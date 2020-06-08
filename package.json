@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "",
@@ -20,13 +23,14 @@
     "react",
     "cli"
   ],
-  "author": "Kalachev Vlad <vlvete1990@yandex.ru>",
+  "author": "Kalachev Vlad",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/eternal-system/react-cli/issues"
   },
   "homepage": "https://github.com/eternal-system/react-cli#readme",
   "devDependencies": {
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "lerna": "^3.22.0"
   }
 }
