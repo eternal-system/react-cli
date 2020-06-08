@@ -1,26 +1,19 @@
-const http = require('http');
-const fs = require('fs');
-const path = require("path");
+const express = require('express');
+const path = require('path');
+const app = express();
 
 module.exports.server = (options, cb = null) => {
+  
+    app.use(express.static(__dirname + '/dist'))
 
-    const httpServer = http.createServer((req, res) => {
-        res.writeHead(200, {
-            'Content-Type': 'text/html',
-            'Expires': '0'
-        });
-        fs.createReadStream(path.join(__dirname + '/public/index.html')).pipe(res);
-    })
-    
-    httpServer.listen(
-        options.port, 
-        options.host || 'localhost'
-    , () => {
-        
-        cb && cb();
+    app.get('*', function (req, res){ 
+        const filePath = path.resolve(__dirname, 'dist', 'index.html');
+        fs.createReadStream(filePath).pipe(res);
     });
 
-   return {
-        httpServer
-   }  
- }
+    app.listen(
+        options.port || 8080 , () => {
+            cb && cb();
+        })
+   
+};

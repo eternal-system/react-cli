@@ -59,6 +59,13 @@ program.on('--help', () => {
     console.log(`Run ${chalk.cyan(`react <command> --help`)} for detailed usage of given command.`)
 });
 
+program
+  .arguments('<command>')
+  .action((cmd) => {
+    program.outputHelp()
+    console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`))
+  })
+
 program.parse(process.argv);
 
 function camelize(str) {
