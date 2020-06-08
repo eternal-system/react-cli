@@ -28,8 +28,8 @@ program
     .command('ui')
     .description('start and open the react-cli ui')
     .option('-D, --dev', 'Run in dev mode')
+    .option('--headless', `Don't open browser on start and output port`)
     .action((cmd) => {
-        console.log(checkNode('>=8.6', 'react ui'))
         checkNode('>=8.6', 'react ui')
         require('../lib/ui')(cleanArgs(cmd));
     });

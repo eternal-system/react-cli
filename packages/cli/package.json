@@ -29,11 +29,12 @@
   "engines": {
     "node": ">=8.9"
   },
-  "devDependencies": {},
   "dependencies": {
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
+    "execa": "^4.0.2",
     "inquirer": "^7.1.0",
+    "open": "^7.0.4",
     "semver": "^7.3.2"
   }
 }

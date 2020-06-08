@@ -1,0 +1,30 @@
+{
+  "name": "@react/cli-ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternal-system/react-cli.git"
+  },
+  "keywords": [
+    "server",
+    "express"
+  ],
+  "author": "Kalachev Vlad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eternal-system/react-cli/issues"
+  },
+  "files": [
+    "server.js"
+  ],
+  "homepage": "https://github.com/eternal-system/react-cli#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
