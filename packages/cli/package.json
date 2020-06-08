@@ -1,0 +1,38 @@
+{
+  "name": "@react/cli",
+  "version": "0.0.1",
+  "description": "Command line interface for React.js development",
+  "main": "index.js",
+  "bin": {
+    "react-test": "bin/react.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternal-system/react-cli.git"
+  },
+  "keywords": [
+    "react",
+    "cli"
+  ],
+  "author": "Kalachev Vlad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eternal-system/react-cli/issues"
+  },
+  "homepage": "https://github.com/eternal-system/react-cli#readme",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "inquirer": "^7.1.0"
+  }
+}
