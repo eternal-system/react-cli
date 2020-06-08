@@ -1,6 +1,6 @@
 
-const seHi = () => {
-    console.log('ui');
+const seHi = (args) => {
+    console.log('ui', args);
 }
 
 module.exports = seHi;
