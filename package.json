@@ -6,6 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "",
+      "commit-msg": ""
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eternal-system/react-cli.git"
@@ -19,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/eternal-system/react-cli/issues"
   },
-  "homepage": "https://github.com/eternal-system/react-cli#readme"
+  "homepage": "https://github.com/eternal-system/react-cli#readme",
+  "devDependencies": {
+    "husky": "^4.2.5"
+  }
 }
