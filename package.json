@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix ./"
   },
   "workspaces": [
@@ -41,6 +41,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
+    "jest": "^26.0.1",
     "lerna": "^3.22.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0"
