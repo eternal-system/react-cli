@@ -11,9 +11,8 @@ module.exports.server = (options, cb = null) => {
         fs.createReadStream(filePath).pipe(res);
     });
 
-    app.listen(
-        options.port || 8080 , () => {
+    app.listen(options.port || 8080 , () => {
             cb && cb();
-        })
+    })
    
 };

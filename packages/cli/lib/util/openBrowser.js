@@ -69,7 +69,7 @@ function startBrowserProcess (browser, url) {
   const shouldTryOpenChromeWithAppleScript =
     process.platform === 'darwin' &&
     (typeof browser !== 'string' || browser === OSX_CHROME)
-    console.log("OSX_CHROME",shouldTryOpenChromeWithAppleScript )
+    
   if (shouldTryOpenChromeWithAppleScript) {
     try {
       // Try our best to reuse existing tab
