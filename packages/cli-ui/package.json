@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server.dev.js",
+    "dev": "nodemon server.dev.js",
     "build": "npx webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
