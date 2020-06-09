@@ -13,11 +13,12 @@ const webpack = require('webpack')
 const webpackConfig = require('./webpack.config.js')
 
 module.exports.server = (options, cb = null) => {
-  app.use(express.static(__dirname + '/dist'))
+  const distPath = path.resolve(__dirname, 'dist')
+  const filePath = path.resolve(__dirname, 'dist', 'index.html')
+
+  app.use(express.static(distPath))
 
   app.get('*', function (req, res) {
-    const filePath = path.resolve(__dirname, 'dist', 'index.html')
-
     if (fs.existsSync(filePath)) {
       fs.createReadStream(filePath).pipe(res)
     } else {

@@ -1,12 +1,10 @@
 import React from 'react'
+import Home from './pages/home'
 
-// root app
 const App = () => {
   return (
     <div className='wrapper constent'>
-        Starter React
-      <br/>
-      <div>Test</div>
+      <Home />
     </div>
   )
 }

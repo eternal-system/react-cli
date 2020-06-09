@@ -6,6 +6,9 @@ module.exports = {
     node: true,
     jest: true
   },
+  globals: {
+    name: 'off'
+  },
   extends: [
     'plugin:react/recommended',
     'standard'
