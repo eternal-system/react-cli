@@ -17,9 +17,9 @@ const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
 app.use(express.static(distPath))
-app.use(app.router)
 
-app.get('*', function (req, res) {
+/* static server */
+app.get('/', function (req, res) {
   if (fs.existsSync(filePath)) {
     fs.createReadStream(filePath).pipe(res)
   } else {
@@ -31,6 +31,33 @@ app.get('*', function (req, res) {
       fs.createReadStream(filePath).pipe(res)
     })
   }
+})
+
+/* api */
+
+/**
+ * TODO
+ * 1. current folder
+ * 2. get list up by current folder name
+ * 3. get list down by current filder name
+ */
+app.get('/api/projects', (req, res) => {
+  const folder = '/'
+  const projects = []
+  fs.readdir(folder, (err, files) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    files.forEach(file => {
+      projects.push(file)
+    })
+    res.send(projects.filter(str => !str.startsWith('.')))
+  })
+})
+
+app.get('/api/folder', (req, res) => {
+  res.send('folder')
 })
 
 app.listen(port)

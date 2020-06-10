@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "dev": "rm -rf dist && nodemon server.dev.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --hot",
     "start-node": "nodemon server.dev.js",
-    "dev": "nodemon server.dev.js",
     "build": "npx webpack --mode production",
     "test": "jest"
   },

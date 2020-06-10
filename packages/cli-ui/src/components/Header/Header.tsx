@@ -3,7 +3,6 @@ import logo from './logo192'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 
 const Header = () => {
-  // const [active, setActive] = useState('')
   const match = useRouteMatch()
   console.log('match', match)
 
@@ -17,8 +16,8 @@ const Header = () => {
           </a>
         </div>
         <div className="nav">
-          <NavLink exact to="/" >Projects</NavLink>
-          <NavLink exact to="/create" >Create</NavLink>
+          <NavLink exact to="/">Projects</NavLink>
+          <NavLink exact to="/create">Create</NavLink>
         </div>
       </div>
     </header>
