@@ -3,13 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: path.join(__dirname, 'src', 'index.js'),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png']
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/',
     filename: '[name].[hash].js'
   },
   module: {
@@ -31,8 +30,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: './index.html'
+      template: path.join(__dirname, 'public', 'index.html'),
+      filename: 'index.html'
     })
   ]
 }

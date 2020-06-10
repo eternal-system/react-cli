@@ -6,6 +6,8 @@ const fs = require('fs')
 
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.config.js')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+// const webpackHotMiddleware = require('webpack-hot-middleware')
 const compiler = webpack(webpackConfig)
 
 module.exports.server = (options, cb = null) => {
@@ -14,22 +16,23 @@ module.exports.server = (options, cb = null) => {
 
   app.use(express.static(distPath))
 
-  app.get('*', function (req, res, next) {
-    console.log('start cheak', fs.existsSync(filePath))
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: '/'
+  }))
 
+  app.get('*', function (req, res, next) {
     if (fs.existsSync(filePath)) {
-      console.log('read file!', filePath)
       fs.createReadStream(filePath).pipe(res)
     } else {
-      compiler.outputFileSystem.readFile(filePath, (err, result) => {
+      webpack(webpackConfig, (err, stats) => {
         if (err) {
-          return next(err)
+          console.error(err)
+          return
         }
-        console.log('compil', result)
-        fs.createReadStream(filePath).pipe(result)
-        // res.set('content-type', 'text/html')
-        // res.send(result)
-        // res.end()
+        if (stats.hasErrors()) {
+          console.log('Build failed with errors.')
+        }
+        console.log(stats.compilation.errors)
       })
     }
   })
