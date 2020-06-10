@@ -34,49 +34,16 @@ module.exports.server = (options, cb = null) => {
       console.log('read file!', filePath)
       fs.createReadStream(filePath).pipe(res)
     } else {
-      compiler.outputFileSystem.readFile(filePath, (err, result) => {
+      webpack(webpackConfig, (err, stats) => {
         if (err) {
-          return next(err)
+          console.error(err)
+          return
         }
-        console.log('compil', result)
-        fs.createReadStream(filePath).pipe(result)
-        // res.set('content-type', 'text/html')
-        // res.send(result)
-        // res.end()
+        if (stats.hasErrors()) {
+          console.log('Build failed with errors.')
+        }
+        console.log(stats.compilation.errors)
       })
-
-      // webpack(webpackConfig, (err, stats) => {
-      //   if (err) {
-      //     console.error(err)
-      //     return
-      //   }
-      //   console.log('webpack!', err)
-      //   // console.log('webpack!', stats)
-      //   // console.log('distPath', distPath)
-
-      //   console.log('building')
-      //    fs.createReadStream(filePath).pipe(res)
-      // })
-      // console.log('start compilation')
-
-      // compiler.run((err, stats) => {
-      //   if (err) {
-      //     console.error(err)
-      //     return
-      //   }
-
-      //   console.log('building')
-      //   // fs.createReadStream(filePath).pipe(res)
-      // })
-
-      // compiler.outputFileSystem.readFile(filePath, (err, result) => {
-      //   if (err) {
-      //     return next(err)
-      //   }
-      //   res.set('content-type', 'text/html')
-      //   res.send(result)
-      //   res.end()
-      // })
     }
   })
 
