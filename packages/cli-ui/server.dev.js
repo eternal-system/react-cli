@@ -17,6 +17,7 @@ const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
 app.use(express.static(distPath))
+app.use(app.router)
 
 app.get('*', function (req, res) {
   if (fs.existsSync(filePath)) {
