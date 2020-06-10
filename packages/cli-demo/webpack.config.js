@@ -1,13 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  //  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png']
   },
@@ -18,16 +14,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: true,
-            reloadAll: true
-          }
-        }, 'css-loader']
-      },
       {
         test: /\.(js|ts)x?$/,
         loader: require.resolve('babel-loader'),
@@ -44,21 +30,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: './index.html'
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public/favicon.ico'),
-          to: path.resolve(__dirname, 'dist')
-        }
-      ]
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css'
     })
   ]
 }
