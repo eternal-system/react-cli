@@ -27,6 +27,7 @@ module.exports.server = (options, cb = null) => {
 
   app.use(webpackHotMiddleware(compiler))
 
+  /* static server */
   app.get('*', function (req, res, next) {
     console.log('start cheak', fs.existsSync(filePath))
 
@@ -45,6 +46,22 @@ module.exports.server = (options, cb = null) => {
         console.log(stats.compilation.errors)
       })
     }
+  })
+
+  /* api */
+  app.get('/api/projects', (req, res) => {
+    const folder = '/'
+    const projects = []
+    fs.readdir(folder, (err, files) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      files.forEach(file => {
+        projects.push(file)
+      })
+      res.send(projects.filter(str => !str.startsWith('.')))
+    })
   })
 
   app.listen(options.port || 8080, () => {
