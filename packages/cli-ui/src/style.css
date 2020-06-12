@@ -133,6 +133,7 @@ a {
     font-size: 17px;
     line-height: 1.7;
     margin-bottom: 65px;
+    width: 100%;
 }
 
 .footer{
@@ -141,6 +142,43 @@ a {
     text-align: center;
     margin-top:auto; 
     height: 50px;
+}
+
+.folders {
+    flex: 100% 1 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.folders .folder-explorer-item:hover {
+    background: rgba(105, 221, 253, 0.54);
+}
+
+.folders .folder-explorer-item {
+    padding: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.folders .folder-explorer-item .folder-name {
+    -ms-flex: 100% 1 1;
+    flex: 100% 1 1;
+    margin-left: 16px;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .loader {

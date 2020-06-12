@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Content from '../components/Content'
 import Loader from '../components/Loader'
+import Folders from '../components/Folders'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
@@ -33,16 +34,7 @@ const Projects = () => {
       <Header />
       <Content>
         Folders:
-
-        {
-          projects.length ? projects.map((name, i) => {
-            return (
-              <div key={i}>
-                {name}
-              </div>
-            )
-          }) : 'No existing projects'
-        }
+        <Folders folders={projects} />
 
         <button onClick={handleClick}>
           + Create a new project here
