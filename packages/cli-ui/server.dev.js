@@ -42,7 +42,7 @@ app.get('/', function (req, res) {
  * 3. get list down by current filder name
  */
 app.get('/api/projects', (req, res) => {
-  const folder = '/'
+  const folder = req.query.url || '/'
   const projects = []
   fs.readdir(folder, (err, files) => {
     if (err) {
