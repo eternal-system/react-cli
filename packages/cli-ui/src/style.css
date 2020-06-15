@@ -78,15 +78,16 @@ html, body, #root, #root .constent{
 }
 
 
-.wrapper__header .nav a{
+.wrapper__header .nav span{
     padding-left: 20px;
     padding-right: 20px;
     font-size: 18px;
     font-weight: 300;
     color: #fff;
+    cursor: pointer;
 }
 
-.wrapper__header .nav a:hover:not(:focus) {
+.wrapper__header .nav span:hover:not(:focus) {
     color: #61dafb;
 }
 

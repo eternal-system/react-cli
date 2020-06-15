@@ -1,10 +1,8 @@
 import React from 'react'
 import logo from './logo192'
-import { NavLink, useRouteMatch } from 'react-router-dom'
 
-const Header = () => {
-  const match = useRouteMatch()
-  console.log('match', match)
+const Header = ({ setTab, active, children }: any) => {
+  console.log('match', children)
 
   return (
     <header className="wrapper__header" >
@@ -16,8 +14,18 @@ const Header = () => {
           </a>
         </div>
         <div className="nav">
-          <NavLink exact to="/">Projects</NavLink>
-          <NavLink exact to="/create">Create</NavLink>
+          {children.map((child) => {
+            return (
+              <span
+                key={child.key}
+                className={child.key === active ? 'active' : ''}
+                onClick={() => setTab(child.key)}
+              >
+                {child.props.label}
+              </span>
+            )
+          })}
+
         </div>
       </div>
     </header>

@@ -9,7 +9,7 @@ import Toolbar from '../components/Toolbar'
 /**
  * Create new project
  */
-const Create = () => {
+const Create = (props: any) => {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -27,6 +27,7 @@ const Create = () => {
   }
 
   useEffect(() => {
+    console.log(props)
     getData()
   }, [])
 
@@ -44,17 +45,14 @@ const Create = () => {
 
   return (
     <Layout>
-      <Header />
       <Content>
         Folders:
         <Toolbar update={getData}/>
         <Folders folders={projects} on={handleClick}/>
-
         <button onClick={handleSubmit}>
           + Create a new project here
         </button>
       </Content>
-      <Footer />
     </Layout>
   )
 }
