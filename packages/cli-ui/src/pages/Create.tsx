@@ -32,11 +32,10 @@ const Create = (props: any) => {
     getData(url)
   }, [url])
 
+  // click on folder
   const handleClick = (name: string) => {
-    console.log('click 1', name)
-    const buildUrl = `/${name}`
+    const buildUrl = `${url}/${name}`
     setUrl(buildUrl)
-    console.log('buildUrl', buildUrl)
     getData(buildUrl)
   }
 
