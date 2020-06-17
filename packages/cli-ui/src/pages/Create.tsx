@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+// eslint-disable-next-line camelcase
+import { unstable_batchedUpdates } from 'react-dom'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -21,8 +23,10 @@ const Create = (props: any) => {
       .then(response => response.json())
       .then(res => {
         console.log(res)
-        setProjects(res)
-        setLoading(false)
+        unstable_batchedUpdates(() => {
+          setProjects(res)
+          setLoading(false)
+        })
         console.log('loading false')
       })
   }
