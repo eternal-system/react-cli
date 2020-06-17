@@ -33,6 +33,20 @@ app.get('/', function (req, res) {
   }
 })
 
+app.get('/create', function (req, res) {
+  if (fs.existsSync(filePath)) {
+    fs.createReadStream(filePath).pipe(res)
+  } else {
+    webpack(webpackConfig, (err, stats) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      fs.createReadStream(filePath).pipe(res)
+    })
+  }
+})
+
 /* api */
 
 /**
