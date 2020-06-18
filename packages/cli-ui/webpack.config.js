@@ -29,6 +29,20 @@ module.exports = {
         }, require.resolve('css-loader')]
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
+        ]
+      },
+      {
         test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
         loader: require.resolve('babel-loader'),

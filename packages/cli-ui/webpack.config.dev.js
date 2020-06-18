@@ -28,6 +28,20 @@ module.exports = {
         }, 'css-loader']
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
+        ]
+      },
+      {
         test: /\.(js|ts)x?$/,
         loader: require.resolve('babel-loader'),
         exclude: /node_modules/
