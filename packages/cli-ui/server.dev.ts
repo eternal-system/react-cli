@@ -17,36 +17,37 @@ const webpackConfig = require('./webpack.config.ts')
 const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
-app.use(express.static(distPath))
-
 /* static server */
-app.get('/', function (req, res) {
-  if (fs.existsSync(filePath)) {
-    fs.createReadStream(filePath).pipe(res)
-  } else {
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        console.error(err)
-        return
-      }
+if (process.env.DEV) {
+  app.use(express.static(distPath))
+  app.get('/', function (req, res) {
+    if (fs.existsSync(filePath)) {
       fs.createReadStream(filePath).pipe(res)
-    })
-  }
-})
+    } else {
+      webpack(webpackConfig, (err, stats) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        fs.createReadStream(filePath).pipe(res)
+      })
+    }
+  })
 
-app.get('/create', function (req, res) {
-  if (fs.existsSync(filePath)) {
-    fs.createReadStream(filePath).pipe(res)
-  } else {
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        console.error(err)
-        return
-      }
+  app.get('/create', function (req, res) {
+    if (fs.existsSync(filePath)) {
       fs.createReadStream(filePath).pipe(res)
-    })
-  }
-})
+    } else {
+      webpack(webpackConfig, (err, stats) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        fs.createReadStream(filePath).pipe(res)
+      })
+    }
+  })
+}
 
 /* api */
 
