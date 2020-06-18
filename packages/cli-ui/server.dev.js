@@ -1,4 +1,3 @@
-export {}
 /**
  * Cheak folder dist
  *
@@ -13,7 +12,7 @@ const app = express()
 const fs = require('fs')
 
 const webpack = require('webpack')
-const webpackConfig = require('./webpack.config.ts')
+const webpackConfig = require('./webpack.config.js')
 const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
