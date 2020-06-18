@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+html, body, #root, #root .constent{
+    height: 100%;
+    margin: 0;
+    
+}
+
+#root {
+    display:flex; 
+    flex-direction:column; 
+}
+
+.wrapper__header {
+    background-color: #20232a;
+    color: #ffffff;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.wrapper__layout{
+    max-width: 1260px;
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.wrapper__header .nav{
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.wrapper__header .nav .active{
+    color: #61dafb;
+    border-bottom: 2px solid #61dafb;
+}
+
+.wrapper__layout .wrapper__logo a{
+    width: 300px;
+    display: flex;
+    margin-right: 10px;
+    color: #61dafb;
+    height: 100%;
+}
+
+.wrapper__layout .wrapper__logo a span{
+    color: inherit;
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.wrapper__layout .wrapper__logo a img{
+    display: inline-block;
+    vertical-align: top;
+    height: 20px;
+    position: relative;
+    top: 19px;
+}
+
+
+.wrapper__header .nav span{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #fff;
+    cursor: pointer;
+}
+
+.wrapper__header .nav span:hover:not(:focus) {
+    color: #61dafb;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.content{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+    justify-content: stretch;
+    align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -webkit-flex-grow: 1;
+    -webkit-flex-shrink: 0;
+    -webkit-flex-basis: auto;
+    -webkit-box-pack: stretch;
+    -webkit-justify-content: stretch;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    margin-top: 60px;
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1260px;
+    height: auto;
+    min-height: calc(96vh - 50px);
+}
+
+.content .content__text{
+    margin-top: 60px;
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 65px;
+    width: 100%;
+}
+
+.footer{
+    background-color: #20232a;
+    color: #ffffff;
+    text-align: center;
+    margin-top:auto; 
+    height: 50px;
+}
+
+.folders {
+    flex: 100% 1 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.folders .folder-explorer-item:hover {
+    background: rgba(105, 221, 253, 0.54);
+}
+
+.folders .folder-explorer-item {
+    padding: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.folders .folder-explorer-item .folder-name {
+    -ms-flex: 100% 1 1;
+    flex: 100% 1 1;
+    margin-left: 16px;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.toolbar{
+    flex: auto 0 0;
+    padding: 16px 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.toolbar button{
+    color: #fff;
+    background: #20232a;
+    padding: 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button{
+    color: #fff;
+    background: #20232a;
+    padding: 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid rgb(95, 95, 95);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+ }
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
