@@ -4,15 +4,15 @@
  * 1. If /dist exists to stream file => res
  * 2. If /dist !exists to webpack build new /dist
  */
-
+require('dotenv').config()
 const express = require('express')
 const path = require('path')
-const port = process.env.PORT || 8080
+const port = process.env.SERVER_PORT || 8080
 const app = express()
 const fs = require('fs')
 
 const webpack = require('webpack')
-const webpackConfig = require('./webpack.config.js')
+const webpackConfig = require('./webpack.config.dev.js')
 const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
