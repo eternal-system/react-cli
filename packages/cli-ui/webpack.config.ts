@@ -1,3 +1,4 @@
+export {}
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -5,13 +6,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.tsx',
-  //  devtool: 'source-map',
+  mode: 'production',
+  entry: path.join(__dirname, 'src', 'index.tsx'),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png']
   },
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].[hash].js'
   },
@@ -25,36 +26,40 @@ module.exports = {
             hmr: true,
             reloadAll: true
           }
-        }, 'css-loader']
+        }, require.resolve('css-loader')]
       },
       {
         test: /\.(js|ts)x?$/,
+        exclude: /node_modules/,
         loader: require.resolve('babel-loader'),
-        exclude: /node_modules/
+        options: {
+          presets: [
+            require.resolve('@babel/preset-env'),
+            require.resolve('@babel/preset-react'),
+            require.resolve('@babel/preset-typescript')
+          ]
+        }
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: ['file-loader']
+        use: [require.resolve('file-loader')]
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: ['file-loader']
+        use: [require.resolve('file-loader')]
       }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: path.join(__dirname, 'public', 'index.html'),
+      filename: 'index.html'
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, 'public/favicon.ico'),
-          to: path.resolve(__dirname, 'dist')
-        },
-        {
-          from: path.resolve(__dirname, 'public/manifest.json'),
           to: path.resolve(__dirname, 'dist')
         }
       ]
