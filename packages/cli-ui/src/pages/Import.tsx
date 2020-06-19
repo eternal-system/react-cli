@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
+
 import Layout from '../components/Layout'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Content from '../components/Content'
 import Loader from '../components/Loader'
 import Folders from '../components/Folders'
 import Toolbar from '../components/Toolbar'
+// import Header from '../components/Header'
+// import Footer from '../components/Footer'
 
 /**
  * Import project
  */
-const Import = (props: any) => {
+function Import (props) {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 

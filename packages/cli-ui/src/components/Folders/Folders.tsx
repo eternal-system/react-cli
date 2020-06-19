@@ -1,23 +1,15 @@
 import React from 'react'
 
-// Item Folder
-const ItemFolder = ({ name, select }: any) => {
-  return (
-    <div className="folder-explorer-item" onClick={() => select(name)}>
-      <div className="folder-name" >
-        {name}
-      </div>
-    </div>
-  )
-}
+import ItemFolder from './ItemFolder'
 
 interface IFolders {
+  /** @TODO add to real types */
   folders: any[];
-  on: (name: string) => void;
+  on(name: string): void;
 }
 
 // Folders
-const Folders = ({ folders, on }: IFolders) => {
+function Folders ({ folders, on }: IFolders) {
   console.log('folders', folders)
 
   return (
