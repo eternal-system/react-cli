@@ -1,7 +1,6 @@
 import React from 'react'
-import type { Node } from 'react'
 
-const Layout = ({ children }: Node) => {
+function Layout ({ children }: React.PropsWithChildren<React.ReactNode>) {
   return (
     <div className="layout">
       {children}

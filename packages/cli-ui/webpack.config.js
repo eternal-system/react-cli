@@ -1,18 +1,37 @@
 require('dotenv').config()
 const path = require('path')
+const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+
+const paths = {
+  appPath: resolveApp('.'),
+  appBuild: resolveApp('dist'),
+  appSrc: resolveApp('src'),
+  appComponents: resolveApp('src/components'),
+  appPages: resolveApp('src/pages'),
+  appTsConfig: resolveApp('tsconfig.json'),
+  appNodeModules: resolveApp('node_modules')
+}
+
 module.exports = {
   mode: 'production',
   entry: path.join(__dirname, 'src', 'index.tsx'),
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png']
+    modules: [paths.appNodeModules, paths.appSrc],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png'],
+    alias: {
+      components: paths.appComponents,
+      pages: paths.appPages
+    }
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: paths.appBuild,
     publicPath: '/',
     filename: '[name].[hash].js'
   },
@@ -60,7 +79,7 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'public/favicon.ico'),
-          to: path.resolve(__dirname, 'dist')
+          to: paths.appBuild
         }
       ]
     }),

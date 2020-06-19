@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+
 import Header from '../Header'
 import Footer from '../Footer'
-import type { Node } from 'react'
 
-// Component tabs
-const Tabs = (
-  { children }: Node
-) => {
+/**
+ * Component tabs
+ */
+function Tabs (
+  { children }: React.PropsWithChildren<React.ReactNode>
+) {
   const [activeTab, setActiveTab] = useState('1')
 
   return (
