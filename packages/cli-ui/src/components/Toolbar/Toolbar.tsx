@@ -1,12 +1,12 @@
 import React from 'react'
 
-interface IProps {
-    update?: () => void;
-    back?: () => void;
-    path?: string;
+interface Props {
+  update?(): void;
+  back?(): void;
+  path?: string;
 }
 
-const Toolbar: React.FC<IProps> = ({ update, path, back }) => {
+export default function Toolbar ({ update, path, back }: Props) {
   return (
     <div className="toolbar">
       <button onClick={back}>^</button>
@@ -15,5 +15,3 @@ const Toolbar: React.FC<IProps> = ({ update, path, back }) => {
     </div>
   )
 }
-
-export default Toolbar
