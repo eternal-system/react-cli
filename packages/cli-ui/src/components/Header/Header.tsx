@@ -1,7 +1,21 @@
 import React from 'react'
-import logo from './logo192'
+import logo from './logo192.png'
 
-const Header = ({ setTab, active, children }: any) => {
+export default function Header ({ setTab, active, children }: any) {
+  console.log('Header | match', children)
+
+  function renderChildren () {
+    return children.map((child) => (
+      <span
+        key={child.key}
+        className={child.key === active ? 'active' : ''}
+        onClick={() => setTab(child.key)}
+      >
+        {child.props.label}
+      </span>
+    ))
+  }
+  
   return (
     <header className="wrapper__header" >
       <div className="wrapper__layout" >
@@ -12,22 +26,9 @@ const Header = ({ setTab, active, children }: any) => {
           </a>
         </div>
         <div className="nav">
-          {children.map((child) => {
-            return (
-              <span
-                key={child.key}
-                className={child.key === active ? 'active' : ''}
-                onClick={() => setTab(child.key)}
-              >
-                {child.props.label}
-              </span>
-            )
-          })}
-
+          {renderChildren()}
         </div>
       </div>
     </header>
   )
 }
-
-export default Header

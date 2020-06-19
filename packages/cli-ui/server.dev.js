@@ -39,4 +39,4 @@ if (process.env.DEV_SERVER.trim() === 'true') {
 }
 
 app.listen(port)
-console.log('server started on port ' + port)
+console.log(`\n Server started on port ${port} \n`)

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
 // eslint-disable-next-line camelcase
 import { unstable_batchedUpdates } from 'react-dom'
-import Layout from '../components/Layout'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Content from '../components/Content'
-import Loader from '../components/Loader'
-import Folders from '../components/Folders'
-import Toolbar from '../components/Toolbar'
+import { Layout, Content, Loader, Folders, Toolbar } from '../components'
+// import Header from '../components/Header'
+// import Footer from '../components/Footer'
+
 /**
  * Create new project
  */
-const Create = (props: any) => {
+export default function Create (props) {
   const [url, setUrl] = useState('/')
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
@@ -29,7 +26,6 @@ const Create = (props: any) => {
   }
 
   useEffect(() => {
-    console.log(props)
     getData(url)
   }, [url])
 
@@ -51,14 +47,14 @@ const Create = (props: any) => {
   }
 
   // create new folder
-  const createFolder = () => {
-    console.log('new folder')
-  }
+  // const createFolder = () => {
+  //   console.log('new folder')
+  // }
 
   // show hidden folder
-  const changeHiddenFolder = () => {
-    console.log('show folder hidden')
-  }
+  // const changeHiddenFolder = () => {
+  //   console.log('show folder hidden')
+  // }
 
   // back folder in stap
   const backFolder = () => {
@@ -97,5 +93,3 @@ const Create = (props: any) => {
     </Layout>
   )
 }
-
-export default Create
