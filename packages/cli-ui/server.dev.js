@@ -17,7 +17,8 @@ const distPath = path.resolve(__dirname, 'dist')
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
 /* static server */
-if (process.env.DEV) {
+if (!process.env.DEV) {
+  console.log('SSR start')
   app.use(express.static(distPath))
   app.get('/', function (req, res) {
     if (fs.existsSync(filePath)) {
