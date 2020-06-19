@@ -18,7 +18,7 @@ interface IFolders {
 
 // Folders
 const Folders = ({ folders, on }: IFolders) => {
-  console.log('folders', folders)
+  // console.log('folders', folders)
 
   return (
     <div className="folders">

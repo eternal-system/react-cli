@@ -2,8 +2,6 @@ import React from 'react'
 import logo from './logo192'
 
 const Header = ({ setTab, active, children }: any) => {
-  console.log('match', children)
-
   return (
     <header className="wrapper__header" >
       <div className="wrapper__layout" >
