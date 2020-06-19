@@ -17,7 +17,7 @@ const Import = (props: any) => {
   const getData = (url?: string) => {
     console.log('getData')
     setLoading(true)
-    fetch('/api/projects')
+    fetch('/api/folders')
       .then(response => response.json())
       .then(res => {
         console.log(res)

@@ -19,7 +19,7 @@ const Create = (props: any) => {
   const getData = (url?: string) => {
     console.log('getData')
     setLoading(true)
-    fetch(`/api/projects?url=${url}`)
+    fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
         console.log(res)
