@@ -4,10 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "rm -rf dist && nodemon server.dev.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --hot",
-    "start-node": "nodemon server.dev.js",
-    "build": "npx webpack --mode production",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run clear-dist\" \"npm run server\" \"npm run start\"",
+    "server": "nodemon server.dev.js",
+    "start": "webpack-dev-server --config ./webpack.config.dev.js --open",
+    "build": "npx webpack --display-error-details --config ./webpack.config.js",
+    "clear-dist": "rm -rf dist",
     "test": "jest"
   },
   "repository": {
@@ -46,9 +47,11 @@
     "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^6.0.2",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
+    "dotenv": "^8.2.0",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.1",
@@ -64,6 +67,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2"
   }
 }
