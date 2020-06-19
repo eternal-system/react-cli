@@ -1,11 +1,9 @@
 import React from 'react'
 
-import Create from './pages/Create'
-import Projects from './pages/Projects'
-import Import from './pages/Import'
-import Tabs from './components/Tabs'
+import { Create, Projects, Import } from './pages'
+import { Tabs } from './components'
 
-const App = () => {
+export default function App () {
   return (
     <div className='wrapper constent'>
       <Tabs>
@@ -16,5 +14,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App

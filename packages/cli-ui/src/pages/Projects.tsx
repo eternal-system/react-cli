@@ -1,9 +1,8 @@
 import React from 'react'
 
-import Layout from '../components/Layout'
-import Content from '../components/Content'
+import { Layout, Content } from '../components'
 
-function Projects () {
+export default function Projects (props) {
   return (
     <Layout>
       <Content>
@@ -12,5 +11,3 @@ function Projects () {
     </Layout>
   )
 }
-
-export default Projects
