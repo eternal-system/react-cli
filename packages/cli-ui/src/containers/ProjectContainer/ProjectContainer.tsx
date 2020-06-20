@@ -3,8 +3,11 @@ import React from 'react'
 import { Routes } from 'router'
 import { Create, Projects, Import } from 'pages'
 import { Tabs } from 'components'
+import useProjectContainer from './projectContainer.hook'
 
 export default function App () {
+  useProjectContainer()
+
   return (
     <div className='wrapper content'>
       <Tabs>
