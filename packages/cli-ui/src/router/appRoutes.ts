@@ -1,4 +1,5 @@
 import ProjectContainer from 'containers/ProjectContainer'
+import PageNotFound from 'pages/PageNotFound'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -36,5 +37,12 @@ export const AppRoutes: RoutesCollection = {
     },
     exact: true,
     Component: ProjectContainer
+  },
+  [Routes.NOT_FOUND]: {
+    paths: {
+      root: '*'
+    },
+    exact: true,
+    Component: PageNotFound
   }
 }
