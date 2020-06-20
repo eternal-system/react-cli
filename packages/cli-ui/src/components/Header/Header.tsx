@@ -1,22 +1,28 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import logo from '../../../public/logo192.png'
 import css from './style.module.css'
 
 export default function Header ({ setTab, active, children }: any) {
+  const history = useHistory()
   console.log('Header | match', children)
 
-  function renderChildren () {
-    return children.map((child) => (
+  const renderChildren = useMemo(() => children.map((child) => {
+    function handleSetTab () {
+      setTab(child.key)
+      history.push(child.key)
+    }
+    return (
       <span
         key={child.key}
         className={child.key === active ? css.active : ''}
-        onClick={() => setTab(child.key)}
+        onClick={handleSetTab}
       >
         {child.props.label}
       </span>
-    ))
-  }
+    )
+  }), [children, active])
 
   return (
     <header className={css.wrapperHeader} >
@@ -28,7 +34,7 @@ export default function Header ({ setTab, active, children }: any) {
           </a>
         </div>
         <div className={css.nav}>
-          {renderChildren()}
+          {renderChildren}
         </div>
       </div>
     </header>

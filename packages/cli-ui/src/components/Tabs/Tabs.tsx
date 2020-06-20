@@ -3,13 +3,17 @@ import React, { useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 
+import { Routes } from 'router'
+
 /**
  * Component tabs
  */
 function Tabs (
   { children }: React.PropsWithChildren<React.ReactNode>
 ) {
-  const [activeTab, setActiveTab] = useState('1')
+  const [activeTab, setActiveTab] = useState(Routes.PROJECTS_SELECT)
+
+  console.log('activeTab', activeTab)
 
   return (
     <>
