@@ -11,7 +11,7 @@ import { Routes } from 'router'
 function Tabs (
   { children }: React.PropsWithChildren<React.ReactNode>
 ) {
-  const [activeTab, setActiveTab] = useState(Routes.PROJECTS_SELECT)
+  const [activeTab, setActiveTab] = useState(Routes.PROJECT)
 
   return (
     <>

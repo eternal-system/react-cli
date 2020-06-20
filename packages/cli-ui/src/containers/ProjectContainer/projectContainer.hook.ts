@@ -9,7 +9,7 @@ export default function useProjectContainer () {
 
   useEffect(() => {
     if ([Routes.MAIN].includes(location.pathname as Routes)) {
-      history.push(Routes.PROJECTS_SELECT)
+      history.push(Routes.PROJECT)
     }
   }, [location])
 }

@@ -3,10 +3,13 @@ import ProjectContainer from 'containers/ProjectContainer'
 /** Url's основных страниц */
 export enum Routes {
   MAIN = '/',
-  PROJECTS = '/project',
-  PROJECTS_SELECT = '/project/select',
-  PROJECTS_CREATE = '/project/create',
-  PROJECTS_IMPORT = '/project/import',
+  PROJECT = '/project',
+  DASHBOARD = '/dashboard',
+  DEPENDENCIES = '/dependencies',
+  NOT_FOUND = '/404',
+  PROJECT_SELECT = '/project/select',
+  PROJECT_CREATE = '/project/create',
+  PROJECT_IMPORT = '/project/import',
 }
 
 export interface RouteEntity {
@@ -23,12 +26,13 @@ type RoutesCollection = {
 };
 
 export const AppRoutes: RoutesCollection = {
-  [Routes.PROJECTS]: {
+  [Routes.PROJECT]: {
     paths: {
       root: Routes.MAIN,
-      select: Routes.PROJECTS_SELECT,
-      create: Routes.PROJECTS_CREATE,
-      import: Routes.PROJECTS_IMPORT
+      projects: Routes.PROJECT,
+      select: Routes.PROJECT_SELECT,
+      import: Routes.PROJECT_IMPORT,
+      create: Routes.PROJECT_CREATE
     },
     exact: true,
     Component: ProjectContainer

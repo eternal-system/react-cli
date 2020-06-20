@@ -11,9 +11,9 @@ export default function App () {
   return (
     <div className='wrapper content'>
       <Tabs>
-        <Projects key={Routes.PROJECTS_SELECT} label="Projects" />
-        <Create key={Routes.PROJECTS_CREATE} label="Create" />
-        <Import key={Routes.PROJECTS_IMPORT} label="Import"/>
+        <Projects key={Routes.PROJECT} label="Projects" />
+        <Create key={Routes.PROJECT_SELECT} label="Create" />
+        <Import key={Routes.PROJECT_IMPORT} label="Import"/>
       </Tabs>
     </div>
   )
