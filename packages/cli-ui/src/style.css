@@ -20,16 +20,6 @@ html, body, #root, #root .constent{
     flex-direction:column; 
 }
 
-.wrapper__header {
-    background-color: #20232a;
-    color: #ffffff;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
 .wrapper__layout{
     max-width: 1260px;
     width: 90%;
@@ -38,19 +28,6 @@ html, body, #root, #root .constent{
     margin-left: auto;
     margin-right: auto;
     display: flex;
-}
-
-.wrapper__header .nav{
-    display: flex;
-    height: 60px;
-    line-height: 60px;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.wrapper__header .nav .active{
-    color: #61dafb;
-    border-bottom: 2px solid #61dafb;
 }
 
 .wrapper__layout .wrapper__logo a{
@@ -75,20 +52,6 @@ html, body, #root, #root .constent{
     height: 20px;
     position: relative;
     top: 19px;
-}
-
-
-.wrapper__header .nav span{
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #fff;
-    cursor: pointer;
-}
-
-.wrapper__header .nav span:hover:not(:focus) {
-    color: #61dafb;
 }
 
 a {

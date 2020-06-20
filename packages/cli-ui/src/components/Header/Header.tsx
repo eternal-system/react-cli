@@ -1,5 +1,7 @@
 import React from 'react'
+
 import logo from './logo192.png'
+import css from './style.module.css'
 
 export default function Header ({ setTab, active, children }: any) {
   console.log('Header | match', children)
@@ -15,9 +17,9 @@ export default function Header ({ setTab, active, children }: any) {
       </span>
     ))
   }
-  
+
   return (
-    <header className="wrapper__header" >
+    <header className={css.wrapperHeader} >
       <div className="wrapper__layout" >
         <div className="wrapper__logo">
           <a href="/" >
