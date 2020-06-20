@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 // eslint-disable-next-line camelcase
 import { unstable_batchedUpdates } from 'react-dom'
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
-// import Header from '../components/Header'
-// import Footer from '../components/Footer'
 
 /**
  * Create new project
@@ -13,7 +11,11 @@ export default function Create (props) {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const getData = (url?: string) => {
+  useEffect(() => {
+    getData(url)
+  }, [url])
+
+  function getData (url?: string) {
     setLoading(true)
     fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
@@ -25,24 +27,20 @@ export default function Create (props) {
       })
   }
 
-  useEffect(() => {
-    getData(url)
-  }, [url])
-
   // click on folder
-  const handleClick = (name: string) => {
+  function handleClick (name: string) {
     const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
     setUrl(buildUrl)
     getData(buildUrl)
   }
 
   // events
-  const handleSubmit = (e) => {
-    console.log('handleSubmit')
+  function handleSubmit (e) {
+    console.log('handleSubmit', e)
   }
 
   // reset
-  const handleReset = () => {
+  function handleReset () {
     getData(url)
   }
 
@@ -57,7 +55,7 @@ export default function Create (props) {
   // }
 
   // back folder in stap
-  const backFolder = () => {
+  function backFolder () {
     console.log('back folder')
     // build array
     const newUrl = url.split('/')

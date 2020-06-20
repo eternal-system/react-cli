@@ -5,9 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+
+const cssModuleRegex = /\.module\.(css)$/
 
 const paths = {
   appPath: resolveApp('.'),
@@ -15,6 +18,7 @@ const paths = {
   appSrc: resolveApp('src'),
   appComponents: resolveApp('src/components'),
   appPages: resolveApp('src/pages'),
+  appPublic: resolveApp('public'),
   appTsConfig: resolveApp('tsconfig.json'),
   appNodeModules: resolveApp('node_modules')
 }
@@ -27,7 +31,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png'],
     alias: {
       components: paths.appComponents,
-      pages: paths.appPages
+      pages: paths.appPages,
+      public: paths.appPublic
     }
   },
   output: {
@@ -35,17 +40,54 @@ module.exports = {
     publicPath: '/',
     filename: '[name].[hash].js'
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public', 'index.html'),
+      filename: 'index.html'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public/favicon.ico'),
+          to: paths.appBuild
+        }
+      ]
+    }),
+    new MiniCssExtractPlugin(),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css|html|ico|json|svg)$/,
+      compressionOptions: { level: 9 },
+      threshold: 4096,
+      minRatio: 0.8,
+      deleteOriginalAssets: false
+    })
+  ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: true,
-            reloadAll: true
-          }
-        }, require.resolve('css-loader')]
+        exclude: cssModuleRegex,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+      },
+      {
+        test: cssModuleRegex,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: {
+                mode: 'local',
+                localIdentName: '[local]--[hash:base64:5]'
+              }
+            }
+          },
+          'postcss-loader'
+        ]
       },
       {
         test: /\.(js|ts)x?$/,
@@ -68,23 +110,5 @@ module.exports = {
         use: [require.resolve('file-loader')]
       }
     ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
-      filename: 'index.html'
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public/favicon.ico'),
-          to: paths.appBuild
-        }
-      ]
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css'
-    })
-  ]
+  }
 }

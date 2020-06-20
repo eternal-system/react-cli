@@ -26,5 +26,22 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    '@typescript-eslint/no-unused-vars': ['error', {
+      vars: 'all',
+      args: 'after-used',
+      ignoreRestSiblings: true
+    }]
+  },
+  settings: {
+    react: {
+      pragma: 'React',
+      version: 'detect'
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.d.ts', '.tsx', '.js', '.jsx'],
+        moduleDirectory: ['node_modules', 'src', './']
+      }
+    }
   }
 }

@@ -1,0 +1,24 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: auto;
+	justify-content: stretch;
+	align-items: flex-start;
+	margin-top: 60px;
+	width: 90%;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1260px;
+}
+
+.content .contentText{
+	margin-top: 60px;
+	font-size: 17px;
+	line-height: 1.7;
+	margin-bottom: 65px;
+	width: 100%;
+}
