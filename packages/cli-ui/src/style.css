@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("~public/fonts/Roboto/Roboto-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -7,6 +14,7 @@ body {
 	margin: 0;
 	overflow-x: hidden;
 	position: relative;
+	font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
 }
 
 html, body, #root, #root .content {
