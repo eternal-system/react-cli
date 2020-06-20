@@ -13,8 +13,6 @@ function Tabs (
 ) {
   const [activeTab, setActiveTab] = useState(Routes.PROJECTS_SELECT)
 
-  console.log('activeTab', activeTab)
-
   return (
     <>
       <Header
@@ -23,7 +21,7 @@ function Tabs (
         {children}
       </Header>
       <div className="tabs" >
-        <div className="tab__content" >
+        <div className="tabContent" >
           {
             children.map((child) => {
               if (child.key !== activeTab) return undefined

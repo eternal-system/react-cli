@@ -9,7 +9,7 @@ body {
 	position: relative;
 }
 
-html, body, #root, #root .constent{
+html, body, #root, #root .content {
 	height: 100%;
 	margin: 0;
 }
@@ -24,48 +24,7 @@ a {
 	text-decoration: none;
 }
 
-.content {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	flex-shrink: 0;
-	flex-basis: auto;
-	justify-content: stretch;
-	align-items: flex-start;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-webkit-flex-grow: 1;
-	-webkit-flex-shrink: 0;
-	-webkit-flex-basis: auto;
-	-webkit-box-pack: stretch;
-	-webkit-justify-content: stretch;
-	-webkit-box-align: start;
-	-webkit-align-items: flex-start;
-	margin-top: 60px;
-	width: 90%;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 1260px;
-	height: auto;
-	min-height: calc(96vh - 50px);
-}
-
-.content .content__text{
-	margin-top: 60px;
-	font-size: 17px;
-	line-height: 1.7;
-	margin-bottom: 65px;
-	width: 100%;
-}
-
-.footer{
+.footer {
 	background-color: #20232a;
 	color: #ffffff;
 	text-align: center;
@@ -110,7 +69,7 @@ a {
 	white-space: nowrap;
 }
 
-.toolbar{
+.toolbar {
 	flex: auto 0 0;
 	padding: 16px 0;
 	display: -ms-flexbox;
@@ -121,7 +80,7 @@ a {
 	align-items: center;
 }
 
-.toolbar button{
+.toolbar button {
 	color: #fff;
 	background: #20232a;
 	padding: 10px;
@@ -130,7 +89,7 @@ a {
 	cursor: pointer;
 }
 
-button{
+button {
 	color: #fff;
 	background: #20232a;
 	padding: 10px;

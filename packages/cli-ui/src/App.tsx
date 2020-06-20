@@ -4,7 +4,7 @@ import { renderRoutes } from './router'
 
 export default function App () {
   return (
-    <div className='wrapper constent'>
+    <div className='wrapper content'>
       {renderRoutes()}
     </div>
   )
