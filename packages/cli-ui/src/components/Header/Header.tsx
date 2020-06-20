@@ -1,5 +1,4 @@
 import React from 'react'
-
 import logo from './logo192.png'
 
 export default function Header ({ setTab, active, children }: any) {
@@ -16,7 +15,7 @@ export default function Header ({ setTab, active, children }: any) {
       </span>
     ))
   }
-
+  
   return (
     <header className="wrapper__header" >
       <div className="wrapper__layout" >

@@ -9,6 +9,7 @@ interface IFolders {
 }
 
 // Folders
+
 function Folders ({ folders, on }: IFolders) {
   console.log('folders', folders)
 

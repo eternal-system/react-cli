@@ -14,17 +14,14 @@ export default function Create (props) {
   const [loading, setLoading] = useState(false)
 
   const getData = (url?: string) => {
-    console.log('getData')
     setLoading(true)
-    fetch(`/api/projects?url=${url}`)
+    fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
-        console.log(res)
         unstable_batchedUpdates(() => {
           setProjects(res)
           setLoading(false)
         })
-        console.log('loading false')
       })
   }
 
@@ -34,7 +31,7 @@ export default function Create (props) {
 
   // click on folder
   const handleClick = (name: string) => {
-    const buildUrl = `${url}/${name}`
+    const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
     setUrl(buildUrl)
     getData(buildUrl)
   }
@@ -67,7 +64,8 @@ export default function Create (props) {
     // delete last element
     const newArr = newUrl.splice(0, newUrl.length - 1)
     // create new string
-    const buildUrl = newArr.join('/')
+    const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
+    console.log(buildUrl)
     // set new url
     setUrl(buildUrl)
     // get new list data
