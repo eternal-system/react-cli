@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Create, Projects, Import } from 'pages'
-import { Tabs } from './components'
+import { Create, Projects, Import } from '../pages'
+import { Tabs } from '../components'
 
 export default function App () {
   return (
