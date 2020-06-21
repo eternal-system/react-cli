@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
-import Header from '../Header'
-import Footer from '../Footer'
-
+import { Header, Footer } from 'components'
 import { Routes } from 'router'
 
 /**
@@ -20,16 +18,6 @@ function Tabs (
         active={activeTab}>
         {children}
       </Header>
-      <div className="tabs" >
-        <div className="tabContent" >
-          {
-            children.map((child) => {
-              if (child.key !== activeTab) return undefined
-              return child
-            })
-          }
-        </div>
-      </div>
       <Footer />
     </>
   )

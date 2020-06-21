@@ -1,5 +1,6 @@
 import React from 'react'
-import { KillPort } from '../components'
+
+import { KillPort } from '../../components'
 
 export default function Dashboard () {
   return (
