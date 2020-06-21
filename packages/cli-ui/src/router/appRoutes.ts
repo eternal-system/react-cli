@@ -1,4 +1,6 @@
 import ProjectContainer from 'containers/ProjectContainer'
+import Dashboard from 'pages/Dashboard'
+import Depend from 'pages/Depend'
 import PageNotFound from 'pages/PageNotFound'
 
 /** Url's основных страниц */
@@ -37,6 +39,20 @@ export const AppRoutes: RoutesCollection = {
     },
     exact: true,
     Component: ProjectContainer
+  },
+  [Routes.DASHBOARD]: {
+    paths: {
+      root: Routes.DASHBOARD
+    },
+    exact: true,
+    Component: Dashboard
+  },
+  [Routes.DEPENDENCIES]: {
+    paths: {
+      root: Routes.DEPENDENCIES
+    },
+    exact: true,
+    Component: Depend
   },
   [Routes.NOT_FOUND]: {
     paths: {

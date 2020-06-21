@@ -2,7 +2,7 @@ const { server } = require('../../cli-ui/server')
 const { openBrowser } = require('./util/openBrowser')
 const port = 8080
 
-const ui = (args = {}) => {
+function ui (args = {}) {
   const host = args.host || 'localhost'
   console.log('ui arg', args)
 

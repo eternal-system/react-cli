@@ -23,6 +23,13 @@ program
   .usage('<command> [options]')
 
 program
+  .command('kill [port]')
+  .description('kill port')
+  .action((port, cmd) => {
+    require('../lib/kill')(port, cleanArgs(cmd))
+  })
+
+program
   .command('ui')
   .description('start and open the react-cli ui')
   .option('-D, --dev', 'Run in dev mode')
