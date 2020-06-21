@@ -1,18 +1,27 @@
 import React, { useMemo } from 'react'
+import cn from 'classnames'
 
 import Footer from 'components/Footer'
 import useProjectContainer from './projectContainer.hook'
 import logo from '../../../public/logo192.png'
 import css from './style.module.css'
+import { Routes } from 'router'
 
 export default function App () {
   const { tabs, activeTab, handleSetTab } = useProjectContainer()
 
   const renderChildren = useMemo(() => tabs.map((tab) => {
+    const styledTab = cn({
+      [css.active]: tab.key === activeTab ||
+        (
+          tab.key === Routes.PROJECT_SELECT &&
+          Routes.PROJECT_CREATE === activeTab
+        )
+    })
     return (
       <span
         key={tab.key}
-        className={tab.key === activeTab ? css.active : ''}
+        className={styledTab}
         onClick={() => handleSetTab(tab)}
       >
         { tab.label }

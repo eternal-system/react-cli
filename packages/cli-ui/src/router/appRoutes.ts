@@ -1,5 +1,12 @@
-import { ProjectContainer, DashboardContainer } from 'containers'
-import { Projects, Create, Import, Depend, PageNotFound } from 'pages'
+import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
+import {
+  Projects,
+  SelectCreateFolder,
+  Import,
+  Depend,
+  PageNotFound,
+  CreateProject
+} from 'pages'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -7,10 +14,10 @@ export enum Routes {
   PROJECT = '/project',
   DASHBOARD = '/dashboard',
   DEPENDENCIES = '/dependencies',
-  NOT_FOUND = '/404',
   PROJECT_SELECT = '/project/select',
   PROJECT_CREATE = '/project/create',
   PROJECT_IMPORT = '/project/import',
+  NOT_FOUND = '/404',
 }
 
 export interface RouteEntity {
@@ -27,10 +34,16 @@ type RoutesCollection = {
 };
 
 export const AppRoutes: RoutesCollection = {
+  [Routes.MAIN]: {
+    paths: {
+      root: Routes.MAIN
+    },
+    exact: true,
+    Component: AppContainer
+  },
   [Routes.PROJECT]: {
     paths: {
-      root: Routes.MAIN,
-      projectsPage: Routes.PROJECT,
+      root: Routes.PROJECT,
       [Routes.PROJECT]: {
         paths: {
           root: Routes.PROJECT
@@ -43,7 +56,14 @@ export const AppRoutes: RoutesCollection = {
           root: Routes.PROJECT_SELECT
         },
         exact: true,
-        Component: Create
+        Component: SelectCreateFolder
+      },
+      [Routes.PROJECT_CREATE]: {
+        paths: {
+          root: Routes.PROJECT_CREATE
+        },
+        exact: true,
+        Component: CreateProject
       },
       [Routes.PROJECT_IMPORT]: {
         paths: {
