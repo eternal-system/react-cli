@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
@@ -63,7 +64,8 @@ module.exports = {
       threshold: 4096,
       minRatio: 0.8,
       deleteOriginalAssets: false
-    })
+    }),
+    new ManifestPlugin()
   ],
   module: {
     rules: [

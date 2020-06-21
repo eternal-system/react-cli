@@ -1,5 +1,12 @@
-import ProjectContainer from 'containers/ProjectContainer'
-import PageNotFound from 'pages/PageNotFound'
+import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
+import {
+  Projects,
+  SelectCreateFolder,
+  Import,
+  Depend,
+  PageNotFound,
+  CreateProject
+} from 'pages'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -7,17 +14,17 @@ export enum Routes {
   PROJECT = '/project',
   DASHBOARD = '/dashboard',
   DEPENDENCIES = '/dependencies',
-  NOT_FOUND = '/404',
   PROJECT_SELECT = '/project/select',
   PROJECT_CREATE = '/project/create',
   PROJECT_IMPORT = '/project/import',
+  NOT_FOUND = '/404',
 }
 
 export interface RouteEntity {
   Component: React.FC<React.ReactNode>;
   paths: {
     root: string;
-    [key: string]: string;
+    [key: string]: string | RouteEntity;
   };
   exact?: boolean;
 }
@@ -27,16 +34,61 @@ type RoutesCollection = {
 };
 
 export const AppRoutes: RoutesCollection = {
-  [Routes.PROJECT]: {
+  [Routes.MAIN]: {
     paths: {
-      root: Routes.MAIN,
-      projects: Routes.PROJECT,
-      select: Routes.PROJECT_SELECT,
-      import: Routes.PROJECT_IMPORT,
-      create: Routes.PROJECT_CREATE
+      root: Routes.MAIN
     },
     exact: true,
+    Component: AppContainer
+  },
+  [Routes.PROJECT]: {
+    paths: {
+      root: Routes.PROJECT,
+      [Routes.PROJECT]: {
+        paths: {
+          root: Routes.PROJECT
+        },
+        exact: true,
+        Component: Projects
+      },
+      [Routes.PROJECT_SELECT]: {
+        paths: {
+          root: Routes.PROJECT_SELECT
+        },
+        exact: true,
+        Component: SelectCreateFolder
+      },
+      [Routes.PROJECT_CREATE]: {
+        paths: {
+          root: Routes.PROJECT_CREATE
+        },
+        exact: true,
+        Component: CreateProject
+      },
+      [Routes.PROJECT_IMPORT]: {
+        paths: {
+          root: Routes.PROJECT_IMPORT
+        },
+        exact: true,
+        Component: Import
+      }
+    },
+    exact: false,
     Component: ProjectContainer
+  },
+  [Routes.DASHBOARD]: {
+    paths: {
+      root: Routes.DASHBOARD
+    },
+    exact: true,
+    Component: DashboardContainer
+  },
+  [Routes.DEPENDENCIES]: {
+    paths: {
+      root: Routes.DEPENDENCIES
+    },
+    exact: true,
+    Component: Depend
   },
   [Routes.NOT_FOUND]: {
     paths: {

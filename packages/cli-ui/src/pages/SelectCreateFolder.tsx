@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
-// eslint-disable-next-line camelcase
-import { unstable_batchedUpdates } from 'react-dom'
+import { unstable_batchedUpdates as batch } from 'react-dom'
+import { useHistory } from 'react-router-dom'
+
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
+import { Routes } from 'router'
 
 /**
  * Create new project
  */
-export default function Create (props) {
+export default function Create () {
+  // Router
+  const history = useHistory()
+
+  // State
   const [url, setUrl] = useState('/')
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
@@ -20,7 +26,7 @@ export default function Create (props) {
     fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
-        unstable_batchedUpdates(() => {
+        batch(() => {
           setProjects(res)
           setLoading(false)
         })
@@ -35,8 +41,10 @@ export default function Create (props) {
   }
 
   // events
-  function handleSubmit (e) {
+  /** @TODO Add real e: types */
+  function handleSubmit (e: any) {
     console.log('handleSubmit', e)
+    history.push(Routes.PROJECT_CREATE)
   }
 
   // reset

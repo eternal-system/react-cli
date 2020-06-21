@@ -32,6 +32,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "express": "^4.17.1",
+    "fkill": "^7.0.1",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -44,6 +45,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.10.1",
+    "@types/classnames": "^2.2.10",
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
@@ -79,6 +81,7 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.25.0",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^4.2.2"
   }
 }
