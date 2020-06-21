@@ -12,11 +12,11 @@ interface Props {
 /**
  * Import project
  */
-export default function Import (props: Props) {
+export default function Import () {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
-  function getData (url?: string) {
+  function getData () {
     console.log('getData')
     setLoading(true)
     fetch('/api/folders')
@@ -32,7 +32,6 @@ export default function Import (props: Props) {
   }
 
   useEffect(() => {
-    console.log(props)
     getData()
   }, [])
 
@@ -40,7 +39,7 @@ export default function Import (props: Props) {
     console.log('click 1', name)
   }
 
-  function handleSubmit (e) {
+  function handleSubmit (e: any) {
     console.log('handleSubmit', e)
   }
 

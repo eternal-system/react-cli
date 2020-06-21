@@ -1,20 +1,41 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
-import { Routes } from 'router'
-import { Create, Projects, Import } from 'pages'
-import { Tabs } from 'components'
+import Footer from 'components/Footer'
 import useProjectContainer from './projectContainer.hook'
+import logo from '../../../public/logo192.png'
+import css from './style.module.css'
 
 export default function App () {
-  useProjectContainer()
+  const { tabs, activeTab, handleSetTab } = useProjectContainer()
+
+  const renderChildren = useMemo(() => tabs.map((tab) => {
+    return (
+      <span
+        key={tab.key}
+        className={tab.key === activeTab ? css.active : ''}
+        onClick={() => handleSetTab(tab)}
+      >
+        { tab.label }
+      </span>
+    )
+  }), [activeTab])
 
   return (
-    <div className='wrapper content'>
-      <Tabs>
-        <Projects key={Routes.PROJECT} label="Projects" />
-        <Create key={Routes.PROJECT_SELECT} label="Create" />
-        <Import key={Routes.PROJECT_IMPORT} label="Import"/>
-      </Tabs>
-    </div>
+    <>
+      <header className={css.wrapperHeader} >
+        <div className={css.wrapperLayout} >
+          <div className={css.wrapperLogo}>
+            <a href="/" >
+              <img src={logo} alt="logo" />
+              <span>React Project Manager</span>
+            </a>
+          </div>
+          <div className={css.nav}>
+            {renderChildren}
+          </div>
+        </div>
+      </header>
+      <Footer />
+    </>
   )
 }

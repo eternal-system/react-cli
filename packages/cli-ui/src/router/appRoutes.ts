@@ -1,5 +1,5 @@
 import { ProjectContainer, DashboardContainer } from 'containers'
-import { Depend, PageNotFound } from 'pages'
+import { Projects, Create, Import, Depend, PageNotFound } from 'pages'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -17,7 +17,7 @@ export interface RouteEntity {
   Component: React.FC<React.ReactNode>;
   paths: {
     root: string;
-    [key: string]: string;
+    [key: string]: string | RouteEntity;
   };
   exact?: boolean;
 }
@@ -30,11 +30,30 @@ export const AppRoutes: RoutesCollection = {
   [Routes.PROJECT]: {
     paths: {
       root: Routes.MAIN,
-      projects: Routes.PROJECT,
-      select: Routes.PROJECT_SELECT,
-      import: Routes.PROJECT_IMPORT
+      projectsPage: Routes.PROJECT,
+      [Routes.PROJECT]: {
+        paths: {
+          root: Routes.PROJECT
+        },
+        exact: true,
+        Component: Projects
+      },
+      [Routes.PROJECT_SELECT]: {
+        paths: {
+          root: Routes.PROJECT_SELECT
+        },
+        exact: true,
+        Component: Create
+      },
+      [Routes.PROJECT_IMPORT]: {
+        paths: {
+          root: Routes.PROJECT_IMPORT
+        },
+        exact: true,
+        Component: Import
+      }
     },
-    exact: true,
+    exact: false,
     Component: ProjectContainer
   },
   [Routes.DASHBOARD]: {
