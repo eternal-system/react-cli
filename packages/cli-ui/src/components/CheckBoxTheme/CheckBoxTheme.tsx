@@ -15,7 +15,7 @@ function CheckBoxTheme () {
   }, [check])
 
   return (
-    <div>
+    <div className="checkbox">
       <label className={`custom-checkbox ${checked}`} onClick={onSetCheck}>
         <span className="custom-checkbox-button"></span>
       </label>

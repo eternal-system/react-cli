@@ -29,6 +29,7 @@ const Header = ({ setTab, active, children }: any) => {
 
         </div>
         <div className="checktheme">
+          <p>Dark Mode</p>
           <CheckBoxTheme />
         </div>
       </div>
