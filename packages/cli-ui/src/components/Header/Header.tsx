@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from './logo192'
+import CheckBoxTheme from '../CheckBoxTheme'
 
 const Header = ({ setTab, active, children }: any) => {
   console.log('match', children)
@@ -26,6 +27,9 @@ const Header = ({ setTab, active, children }: any) => {
             )
           })}
 
+        </div>
+        <div className="checktheme">
+          <CheckBoxTheme />
         </div>
       </div>
     </header>

@@ -6,7 +6,7 @@ import Tabs from './components/Tabs'
 
 const App = () => {
   return (
-    <div className='wrapper constent'>
+    <div className='wrapper content content__bg'>
       <Tabs>
         <Projects label="Projects" key={1} />
         <Create label="Create" key={2} />

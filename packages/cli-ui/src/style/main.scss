@@ -1,3 +1,5 @@
+@import './vars.scss';
+
 * {
     margin: 0;
     padding: 0;
@@ -7,12 +9,12 @@ body {
     margin: 0;
     overflow-x: hidden;
     position: relative;
+    font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 
 html, body, #root, #root .constent{
     height: 100%;
     margin: 0;
-    
 }
 
 #root {
@@ -21,7 +23,7 @@ html, body, #root, #root .constent{
 }
 
 .wrapper__header {
-    background-color: #20232a;
+    background-color: $header_bg;
     color: #ffffff;
     position: fixed;
     z-index: 1;
@@ -38,6 +40,7 @@ html, body, #root, #root .constent{
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    justify-content: space-between;
 }
 
 .wrapper__header .nav{
@@ -46,6 +49,16 @@ html, body, #root, #root .constent{
     line-height: 60px;
     overflow-x: auto;
     overflow-y: hidden;
+
+}
+
+.wrapper__header .checktheme{
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
 }
 
 .wrapper__header .nav .active{
@@ -128,6 +141,10 @@ a {
     height: auto;
     min-height: calc(96vh - 50px);
 }
+
+// .content__bg, .wrapper{
+//     background-color: #000;
+// }
 
 .content .content__text{
     margin-top: 60px;
@@ -222,6 +239,62 @@ button{
     top: 50%;
     left: 50%;
  }
+
+ .custom-checkbox {
+	position: relative;
+	cursor: pointer;
+    line-height: 20px;
+    align-self: center;
+}
+
+.custom-checkbox-button {
+	display: inline-block;
+	margin: 0 15px;
+	width: 35px;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.5);
+	height: 20px;
+    position: relative;
+    bottom: -4px;
+
+    // top: 3px;
+	cursor: pointer;
+}
+.custom-checkbox-button:before {
+	background: #fff;
+	content: "";
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+    position: absolute;
+	top: 0px;
+	left: -1px;
+	-webkit-box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3), 0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
+	        box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3), 0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
+	-webkit-transition: 0.2s;
+	        transition: 0.2s;
+}
+.custom-checkbox-button:after {
+	content: "";
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	background: #707070;
+	border-radius: 50%;
+	top: 4px;
+	left: 3px;
+	-webkit-box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
+	        box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
+	-webkit-transition: 0.2s;
+	        transition: 0.2s;
+}
+.custom-checkbox.checked .custom-checkbox-button:before {
+	left: 16px;
+}
+.custom-checkbox.checked .custom-checkbox-button:after {
+	left: 20px;
+	background: #61dafb;
+}
   
 @keyframes spin {
     0% { transform: rotate(0deg); }
