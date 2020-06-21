@@ -34,8 +34,7 @@ export const AppRoutes: RoutesCollection = {
       root: Routes.MAIN,
       projects: Routes.PROJECT,
       select: Routes.PROJECT_SELECT,
-      import: Routes.PROJECT_IMPORT,
-      create: Routes.PROJECT_CREATE
+      import: Routes.PROJECT_IMPORT
     },
     exact: true,
     Component: ProjectContainer
