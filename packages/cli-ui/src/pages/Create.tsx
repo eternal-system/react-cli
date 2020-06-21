@@ -1,77 +1,69 @@
 import React, { useState, useEffect } from 'react'
 // eslint-disable-next-line camelcase
 import { unstable_batchedUpdates } from 'react-dom'
-import Layout from '../components/Layout'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Content from '../components/Content'
-import Loader from '../components/Loader'
-import Folders from '../components/Folders'
-import Toolbar from '../components/Toolbar'
+import { Layout, Content, Loader, Folders, Toolbar } from '../components'
+
 /**
  * Create new project
  */
-const Create = (props: any) => {
+export default function Create (props) {
   const [url, setUrl] = useState('/')
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const getData = (url?: string) => {
-    console.log('getData')
+  useEffect(() => {
+    getData(url)
+  }, [url])
+
+  function getData (url?: string) {
     setLoading(true)
-    fetch(`/api/projects?url=${url}`)
+    fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
-        console.log(res)
         unstable_batchedUpdates(() => {
           setProjects(res)
           setLoading(false)
         })
-        console.log('loading false')
       })
   }
 
-  useEffect(() => {
-    console.log(props)
-    getData(url)
-  }, [url])
-
   // click on folder
-  const handleClick = (name: string) => {
-    const buildUrl = `${url}/${name}`
+  function handleClick (name: string) {
+    const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
     setUrl(buildUrl)
     getData(buildUrl)
   }
 
   // events
-  const handleSubmit = (e) => {
-    console.log('handleSubmit')
+  function handleSubmit (e) {
+    console.log('handleSubmit', e)
   }
 
   // reset
-  const handleReset = () => {
+  function handleReset () {
     getData(url)
   }
 
   // create new folder
-  const createFolder = () => {
-    console.log('new folder')
-  }
+  // const createFolder = () => {
+  //   console.log('new folder')
+  // }
 
   // show hidden folder
-  const changeHiddenFolder = () => {
-    console.log('show folder hidden')
-  }
+  // const changeHiddenFolder = () => {
+  //   console.log('show folder hidden')
+  // }
 
   // back folder in stap
-  const backFolder = () => {
+  function backFolder () {
     console.log('back folder')
     // build array
     const newUrl = url.split('/')
     // delete last element
     const newArr = newUrl.splice(0, newUrl.length - 1)
     // create new string
-    const buildUrl = newArr.join('/')
+    const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
+    console.log(buildUrl)
     // set new url
     setUrl(buildUrl)
     // get new list data
@@ -99,5 +91,3 @@ const Create = (props: any) => {
     </Layout>
   )
 }
-
-export default Create

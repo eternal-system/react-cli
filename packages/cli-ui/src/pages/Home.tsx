@@ -1,10 +1,8 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Content from '../components/Content'
 
-const Home = () => {
+import { Layout, Header, Footer, Content } from '../components'
+
+export default function Home () {
   return (
     <Layout>
       <Header />
@@ -18,5 +16,3 @@ const Home = () => {
     </Layout>
   )
 }
-
-export default Home

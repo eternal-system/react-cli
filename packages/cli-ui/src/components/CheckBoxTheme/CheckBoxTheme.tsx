@@ -6,11 +6,11 @@ function CheckBoxTheme () {
   const checked = check ? 'checked' : ''
 
   const onSetCheck = () => {
-    onChecked(localStorage.setItem('checked', JSON.stringify(!check)))
+    onChecked(localStorage.setItem('thememode', JSON.stringify(!check)))
   }
 
   useEffect(() => {
-    const checkout = JSON.parse(localStorage.getItem('checked')) ? JSON.parse(localStorage.getItem('checked')) : false
+    const checkout = JSON.parse(localStorage.getItem('thememode')) ? JSON.parse(localStorage.getItem('thememode')) : false
     onChecked(checkout)
   }, [check])
 

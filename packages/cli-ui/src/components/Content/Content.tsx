@@ -1,10 +1,11 @@
 import React from 'react'
-import type { Node } from 'react'
 
-const Content = ({ children }: Node) => {
+import css from './style.module.css'
+
+function Content ({ children }: React.PropsWithChildren<React.ReactNode>) {
   return (
-    <div className="content" >
-      <div className="content__text">
+    <div className={css.content} >
+      <div className={css.contentText}>
         {children}
       </div>
     </div>

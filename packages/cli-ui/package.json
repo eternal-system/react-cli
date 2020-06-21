@@ -4,10 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "rm -rf dist && nodemon server.dev.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --hot",
-    "start-node": "nodemon server.dev.js",
-    "build": "npx webpack --mode production",
+    "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run clear-dist\" \"npm run server\" \"npm run start\"",
+    "dev-server": "cross-env DEV_SERVER=true concurrently \"npm run clear-dist\" \"npm run server\"",
+    "server": "nodemon server.dev.js",
+    "start": "webpack-dev-server --config ./webpack.config.dev.js --open",
+    "build": "npx webpack --display-error-details --config ./webpack.config.js",
+    "clear-dist": "rm -rf dist",
     "test": "jest"
   },
   "repository": {
@@ -28,6 +30,7 @@
   ],
   "homepage": "https://github.com/eternal-system/react-cli#readme",
   "dependencies": {
+    "classnames": "^2.2.6",
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
@@ -41,14 +44,21 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.10.1",
+    "@types/react": "^16.9.38",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
+    "autoprefixer": "^9.8.1",
     "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^4.0.0",
+    "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^6.0.2",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
+    "dotenv": "^8.2.0",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.1",
@@ -62,11 +72,13 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "postcss-loader": "^3.0.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2"
   }
 }

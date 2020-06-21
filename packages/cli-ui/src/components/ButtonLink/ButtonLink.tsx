@@ -1,11 +1,9 @@
 import React from 'react'
 
-const ButtonLink = () => {
+export default function ButtonLink () {
   return (
     <div>
-        ButtonLink
+      ButtonLink
     </div>
   )
 }
-
-export default ButtonLink

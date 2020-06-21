@@ -1,19 +1,20 @@
-import React from 'react'
-import Create from './pages/Create'
-import Projects from './pages/Projects'
-import Import from './pages/Import'
-import Tabs from './components/Tabs'
+import React, { useState, useEffect } from 'react'
 
-const App = () => {
+import { renderRoutes } from './router'
+
+export default function App () {
+  const theme = (JSON.parse(localStorage.getItem('thememode')) === true) ? 'dark' : 'ligth'
+  console.log(localStorage.getItem('thememode'))
+
+  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
+
+  useEffect(() => {
+    setValue(JSON.parse(localStorage.getItem('thememode')))
+  }, [value])
+
   return (
-    <div className='wrapper content'>
-      <Tabs>
-        <Projects label="Projects" key={1} />
-        <Create label="Create" key={2} />
-        <Import label="Import" key={3} />
-      </Tabs>
+    <div key={theme} className={`wrapper content ${theme}`}>
+      {renderRoutes()}
     </div>
   )
 }
-
-export default App
