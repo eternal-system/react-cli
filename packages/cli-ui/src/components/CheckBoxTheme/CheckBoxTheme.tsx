@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {Context} from '../../context'
 import css from './style.module.scss'
 
 function CheckBoxTheme () {
@@ -6,8 +7,11 @@ function CheckBoxTheme () {
 
   const checked = check ? 'checked' : ''
 
+  const {getValue} = useContext(Context)
+
   const onSetCheck = () => {
-    onChecked(localStorage.setItem('thememode', JSON.stringify(!check)))
+    // onChecked(localStorage.setItem('thememode', JSON.stringify(!check)))
+    getValue(onChecked(localStorage.setItem('thememode', JSON.stringify(!check))))
   }
 
   useEffect(() => {

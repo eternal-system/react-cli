@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import CheckBoxTheme from '../CheckBoxTheme/CheckBoxTheme'
@@ -25,6 +25,16 @@ export default function Header ({ setTab, active, children }: any) {
     )
   }), [children, active])
 
+  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
+
+  useEffect(() => {
+    setValue(JSON.parse(localStorage.getItem('thememode')))
+  }, [value])
+
+  const actived = value ? 'actived' : ''
+
+  console.log(value)
+
   return (
     <header className={css.wrapperHeader} >
       <div className={css.wrapperLayout} >
@@ -37,8 +47,8 @@ export default function Header ({ setTab, active, children }: any) {
         <div className={css.nav}>
           {renderChildren}
         </div>
-        <div className="checktheme">
-          <p>Dark Mode</p>
+        <div className="checktheme" >
+          <p className={actived}>Dark Mode</p>
           <CheckBoxTheme />
         </div>
       </div>
