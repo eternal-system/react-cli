@@ -1,10 +1,10 @@
 @import './vars.scss';
 
-@font-face {
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-weight: normal;
-  font-style: normal;
-}
+// @font-face {
+//   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
 * {
 	margin: 0;
@@ -15,7 +15,7 @@ body {
     margin: 0;
     overflow-x: hidden;
     position: relative;
-    // font-family:
+    font-family: sans-serif;
 }
 
 html, body, #root, #root .constent{
@@ -210,33 +210,32 @@ button {
  }
 
  .checktheme{
-     display: flex;
-     flex-direction: column;
+    position: absolute;
+    top:50%;
+    right: 50px;
  }
 
  .checktheme p{
     margin-top: -15px;
     text-align: center;
     color: rgb(118,118,118);
-    font-size: 10px;
+    font-size: 11px;
  }
 
  .checkbox{
-     width: 150px;
-     margin-top: -40px;
-     text-align: center;
+    margin: 0 auto;
  }
 
  .custom-checkbox {
 	position: relative;
-	cursor: pointer;
+    cursor: pointer;
+    display: block;
     line-height: 20px;
-    margin-top: -40px;
 }
 
 .custom-checkbox-button {
-	display: inline-block;
-	margin: 0 5px;
+	display: block;
+	margin: 0 25px;
 	width: 35px;
 	border-radius: 12px;
 	background: rgb(118, 118, 118);
