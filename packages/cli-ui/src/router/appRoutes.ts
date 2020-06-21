@@ -1,7 +1,5 @@
-import ProjectContainer from 'containers/ProjectContainer'
-import Dashboard from 'pages/Dashboard'
-import Depend from 'pages/Depend'
-import PageNotFound from 'pages/PageNotFound'
+import { ProjectContainer, DashboardContainer } from 'containers'
+import { Depend, PageNotFound } from 'pages'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -44,7 +42,7 @@ export const AppRoutes: RoutesCollection = {
       root: Routes.DASHBOARD
     },
     exact: true,
-    Component: Dashboard
+    Component: DashboardContainer
   },
   [Routes.DEPENDENCIES]: {
     paths: {

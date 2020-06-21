@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-// eslint-disable-next-line camelcase
-import { unstable_batchedUpdates } from 'react-dom'
+import { unstable_batchedUpdates as batch } from 'react-dom'
+
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
 /**
@@ -20,7 +20,7 @@ export default function Create (props) {
     fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
-        unstable_batchedUpdates(() => {
+        batch(() => {
           setProjects(res)
           setLoading(false)
         })
