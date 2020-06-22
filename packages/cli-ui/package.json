@@ -33,9 +33,11 @@
     "classnames": "^2.2.6",
     "express": "^4.17.1",
     "fkill": "^7.0.1",
+    "i18next": "^19.5.1",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.7.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
