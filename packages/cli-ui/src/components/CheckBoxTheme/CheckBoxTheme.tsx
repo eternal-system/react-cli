@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Context } from '../../context'
 
-function CheckBoxTheme () {
+export default function CheckBoxTheme () {
   const [check, onChecked] = useState(false)
 
   const checked = check ? 'checked' : ''
@@ -26,5 +26,3 @@ function CheckBoxTheme () {
     </div>
   )
 }
-
-export default CheckBoxTheme

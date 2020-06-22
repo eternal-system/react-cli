@@ -1,31 +1,37 @@
-import React, { useMemo } from 'react'
-import cn from 'classnames'
-
-import Footer from 'components/Footer'
+import React, { useMemo, useState, useEffect } from 'react'
+import { CheckBoxTheme, Footer } from 'components'
+import {NavLink} from 'react-router-dom'
 import useProjectContainer from './projectContainer.hook'
+import { Routes } from 'router'
 import logo from '../../../public/logo192.png'
 import css from './style.module.css'
-import { Routes } from 'router'
 
-export default function App () {
+
+export default function ProjectContainer () {
   const { tabs, activeTab, handleSetTab } = useProjectContainer()
+  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
+
+  useEffect(() => {
+    setValue(JSON.parse(localStorage.getItem('thememode')))
+  }, [value])
+
+  const actived = value ? 'actived' : ''
 
   const renderChildren = useMemo(() => tabs.map((tab) => {
-    const styledTab = cn({
-      [css.active]: tab.key === activeTab ||
-        (
-          tab.key === Routes.PROJECT_SELECT &&
-          Routes.PROJECT_CREATE === activeTab
-        )
-    })
     return (
-      <span
-        key={tab.key}
-        className={styledTab}
-        onClick={() => handleSetTab(tab)}
+      <NavLink 
+        key={tab.key} 
+        exact={true}
+        to={tab.key}
+        activeClassName={css.active}
+        isActive={(match, location) => {
+            if(tab.key === location.pathname){
+              return true
+            }
+        }} 
       >
-        { tab.label }
-      </span>
+        {tab.label}
+      </NavLink>
     )
   }), [activeTab])
 
@@ -43,7 +49,14 @@ export default function App () {
             {renderChildren}
           </div>
         </div>
+
+        <div className="checktheme" >
+          <p className={actived}>Dark Mode</p>
+          <CheckBoxTheme />
+        </div>
+
       </header>
+
       <Footer />
     </>
   )

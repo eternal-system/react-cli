@@ -43,7 +43,6 @@ export default function Create () {
   // events
   /** @TODO Add real e: types */
   function handleSubmit (e: any) {
-    console.log('handleSubmit', e)
     history.push(Routes.PROJECT_CREATE)
   }
 
@@ -64,14 +63,12 @@ export default function Create () {
 
   // back folder in stap
   function backFolder () {
-    console.log('back folder')
     // build array
     const newUrl = url.split('/')
     // delete last element
     const newArr = newUrl.splice(0, newUrl.length - 1)
     // create new string
     const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
-    console.log(buildUrl)
     // set new url
     setUrl(buildUrl)
     // get new list data
