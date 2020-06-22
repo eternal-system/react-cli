@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import {Context} from '../../context'
-import css from './style.module.scss'
+import { Context } from '../../context'
 
 function CheckBoxTheme () {
   const [check, onChecked] = useState(false)
 
   const checked = check ? 'checked' : ''
 
-  const {getValue} = useContext(Context)
+  const { getValue } = useContext(Context)
 
   const onSetCheck = () => {
     // onChecked(localStorage.setItem('thememode', JSON.stringify(!check)))

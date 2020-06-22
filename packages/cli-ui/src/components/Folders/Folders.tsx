@@ -1,18 +1,13 @@
 import React from 'react'
-
 import ItemFolder from './ItemFolder'
 
 interface IFolders {
   /** @TODO add to real types */
-  folders: any[];
+  folders: string[];
   on(name: string): void;
 }
 
-// Folders
-
 function Folders ({ folders, on }: IFolders) {
-  console.log('folders', folders)
-
   return (
     <div className="folders">
       { folders.length

@@ -13,34 +13,55 @@ interface Props {
  * Import project
  */
 export default function Import () {
+  // State
+  const [url, setUrl] = useState('/')
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
-  function getData () {
-    console.log('getData')
+  useEffect(() => {
+    getData(url)
+  }, [url])
+
+  function getData (url?: string) {
     setLoading(true)
-    fetch('/api/folders')
+    fetch(`/api/folders?url=${url}`)
       .then(response => response.json())
       .then(res => {
-        console.log(res)
         batch(() => {
           setProjects(res)
           setLoading(false)
         })
-        console.log('loading false')
       })
   }
 
-  useEffect(() => {
-    getData()
-  }, [])
-
   function handleClick (name: string) {
-    console.log('click 1', name)
+    const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
+    setUrl(buildUrl)
+    getData(buildUrl)
   }
 
   function handleSubmit (e: any) {
     console.log('handleSubmit', e)
+  }
+
+  function handleReset () {
+    getData(url)
+  }
+
+  // back folder in stap
+  function backFolder () {
+    console.log('back folder')
+    // build array
+    const newUrl = url.split('/')
+    // delete last element
+    const newArr = newUrl.splice(0, newUrl.length - 1)
+    // create new string
+    const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
+    console.log(buildUrl)
+    // set new url
+    setUrl(buildUrl)
+    // get new list data
+    getData(buildUrl)
   }
 
   if (loading) {
@@ -51,7 +72,11 @@ export default function Import () {
     <Layout>
       <Content>
         Folders:
-        <Toolbar update={getData}/>
+        <Toolbar
+          back={backFolder}
+          update={handleReset}
+          path={url}
+        />
         <Folders folders={projects} on={handleClick}/>
         <button onClick={handleSubmit}>
           + Import project
