@@ -6,7 +6,6 @@ import { Routes } from 'router'
 import logo from '../../../public/logo192.png'
 import css from './style.module.css'
 
-
 export default function ProjectContainer () {
   const { tabs, activeTab, handleSetTab } = useProjectContainer()
   const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
@@ -25,9 +24,17 @@ export default function ProjectContainer () {
         to={tab.key}
         activeClassName={css.active}
         isActive={(match, location) => {
-            if(tab.key === location.pathname){
-              return true
-            }
+
+          if(tab.key === Routes.PROJECT_SELECT &&
+            Routes.PROJECT_CREATE === location.pathname
+          ) {
+            return true
+          }
+
+          if(tab.key === location.pathname){
+            return true
+          }
+
         }} 
       >
         {tab.label}
@@ -38,22 +45,22 @@ export default function ProjectContainer () {
   return (
     <>
       <header className={css.wrapperHeader} >
-        <div className={css.wrapperLayout} >
-          <div className={css.wrapperLogo}>
-            <a href="/" >
-              <img src={logo} alt="logo" />
-              <span>React Project Manager</span>
-            </a>
+          <div className={css.wrapperLayout} >
+            <div className={css.wrapperLogo}>
+              <a href="/" >
+                <img src={logo} alt="logo" />
+                <span>React Project Manager</span>
+              </a>
+            </div>
+            <div className={css.nav}>
+              {renderChildren}
+            </div>
           </div>
-          <div className={css.nav}>
-            {renderChildren}
+          
+          <div className="checktheme" >
+            <p className={actived}>Dark Mode</p>
+            <CheckBoxTheme />
           </div>
-        </div>
-
-        <div className="checktheme" >
-          <p className={actived}>Dark Mode</p>
-          <CheckBoxTheme />
-        </div>
 
       </header>
 

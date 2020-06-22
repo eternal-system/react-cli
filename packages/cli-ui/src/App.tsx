@@ -4,23 +4,19 @@ import { Context } from './context'
 import { renderRoutes } from './router'
 
 export default function App () {
-  const theme = JSON.parse(localStorage.getItem('thememode')) ? 'dark' : 'ligth'
-  console.log(localStorage.getItem('thememode'))
-
-  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
+  const getLocalStorage = JSON.parse(localStorage.getItem('thememode'))
+  const theme = getLocalStorage ? 'dark' : 'ligth'
+ 
+  const [value, setValue] = useState(getLocalStorage)
 
   useEffect(() => {
-    setValue(JSON.parse(localStorage.getItem('thememode')))
+    setValue(getLocalStorage)
   }, [value])
 
-  const getValue = (status) => {
-    setValue(status)
-  }
+  const getValue = (status) => setValue(status)
 
   return (
-    <Context.Provider value={{
-      getValue
-    }}>
+    <Context.Provider value={{getValue}}>
       <div key={theme} className={`wrapper content ${theme}`}>
         {renderRoutes()}
       </div>
