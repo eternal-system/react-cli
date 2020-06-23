@@ -10,8 +10,11 @@ export function useSettings () {
   const [locale, setLocale] = useState<string | null>(null)
 
   useEffect(() => {
-    setDarkTheme(JSON.parse(localStorage.getItem(storageThemeName)) ?? true)
-    setLocale(JSON.parse(localStorage.getItem(storageLocaleName)) ?? 'en')
+    const storedLocale = JSON.parse(localStorage.getItem(storageLocaleName)!) ?? 'en'
+    const storedTheme = JSON.parse(localStorage.getItem(storageThemeName)!) ?? true
+    setDarkTheme(storedTheme)
+    setLocale(storedLocale)
+    i18n.changeLanguage(storedLocale)
   }, [])
 
   const changeTheme = useCallback(() => {
@@ -22,8 +25,8 @@ export function useSettings () {
   const changeLocale = useCallback(() => {
     const changedLocale = locale === 'en' ? 'ru' : 'en'
     localStorage.setItem(storageLocaleName, JSON.stringify(changedLocale))
-    i18n.changeLanguage(changedLocale)
     setLocale(changedLocale)
+    i18n.changeLanguage(changedLocale)
   }, [locale])
 
   return { locale, darkTheme, changeTheme, changeLocale }

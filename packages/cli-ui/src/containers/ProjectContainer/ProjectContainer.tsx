@@ -11,7 +11,7 @@ import css from './style.module.css'
 
 export default function ProjectContainer () {
   const { t } = useTranslation('project')
-  const { tabs, activeTab, isDarkTheme } = useProjectContainer()
+  const { locale, tabs, activeTab, isDarkTheme } = useProjectContainer()
 
   const renderChildren = useMemo(() => tabs.map((tab) => {
     return (
@@ -36,7 +36,7 @@ export default function ProjectContainer () {
         {tab.label}
       </NavLink>
     )
-  }), [activeTab])
+  }), [activeTab, locale])
 
   return (
     <>

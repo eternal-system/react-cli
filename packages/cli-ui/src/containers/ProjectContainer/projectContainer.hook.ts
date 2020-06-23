@@ -11,6 +11,7 @@ interface TabItem {
 }
 
 interface HookProps {
+  locale: string;
   tabs:TabItem[];
   isDarkTheme: 'actived' | '';
   activeTab: string;
@@ -22,7 +23,7 @@ export default function useProjectContainer (): HookProps {
 
   // State
   const { t } = useTranslation('project')
-  const { darkTheme } = useContext(SettingsContext)
+  const { locale, darkTheme } = useContext(SettingsContext)
 
   const tabs: TabItem[] = [
     { key: Routes.PROJECT, label: t('projects') },
@@ -35,6 +36,7 @@ export default function useProjectContainer (): HookProps {
   }
 
   return {
+    locale,
     tabs,
     isDarkTheme: darkTheme ? 'actived' : '',
     activeTab: location.pathname,
