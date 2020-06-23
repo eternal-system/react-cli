@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 import { Routes } from 'router'
@@ -9,6 +10,7 @@ import { Routes } from 'router'
  * Create new project
  */
 export default function Create () {
+  const { t } = useTranslation('project')
   // Router
   const history = useHistory()
 
@@ -82,7 +84,7 @@ export default function Create () {
   return (
     <Layout>
       <Content>
-        Folders:
+        {`${t('folders')}:`}
         <Toolbar
           back={backFolder}
           update={handleReset}
@@ -90,7 +92,7 @@ export default function Create () {
         />
         <Folders folders={projects} on={handleClick}/>
         <button onClick={handleSubmit}>
-          + Create a new project here
+          {`+ ${t('createNewProject')}`}
         </button>
       </Content>
     </Layout>
