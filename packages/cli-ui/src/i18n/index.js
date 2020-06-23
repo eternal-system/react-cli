@@ -4,7 +4,7 @@ import locales from './locales'
 // Инициализация i18n
 i18n.init({
   // Ипользуем русский + отладочную локаль
-  lng: 'ru',
+  lng: 'en',
   fallbackLng: 'dev',
 
   // По умолчанию используем неймспейс common

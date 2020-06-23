@@ -1,41 +1,37 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { CheckBoxTheme, Footer } from 'components'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import useProjectContainer from './projectContainer.hook'
 import { Routes } from 'router'
+
 import logo from '../../../public/logo192.png'
 import css from './style.module.css'
 
 export default function ProjectContainer () {
-  const { tabs, activeTab, handleSetTab } = useProjectContainer()
-  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
-
-  useEffect(() => {
-    setValue(JSON.parse(localStorage.getItem('thememode')))
-  }, [value])
-
-  const actived = value ? 'actived' : ''
+  const { t } = useTranslation('project')
+  const { tabs, activeTab, isDarkTheme } = useProjectContainer()
 
   const renderChildren = useMemo(() => tabs.map((tab) => {
     return (
-      <NavLink 
-        key={tab.key} 
+      <NavLink
+        key={tab.key}
         exact={true}
         to={tab.key}
         activeClassName={css.active}
-        isActive={(match, location) => {
-
-          if(tab.key === Routes.PROJECT_SELECT &&
+        isActive={(_, location) => {
+          if (tab.key === Routes.PROJECT_SELECT &&
             Routes.PROJECT_CREATE === location.pathname
           ) {
             return true
           }
 
-          if(tab.key === location.pathname){
+          if (tab.key === location.pathname) {
             return true
           }
-
-        }} 
+          return false
+        }}
       >
         {tab.label}
       </NavLink>
@@ -45,22 +41,22 @@ export default function ProjectContainer () {
   return (
     <>
       <header className={css.wrapperHeader} >
-          <div className={css.wrapperLayout} >
-            <div className={css.wrapperLogo}>
-              <a href="/" >
-                <img src={logo} alt="logo" />
-                <span>React Project Manager</span>
-              </a>
-            </div>
-            <div className={css.nav}>
-              {renderChildren}
-            </div>
+        <div className={css.wrapperLayout} >
+          <div className={css.wrapperLogo}>
+            <a href="/" >
+              <img src={logo} alt="logo" />
+              <span>{t('headerTitle')}</span>
+            </a>
           </div>
-          
-          <div className="checktheme" >
-            <p className={actived}>Dark Mode</p>
-            <CheckBoxTheme />
+          <div className={css.nav}>
+            {renderChildren}
           </div>
+        </div>
+
+        <div className="checktheme" >
+          <p className={isDarkTheme}>Dark Mode</p>
+          <CheckBoxTheme />
+        </div>
 
       </header>
 
