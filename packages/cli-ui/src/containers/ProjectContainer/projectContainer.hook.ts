@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { Routes } from 'router'
+import { SettingsContext } from 'context'
 
 interface TabItem {
   key: Routes.PROJECT | Routes.PROJECT_SELECT | Routes.PROJECT_IMPORT;
@@ -16,22 +17,18 @@ interface HookProps {
   handleSetTab(tabItem: TabItem): void;
 }
 export default function useProjectContainer (): HookProps {
+  // Router
+  const history = useHistory()
+
+  // State
   const { t } = useTranslation('project')
+  const { darkTheme } = useContext(SettingsContext)
+
   const tabs: TabItem[] = [
     { key: Routes.PROJECT, label: t('projects') },
     { key: Routes.PROJECT_SELECT, label: t('create') },
     { key: Routes.PROJECT_IMPORT, label: t('import') }
   ]
-
-  // Router
-  const history = useHistory()
-
-  // State
-  const [value, setValue] = useState(JSON.parse(localStorage.getItem('thememode')))
-
-  useEffect(() => {
-    setValue(JSON.parse(localStorage.getItem('thememode')))
-  }, [value])
 
   function handleSetTab (tabItem: any) {
     history.push(tabItem.key)
@@ -39,7 +36,7 @@ export default function useProjectContainer (): HookProps {
 
   return {
     tabs,
-    isDarkTheme: value ? 'actived' : '',
+    isDarkTheme: darkTheme ? 'actived' : '',
     activeTab: location.pathname,
     handleSetTab
   }

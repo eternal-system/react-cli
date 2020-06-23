@@ -12,6 +12,7 @@ const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 const cssModuleRegex = /\.module\.(css)$/
+const svgInlineRegexp = /\.inline\.svg$/
 
 const paths = {
   appPath: resolveApp('.'),
@@ -118,12 +119,35 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|svg|gif)$/,
+        test: /\.(png|jpg|gif)$/,
         use: [require.resolve('file-loader')]
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
         use: [require.resolve('file-loader')]
+      },
+      {
+        test: svgInlineRegexp,
+        loader: 'svg-url-loader',
+        options: {
+          limit: 10000,
+          name: '[path][name].[ext]'
+        }
+      },
+      {
+        test: /\.(svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        exclude: svgInlineRegexp,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
       }
     ]
   }

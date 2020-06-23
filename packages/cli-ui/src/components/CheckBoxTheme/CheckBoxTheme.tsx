@@ -1,26 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Context } from '../../context'
+import React from 'react'
+import { SettingsContext } from '../../context'
 
 export default function CheckBoxTheme () {
-  const [check, onChecked] = useState(false)
+  const { darkTheme, changeTheme } = React.useContext(SettingsContext)
 
-  const checked = check ? 'checked' : ''
-
-  const { getValue } = useContext(Context)
-
-  const onSetCheck = () => {
-    // onChecked(localStorage.setItem('thememode', JSON.stringify(!check)))
-    getValue(onChecked(localStorage.setItem('thememode', JSON.stringify(!check))))
-  }
-
-  useEffect(() => {
-    const checkout = JSON.parse(localStorage.getItem('thememode')) ? JSON.parse(localStorage.getItem('thememode')) : false
-    onChecked(checkout)
-  }, [check])
+  const checked = darkTheme ? 'checked' : ''
 
   return (
     <div className="checkbox">
-      <label className={`custom-checkbox ${checked}`} onClick={onSetCheck}>
+      <label className={`custom-checkbox ${checked}`} onClick={changeTheme}>
         <span className="custom-checkbox-button"></span>
       </label>
     </div>

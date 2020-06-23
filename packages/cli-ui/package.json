@@ -38,7 +38,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "svg-url-loader": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
@@ -74,9 +75,10 @@
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "react-svg-loader": "^3.0.3",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "postcss-loader": "^3.0.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
