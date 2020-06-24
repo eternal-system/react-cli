@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { Context } from './context'
+import React from 'react'
+import { I18nextProvider } from 'react-i18next'
 
+import i18n from './i18n'
+import { SettingsContext } from './context'
+import { useSettings } from './hooks'
 import { renderRoutes } from './router'
 
 export default function App () {
-  const getLocalStorage = JSON.parse(localStorage.getItem('thememode'))
-  const theme = getLocalStorage ? 'dark' : 'ligth'
- 
-  const [value, setValue] = useState(getLocalStorage)
-
-  useEffect(() => {
-    setValue(getLocalStorage)
-  }, [value])
-
-  const getValue = (status) => setValue(status)
+  const { locale, darkTheme, changeTheme, changeLocale } = useSettings()
+  const theme = darkTheme ? 'dark' : 'ligth'
 
   return (
-    <Context.Provider value={{getValue}}>
-      <div key={theme} className={`wrapper content ${theme}`}>
-        {renderRoutes()}
-      </div>
-    </Context.Provider>
+    <I18nextProvider i18n={i18n}>
+      <SettingsContext.Provider value={{ locale, darkTheme, changeTheme, changeLocale }}>
+        <div className={`wrapper content ${theme}`}>
+          {renderRoutes()}
+        </div>
+      </SettingsContext.Provider>
+    </I18nextProvider>
   )
 }

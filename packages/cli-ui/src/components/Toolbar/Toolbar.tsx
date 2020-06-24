@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   update?(): void;
@@ -7,11 +8,13 @@ interface Props {
 }
 
 export default function Toolbar ({ update, path, back }: Props) {
+  const { t } = useTranslation('common')
+
   return (
     <div className="toolbar">
       <button onClick={back}>^</button>
-      Path: <span>{path}</span>
-      <button onClick={update}>reset</button>
+      {`${t('path')}: `} <span>{path}</span>
+      <button onClick={update}>{t('reset')}</button>
     </div>
   )
 }

@@ -1,12 +1,14 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Layout, Content } from '../components'
 
 export default function Projects () {
+  const { t } = useTranslation('project')
   return (
     <Layout>
       <Content>
-        Not found projects
+        {t('notFoundProjects')}
       </Content>
     </Layout>
   )

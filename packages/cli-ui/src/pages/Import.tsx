@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 // import Header from '../components/Header'
@@ -13,6 +14,7 @@ interface Props {
  * Import project
  */
 export default function Import () {
+  const { t } = useTranslation('project')
   // State
   const [url, setUrl] = useState('/')
   const [projects, setProjects] = useState([])
@@ -69,7 +71,7 @@ export default function Import () {
   return (
     <Layout>
       <Content>
-        Folders:
+        {`${t('folders')}:`}
         <Toolbar
           back={backFolder}
           update={handleReset}
@@ -77,7 +79,7 @@ export default function Import () {
         />
         <Folders folders={projects} on={handleClick}/>
         <button onClick={handleSubmit}>
-          + Import project
+          {`+ ${t('importProject')}`}
         </button>
       </Content>
     </Layout>
