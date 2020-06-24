@@ -1,41 +1,39 @@
 import i18n from 'i18next'
 import locales from './locales'
 
-// Инициализация i18n
+// Initialization i18n
 i18n.init({
-  // Ипользуем русский + отладочную локаль
+  // We use English + debug locale
   lng: 'en',
   fallbackLng: 'dev',
 
-  // По умолчанию используем неймспейс common
+  // By default we use common namespace
   ns: ['common'],
   defaultNS: 'common',
 
-  // Настройки для React
+  // Settings for React
   interpolation: {
     escapeValue: false
   },
 
-  // Языки
+  // Languages
   resources: locales
 })
 
-// Поддержка горячей перезагрузки (https://github.com/i18next/react-i18next/issues/6)
+// Support hot-reload (https://github.com/i18next/react-i18next/issues/6)
 if (module.hot) {
   module.hot.accept('./locales', () => {
     setTimeout(() => {
       const newLocales = require('./locales').default
 
-      // Обновляем локаль
-      // eslint-disable-next-line
+      // Update locale
       for (const [lang, namespaces] of Object.entries(newLocales)) {
-        // eslint-disable-next-line
         for (const [namespace, strings] of Object.entries(namespaces)) {
           i18n.addResourceBundle(lang, namespace, strings, true, true)
         }
       }
 
-      // Перегружаем компоненты
+      // Overload components
       i18n.emit('loaded')
     })
   })

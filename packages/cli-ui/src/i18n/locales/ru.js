@@ -1,5 +1,5 @@
 /**
- * Русская локаль
+ * Russian locale
  */
 const locale = {
   common: {

@@ -11,7 +11,7 @@ export function useSettings () {
 
   useEffect(() => {
     const storedLocale = JSON.parse(localStorage.getItem(storageLocaleName)!) ?? 'en'
-    const storedTheme = JSON.parse(localStorage.getItem(storageThemeName)!) ?? true
+    const storedTheme = JSON.parse(localStorage.getItem(storageThemeName)!) ?? false
     setDarkTheme(storedTheme)
     setLocale(storedLocale)
     i18n.changeLanguage(storedLocale)

@@ -1,5 +1,5 @@
 /**
- * Английская локаль
+ * English locale
  */
 
 const locale = {
