@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../components/Modal'
-import Input from '../components/Form/Input'
+import { Input } from '../components/Form'
 
 export interface ModalFolder {
     visible?: boolean;
