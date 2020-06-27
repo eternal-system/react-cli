@@ -5,7 +5,8 @@
 const locale = {
   common: {
     path: 'Path',
-    reset: 'reset'
+    reset: 'reset',
+    newFolder: 'new folder'
   },
   project: {
     headerTitle: 'React Project Manager',
@@ -16,6 +17,13 @@ const locale = {
     folders: 'Folders',
     createNewProject: 'Create a new project here',
     importProject: 'Import project'
+  },
+  modal: {
+    createNew: 'Create new folder',
+    create: 'Create',
+    title: 'title',
+    newFolder: 'New folder',
+    cancel: 'Cancel'
   }
 }
 
