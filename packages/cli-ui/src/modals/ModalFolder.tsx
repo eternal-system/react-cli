@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../components/Modal'
+import { useTranslation } from 'react-i18next'
 import { Input } from '../components/Form'
 
 export interface ModalFolder {
@@ -10,6 +11,7 @@ export interface ModalFolder {
 
 export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
   const initForm = { title: '' }
+  const { t } = useTranslation('modal')
   const [form, setForm] = useState(initForm)
 
   useEffect(() => {
@@ -34,15 +36,15 @@ export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
 
   return (
     <Modal
-      title="Create new folder"
-      okText="Create"
+      title={`${t('createNew')}`}
+      okText={`${t('create')}`}
       visible={visible}
       onOk={onSubmit}
       onCancel={closeModal}
     >
       <Input
-        name={'title'}
-        label={'New folder'}
+        name={`${t('title')}`}
+        label={`${t('newFolder')}`}
         value={form.title}
         onChange={onChange}
       />

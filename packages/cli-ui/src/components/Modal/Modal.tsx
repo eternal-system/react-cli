@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export interface ModalInterface {
     visible?: boolean;
@@ -11,6 +12,7 @@ export interface ModalInterface {
 
 export default function Modal (props: ModalInterface) {
   const { visible = false, title = 'Title', children, okText = 'Ok' } = props
+  const { t } = useTranslation('modal')
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -57,7 +59,7 @@ export default function Modal (props: ModalInterface) {
   return (
     <>
       {visible && (
-        <div className="modal__wrapper" >
+        <div className="modal__wrapper">
           <div className="modal__content" ref={ref}>
             <button onClick={handleCancel} className="modal__close">
               <span className="modal__close_x" >X</span>
@@ -70,7 +72,7 @@ export default function Modal (props: ModalInterface) {
                 {children}
               </div>
               <div className="modal__footer">
-                <button onClick={handleCancel}>Cancel</button>
+                <button onClick={handleCancel}>{`${t('cancel')}`}</button>
                 <button type="submit">{okText}</button>
               </div>
             </form>

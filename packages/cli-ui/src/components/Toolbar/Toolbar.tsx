@@ -27,7 +27,7 @@ export default function Toolbar ({ update, path, back }: Props) {
         path={path}
       />
       <button onClick={showModal}>
-        + new folder
+        + {t('newFolder')}
       </button>
     </div>
 
