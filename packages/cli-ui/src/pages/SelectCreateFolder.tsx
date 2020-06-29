@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 import { Routes } from 'router'
 
-/**
- * Create new project
- */
+// Create new project
 export default function Create () {
   const { t } = useTranslation('project')
   // Router
@@ -30,6 +27,7 @@ export default function Create () {
       .then(res => {
         batch(() => {
           setProjects(res)
+          setUrl(url)
           setLoading(false)
         })
       })
@@ -43,8 +41,8 @@ export default function Create () {
   }
 
   // events
-  /** @TODO Add real e: types */
-  function handleSubmit (e: any) {
+  function handleSubmit (e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
     history.push(Routes.PROJECT_CREATE)
   }
 
@@ -70,7 +68,7 @@ export default function Create () {
     // delete last element
     const newArr = newUrl.splice(0, newUrl.length - 1)
     // create new string
-    const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
+    const buildUrl = newArr.length === 1 ? '/' : newArr.join('/')
     // set new url
     setUrl(buildUrl)
     // get new list data
@@ -88,6 +86,7 @@ export default function Create () {
         <Toolbar
           back={backFolder}
           update={handleReset}
+          get={getData}
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>

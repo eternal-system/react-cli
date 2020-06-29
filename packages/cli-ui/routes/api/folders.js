@@ -19,13 +19,12 @@ router.get('/', (req, res) => {
 })
 
 // Create new folder
-router.post('/create/', (req, res) => {
+router.post('/create/', async (req, res) => {
   const dir = req.query.url
   if (dir) {
     if (!fs.existsSync(dir)) {
       try {
-        fs.mkdirSync(dir)
-        console.log('create')
+        await fs.mkdirSync(dir, { recursive: true })
         res.send('Folder successfully create')
       } catch (error) {
         res.send(error)

@@ -6,10 +6,11 @@ import { Input } from '../components/Form'
 export interface ModalFolder {
     visible?: boolean;
     path?: string;
+    get?(url?: string): void;
     closeModal?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
+export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
   const initForm = { title: '' }
   const { t } = useTranslation('modal')
   const [form, setForm] = useState(initForm)
@@ -22,16 +23,27 @@ export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    console.log(form, path)
-    if (closeModal) {
-      closeModal()
-    }
+    const url = `/api/folders/create?url=${path}/${form.title}`
+
+    fetch(url, {
+      method: 'POST'
+    })
+      .then(response => response.text())
+      .then(res => {
+        console.log(res)
+        console.log(url)
+        get(`${path}/${form.title}`)
+        if (closeModal) {
+          closeModal()
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
   }
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const name = e.target.name
     const value = e.target.value
-    console.log(name, value)
     setForm({ ...form, [name]: value })
   }
 
