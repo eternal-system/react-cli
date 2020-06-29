@@ -25,13 +25,12 @@ router.post('/create/', async (req, res) => {
     if (dir && !fs.existsSync(dir)) {
       await fs.mkdirSync(dir, { recursive: true })
       res.send('Folder successfully create')
-     } else {
-        res.send('Folder already exists')
-      }
+    } else {
+      res.send('Folder already exists')
     }
-   } catch (error) {
-      res.send(error)
-   }
+  } catch (error) {
+    res.send(error)
+  }
 })
 
 module.exports = router
