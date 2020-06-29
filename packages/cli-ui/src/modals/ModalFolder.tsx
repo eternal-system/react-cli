@@ -31,6 +31,7 @@ export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const name = e.target.name
     const value = e.target.value
+    console.log(name, value)
     setForm({ ...form, [name]: value })
   }
 
@@ -43,7 +44,7 @@ export function ModalFolder ({ visible, closeModal, path }: ModalFolder) {
       onCancel={closeModal}
     >
       <Input
-        name={`${t('title')}`}
+        name='title'
         label={`${t('newFolder')}`}
         value={form.title}
         onChange={onChange}
