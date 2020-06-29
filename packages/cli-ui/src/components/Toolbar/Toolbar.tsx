@@ -4,12 +4,13 @@ import { useModal } from '../../hooks/modal.hook'
 import { ModalFolder } from '../../modals'
 
 interface Props {
+  get?(url?: string): void;
   update?(): void;
   back?(): void;
   path?: string;
 }
 
-export default function Toolbar ({ update, path, back }: Props) {
+export default function Toolbar ({ get, update, path, back }: Props) {
   const { t } = useTranslation('common')
   const { visible, showModal, closeModal } = useModal()
 
@@ -22,6 +23,7 @@ export default function Toolbar ({ update, path, back }: Props) {
         {t('reset')}
       </button>
       <ModalFolder
+        get={get}
         visible={visible}
         closeModal={closeModal}
         path={path}

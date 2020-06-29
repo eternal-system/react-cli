@@ -1,9 +1,3 @@
-/**
- * Cheak folder dist
- *
- * 1. If /dist exists to stream file => res
- * 2. If /dist !exists to webpack build new /dist
- */
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -18,6 +12,8 @@ const compiler = webpack(webpackConfig)
 module.exports.server = (options, cb = null) => {
   const distPath = path.resolve(__dirname, 'dist')
   const filePath = path.resolve(__dirname, 'dist', 'index.html')
+
+  app.use(require('./routes'))
 
   app.use(express.static(distPath))
 
