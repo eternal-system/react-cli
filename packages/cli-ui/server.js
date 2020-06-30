@@ -2,33 +2,34 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const fs = require('fs')
-
 const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
+// const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config.js')
-const compiler = webpack(webpackConfig)
+// const compiler = webpack(webpackConfig)
 
 module.exports.server = (options, cb = null) => {
-  const distPath = path.resolve(__dirname, 'dist')
+  // const distPath = path.resolve(__dirname, 'dist')
   const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
   app.use(require('./routes'))
+  app.use(express.json({ extended: true }))
 
-  app.use(express.static(distPath))
+  app.use(webpackHotMiddleware(webpack(webpackConfig)))
 
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath
-  }))
+  app.use('/', express.static(path.join(__dirname, 'dist')))
 
-  app.use(webpackHotMiddleware(compiler))
+  // app.use(express.static(distPath))
+
+  // app.use(webpackDevMiddleware(compiler, {
+  //   publicPath: webpackConfig.output.publicPath
+  // }))
+
+  // app.use(webpackHotMiddleware(compiler))
 
   /* static server */
-  app.get('*', function (req, res, next) {
-    console.log('start cheak', fs.existsSync(filePath))
-
+  app.get('*', function (req, res) {
     if (fs.existsSync(filePath)) {
-      console.log('read file!', filePath)
       fs.createReadStream(filePath).pipe(res)
     } else {
       webpack(webpackConfig, (err, stats) => {
@@ -36,29 +37,29 @@ module.exports.server = (options, cb = null) => {
           console.error(err)
           return
         }
-        if (stats.hasErrors()) {
-          console.log('Build failed with errors.')
-        }
-        console.log(stats.compilation.errors)
+        fs.createReadStream(filePath).pipe(res)
       })
     }
   })
+  // app.get('*', function (req, res, next) {
+  //   console.log('start cheak', fs.existsSync(filePath))
 
-  /* api */
-  app.get('/api/projects', (req, res) => {
-    const folder = '/'
-    const projects = []
-    fs.readdir(folder, (err, files) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      files.forEach(file => {
-        projects.push(file)
-      })
-      res.send(projects.filter(str => !str.startsWith('.')))
-    })
-  })
+  //   if (fs.existsSync(filePath)) {
+  //     console.log('read file!', filePath)
+  //     fs.createReadStream(filePath).pipe(res)
+  //   } else {
+  //     webpack(webpackConfig, (err, stats) => {
+  //       if (err) {
+  //         console.error(err)
+  //         return
+  //       }
+  //       if (stats.hasErrors()) {
+  //         console.log('Build failed with errors.')
+  //       }
+  //       console.log(stats.compilation.errors)
+  //     })
+  //   }
+  // })
 
   app.listen(options.port || 8080, () => {
     cb && cb()
