@@ -12,7 +12,7 @@ module.exports.server = (options, cb = null) => {
   // const distPath = path.resolve(__dirname, 'dist')
   const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
-  app.use(require('./routes'))
+  app.use(require('./server/routes'))
   app.use(express.json({ extended: true }))
 
   app.use(webpackHotMiddleware(webpack(webpackConfig)))
