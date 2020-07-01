@@ -64,7 +64,7 @@ export default function Modal (props: ModalInterface) {
         <div className={css.modalWrapper}>
           <div className={css.modalContent} ref={ref}>
             <button onClick={handleCancel} className={css.modalClose}>
-              <span className={css.modalCloseX} >X</span>
+              <span className={css.modalCloseX}>X</span>
             </button>
             <form onSubmit={handleOk}>
               <div className={css.modalHeader}>

@@ -137,24 +137,6 @@ module.exports = {
         ]
       },
       {
-        test: regExp.cssModuleRegex,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: isDev,
-              modules: {
-                mode: 'local',
-                localIdentName: '[local]--[hash:base64:5]'
-              }
-            }
-          },
-          'sass-loader',
-          'postcss-loader'
-        ]
-      },
-      {
         test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
         loader: require.resolve('babel-loader'),
