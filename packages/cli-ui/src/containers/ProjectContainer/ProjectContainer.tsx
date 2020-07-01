@@ -52,12 +52,6 @@ export default function ProjectContainer () {
             {renderChildren}
           </div>
         </div>
-
-        <div className="checktheme" >
-          <p className={isDarkTheme}>Dark Mode</p>
-          <CheckBoxTheme />
-        </div>
-
       </header>
 
       <Footer />
