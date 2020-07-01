@@ -29,6 +29,7 @@ const paths = {
   appComponents: resolveApp('src/components'),
   appPages: resolveApp('src/pages'),
   appPublic: resolveApp('public'),
+  appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
   appNodeModules: resolveApp('node_modules')
 }
@@ -43,7 +44,8 @@ module.exports = {
     alias: {
       components: paths.appComponents,
       pages: paths.appPages,
-      public: paths.appPublic
+      public: paths.appPublic,
+      $icons: paths.appIcons
     }
   },
 

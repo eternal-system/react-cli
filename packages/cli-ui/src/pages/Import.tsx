@@ -3,12 +3,6 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
-// import Header from '../components/Header'
-// import Footer from '../components/Footer'
-
-interface Props {
-  label: string;
-}
 
 /**
  * Import project

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Modal from '../components/Modal'
 import { useTranslation } from 'react-i18next'
+
+import Modal from '../components/Modal'
 import { Input } from '../components/Form'
 
 export interface ModalFolder {
-    visible?: boolean;
-    path?: string;
-    get?(url?: string): void;
-    closeModal?: (e: React.MouseEvent<HTMLElement>) => void;
+  visible?: boolean;
+  path?: string;
+  get?(url?: string): void;
+  closeModal?(e: React.MouseEvent<HTMLElement>): void;
 }
 
 export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
@@ -21,7 +22,7 @@ export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
     }
   }, [setForm, visible])
 
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     const url = `/api/folders/create?url=${path}/${form.title}`
 
@@ -41,7 +42,7 @@ export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
       })
   }
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+  function onChange (e: React.FormEvent<HTMLInputElement>) {
     const name = e.target.name
     const value = e.target.value
     setForm({ ...form, [name]: value })
