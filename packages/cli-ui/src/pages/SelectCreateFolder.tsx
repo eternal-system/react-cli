@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Layout, Content, Loader, Folders, Toolbar } from '../components'
+
 import { Routes } from 'router'
+import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
 // Create new project
 export default function Create () {
@@ -82,7 +83,6 @@ export default function Create () {
   return (
     <Layout>
       <Content>
-        {`${t('folders')}:`}
         <Toolbar
           back={backFolder}
           update={handleReset}
