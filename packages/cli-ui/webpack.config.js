@@ -6,14 +6,21 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
+const isDev = process.env.NODE_ENV === 'development'
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
-const cssModuleRegex = /\.module\.(css)$/
-const svgInlineRegexp = /\.inline\.svg$/
+const regExp = {
+  /** desc: /\.module\.css$/ */
+  cssModuleRegex: /\.module\.css$/,
+  /** desc: /\.module\.s(a|c)ss$/ */
+  scssModuleRegex: /\.module\.s(a|c)ss$/,
+  /** desc: /\.inline\.svg$/ */
+  svgInlineRegexp: /\.inline\.svg$/
+}
 
 const paths = {
   appPath: resolveApp('.'),
@@ -32,7 +39,7 @@ module.exports = {
 
   resolve: {
     modules: [paths.appNodeModules, paths.appSrc],
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.scss'],
     alias: {
       components: paths.appComponents,
       pages: paths.appPages,
@@ -71,7 +78,9 @@ module.exports = {
         }
       ]
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash:5].css'
+    }),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -88,38 +97,61 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        exclude: cssModuleRegex,
+        exclude: regExp.cssModuleRegex,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: cssModuleRegex,
+        test: regExp.scssModuleRegex,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[local]--[hash:base64:5]'
+              },
+              sourceMap: isDev
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDev
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: regExp.scssModuleRegex,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDev
+            }
+          }
+        ]
+      },
+      {
+        test: regExp.cssModuleRegex,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: isDev,
               modules: {
                 mode: 'local',
                 localIdentName: '[local]--[hash:base64:5]'
               }
             }
           },
+          'sass-loader',
           'postcss-loader'
-        ]
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true }
-          }, {
-            loader: 'sass-loader',
-            options: { sourceMap: true }
-          }
         ]
       },
       {
@@ -151,7 +183,7 @@ module.exports = {
         }
       },
       {
-        test: svgInlineRegexp,
+        test: regExp.svgInlineRegexp,
         loader: 'svg-url-loader',
         options: {
           limit: 10000,
@@ -160,7 +192,7 @@ module.exports = {
       },
       {
         test: /\.(svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        exclude: svgInlineRegexp,
+        exclude: regExp.svgInlineRegexp,
         use: [
           {
             loader: 'babel-loader'

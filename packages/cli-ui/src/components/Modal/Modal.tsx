@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import css from './style.module.scss'
+
 export interface ModalInterface {
     visible?: boolean;
     title?: React.ReactNode | string;
@@ -16,28 +18,28 @@ export default function Modal (props: ModalInterface) {
 
   const ref = useRef<HTMLDivElement>(null)
 
-  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+  function handleCancel (e?: React.MouseEvent<HTMLButtonElement>) {
     const { onCancel } = props
     if (onCancel) {
-      onCancel(e)
+      onCancel(e!)
     }
   }
 
-  const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
+  function handleOk (e?: React.MouseEvent<HTMLButtonElement>) {
     const { onOk } = props
     if (onOk) {
-      onOk(e)
+      onOk(e!)
     }
   }
 
-  const handleClickOutside = (e: React.MouseEvent) => {
+  function handleClickOutside (e?: React.MouseEvent) {
     if (ref.current && !ref.current.contains(e.target)) {
       handleCancel()
     }
   }
 
-  const handleClose = (ev: KeyboardEvent) => {
-    if (ev.keyCode === 27) {
+  function handleClose (e: KeyboardEvent) {
+    if (e.keyCode === 27) {
       handleCancel()
     }
   }
@@ -59,19 +61,19 @@ export default function Modal (props: ModalInterface) {
   return (
     <>
       {visible && (
-        <div className="modal__wrapper">
-          <div className="modal__content" ref={ref}>
-            <button onClick={handleCancel} className="modal__close">
-              <span className="modal__close_x" >X</span>
+        <div className={css.modalWrapper}>
+          <div className={css.modalContent} ref={ref}>
+            <button onClick={handleCancel} className={css.modalClose}>
+              <span className={css.modalCloseX} >X</span>
             </button>
             <form onSubmit={handleOk}>
-              <div className="modal__header">
+              <div className={css.modalHeader}>
                 {title}
               </div>
-              <div className="modal__body">
+              <div className={css.modalBody}>
                 {children}
               </div>
-              <div className="modal__footer">
+              <div className={css.modalFooter}>
                 <button onClick={handleCancel}>{`${t('cancel')}`}</button>
                 <button type="submit">{okText}</button>
               </div>

@@ -7,7 +7,7 @@ import useProjectContainer from './projectContainer.hook'
 import { Routes } from 'router'
 
 import logo from '../../../public/logo192.png'
-import css from './style.module.css'
+import css from './style.module.scss'
 
 export default function ProjectContainer () {
   const { t } = useTranslation('project')

@@ -3,9 +3,13 @@ import { useState } from 'react'
 export function useModal () {
   const [visible, setVisible] = useState<boolean>(false)
 
-  const showModal = (): boolean => setVisible(true)
+  function showModal () {
+    setVisible(true)
+  }
 
-  const closeModal = (): boolean => setVisible(false)
+  function closeModal () {
+    setVisible(false)
+  }
 
   return { showModal, closeModal, visible }
 }

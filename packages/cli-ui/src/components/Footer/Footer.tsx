@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SettingsContext } from 'context'
 import TranlateIcon from '../../../public/icons/translate.svg'
-import css from './style.module.css'
+import css from './style.module.scss'
 
 export default function Footer () {
   const { changeLocale } = React.useContext(SettingsContext)
