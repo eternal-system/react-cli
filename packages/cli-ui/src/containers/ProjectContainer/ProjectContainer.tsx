@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { NavLink, Link } from 'react-router-dom'
 
 import { Routes } from 'router'
-import { Footer } from 'components'
 import useProjectContainer, { TabItem } from './projectContainer.hook'
 
 import ProjectIcon from '$icons/nav-projects.svg'
@@ -64,8 +63,6 @@ export default function ProjectContainer () {
           </div>
         </div>
       </header>
-
-      <Footer />
     </>
   )
 }

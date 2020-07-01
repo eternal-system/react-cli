@@ -1,18 +1,13 @@
 @import "../../style/vars.scss";
 
 .footer {
-	z-index: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-	position: fixed;
-	bottom: 0;
-	left: 0;
+	color: #fff;
 	height: 30px;
 	width: 100%;
 	background-color: #20232a;
-	color: #ffffff;
-	margin-top:auto;
 }
 
 .translateIcon {

@@ -1,7 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useModal } from '../../hooks/modal.hook'
+
 import { ModalFolder } from '../../modals'
+import { useModal } from '../../hooks/modal.hook'
+
+import css from './style.module.scss'
 
 interface Props {
   get?(url?: string): void;
@@ -15,7 +18,7 @@ export default function Toolbar ({ get, update, path, back }: Props) {
   const { visible, showModal, closeModal } = useModal()
 
   return (
-    <div className="toolbar">
+    <div className={css.toolbar}>
       <button onClick={back}>^</button>
       {`${t('path')}: `}
       <span>{path}</span>

@@ -22,68 +22,6 @@ a {
 	text-decoration: none;
 }
 
-#root {
-	display:flex; 
-	flex-direction:column; 
-}
-
-.folders {
-	flex: 100% 1 1;
-	overflow-x: hidden;
-	overflow-y: auto;
-	position: relative;
-}
-
-.folders .folder-explorer-item:hover {
-	background: rgba(105, 221, 253, 0.54);
-}
-
-.folders .folder-explorer-item {
-	padding: 16px;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	cursor: pointer;
-	position: relative;
-}
-
-.folders .folder-explorer-item .folder-name {
-	-ms-flex: 100% 1 1;
-	flex: 100% 1 1;
-	margin-left: 16px;
-	overflow: hidden;
-	-ms-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.toolbar {
-	flex: auto 0 0;
-	padding: 16px 0;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-ms-flex-align: center;
-	align-items: center;
-}
-
-.toolbar button {
-	color: #fff;
-	background: #20232a;
-	padding: 10px;
-	margin-right: 5px;
-	border: none;
-	cursor: pointer;
-}
-
 button {
 	color: #fff;
 	background: #20232a;
@@ -105,24 +43,24 @@ button {
 	left: 50%;
 }
 
-.checktheme{
+.checktheme {
 	position: absolute;
 	top: 42px;
 	right: 50px;
+
+	p {
+		margin-top: -15px;
+		text-align: center;
+		color: rgb(118,118,118);
+		font-size: 11px;
+
+		&.actived{
+			color: $color_title;
+		}
+	}
 }
 
-.checktheme p{
-	margin-top: -15px;
-	text-align: center;
-	color: rgb(118,118,118);
-	font-size: 11px;
-}
-
-.checktheme p.actived{
-	color: $color_title;
-}
-
-.checkbox{
+.checkbox {
 	margin: 0 auto;
 }
 
@@ -180,11 +118,12 @@ button {
 	background: #61dafb;
 }
 
-.input__wrapper{
-	.input__title{
+.input__wrapper {
+	.input__title {
 		color: #2c3e50;
 		font-size: 16px;
 	}
+
 	input {
 		display: -ms-flexbox;
 		display: flex;
