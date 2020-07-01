@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
@@ -28,6 +29,7 @@ const paths = {
 module.exports = {
   mode: 'production',
   entry: path.join(__dirname, 'src', 'index.tsx'),
+
   resolve: {
     modules: [paths.appNodeModules, paths.appSrc],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png'],
@@ -37,11 +39,24 @@ module.exports = {
       public: paths.appPublic
     }
   },
+
   output: {
     path: paths.appBuild,
     publicPath: '/',
-    filename: '[name].[hash].js'
+    filename: '[name].[hash:5].js'
   },
+
+  stats: {
+    colors: true,
+    children: false,
+    errors: true,
+    errorDetails: true
+  },
+
+  optimization: {
+    minimizer: [new OptimizeCSSAssetsPlugin({})]
+  },
+
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -68,6 +83,7 @@ module.exports = {
     }),
     new ManifestPlugin()
   ],
+
   module: {
     rules: [
       {
@@ -120,11 +136,19 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [require.resolve('file-loader')]
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'public'
+        }
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: [require.resolve('file-loader')]
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'public/fonts/'
+        }
       },
       {
         test: svgInlineRegexp,
