@@ -7,8 +7,8 @@ export interface ModalInterface {
     visible?: boolean;
     title?: React.ReactNode | string;
     okText?: React.ReactNode | string;
-    onOk?: (e: React.MouseEvent<HTMLElement>) => void;
-    onCancel?: (e: React.MouseEvent<HTMLElement>) => void;
+    onOk?(e: React.MouseEvent<HTMLElement>): void;
+    onCancel?(e: React.MouseEvent<HTMLElement> | KeyboardEvent): void;
     children: React.PropsWithChildren<React.ReactNode>;
 }
 
@@ -18,29 +18,29 @@ export default function Modal (props: ModalInterface) {
 
   const ref = useRef<HTMLDivElement>(null)
 
-  function handleCancel (e?: React.MouseEvent<HTMLButtonElement>) {
+  function handleCancel (e: React.MouseEvent<HTMLButtonElement> | KeyboardEvent) {
     const { onCancel } = props
     if (onCancel) {
-      onCancel(e!)
+      onCancel(e)
     }
   }
 
-  function handleOk (e?: React.MouseEvent<HTMLButtonElement>) {
+  function handleOk (e: React.MouseEvent<HTMLButtonElement>) {
     const { onOk } = props
     if (onOk) {
-      onOk(e!)
+      onOk(e)
     }
   }
 
-  function handleClickOutside (e?: React.MouseEvent) {
+  function handleClickOutside (e: React.MouseEvent<HTMLButtonElement>) {
     if (ref.current && !ref.current.contains(e.target)) {
-      handleCancel()
+      handleCancel(e)
     }
   }
 
   function handleClose (e: KeyboardEvent) {
     if (e.keyCode === 27) {
-      handleCancel()
+      handleCancel(e)
     }
   }
 
