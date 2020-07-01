@@ -7,7 +7,7 @@
 	flex-direction: row;
 	-ms-flex-align: center;
   align-items: center;
-  
+
   button {
     color: #fff;
     background: #20232a;
@@ -15,5 +15,21 @@
     margin-right: 5px;
     border: none;
     cursor: pointer;
+  }
+
+  .urlElement {
+    padding: 5px;
+    margin: 0 2px;
+    background-color: #61dafb23;
+    cursor: pointer;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+
+    svg {
+      fill: #fff;
+    }
   }
 }

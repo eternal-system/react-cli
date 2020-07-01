@@ -13,7 +13,7 @@ export default function Create () {
   const history = useHistory()
 
   // State
-  const [url, setUrl] = useState('/')
+  const [url, setUrl] = useState<string[]>([])
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -21,14 +21,13 @@ export default function Create () {
     getData(url)
   }, [url])
 
-  function getData (url?: string) {
+  function getData (arrUrl: string[]) {
     setLoading(true)
-    fetch(`/api/folders?url=${url}`)
-      .then(response => response.json())
+    fetch(`/api/folders?url=/${arrUrl.join('/')}`)
+      .then(res => res.json())
       .then(res => {
         batch(() => {
           setProjects(res)
-          setUrl(url)
           setLoading(false)
         })
       })
@@ -36,9 +35,8 @@ export default function Create () {
 
   // click on folder
   function handleClick (name: string) {
-    const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
+    const buildUrl = url.length ? [...url, name] : [name]
     setUrl(buildUrl)
-    getData(buildUrl)
   }
 
   // events
@@ -64,16 +62,8 @@ export default function Create () {
 
   // back folder in stap
   function backFolder () {
-    // build array
-    const newUrl = url.split('/')
-    // delete last element
-    const newArr = newUrl.splice(0, newUrl.length - 1)
-    // create new string
-    const buildUrl = newArr.length === 1 ? '/' : newArr.join('/')
-    // set new url
-    setUrl(buildUrl)
-    // get new list data
-    getData(buildUrl)
+    const newArr = url.splice(0, url.length - 1)
+    setUrl(newArr)
   }
 
   if (loading) {
@@ -86,7 +76,7 @@ export default function Create () {
         <Toolbar
           back={backFolder}
           update={handleReset}
-          get={getData}
+          get={setUrl}
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>

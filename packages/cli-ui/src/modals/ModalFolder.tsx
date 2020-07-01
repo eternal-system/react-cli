@@ -6,8 +6,8 @@ import { Input } from '../components/Form'
 
 export interface ModalFolder {
   visible?: boolean;
-  path?: string;
-  get?(url?: string): void;
+  path: string[];
+  get(url: string[]): void;
   closeModal?(e: React.MouseEvent<HTMLElement>): void;
 }
 
@@ -22,18 +22,21 @@ export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
     }
   }, [setForm, visible])
 
+  function createFoldersPath (str: string) {
+    return str.split(/\//g).filter(path => path !== '')
+  }
+
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    const url = `/api/folders/create?url=${path}/${form.title}`
+    const createUrl = [...path, ...createFoldersPath(form.title)].join('/')
+    const url = `/api/folders/create?url=/${createUrl}`
 
-    fetch(url, {
-      method: 'POST'
-    })
-      .then(response => response.text())
+    fetch(url, { method: 'POST' })
+      .then(res => res.text())
       .then(res => {
         console.log(res)
         console.log(url)
-        get(`${path}/${form.title}`)
+        get([...path, ...createFoldersPath(form.title)])
         if (closeModal) {
           closeModal()
         }
