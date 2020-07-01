@@ -2,38 +2,49 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Link } from 'react-router-dom'
 
-import { CheckBoxTheme, Footer } from 'components'
-import useProjectContainer from './projectContainer.hook'
 import { Routes } from 'router'
+import { Footer } from 'components'
+import useProjectContainer, { TabItem } from './projectContainer.hook'
 
+import ProjectIcon from '$icons/nav-projects.svg'
+import SelectFoulderIcon from '$icons/nav-select-folder.svg'
+import ImportIcon from '$icons/nav-import.svg'
 import logo from '../../../public/logo192.png'
+
 import css from './style.module.scss'
 
 export default function ProjectContainer () {
   const { t } = useTranslation('project')
-  const { locale, tabs, activeTab, isDarkTheme } = useProjectContainer()
+  const { locale, activeTab } = useProjectContainer()
 
-  const renderChildren = useMemo(() => tabs.map((tab) => {
+  const tabs: TabItem[] = [
+    { key: Routes.PROJECT, label: t('projects'), Icon: ProjectIcon },
+    { key: Routes.PROJECT_SELECT, label: t('create'), Icon: SelectFoulderIcon },
+    { key: Routes.PROJECT_IMPORT, label: t('import'), Icon: ImportIcon }
+  ]
+
+  const renderChildren = useMemo(() => tabs.map(({ key, label, Icon }: TabItem) => {
     return (
       <NavLink
-        key={tab.key}
+        key={key}
         exact={true}
-        to={tab.key}
+        to={key}
         activeClassName={css.active}
         isActive={(_, location) => {
-          if (tab.key === Routes.PROJECT_SELECT &&
+          if (key === Routes.PROJECT_SELECT &&
             Routes.PROJECT_CREATE === location.pathname
           ) {
             return true
           }
 
-          if (tab.key === location.pathname) {
+          if (key === location.pathname) {
             return true
           }
           return false
         }}
       >
-        {tab.label}
+        <Icon />
+        {label}
       </NavLink>
     )
   }), [activeTab, locale])
