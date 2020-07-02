@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
+import mainCss from '../style/main.module.scss'
+
 /**
  * Import project
  */
@@ -84,7 +86,7 @@ export default function Import () {
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>
-        <button onClick={handleSubmit}>
+        <button className={mainCss.foulderBtn} onClick={handleSubmit}>
           {`+ ${t('importProject')}`}
         </button>
       </Content>

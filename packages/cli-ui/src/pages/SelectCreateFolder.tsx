@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next'
 import { Routes } from 'router'
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
+import mainCss from '../style/main.module.scss'
+
 // Create new project
 export default function Create () {
   const { t } = useTranslation('project')
@@ -86,7 +88,7 @@ export default function Create () {
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>
-        <button onClick={handleSubmit}>
+        <button className={mainCss.foulderBtn} onClick={handleSubmit}>
           {`+ ${t('createNewProject')}`}
         </button>
       </Content>
