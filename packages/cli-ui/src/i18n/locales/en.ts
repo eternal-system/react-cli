@@ -13,7 +13,7 @@ const locale = {
     projects: 'Projects',
     create: 'Create',
     import: 'Import',
-    notFoundProjects: 'Not found projects',
+    notFoundProjects: 'No existing projects',
     folders: 'Folders',
     createNewProject: 'Create a new project here',
     importProject: 'Import project'

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { Routes } from 'router'
 import useProjectContainer, { TabItem } from './projectContainer.hook'
@@ -53,10 +53,8 @@ export default function ProjectContainer () {
       <header className={css.wrapperHeader} >
         <div className={css.wrapperLayout} >
           <div className={css.wrapperLogo}>
-            <Link to="/" >
-              <img src={logo} alt="logo" />
-              <span>{t('headerTitle')}</span>
-            </Link>
+            <img src={logo} alt="logo" />
+            <span>{t('headerTitle')}</span>
           </div>
           <div className={css.nav}>
             {renderChildren}

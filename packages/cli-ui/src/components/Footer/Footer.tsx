@@ -1,9 +1,13 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
+import { Routes } from 'router'
 import { SettingsContext } from 'context'
+
 import TranlateIcon from '$icons/translate.svg'
 import DarkIcon from '$icons/dark-mode.svg'
 import LightIcon from '$icons/light-mode.svg'
+import HomeIcon from '$icons/home-filled.svg'
 
 import css from './style.module.scss'
 
@@ -18,11 +22,16 @@ export default function Footer () {
 
   return (
     <div className={css.footer}>
-      <div className={css.translateIcon}>
-        {renderThemeIcon()}
-      </div>
-      <div className={css.translateIcon}>
-        <TranlateIcon className="" onClick={changeLocale} />
+      <Link to={Routes.PROJECT} className={css.icon}>
+        <HomeIcon />
+      </Link>
+      <div className={css.rightGroup}>
+        <div className={css.icon}>
+          {renderThemeIcon()}
+        </div>
+        <div className={css.icon}>
+          <TranlateIcon onClick={changeLocale} />
+        </div>
       </div>
     </div>
   )

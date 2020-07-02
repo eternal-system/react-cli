@@ -98,7 +98,7 @@ export default function Create () {
           setUrlPath={setUrl}
           path={url}
         />
-        <Folders folders={projects} on={handleClick}/>
+        <Folders folders={projects} onSelect={handleClick}/>
         {renderActionBtn()}
       </Content>
     </Layout>
