@@ -1,3 +1,5 @@
+@import '../../style/vars.scss';
+
 .modalWrapper {
 	position: fixed;
 	top: 0;
@@ -63,6 +65,13 @@
 			text-align: center;
 			text-transform: none;
 			text-rendering: auto;
+
+			svg {
+				height: 20px;
+				width: 20px;
+
+				@include click-rule;
+			}
     }
 
 		.modalHeader {
@@ -89,7 +98,9 @@
       border-radius: 0 0 2px 2px;
 
       button {
-        border-radius: 5px;
+				border-radius: 5px;
+
+				@include click-rule;
       }
 		}
 	}
