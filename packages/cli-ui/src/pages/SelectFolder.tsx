@@ -3,6 +3,7 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
+import Api from 'api'
 import { Routes } from 'router'
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
@@ -16,7 +17,7 @@ export default function Create () {
 
   // State
   const [url, setUrl] = useState<string[]>([])
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -28,13 +29,19 @@ export default function Create () {
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
       setLoading(true)
-      fetch(`/api/folders?url=/${arrUrl.join('/')}`)
-        .then(res => res.json())
-        .then(res => {
+      Api.POST('/api/folders', {
+        url: `/${arrUrl.join('/')}`,
+        hidden: false
+      })
+        .then((res) => {
           batch(() => {
-            setProjects(res)
+            setProjects(res as string[])
             setLoading(false)
           })
+        })
+        .catch((error) => {
+          console.log('error', error)
+          setLoading(false)
         })
     },
     [url]

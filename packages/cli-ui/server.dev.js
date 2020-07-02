@@ -9,12 +9,12 @@ const port = process.env.SERVER_PORT || 8080
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
+app.use(express.json({ extended: true }))
+
 app.use(require('./routes'))
 /* static server */
 if (process.env.DEV_SERVER.trim() === 'true') {
   console.log('SSR start')
-
-  app.use(express.json({ extended: true }))
 
   app.use(webpackHotMiddleware(webpack(webpackConfig)))
 

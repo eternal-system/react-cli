@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Api from 'api'
+
 import Modal from '../components/Modal'
 import { Input } from '../components/Form'
 
@@ -28,14 +30,11 @@ export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
 
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    const createUrl = [...path, ...createFoldersPath(form.title)].join('/')
-    const url = `/api/folders/create?url=/${createUrl}`
-
-    fetch(url, { method: 'POST' })
-      .then(res => res.text())
+    Api.POST('/api/folders/create', {
+      url: `/${[...path, ...createFoldersPath(form.title)].join('/')}`
+    })
       .then(res => {
         console.log(res)
-        console.log(url)
         get([...path, ...createFoldersPath(form.title)])
         if (closeModal) {
           closeModal()

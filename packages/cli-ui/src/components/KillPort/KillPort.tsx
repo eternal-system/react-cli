@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import Api from 'api'
+
 import css from './style.module.scss'
 
 export default function KillPort () {
@@ -7,9 +9,7 @@ export default function KillPort () {
 
   const handleKill = (ev: any) => {
     ev.preventDefault()
-    console.log('kill port', value)
-    fetch(`/api/kill?port=${value}`)
-      .then(response => response.json())
+    Api.GET(`/api/kill?port=${value}`)
       .then(res => {
         console.log(res)
       }).catch((err) => {
