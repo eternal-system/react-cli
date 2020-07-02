@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -9,53 +9,65 @@ import { Layout, Content, Loader, Folders, Toolbar } from '../components'
  */
 export default function Import () {
   const { t } = useTranslation('project')
+
   // State
-  const [url, setUrl] = useState('/')
+  const [url, setUrl] = useState<string[]>([])
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getData(url)
+    getFoldersData(url)
   }, [url])
 
-  function getData (url?: string) {
-    setLoading(true)
-    fetch(`/api/folders?url=${url}`)
-      .then(response => response.json())
-      .then(res => {
-        batch(() => {
-          setProjects(res)
-          setLoading(false)
+  const getFoldersData = useCallback(
+    (arrUrl: string[]) => {
+      setLoading(true)
+      fetch(`/api/folders?url=/${arrUrl.join('/')}`)
+        .then(res => res.json())
+        .then(res => {
+          batch(() => {
+            setProjects(res)
+            setLoading(false)
+          })
         })
-      })
-  }
+    },
+    [url]
+  )
 
+  /**
+   * Select foulder
+   * @param name - nome selected foulder
+   */
   function handleClick (name: string) {
-    const buildUrl = url === '/' ? `/${name}` : `${url}/${name}`
+    const buildUrl = url.length ? [...url, name] : [name]
     setUrl(buildUrl)
-    getData(buildUrl)
   }
 
-  function handleSubmit (e: any) {
-    console.log('handleSubmit', e)
+  // events
+  function handleSubmit (e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
+    console.log('Import - handleSubmit')
   }
 
+  // reset
   function handleReset () {
-    getData(url)
+    getFoldersData(url)
   }
+
+  // create new folder
+  // function createFolder () {
+  //   console.log('new folder')
+  // }
+
+  // show hidden folder
+  // function changeHiddenFolder () {
+  //   console.log('show folder hidden')
+  // }
 
   // back folder in stap
   function backFolder () {
-    // build array
-    const newUrl = url.split('/')
-    // delete last element
-    const newArr = newUrl.splice(0, newUrl.length - 1)
-    // create new string
-    const buildUrl = newArr[0] === '' ? '/' : newArr.join('/')
-    // set new url
-    setUrl(buildUrl)
-    // get new list data
-    getData(buildUrl)
+    const newArr = url.splice(0, url.length - 1)
+    setUrl(newArr)
   }
 
   if (loading) {
@@ -65,10 +77,10 @@ export default function Import () {
   return (
     <Layout>
       <Content>
-        {`${t('folders')}:`}
         <Toolbar
           back={backFolder}
-          update={handleReset}
+          updateFolderData={handleReset}
+          setUrlPath={setUrl}
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>
