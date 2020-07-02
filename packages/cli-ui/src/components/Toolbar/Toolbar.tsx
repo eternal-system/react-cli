@@ -6,17 +6,19 @@ import { useModal } from '../../hooks/modal.hook'
 import ArrowUpIcon from '$icons/arrow-up.svg'
 import RefrechIcon from '$icons/refresh.svg'
 import CreateFolderIcon from '$icons/folder-create-filled.svg'
+import FolderFilledIcon from '$icons/folder-filled.svg'
 
 import css from './style.module.scss'
 
 interface Props {
-  get(url: string): void;
-  update?(): void;
-  back?(): void;
+  setUrlPath(url: string[]): void;
+  updateFolderData(): void;
+  back(): void;
   path: string[];
 }
 
-export default function Toolbar ({ get, update, path, back }: Props) {
+// eslint-disable-next-line react/prop-types
+export default function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
   const { visible, showModal, closeModal } = useModal()
 
   function renderIcon (Component: React.FC) {
@@ -33,15 +35,24 @@ export default function Toolbar ({ get, update, path, back }: Props) {
     })
   }
 
+  function clearUrlPath () {
+    return setUrlPath([])
+  }
+
   return (
     <>
       <div className={css.toolbar}>
         <button onClick={back}>
           {renderIcon(ArrowUpIcon)}
         </button>
-        {renderUrlPath()}
+        <div className={css.urlPaths}>
+          <button onClick={clearUrlPath}>
+            {renderIcon(FolderFilledIcon)}
+          </button>
+          {renderUrlPath()}
+        </div>
         <div>
-          <button onClick={update}>
+          <button onClick={updateFolderData}>
             {renderIcon(RefrechIcon)}
           </button>
           <button onClick={showModal}>
@@ -50,7 +61,7 @@ export default function Toolbar ({ get, update, path, back }: Props) {
         </div>
       </div>
       <ModalFolder
-        get={get}
+        get={setUrlPath}
         visible={visible}
         closeModal={closeModal}
         path={path}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -18,22 +18,28 @@ export default function Create () {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getData(url)
+    getFoldersData(url)
   }, [url])
 
-  function getData (arrUrl: string[]) {
-    setLoading(true)
-    fetch(`/api/folders?url=/${arrUrl.join('/')}`)
-      .then(res => res.json())
-      .then(res => {
-        batch(() => {
-          setProjects(res)
-          setLoading(false)
+  const getFoldersData = useCallback(
+    (arrUrl: string[]) => {
+      setLoading(true)
+      fetch(`/api/folders?url=/${arrUrl.join('/')}`)
+        .then(res => res.json())
+        .then(res => {
+          batch(() => {
+            setProjects(res)
+            setLoading(false)
+          })
         })
-      })
-  }
+    },
+    [url]
+  )
 
-  // click on folder
+  /**
+   * Select foulder
+   * @param name - nome selected foulder
+   */
   function handleClick (name: string) {
     const buildUrl = url.length ? [...url, name] : [name]
     setUrl(buildUrl)
@@ -47,16 +53,16 @@ export default function Create () {
 
   // reset
   function handleReset () {
-    getData(url)
+    getFoldersData(url)
   }
 
   // create new folder
-  // const createFolder = () => {
+  // function createFolder () {
   //   console.log('new folder')
   // }
 
   // show hidden folder
-  // const changeHiddenFolder = () => {
+  // function changeHiddenFolder () {
   //   console.log('show folder hidden')
   // }
 
@@ -75,8 +81,8 @@ export default function Create () {
       <Content>
         <Toolbar
           back={backFolder}
-          update={handleReset}
-          get={setUrl}
+          updateFolderData={handleReset}
+          setUrlPath={setUrl}
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>

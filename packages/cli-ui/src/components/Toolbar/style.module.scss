@@ -1,12 +1,11 @@
+@import "../../style/vars.scss";
+
 .toolbar {
-	flex: auto 0 0;
-	padding: 16px 0;
-	display: -ms-flexbox;
 	display: flex;
-	-ms-flex-direction: row;
 	flex-direction: row;
-	-ms-flex-align: center;
   align-items: center;
+  justify-content: space-between;
+	padding: 16px 0;
 
   button {
     color: #fff;
@@ -16,12 +15,33 @@
     border: none;
     cursor: pointer;
   }
+  
+  .urlPaths {
+    display: flex;
+    flex: auto;
+    margin-right: 5px;
+    border-radius: 3px;
+    background-color: #c8f3ff;
 
-  .urlElement {
-    padding: 5px;
-    margin: 0 2px;
-    background-color: #61dafb23;
-    cursor: pointer;
+    button {
+      background-color: #c8f3ff;
+      border-right: 2px solid #fff;
+      border-radius: 2px 0 0 2px;
+
+      svg {
+        fill: #20232a;
+
+        @include click-rule;
+      }
+    }
+
+    .urlElement {
+      padding: 5px;
+      margin: 0 2px;
+      background-color: #c8f3ff;
+      cursor: pointer;
+      border-right: 2px solid #fff;
+    }
   }
 
   .icon {
