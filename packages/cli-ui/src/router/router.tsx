@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import { AppRoutes, RouteEntity } from './appRoutes'
 
@@ -27,10 +27,8 @@ export default function renderRoutes () {
   )
 
   return (
-    <Router>
-      <Switch>
-        {createMainRoutes(AppRoutes)}
-      </Switch>
-    </Router>
+    <Switch>
+      {createMainRoutes(AppRoutes)}
+    </Switch>
   )
 }

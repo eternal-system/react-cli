@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { I18nextProvider } from 'react-i18next'
 import cn from 'classnames'
 
@@ -17,10 +18,12 @@ export default function App () {
   return (
     <I18nextProvider i18n={i18n}>
       <SettingsContext.Provider value={{ locale, darkTheme, changeTheme, changeLocale }}>
-        <div className={styles}>
-          {renderRoutes()}
-          <Footer />
-        </div>
+        <Router>
+          <div className={styles}>
+            {renderRoutes()}
+            <Footer />
+          </div>
+        </Router>
       </SettingsContext.Provider>
     </I18nextProvider>
   )
