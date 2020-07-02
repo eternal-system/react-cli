@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
+import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
+import { Routes } from 'router'
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
 import mainCss from '../style/main.module.scss'
 
-/**
- * Import project
- */
-export default function Import () {
+// Create new project
+export default function Create () {
   const { t } = useTranslation('project')
+  // Router
+  const history = useHistory()
 
   // State
   const [url, setUrl] = useState<string[]>([])
@@ -20,6 +22,8 @@ export default function Import () {
   useEffect(() => {
     getFoldersData(url)
   }, [url])
+
+  const isImportPage = useMemo(() => history.location.pathname === Routes.PROJECT_IMPORT, [history.location.pathname])
 
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
@@ -48,7 +52,8 @@ export default function Import () {
   // events
   function handleSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    console.log('Import - handleSubmit')
+    return isImportPage ? console.debug('Import project')
+      : history.push(Routes.PROJECT_CREATE)
   }
 
   // reset
@@ -72,6 +77,14 @@ export default function Import () {
     setUrl(newArr)
   }
 
+  function renderActionBtn () {
+    return (
+      <button className={mainCss.foulderBtn} onClick={handleSubmit}>
+        {isImportPage ? `+ ${t('importProject')}` : `+ ${t('createNewProject')}`}
+      </button>
+    )
+  }
+
   if (loading) {
     return <Loader />
   }
@@ -86,9 +99,7 @@ export default function Import () {
           path={url}
         />
         <Folders folders={projects} on={handleClick}/>
-        <button className={mainCss.foulderBtn} onClick={handleSubmit}>
-          {`+ ${t('importProject')}`}
-        </button>
+        {renderActionBtn()}
       </Content>
     </Layout>
   )

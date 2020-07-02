@@ -1,8 +1,7 @@
 import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
 import {
   Projects,
-  SelectCreateFolder,
-  Import,
+  SelectFolder,
   Depend,
   PageNotFound,
   CreateProject
@@ -56,7 +55,7 @@ export const AppRoutes: RoutesCollection = {
           root: Routes.PROJECT_SELECT
         },
         exact: true,
-        Component: SelectCreateFolder
+        Component: SelectFolder
       },
       projectCreate: {
         paths: {
@@ -70,7 +69,7 @@ export const AppRoutes: RoutesCollection = {
           root: Routes.PROJECT_IMPORT
         },
         exact: true,
-        Component: Import
+        Component: SelectFolder
       }
     },
     exact: false,
