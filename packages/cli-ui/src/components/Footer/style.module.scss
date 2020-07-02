@@ -1,7 +1,29 @@
-.translate {
-  position: absolute;
-  bottom: 7px;
-  height: 16px;
-  right: 20px;
-  cursor: pointer;
+@import "../../style/vars.scss";
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+	color: #fff;
+	height: 30px;
+	width: 100%;
+	background-color: #20232a;
+}
+
+.translateIcon {
+	padding: 5px 7px;
+
+	&:hover {
+		background-color: #61dafb23;
+	}
+
+	svg {
+		fill: #fff;
+		margin-top: 4px;
+		height: 16px;
+		width: 16px;
+		cursor: pointer;
+
+		@include click-rule;
+	}
 }

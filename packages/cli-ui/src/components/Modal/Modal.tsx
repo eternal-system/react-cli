@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import CloceIcon from '$icons/close.svg'
+
 import css from './style.module.scss'
 
 export interface ModalInterface {
@@ -64,7 +66,9 @@ export default function Modal (props: ModalInterface) {
         <div className={css.modalWrapper}>
           <div className={css.modalContent} ref={ref}>
             <button onClick={handleCancel} className={css.modalClose}>
-              <span className={css.modalCloseX}>X</span>
+              <span className={css.modalCloseX}>
+                <CloceIcon />
+              </span>
             </button>
             <form onSubmit={handleOk}>
               <div className={css.modalHeader}>

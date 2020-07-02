@@ -1,8 +1,7 @@
 import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
 import {
   Projects,
-  SelectCreateFolder,
-  Import,
+  SelectFolder,
   Depend,
   PageNotFound,
   CreateProject
@@ -34,63 +33,63 @@ type RoutesCollection = {
 };
 
 export const AppRoutes: RoutesCollection = {
-  [Routes.MAIN]: {
+  main: {
     paths: {
       root: Routes.MAIN
     },
     exact: true,
     Component: AppContainer
   },
-  [Routes.PROJECT]: {
+  projects: {
     paths: {
       root: Routes.PROJECT,
-      [Routes.PROJECT]: {
+      project: {
         paths: {
           root: Routes.PROJECT
         },
         exact: true,
         Component: Projects
       },
-      [Routes.PROJECT_SELECT]: {
+      projectSelect: {
         paths: {
           root: Routes.PROJECT_SELECT
         },
         exact: true,
-        Component: SelectCreateFolder
+        Component: SelectFolder
       },
-      [Routes.PROJECT_CREATE]: {
+      projectCreate: {
         paths: {
           root: Routes.PROJECT_CREATE
         },
         exact: true,
         Component: CreateProject
       },
-      [Routes.PROJECT_IMPORT]: {
+      projectImport: {
         paths: {
           root: Routes.PROJECT_IMPORT
         },
         exact: true,
-        Component: Import
+        Component: SelectFolder
       }
     },
     exact: false,
     Component: ProjectContainer
   },
-  [Routes.DASHBOARD]: {
+  dashboard: {
     paths: {
       root: Routes.DASHBOARD
     },
     exact: true,
     Component: DashboardContainer
   },
-  [Routes.DEPENDENCIES]: {
+  dependencies: {
     paths: {
       root: Routes.DEPENDENCIES
     },
     exact: true,
     Component: Depend
   },
-  [Routes.NOT_FOUND]: {
+  notFound: {
     paths: {
       root: '*'
     },

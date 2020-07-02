@@ -11,7 +11,7 @@ const locale = {
     headerTitle: 'React Проектный менеджер',
     projects: 'Проекты',
     create: 'Создать',
-    import: 'Импортировать',
+    import: 'Импорт',
     notFoundProjects: 'Не найдено проектов',
     folders: 'Папки',
     createNewProject: 'Создать новый проект',
