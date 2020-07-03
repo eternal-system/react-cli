@@ -2,7 +2,7 @@
 const execa = require('execa')
 
 const rawArgv = process.argv.slice(2)
-console.log(rawArgv, __dirname)
+// console.log(rawArgv, __dirname)
 
 async function cli (arg) {
   try {
@@ -18,49 +18,20 @@ async function git (status) {
   return await execa('git', [`${status}`])
 }
 
-function cliP (argv) {
-    return new Promise((resolve, reject) => {
-        const child = execa('react-cli-ui', argv)
-        child.on('error', reject)
-        child.on('exit', code => {
-            if (code !== 0) {
-                reject(`mochapack exited with code ${code}.`)
-            } else {
-                resolve()
-            }
-        })
-    }
-)}
-
-// TODO 
-// get call process status
 async function create (name) {
-    try {
-        const path = '/Users/vladkalachev/Desktop'
-        const res = await execa('create-react-app', [`${path}/${name}`])
-        console.log(res)
-        return res
-      } catch (error) {
-        console.error(error)
-        process.exit(1)
-      }
+  const path = '/Users/vladkalachev/Desktop'
+  const subprocess = execa.command(`create-react-app ${path}/${name}`)
+  subprocess.stdout.pipe(process.stdout)
+
+  try {
+    console.log('start process 1')
+    const { stdout } = await subprocess
+    console.log('child output:', stdout)
+    return stdout
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
 }
-
-// git(rawArgv[0]).then(res => {
-//   console.log(res)
-// }).catch(err => {
-//   console.error(err)
-// })
-
-// try {
-//   const res = cli(rawArgv[0])
-//   console.log(res)
-// } catch (error) {
-//   console.error(error)
-//   process.exit(1)
-// }
-
-// cli(rawArgv[0])
-// cli(rawArgv[0])
 
 create(rawArgv[0])
