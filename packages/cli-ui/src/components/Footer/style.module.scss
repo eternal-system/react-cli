@@ -1,0 +1,33 @@
+@import "../../style/vars.scss";
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	color: #fff;
+	height: 30px;
+	width: 100%;
+	background-color: #20232a;
+
+	.rightGroup {
+		display: flex;
+	}
+
+	.icon {
+		padding: 5px 7px;
+	
+		&:hover {
+			background-color: #61dafb23;
+			cursor: pointer;
+		}
+	
+		svg {
+			fill: #fff;
+			margin-top: 4px;
+			height: 16px;
+			width: 16px;
+
+			@include click-rule;
+		}
+	}
+}

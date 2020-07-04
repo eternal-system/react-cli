@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     files.forEach(file => {
       projects.push(file)
     })
-    res.send(projects.filter(str => !str.startsWith('.')))
+    res.send(projects.filter(str => !str.startsWith('.') && !str.match(/\.[0-9a-z]{1,5}$/)))
   })
 })
 

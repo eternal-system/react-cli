@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import css from './style.module.css'
+
+import css from './style.module.scss'
 
 export default function KillPort () {
   const [value, setValue] = useState()

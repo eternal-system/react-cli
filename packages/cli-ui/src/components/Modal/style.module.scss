@@ -1,0 +1,107 @@
+@import '../../style/vars.scss';
+
+.modalWrapper {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+
+	.modalContent {
+		width: 520px;
+		transform-origin: 62px -72px;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		color: rgba(0, 0, 0, 0.65);
+		font-size: 14px;
+		font-variant: tabular-nums;
+		line-height: 1.5715;
+		list-style: none;
+		-webkit-font-feature-settings: 'tnum';
+		font-feature-settings: 'tnum';
+		position: relative;
+		top: 100px;
+		margin: 0 auto;
+		pointer-events: none;
+		position: relative;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 0;
+		border-radius: 6px;
+		-webkit-box-shadow: 0 3px 6px -4px hsla(0, 0%, 0%, 0.122), 0 6px 16px 0 hsla(0, 0%, 0%, 0.078), 0 9px 28px 8px hsla(0, 0%, 0%, 0.05);
+		box-shadow: 0 3px 6px -4px hsla(0, 0%, 0%, 0.12), 0 6px 16px 0 hsla(0, 0%, 0%, 0.08), 0 9px 28px 8px hsla(0, 0%, 0%, 0.05);
+    pointer-events: auto;
+
+		.modalClose {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 10;
+			padding: 0;
+			color: rgba(0, 0, 0, 0.45);
+			font-weight: 700;
+			line-height: 1;
+			text-decoration: none;
+			background: transparent;
+			border: 0;
+			outline: 0;
+			cursor: pointer;
+			-webkit-transition: color 0.3s;
+			transition: color 0.3s;
+    }
+
+		.modalCloseX {
+			display: block;
+			width: 56px;
+			height: 56px;
+			font-size: 16px;
+			font-style: normal;
+			line-height: 56px;
+			text-align: center;
+			text-transform: none;
+			text-rendering: auto;
+
+			svg {
+				height: 20px;
+				width: 20px;
+
+				@include click-rule;
+			}
+    }
+
+		.modalHeader {
+			padding: 16px 24px;
+			color: rgba(0, 0, 0, 0.65);
+			background: #fff;
+			border-bottom: 1px solid #f0f0f0;
+			border-radius: 2px 2px 0 0;
+			font-size: 18px;
+    }
+
+		.modalBody {
+			padding: 24px;
+			font-size: 14px;
+			line-height: 1.5715;
+			word-wrap: break-word;
+    }
+
+		.modalFooter {
+			padding: 10px 16px;
+			text-align: right;
+			background: transparent;
+			border-top: 1px solid #f0f0f0;
+      border-radius: 0 0 2px 2px;
+
+      button {
+				border-radius: 5px;
+
+				@include click-rule;
+      }
+		}
+	}
+}

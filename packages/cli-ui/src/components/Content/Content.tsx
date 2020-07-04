@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './style.module.css'
+import css from './style.module.scss'
 
 function Content ({ children }: React.PropsWithChildren<React.ReactNode>) {
   return (

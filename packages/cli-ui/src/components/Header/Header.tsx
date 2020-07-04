@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import CheckBoxTheme from '../CheckBoxTheme/CheckBoxTheme'
 import logo from '../../../public/logo192.png'
-import css from './style.module.css'
+import css from './style.module.scss'
 
 export default function Header ({ setTab, active, children }: any) {
   const history = useHistory()
