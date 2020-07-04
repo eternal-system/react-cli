@@ -1,0 +1,47 @@
+.inputContainer {
+  width: 100%;
+
+  .inputLabel {
+    font-size: 16px;
+  }
+
+  .inputContent {
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #c8f3ff8a;
+    margin: 6px 0;
+    padding: 0 10px;
+    border: 1px solid #c8f3ff;
+    color: #2c3e50;
+    border-radius: 3px;
+    transition: background .3s;
+    position: relative;
+
+    svg {
+      fill: #2c3e50;
+      width: 24px;
+      height: 24px;
+    }
+
+    .input {
+      display: block;
+      margin-left: 10px;
+      border: transparent;
+      outline: none;
+      position: relative;
+      z-index: 1;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 14px;
+      color: #2c3e50;
+      padding: 0;
+      width: 100%;
+      background: 0 0;
+    }
+  }
+
+
+}
