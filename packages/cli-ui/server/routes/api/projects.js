@@ -9,6 +9,8 @@ const folderDbPath = path.normalize(__dirname + '../../../../db.json')
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
 
+const execa = require('execa')
+
 // Get list project
 router.get('/', (req, res) => {
   if (fs.existsSync(folderDbPath)) {
@@ -19,16 +21,25 @@ router.get('/', (req, res) => {
 })
 
 // Create new project
-router.post('/create', (req, res) => {
-  const {name, path, manager, preset} = req.body
-  db.get('projects').push({ 
-    id: db.get('projects').value().length + 1, 
-    name,
-    path,
-    manager,
-    preset
-  }).write()
-  res.send(db.get('projects').value())
+router.post('/create', async(req, res) => {
+  const {name, path, manager = '', preset = ''} = req.body
+  const subprocess = execa.command(`create-react-app ${path}/${name}`)
+    subprocess.stdout.pipe(process.stdout)
+    try {
+      const { stdout } = await subprocess
+      // Add item project 
+      db.get('projects').push({ 
+        id: db.get('projects').value().length + 1, 
+        name,
+        path,
+        manager,
+        preset
+      }).write()
+      res.send(db.get('projects').value())
+    } catch (error) {
+      console.error(error)
+      process.exit(1)
+    }
 })
 
 // Get project by Id

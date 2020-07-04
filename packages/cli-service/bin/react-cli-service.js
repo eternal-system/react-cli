@@ -3,7 +3,7 @@ const execa = require('execa')
 
 const rawArgv = process.argv.slice(2)
 
-async function create (name, path = '/Users/vladkalachev/Desktop') {
+async function create (name, path) {
   const subprocess = execa.command(`create-react-app ${path}/${name}`)
   subprocess.stdout.pipe(process.stdout)
   try {
