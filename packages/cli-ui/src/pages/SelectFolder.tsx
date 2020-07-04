@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Api from 'api'
+import { SettingsContext } from 'context'
 import { Routes } from 'router'
 import { Layout, Content, Loader, Folders, Toolbar } from '../components'
 
@@ -16,9 +17,16 @@ export default function Create () {
   const history = useHistory()
 
   // State
-  const [url, setUrl] = useState<string[]>([])
+  const { selectedPath, changeSelectedPath } = React.useContext(SettingsContext)
+  const [url, setUrl] = useState<string[]>(selectedPath)
   const [projects, setProjects] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (selectedPath.length && selectedPath !== url) {
+      setUrl(selectedPath)
+    }
+  }, [selectedPath])
 
   useEffect(() => {
     getFoldersData(url)
@@ -36,6 +44,7 @@ export default function Create () {
         .then((res) => {
           batch(() => {
             setProjects(res as string[])
+            changeSelectedPath(url)
             setLoading(false)
           })
         })

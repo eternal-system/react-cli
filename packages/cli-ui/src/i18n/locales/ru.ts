@@ -17,6 +17,11 @@ const locale = {
     createNewProject: 'Создать новый проект',
     importProject: 'Импортировать проект'
   },
+  projectCreate: {
+    createProjectTitle: 'Создание нового проекта',
+    nameProject: 'Название проекта',
+    createProject: 'Создать проект'
+  },
   modal: {
     createNew: 'Добавить новую папку',
     create: 'Добавить',

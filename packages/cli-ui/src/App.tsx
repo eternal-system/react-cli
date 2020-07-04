@@ -12,12 +12,12 @@ import { renderRoutes } from './router'
 import css from './style/main.module.scss'
 
 export default function App () {
-  const { locale, darkTheme, changeTheme, changeLocale } = useSettings()
-  const styles = cn(darkTheme ? 'dark' : 'ligth', css.appContainer)
+  const settings = useSettings()
+  const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
 
   return (
     <I18nextProvider i18n={i18n}>
-      <SettingsContext.Provider value={{ locale, darkTheme, changeTheme, changeLocale }}>
+      <SettingsContext.Provider value={settings}>
         <Router>
           <div className={styles}>
             {renderRoutes()}

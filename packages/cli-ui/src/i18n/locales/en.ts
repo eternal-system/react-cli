@@ -18,6 +18,11 @@ const locale = {
     createNewProject: 'Create a new project here',
     importProject: 'Import project'
   },
+  projectCreate: {
+    createProjectTitle: 'Create new project',
+    nameProject: 'Project folder',
+    createProject: 'Create Project'
+  },
   modal: {
     createNew: 'Create new folder',
     create: 'Create',

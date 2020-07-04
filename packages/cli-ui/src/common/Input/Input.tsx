@@ -73,7 +73,7 @@ function Input (props: Props) {
     })
   }
 
-  const renderSufix = useMemo(() => {
+  const renderPrefix = useMemo(() => {
     switch (prefix) {
       case 'folder':
         return <FolderFilledIcon />
@@ -82,11 +82,20 @@ function Input (props: Props) {
     }
   }, [prefix])
 
+  const renderSufix = useMemo(() => {
+    switch (suffix) {
+      case 'folder':
+        return <FolderFilledIcon />
+      default:
+        return null
+    }
+  }, [suffix])
+
   return (
     <div className={cn(css.inputContainer, className)}>
       <label className={css.inputLabel}>{label}</label>
       <div className={css.inputContent}>
-        {renderSufix}
+        {renderPrefix}
         <input
           className={css.input}
           {...(onChange && { onChange: handleChange })}
@@ -102,6 +111,7 @@ function Input (props: Props) {
           type={type}
           value={value}
         />
+        {renderSufix}
       </div>
     </div>
   )
