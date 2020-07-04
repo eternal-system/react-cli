@@ -9,6 +9,12 @@ const port = process.env.SERVER_PORT || 8080
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
+/* db */
+if (!fs.existsSync('db.json')) {
+  console.log('create new db')
+  require('./server/util/db')
+}
+
 app.use(require('./server/routes'))
 /* static server */
 if (process.env.DEV_SERVER.trim() === 'true') {

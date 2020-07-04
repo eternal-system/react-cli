@@ -10,6 +10,12 @@ const webpackConfig = require('./webpack.config.js')
 
 module.exports.server = (options, cb = null) => {
   // const distPath = path.resolve(__dirname, 'dist')
+
+  // db
+  if (!fs.existsSync('db.json')) {
+    require('./server/util/db')
+  }
+
   const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
   app.use(require('./server/routes'))
