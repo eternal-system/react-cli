@@ -15,13 +15,13 @@ if (!fs.existsSync('db.json')) {
   require('./server/util/db')
 }
 
+app.use(express.json({ extended: true }))
+
 app.use(require('./server/routes'))
 /* static server */
 if (process.env.DEV_SERVER.trim() === 'true') {
   console.log('SSR start')
-
-  app.use(express.json({ extended: true }))
-
+  
   app.use(webpackHotMiddleware(webpack(webpackConfig)))
 
   app.use('/', express.static(path.join(__dirname, 'dist')))

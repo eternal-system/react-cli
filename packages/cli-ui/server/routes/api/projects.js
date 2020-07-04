@@ -20,10 +20,13 @@ router.get('/', (req, res) => {
 
 // Create new project
 router.post('/create', (req, res) => {
+  const {name, path, manager, preset} = req.body
   db.get('projects').push({ 
     id: db.get('projects').value().length + 1, 
-    title: 'test', 
-    path: 'test'
+    name,
+    path,
+    manager,
+    preset
   }).write()
   res.send(db.get('projects').value())
 })
