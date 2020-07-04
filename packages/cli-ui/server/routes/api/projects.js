@@ -39,16 +39,23 @@ router.get('/:id', (req, res) => {
 })
 
 // Delete project by Id
-router.delete('/delete', (req, res) => {
-  db.get('posts')
-  .remove({ id })
-  .write()
+router.delete('/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  console.log(id)
+  if(id){
+     db.get('projects')
+    .remove({ id })
+    .write()
+    res.send(db.get('projects').value())
+  } else {
+    res.send(db.get('projects').value())
+  }
 })
 
 // Clear DB
 router.post('/clear', (req, res) => {
-  db.get('posts')
-    .remove([]).write()
+  db.get('projects')
+    .remove().write()
   res.send(db.get('projects').value())
 })
 
