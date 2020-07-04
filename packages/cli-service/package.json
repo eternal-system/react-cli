@@ -1,10 +1,10 @@
 {
-  "name": "@react/cli",
+  "name": "@react/cli-service",
   "version": "0.0.1",
-  "description": "Command line interface for React.js development",
+  "description": "local service for react-cli projects",
   "main": "index.js",
   "bin": {
-    "react-cli-ui": "bin/react.js"
+    "react-cli-service": "bin/react-cli-service.js"
   },
   "scripts": {
     "test": "jest"
