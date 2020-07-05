@@ -15,9 +15,10 @@
   }
 
   button {
-    background-color: #c8f3ff;
-    padding: 7px 8px;
     margin-right: 0;
+    padding: 7px 8px;
+    border: 1px solid #c8f3ff;
+    background-color: #c8f3ff8a;
 
     svg {
       fill: #2c3e50;
