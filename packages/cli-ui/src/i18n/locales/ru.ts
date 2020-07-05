@@ -23,7 +23,8 @@ const locale = {
     nameProject: 'Название проекта',
     createProject: 'Создать проект',
     packageManager: 'Пакетный менеджер',
-    selectPreset: 'Выбор базовых настроек'
+    selectPreset: 'Выбор базовых настроек',
+    typeName: 'Введите имя'
   },
   modal: {
     selectFolder: 'Выбор директории',

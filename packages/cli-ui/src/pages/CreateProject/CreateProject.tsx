@@ -45,6 +45,7 @@ export default function CreateProject () {
         <Input
           name="name"
           label={t('nameProject')}
+          placeholder={t('typeName')}
           prefix="folder"
           className={css.projectName}
           value={state.name}
