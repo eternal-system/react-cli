@@ -1,0 +1,40 @@
+.inputContainer {
+  width: 100%;
+
+  .inputLabel {
+    font-size: 16px;
+  }
+
+  .inputContent {
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #c8f3ff8a;
+    margin: 6px 0;
+    padding: 0 10px;
+    border: 1px solid #c8f3ff;
+    color: #2c3e50;
+    border-radius: 3px;
+    transition: background .3s;
+    position: relative;
+
+    .select {
+      width: 100%;
+      margin-left: 10px;
+      font-family: inherit;
+      outline: none;
+      font-size: 14px;
+      line-height: 14px;
+      color: #2c3e50;
+      padding: 0;
+
+      & > div[class$='control'] {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+}

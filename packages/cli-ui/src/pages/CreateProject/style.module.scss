@@ -7,6 +7,10 @@
   max-width: 400px;
   margin: 0 auto;
 
+  & > div {
+    margin-bottom: 20px;
+  }
+
   .createTitle {
     font-size: 24px;
     font-weight: 300;

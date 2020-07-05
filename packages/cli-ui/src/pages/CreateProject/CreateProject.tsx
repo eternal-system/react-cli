@@ -2,20 +2,32 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Content } from 'components'
-import { Input } from 'common'
+import { Input, Select } from 'common'
 
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
+
+const optionsManager = [
+  { value: 'npm', label: 'npm' },
+  { value: 'yarn', label: 'yarn' }
+]
+
+const optionsPreset = [
+  { value: 'create-react-app', label: 'create-react-app' },
+  { value: 'custom-react-app', label: 'custom-react-app' }
+]
 
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
 
   // State
   const [state, setState] = useState({
-    name: ''
+    name: '',
+    manager: optionsManager[0],
+    preset: optionsPreset[0]
   })
 
-  function changeProjectName ({ value, name }: { value: string, name: string }) {
+  function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
   }
 
@@ -33,7 +45,21 @@ export default function CreateProject () {
           prefix="folder"
           className={css.projectName}
           value={state.name}
-          onChange={changeProjectName}
+          onChange={handleChange}
+        />
+        <Select
+          name="packageManager"
+          label="Package manager"
+          onChange={handleChange}
+          options={optionsManager}
+          value={state.manager}
+        />
+        <Select
+          name="preset"
+          label="Select a preset"
+          onChange={handleChange}
+          options={optionsPreset}
+          value={state.preset}
         />
       </div>
       <button className={mainCss.foulderBtn} onClick={createProject}>
