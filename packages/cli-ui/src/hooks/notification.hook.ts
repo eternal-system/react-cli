@@ -17,29 +17,27 @@ const defaultConfig = {
 
 export function useNotification () {
   const notification = useMemo(
-    () => {
-      return {
-        success: (config) => store.addNotification({
-          ...defaultConfig,
-          ...config
-        }),
-        error: (config) => store.addNotification({
-          ...defaultConfig,
-          ...config,
-          type: 'danger'
-        }),
-        info: (config) => store.addNotification({
-          ...defaultConfig,
-          ...config,
-          type: 'info'
-        }),
-        warning: (config) => store.addNotification({
-          ...defaultConfig,
-          ...config,
-          type: 'warning'
-        })
-      }
-    },
+    () => ({
+      success: (config: any) => store.addNotification({
+        ...defaultConfig,
+        ...config
+      }),
+      error: (config: any) => store.addNotification({
+        ...defaultConfig,
+        ...config,
+        type: 'danger'
+      }),
+      info: (config: any) => store.addNotification({
+        ...defaultConfig,
+        ...config,
+        type: 'info'
+      }),
+      warning: (config: any) => store.addNotification({
+        ...defaultConfig,
+        ...config,
+        type: 'warning'
+      })
+    }),
     []
   )
 
