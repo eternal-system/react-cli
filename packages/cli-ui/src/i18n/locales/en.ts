@@ -21,7 +21,9 @@ const locale = {
   projectCreate: {
     createProjectTitle: 'Create new project',
     nameProject: 'Project folder',
-    createProject: 'Create Project'
+    createProject: 'Create Project',
+    packageManager: 'Package manager',
+    selectPreset: 'Select a preset'
   },
   modal: {
     createNew: 'Create new folder',

@@ -48,15 +48,15 @@ export default function CreateProject () {
           onChange={handleChange}
         />
         <Select
-          name="packageManager"
-          label="Package manager"
+          name="manager"
+          label={t('packageManager')}
           onChange={handleChange}
           options={optionsManager}
           value={state.manager}
         />
         <Select
           name="preset"
-          label="Select a preset"
+          label={t('selectPreset')}
           onChange={handleChange}
           options={optionsPreset}
           value={state.preset}
