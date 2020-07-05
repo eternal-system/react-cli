@@ -21,6 +21,7 @@
     position: relative;
 
     svg {
+      margin-right: 10px;
       fill: #2c3e50;
       width: 24px;
       height: 24px;
@@ -28,7 +29,6 @@
 
     .input {
       display: block;
-      margin-left: 10px;
       border: transparent;
       outline: none;
       position: relative;
