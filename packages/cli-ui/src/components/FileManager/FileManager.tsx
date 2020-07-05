@@ -3,7 +3,8 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 
 import Api from 'api'
 import { SettingsContext } from 'context'
-import { Loader, Folders, Toolbar } from '../index'
+import { ProgressBar } from 'common'
+import { Folders, Toolbar } from '../index'
 
 // Create new project
 export default function FileManager () {
@@ -39,7 +40,10 @@ export default function FileManager () {
         })
         .catch((error) => {
           console.log('error', error)
-          setLoading(false)
+          batch(() => {
+            setLoading(false)
+            setUrl((prevState) => prevState.splice(0, url.length - 1))
+          })
         })
     },
     [url]
@@ -73,10 +77,6 @@ export default function FileManager () {
     setUrl((prevState) => prevState.splice(0, url.length - 1))
   }
 
-  if (loading) {
-    return <Loader />
-  }
-
   return (
     <>
       <Toolbar
@@ -85,6 +85,7 @@ export default function FileManager () {
         setUrlPath={setUrl}
         path={url}
       />
+      { loading && <ProgressBar progress={75} /> }
       <Folders folders={projects} onSelect={handleClick}/>
     </>
   )
