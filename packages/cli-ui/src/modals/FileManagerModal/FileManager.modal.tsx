@@ -26,7 +26,10 @@ function FileManagerModal ({ folderName, visible, closeModal, showModal }: Modal
 
   return (
     <div className={css.modal}>
-      <label>{`/${selectedPath.join('/')}/`}<strong>{folderName}</strong></label>
+      <label>
+        {`/${selectedPath.join('/')}${selectedPath.length && folderName ? '/' : ''}`}
+        <strong>{`${folderName}`}</strong>
+      </label>
       <button onClick={showModal}>
         <EditIcon />
       </button>
