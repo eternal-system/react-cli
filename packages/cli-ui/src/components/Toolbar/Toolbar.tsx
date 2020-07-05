@@ -18,7 +18,7 @@ interface Props {
 }
 
 // eslint-disable-next-line react/prop-types
-export default function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
+function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
   const { visible, showModal, closeModal } = useModal()
 
   function renderIcon (Component: React.FC) {
@@ -69,3 +69,5 @@ export default function Toolbar ({ setUrlPath, updateFolderData, path, back }: P
     </>
   )
 }
+
+export default React.memo(Toolbar)

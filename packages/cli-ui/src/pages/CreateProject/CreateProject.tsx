@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import { Content } from 'components'
 import { Input, Select } from 'common'
+import { FileManagerModal } from 'modals'
+import { useModal } from 'hooks'
 
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
@@ -19,6 +21,7 @@ const optionsPreset = [
 
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
+  const { visible, showModal, closeModal } = useModal()
 
   // State
   const [state, setState] = useState({
@@ -46,6 +49,12 @@ export default function CreateProject () {
           className={css.projectName}
           value={state.name}
           onChange={handleChange}
+        />
+        <FileManagerModal
+          folderName={state.name}
+          visible={visible}
+          closeModal={closeModal}
+          showModal={showModal}
         />
         <Select
           name="manager"

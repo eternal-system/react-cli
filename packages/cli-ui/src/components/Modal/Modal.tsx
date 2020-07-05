@@ -70,7 +70,7 @@ export default function Modal (props: ModalInterface) {
                 <CloceIcon />
               </span>
             </button>
-            <form onSubmit={handleOk}>
+            <section>
               <div className={css.modalHeader}>
                 {title}
               </div>
@@ -79,9 +79,9 @@ export default function Modal (props: ModalInterface) {
               </div>
               <div className={css.modalFooter}>
                 <button onClick={handleCancel}>{`${t('cancel')}`}</button>
-                <button type="submit">{okText}</button>
+                <button onClick={handleOk}>{okText}</button>
               </div>
-            </form>
+            </section>
           </div>
         </div>
       )}

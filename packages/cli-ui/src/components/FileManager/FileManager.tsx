@@ -50,8 +50,7 @@ export default function FileManager () {
    * @param name - nome selected foulder
    */
   function handleClick (name: string) {
-    const buildUrl = url.length ? [...url, name] : [name]
-    setUrl(buildUrl)
+    setUrl((prevState) => prevState.length ? [...prevState, name] : [name])
   }
 
   // reset
@@ -71,8 +70,7 @@ export default function FileManager () {
 
   // back folder in stap
   function backFolder () {
-    const newArr = url.splice(0, url.length - 1)
-    setUrl(newArr)
+    setUrl((prevState) => prevState.splice(0, url.length - 1))
   }
 
   if (loading) {
