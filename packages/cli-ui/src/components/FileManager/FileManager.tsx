@@ -4,10 +4,12 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 import Api from 'api'
 import { SettingsContext } from 'context'
 import { ProgressBar } from 'common'
+import { useNotification } from 'hooks'
 import { Folders, Toolbar } from '../index'
 
 // Create new project
 export default function FileManager () {
+  const notification = useNotification()
   // State
   const { selectedPath, changeSelectedPath } = React.useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
@@ -43,6 +45,10 @@ export default function FileManager () {
           batch(() => {
             setLoading(false)
             setUrl((prevState) => prevState.splice(0, url.length - 1))
+          })
+          notification.error({
+            title: error.message,
+            message: error.error.path
           })
         })
     },
