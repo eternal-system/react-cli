@@ -5,7 +5,8 @@ const locale = {
   common: {
     path: 'Путь',
     reset: 'сбросить',
-    newFolder: 'новая папка'
+    newFolder: 'новая папка',
+    select: 'Выбрать'
   },
   project: {
     headerTitle: 'React Проектный менеджер',
@@ -25,6 +26,7 @@ const locale = {
     selectPreset: 'Выбор базовых настроек'
   },
   modal: {
+    selectFolder: 'Выбор директории',
     createNew: 'Добавить новую папку',
     create: 'Добавить',
     title: 'Заголовок',

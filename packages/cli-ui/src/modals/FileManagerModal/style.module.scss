@@ -1,0 +1,45 @@
+.modal {
+  color: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  label {
+    font-size: 14px;
+
+    strong {
+      color: #2d3e4f;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+
+  button {
+    background-color: #c8f3ff;
+    padding: 7px 8px;
+    margin-right: 0;
+
+    svg {
+      fill: #2c3e50;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  & > div[class^='modalWrapper'] {
+    & > div[class^='modalContent'] {
+      width: 70%;
+
+      div[class^='folders'] {
+        max-height: 500px;
+      }
+
+      div[class^='modalFooter'] {
+        button {
+          color: #2c3e50;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

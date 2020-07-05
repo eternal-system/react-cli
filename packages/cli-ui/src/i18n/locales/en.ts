@@ -6,7 +6,8 @@ const locale = {
   common: {
     path: 'Path',
     reset: 'reset',
-    newFolder: 'new folder'
+    newFolder: 'new folder',
+    select: 'Select'
   },
   project: {
     headerTitle: 'React Project Manager',
@@ -26,6 +27,7 @@ const locale = {
     selectPreset: 'Select a preset'
   },
   modal: {
+    selectFolder: 'Select folder',
     createNew: 'Create new folder',
     create: 'Create',
     title: 'title',

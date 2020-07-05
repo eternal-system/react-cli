@@ -13,7 +13,7 @@ export interface ModalFolder {
   closeModal?(e: React.MouseEvent<HTMLElement>): void;
 }
 
-export function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
+export default function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
   const initForm = { title: '' }
   const { t } = useTranslation('modal')
   const [form, setForm] = useState(initForm)
