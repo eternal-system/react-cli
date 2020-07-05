@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { I18nextProvider } from 'react-i18next'
+import ReactNotification from 'react-notifications-component'
 import cn from 'classnames'
 
 import i18n from './i18n'
@@ -9,6 +10,7 @@ import { SettingsContext } from './context'
 import { useSettings } from './hooks'
 import { renderRoutes } from './router'
 
+import 'react-notifications-component/dist/theme.css'
 import css from './style/main.module.scss'
 
 export default function App () {
@@ -22,6 +24,7 @@ export default function App () {
           <div className={styles}>
             {renderRoutes()}
             <Footer />
+            <ReactNotification />
           </div>
         </Router>
       </SettingsContext.Provider>

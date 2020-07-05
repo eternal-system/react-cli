@@ -5,6 +5,7 @@ import Api from 'api'
 
 import Modal from '../components/Modal'
 import { Input } from '../components/Form'
+import { useNotification } from 'hooks'
 
 export interface ModalFolder {
   visible?: boolean;
@@ -14,6 +15,8 @@ export interface ModalFolder {
 }
 
 export default function ModalFolder ({ visible, closeModal, path, get }: ModalFolder) {
+  const notification = useNotification()
+  // State
   const initForm = { title: '' }
   const { t } = useTranslation('modal')
   const [form, setForm] = useState(initForm)
@@ -35,10 +38,12 @@ export default function ModalFolder ({ visible, closeModal, path, get }: ModalFo
     })
       .then(res => {
         console.log(res)
+        notification.success({
+          title: 'Success',
+          message: res.message
+        })
         get([...path, ...createFoldersPath(form.title)])
-        if (closeModal) {
-          closeModal()
-        }
+        closeModal && closeModal(e)
       }).catch((err) => {
         console.log(err)
       })
