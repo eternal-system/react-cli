@@ -20,28 +20,20 @@
     transition: background .3s;
     position: relative;
 
-    svg {
-      margin-right: 10px;
-      fill: #2c3e50;
-      width: 24px;
-      height: 24px;
-    }
-
-    .input {
-      display: block;
-      border: transparent;
-      outline: none;
-      position: relative;
-      z-index: 1;
+    .select {
+      width: 100%;
       font-family: inherit;
+      outline: none;
       font-size: 14px;
       line-height: 14px;
       color: #2c3e50;
       padding: 0;
-      width: 100%;
-      background: 0 0;
+
+      & > div[class$='control'] {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
     }
   }
-
-
 }

@@ -20,7 +20,9 @@ const locale = {
   projectCreate: {
     createProjectTitle: 'Создание нового проекта',
     nameProject: 'Название проекта',
-    createProject: 'Создать проект'
+    createProject: 'Создать проект',
+    packageManager: 'Пакетный менеджер',
+    selectPreset: 'Выбор базовых настроек'
   },
   modal: {
     createNew: 'Добавить новую папку',
