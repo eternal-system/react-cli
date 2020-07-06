@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { Content } from 'components'
+import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
 import { useModal } from 'hooks'
 
+import Api from 'api'
+import { SettingsContext } from 'context'
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
 
@@ -22,6 +24,7 @@ const optionsPreset = [
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
   const { visible, showModal, closeModal } = useModal()
+  const { selectedPath } = React.useContext(SettingsContext)
 
   // State
   const [state, setState] = useState({
@@ -30,12 +33,36 @@ export default function CreateProject () {
     preset: optionsPreset[0]
   })
 
+  const [loading, setLoading] = useState(false)
+
   function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
   }
 
   function createProject () {
-    console.debug('createProject')
+    const { name, manager, preset } = state
+    // TODO
+    // 1 loading page
+    // fetch
+    //
+    setLoading(true)
+    console.debug('createProject 22', state, selectedPath.join('/'))
+    Api.POST('/api/projects/create', {
+      name,
+      path: selectedPath,
+      manager: manager.value,
+      preset: preset.value
+    }).then((res) => {
+      console.log('res', res)
+      setLoading(false)
+    }).catch((error) => {
+      console.log('error', error)
+      setLoading(false)
+    })
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (
