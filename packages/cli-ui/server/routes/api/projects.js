@@ -22,28 +22,48 @@ router.get('/', (req, res) => {
 
 // Create new project
 router.post('/create', async (req, res) => {
-  const { name, path: pathProject, manager = '', preset = '' } = req.body
-  console.log(111111111111, req.body, path.join(...pathProject, name))
+  const { 
+    name, 
+    path: pathProject, 
+    manager = '', 
+    preset = ''
+  } = req.body
 
-  const subprocess = execa.command(`create-react-app ${path.join(...pathProject, name)}`)
+  console.log(111111111111, req.body, path.join('/', ...pathProject, name))
+  let subprocess
+  if(manager === 'npm') {
+    subprocess = execa.command(`npx create-react-app ${path.join('/', ...pathProject, name)} --use-npm`)
+  } else {
+    subprocess = execa.command(`yarn create react-app ${path.join('/', ...pathProject, name)}`)
+  }
+
+ // const subprocess = execa.command(`create-react-app ${path.join('/', ...pathProject, name)}`)
   subprocess.stdout.pipe(process.stdout)
   try {
     const { stdout } = await subprocess
     console.log(2222222222, stdout)
+
     // Add item project
-    db.get('projects').push({
-      id: db.get('projects').value().length + 1,
-      name,
-      path,
-      manager,
-      preset
-    }).write()
-    res.send(db.get('projects').value())
+    // db.get('projects').push({
+    //   id: db.get('projects').value().length + 1,
+    //   name,
+    //   path,
+    //   manager,
+    //   preset
+    // }).write()
+
+    // res.send(db.get('projects').value())
+
+    return res.status(200).json({
+      message: 'Project successfully create'
+    })
   } catch (error) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     console.error(error)
     process.exit(1)
   }
+
+  
 })
 
 // Get project by Id
