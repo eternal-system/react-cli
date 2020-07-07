@@ -76,11 +76,11 @@ router.post('/create', async (req, res, next) => {
 
   try {
     // await setTimeoutPromise(110000)
-    await setTimeoutPromise(180000)
+   // await setTimeoutPromise(180000)
+   await setTimeoutPromise(3000)
     return res.status(200).json({ 
       message: 'Project successfully create'
     })
-    res.end()
   } catch (error) {
     return res.status(500).json({ 
       message: 'Что-то пошло не так, попробуйте снова'

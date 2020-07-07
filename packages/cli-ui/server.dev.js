@@ -5,11 +5,17 @@ const fs = require('fs')
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config.js')
-const port = process.env.SERVER_PORT || 8080
+const PORT = process.env.SERVER_PORT || 8080
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 // const timeout = require('connect-timeout')
 //const timeout = require('express-timeout-handler');
+
+// logger
+const pino = require('pino')
+const expressPino = require('express-pino-logger')
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' })
+const expressLogger = expressPino({ logger })
 
 /* db */
 if (!fs.existsSync('db.json')) {
@@ -18,6 +24,7 @@ if (!fs.existsSync('db.json')) {
 }
 
 
+app.use(expressLogger)
 
 // app.use('/api/projects/create', (req, res, next) => {
 //     req.setTimeout(4 * 60 * 1000); // No need to offset
@@ -71,7 +78,26 @@ if (process.env.DEV_SERVER.trim() === 'true') {
   })
 }
 
-app.listen(port)
+const apiTimeout = 180000;
+app.use((req, res, next) => {
+  // Set the timeout for all HTTP requests
+  req.setTimeout(apiTimeout, () => {
+      let err = new Error('Request Timeout');
+      err.status = 408;
+      next(err);
+  });
+  // Set the server response timeout for all HTTP requests
+  res.setTimeout(apiTimeout, () => {
+      let err = new Error('Service Unavailable');
+      err.status = 503;
+      next(err);
+  });
+})
+
+app.listen(PORT, () => {
+  logger.info('Server running on port %d', PORT);
+})
+
   // .use(timeout('3m'))
   // .use((res, req, next) => {
   //   console.log('timers!')
@@ -85,4 +111,4 @@ app.listen(port)
 //   if (!req.timedout) next()
 // }
 
-console.log(`\n Server started on port ${port} \n`)
+// console.log(`\n Server started on port ${port} \n`)
