@@ -8,7 +8,7 @@ const webpackConfig = require('./webpack.config.js')
 const port = process.env.SERVER_PORT || 8080
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
-const timeout = require('connect-timeout')
+// const timeout = require('connect-timeout')
 //const timeout = require('express-timeout-handler');
 
 /* db */
@@ -49,8 +49,8 @@ app.use(require('./server/routes'))
 /* static server */
 if (process.env.DEV_SERVER.trim() === 'true') {
   console.log('SSR start')
-  app.use(timeout(125000));
-  app.use(haltOnTimedout);
+  // app.use(timeout(125000));
+  // app.use(haltOnTimedout);
 
   app.use(webpackHotMiddleware(webpack(webpackConfig)))
 
@@ -80,9 +80,9 @@ app.listen(port)
   // .use(haltOnTimedout)
 
 
-function haltOnTimedout (req, res, next) {
-  console.log('req.timedout !!!', req.timedout)
-  if (!req.timedout) next()
-}
+// function haltOnTimedout (req, res, next) {
+//   console.log('req.timedout !!!', req.timedout)
+//   if (!req.timedout) next()
+// }
 
 console.log(`\n Server started on port ${port} \n`)

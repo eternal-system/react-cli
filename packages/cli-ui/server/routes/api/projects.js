@@ -59,6 +59,12 @@ router.get('/', (req, res) => {
   }
 })
 
+function setTimeoutPromise(delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), delay);
+  });
+}
+
 // Create new project
 router.post('/create', async (req, res, next) => {
   const { 
@@ -67,6 +73,22 @@ router.post('/create', async (req, res, next) => {
     manager = '', 
     preset = ''
   } = req.body
+
+  try {
+    // await setTimeoutPromise(110000)
+    await setTimeoutPromise(180000)
+    return res.status(200).json({ 
+      message: 'Project successfully create'
+    })
+    res.end()
+  } catch (error) {
+    return res.status(500).json({ 
+      message: 'Что-то пошло не так, попробуйте снова'
+    })
+  }
+
+  //res.connection.setTimeout(180000)
+//  res.server.timeout = 180000
 
   // res.setHeader('Expires', '-1')
   // res.setHeader('Pragma', 'no-cache')
@@ -113,18 +135,22 @@ router.post('/create', async (req, res, next) => {
 
   // });
 
-  try {
-     let success = await createReactApp(pathProject, name)
-    console.log('success', success)
+  // try {
+  //   // res.timeout = 180000
+  //   console.log('create react appp', res)
+    
+  //   //res.setTimeout(0) // no timeout
+  //    let success = await createReactApp(pathProject, name)
+  //   console.log('success', success)
    
-    res.send('Project successfully create')
-    res.end()
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ 
-      message: 'Что-то пошло не так, попробуйте снова'
-    })
-  }
+  //   res.send('Project successfully create')
+  //   res.end()
+  // } catch (error) {
+  //   console.log(error)
+  //   return res.status(500).json({ 
+  //     message: 'Что-то пошло не так, попробуйте снова'
+  //   })
+  // }
  
 
  
