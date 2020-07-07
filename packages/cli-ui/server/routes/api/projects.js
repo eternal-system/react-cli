@@ -20,8 +20,6 @@ const shell = require('shelljs')
 const craNpm = (pathProject, name) => execa.command(`npx create-react-app ${path.join('/', ...pathProject, name)} --use-npm`, {shell: true})
 const craYarn = (pathProject, name) => execa.command(`yarn create react-app ${path.join('/', ...pathProject, name)}`, {shell: true})
 
-
-
 const createReactApp = (pathProject, name) => {
   return new Promise(resolve=>{
     if(name){
@@ -50,8 +48,10 @@ function execShellCommand(cmd) {
   });
  }
 
-// Get list project
+
+ // Get list project
 router.get('/', (req, res) => {
+  req.log.info('GET project')
   if (fs.existsSync(folderDbPath)) {
     res.send(db.get('projects').value())
   } else {
@@ -73,16 +73,17 @@ router.post('/create', async (req, res, next) => {
     manager = '', 
     preset = ''
   } = req.body
-
+  
   try {
-    // await setTimeoutPromise(110000)
-   // await setTimeoutPromise(180000)
-   await setTimeoutPromise(3000)
-    return res.status(200).json({ 
+    req.log.info('POST project/create')
+    req.setTimeout(0) // no timeout
+    await setTimeoutPromise(180000)
+    res.status(200).json({ 
       message: 'Project successfully create'
     })
   } catch (error) {
-    return res.status(500).json({ 
+    req.log.error('POST error project/create')
+    res.status(500).json({ 
       message: 'Что-то пошло не так, попробуйте снова'
     })
   }
@@ -178,6 +179,7 @@ function haltOnTimedout (req, res, next) {
 
 // Get project by Id
 router.get('/:id', (req, res) => {
+  req.log.info('GET project/:id')
   const id = parseInt(req.params.id)
   res.send(
     db.get('projects')
@@ -188,6 +190,7 @@ router.get('/:id', (req, res) => {
 
 // Delete project by Id
 router.delete('/:id', (req, res) => {
+  req.log.info('DELETE project/:id')
   const id = parseInt(req.params.id)
   console.log(id)
   if (id) {
@@ -202,6 +205,7 @@ router.delete('/:id', (req, res) => {
 
 // Clear DB
 router.post('/clear', (req, res) => {
+  req.log.info('Clear list projects')
   db.get('projects')
     .remove().write()
   res.send(db.get('projects').value())
