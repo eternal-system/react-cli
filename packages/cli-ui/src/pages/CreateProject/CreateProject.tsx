@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
 import { useModal } from 'hooks'
-
+import { useHistory } from 'react-router-dom'
 import Api from 'api'
 import { SettingsContext } from 'context'
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
+import { Routes } from '../../router'
 
 const optionsManager = [
   { value: 'npm', label: 'npm' },
@@ -23,6 +23,7 @@ const optionsPreset = [
 
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
+  const history = useHistory()
   const { visible, showModal, closeModal } = useModal()
   const { selectedPath } = React.useContext(SettingsContext)
 
@@ -41,12 +42,7 @@ export default function CreateProject () {
 
   function createProject () {
     const { name, manager, preset } = state
-    // TODO
-    // 1 loading page
-    // fetch
-    //
     setLoading(true)
-    console.debug('createProject 22', state, selectedPath.join('/'))
     Api.POST('/api/projects/create', {
       name,
       path: selectedPath,
@@ -55,6 +51,7 @@ export default function CreateProject () {
     }).then((res) => {
       console.log('res', res)
       setLoading(false)
+      history.push(Routes.DASHBOARD)
     }).catch((error) => {
       console.log('error', error)
       setLoading(false)

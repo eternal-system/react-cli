@@ -31,10 +31,8 @@
   "homepage": "https://github.com/eternal-system/react-cli#readme",
   "dependencies": {
     "classnames": "^2.2.6",
-    "connect-timeout": "^1.9.0",
     "express": "^4.17.1",
     "express-pino-logger": "^5.0.0",
-    "express-timeout-handler": "^2.2.0",
     "fkill": "^7.0.1",
     "i18next": "^19.5.1",
     "lowdb": "^1.0.0",
@@ -45,7 +43,6 @@
     "react-i18next": "^11.7.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^3.1.0",
-    "shelljs": "^0.8.4",
     "svg-url-loader": "^6.0.0"
   },
   "devDependencies": {
