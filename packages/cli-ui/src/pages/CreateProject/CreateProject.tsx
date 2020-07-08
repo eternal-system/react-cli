@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
-import { useModal } from 'hooks'
+import { useModal, useNotification } from 'hooks'
 import { useHistory } from 'react-router-dom'
 import Api from 'api'
 import { SettingsContext } from 'context'
@@ -24,6 +24,7 @@ const optionsPreset = [
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
   const history = useHistory()
+  const notification = useNotification()
   const { visible, showModal, closeModal } = useModal()
   const { selectedPath } = React.useContext(SettingsContext)
 
@@ -48,13 +49,16 @@ export default function CreateProject () {
       path: selectedPath,
       manager: manager.value,
       preset: preset.value
-    }).then((res) => {
-      console.log('res', res)
+    }).then(() => {
       setLoading(false)
       history.push(Routes.DASHBOARD)
     }).catch((error) => {
       console.log('error', error)
       setLoading(false)
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
     })
   }
 
