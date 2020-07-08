@@ -20,7 +20,9 @@ const devConfig = {
         target: `http://0.0.0.0:${process.env.SERVER_PORT}`,
         secure: false,
         changeOrigin: true,
-        autoRewrite: true
+        autoRewrite: true,
+        proxyTimeout: 1000 * 60 * 10,
+        timeout: 1000 * 60 * 10
       }
     }
   },

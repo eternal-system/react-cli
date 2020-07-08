@@ -50,8 +50,8 @@ export default function ProjectContainer () {
 
   return (
     <>
-      <header className={css.wrapperHeader} >
-        <div className={css.wrapperLayout} >
+      <header className={css.wrapperHeader}>
+        <div className={css.wrapperLayout}>
           <div className={css.wrapperLogo}>
             <img src={logo} alt="logo" />
             <span>{t('headerTitle')}</span>

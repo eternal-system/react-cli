@@ -24,7 +24,8 @@ const locale = {
     nameProject: 'Project folder',
     createProject: 'Create Project',
     packageManager: 'Package manager',
-    selectPreset: 'Select a preset'
+    selectPreset: 'Select a preset',
+    typeName: 'Type a name'
   },
   modal: {
     selectFolder: 'Select folder',

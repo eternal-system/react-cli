@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Content } from 'components'
+import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
-import { useModal } from 'hooks'
-
+import { useModal, useNotification } from 'hooks'
+import { useHistory } from 'react-router-dom'
+import Api from 'api'
+import { SettingsContext } from 'context'
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
+import { Routes } from '../../router'
 
 const optionsManager = [
   { value: 'npm', label: 'npm' },
@@ -21,7 +23,10 @@ const optionsPreset = [
 
 export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
+  const history = useHistory()
+  const notification = useNotification()
   const { visible, showModal, closeModal } = useModal()
+  const { selectedPath } = React.useContext(SettingsContext)
 
   // State
   const [state, setState] = useState({
@@ -30,12 +35,35 @@ export default function CreateProject () {
     preset: optionsPreset[0]
   })
 
+  const [loading, setLoading] = useState(false)
+
   function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
   }
 
   function createProject () {
-    console.debug('createProject')
+    const { name, manager, preset } = state
+    setLoading(true)
+    Api.POST('/api/projects/create', {
+      name,
+      path: selectedPath,
+      manager: manager.value,
+      preset: preset.value
+    }).then(() => {
+      setLoading(false)
+      history.push(Routes.DASHBOARD)
+    }).catch((error) => {
+      console.log('error', error)
+      setLoading(false)
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
+    })
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (
@@ -45,6 +73,7 @@ export default function CreateProject () {
         <Input
           name="name"
           label={t('nameProject')}
+          placeholder={t('typeName')}
           prefix="folder"
           className={css.projectName}
           value={state.name}

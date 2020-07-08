@@ -8,69 +8,105 @@ const FileSync = require('lowdb/adapters/FileSync')
 const folderDbPath = path.normalize(__dirname + '../../../../db.json')
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
+const {craNpm, craYarn} = require('../../util/create')
 
-const execa = require('execa')
-
-// Get list project
+ // Get list project
 router.get('/', (req, res) => {
+  req.log.info('GET project')
   if (fs.existsSync(folderDbPath)) {
-    res.send(db.get('projects').value())
+    res.status(200).json({ 
+      data: db.get('projects').value() 
+    })
   } else {
-    console.log('dont find db')
+    res.status(500).json({ 
+      message: 'Что-то пошло не так, попробуйте снова'
+    })
   }
 })
 
 // Create new project
-router.post('/create', async(req, res) => {
-  const {name, path, manager = '', preset = ''} = req.body
-  const subprocess = execa.command(`create-react-app ${path}/${name}`)
-    subprocess.stdout.pipe(process.stdout)
-    try {
-      const { stdout } = await subprocess
-      // Add item project 
-      db.get('projects').push({ 
-        id: db.get('projects').value().length + 1, 
-        name,
-        path,
-        manager,
-        preset
-      }).write()
-      res.send(db.get('projects').value())
-    } catch (error) {
-      console.error(error)
-      process.exit(1)
-    }
+router.post('/create', async (req, res, next) => {
+  const { 
+    name, 
+    path: pathProject, 
+    manager = '', 
+    preset = ''
+  } = req.body
+
+  req.setTimeout(0)
+
+  let subprocess
+  if(manager === 'npm') {
+      subprocess = craNpm(pathProject, name)
+  } else {
+      subprocess = craYarn(pathProject, name)
+  }
+  subprocess.stdout.pipe(process.stdout)
+  try {
+      req.log.info('POST project/create')
+      const {stdout} = await subprocess
+      console.log('stdout', stdout)
+       // add db project
+      if(stdout) {
+         db.get('projects').push({
+          id: db.get('projects').value().length + 1,
+          name,
+          path: pathProject,
+          manager,
+          preset
+        }).write()
+      }
+     
+      res.status(200).json({ 
+        message: 'Project successfully create'
+      })
+  } catch (error) {
+      req.log.error('POST error project/create')
+      res.status(500).json({ 
+        message: 'Что-то пошло не так, попробуйте снова'
+      })
+  }
+
 })
 
 // Get project by Id
 router.get('/:id', (req, res) => {
+  req.log.info('GET project/:id')
   const id = parseInt(req.params.id)
-  res.send(
-    db.get('projects')
-    .filter({ id })
-    .value()
-  )
+  res.status(200).send({
+    data: db.get('projects')
+      .filter({ id })
+      .value()
+  })
 })
 
 // Delete project by Id
 router.delete('/:id', (req, res) => {
+  req.log.info('DELETE project/:id')
   const id = parseInt(req.params.id)
   console.log(id)
-  if(id){
-     db.get('projects')
-    .remove({ id })
-    .write()
-    res.send(db.get('projects').value())
+  if (id) {
+    db.get('projects')
+      .remove({ id })
+      .write()
+    res.status(200).json({ 
+      data: db.get('projects').value()
+    })
   } else {
-    res.send(db.get('projects').value())
+    res.status(200).json({
+      data: db.get('projects').value()
+    })
   }
 })
 
-// Clear DB
+// Clear db
 router.post('/clear', (req, res) => {
+  req.log.info('Clear list projects')
   db.get('projects')
     .remove().write()
-  res.send(db.get('projects').value())
+  res.status(200).json({ 
+    data: db.get('projects').value()
+  })
 })
 
 module.exports = router
