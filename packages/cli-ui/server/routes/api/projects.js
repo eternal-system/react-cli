@@ -5,7 +5,7 @@ const router = Router()
 // db
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
-const folderDbPath = path.normalize(__dirname + '../../../../db.json')
+const folderDbPath = path.normalize(path.join(__dirname, '../../../db.json'))
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
 const {craNpm, craYarn} = require('../../util/create')
