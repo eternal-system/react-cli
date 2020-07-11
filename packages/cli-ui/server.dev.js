@@ -48,5 +48,5 @@ if (process.env.DEV_SERVER.trim() === 'true') {
 }
 
 app.listen(PORT, () => {
-  logger.info('Server running on port %d', PORT);
+  logger.info('Server running on port %d', PORT)
 })
