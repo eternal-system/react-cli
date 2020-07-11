@@ -8,17 +8,17 @@ const FileSync = require('lowdb/adapters/FileSync')
 const folderDbPath = path.normalize(path.join(__dirname, '../../../db.json'))
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
-const {craNpm, craYarn} = require('../../util/create')
+const { craNpm, craYarn } = require('../../util/create')
 
- // Get list project
+// Get list project
 router.get('/', (req, res) => {
   req.log.info('GET project')
   if (fs.existsSync(folderDbPath)) {
-    res.status(200).json({ 
-      data: db.get('projects').value() 
+    res.status(200).json({
+      data: db.get('projects').value()
     })
   } else {
-    res.status(500).json({ 
+    res.status(500).json({
       message: 'Что-то пошло не так, попробуйте снова'
     })
   }
@@ -26,47 +26,46 @@ router.get('/', (req, res) => {
 
 // Create new project
 router.post('/create', async (req, res, next) => {
-  const { 
-    name, 
-    path: pathProject, 
-    manager = '', 
+  const {
+    name,
+    path: pathProject,
+    manager = '',
     preset = ''
   } = req.body
 
   req.setTimeout(0)
 
   let subprocess
-  if(manager === 'npm') {
-      subprocess = craNpm(pathProject, name)
+  if (manager === 'npm') {
+    subprocess = craNpm(pathProject, name)
   } else {
-      subprocess = craYarn(pathProject, name)
+    subprocess = craYarn(pathProject, name)
   }
   subprocess.stdout.pipe(process.stdout)
   try {
-      req.log.info('POST project/create')
-      const {stdout} = await subprocess
-      console.log('stdout', stdout)
-       // add db project
-      if(stdout) {
-         db.get('projects').push({
-          id: db.get('projects').value().length + 1,
-          name,
-          path: pathProject,
-          manager,
-          preset
-        }).write()
-      }
-     
-      res.status(200).json({ 
-        message: 'Project successfully create'
-      })
-  } catch (error) {
-      req.log.error('POST error project/create')
-      res.status(500).json({ 
-        message: 'Что-то пошло не так, попробуйте снова'
-      })
-  }
+    req.log.info('POST project/create')
+    const { stdout } = await subprocess
+    console.log('stdout', stdout)
+    // add db project
+    if (stdout) {
+      db.get('projects').push({
+        id: db.get('projects').value().length + 1,
+        name,
+        path: pathProject,
+        manager,
+        preset
+      }).write()
+    }
 
+    res.status(200).json({
+      message: 'Project successfully create'
+    })
+  } catch (error) {
+    req.log.error('POST error project/create')
+    res.status(500).json({
+      message: 'Что-то пошло не так, попробуйте снова'
+    })
+  }
 })
 
 // Get project by Id
@@ -89,7 +88,7 @@ router.delete('/:id', (req, res) => {
     db.get('projects')
       .remove({ id })
       .write()
-    res.status(200).json({ 
+    res.status(200).json({
       data: db.get('projects').value()
     })
   } else {
@@ -104,7 +103,7 @@ router.post('/clear', (req, res) => {
   req.log.info('Clear list projects')
   db.get('projects')
     .remove().write()
-  res.status(200).json({ 
+  res.status(200).json({
     data: db.get('projects').value()
   })
 })
