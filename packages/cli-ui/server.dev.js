@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
-const WebSocket = require('ws')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config.js')
 const PORT = process.env.SERVER_PORT || 8080
@@ -17,9 +16,14 @@ const logger = pino({ level: process.env.LOG_LEVEL || 'info' })
 const expressLogger = expressPino({ logger })
 
 // ws
-const wss = new WebSocket.Server({ port: 8082 })
-wss.on('connection', ws => {
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+
+io.on('connection', (client) => {
   console.log('New connection')
+  client.on('disconnect', () => {
+    console.log('user disconnected')
+  })
 })
 
 // db
@@ -54,6 +58,6 @@ if (process.env.DEV_SERVER.trim() === 'true') {
   })
 }
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   logger.info('Server running on port %d', PORT)
 })

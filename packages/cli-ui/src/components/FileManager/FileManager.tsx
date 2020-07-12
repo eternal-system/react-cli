@@ -29,28 +29,28 @@ export default function FileManager () {
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
       setLoading(true)
-      Api.POST('/api/folders', {
-        url: `/${arrUrl.join('/')}`,
-        hidden: false
-      })
-        .then((res) => {
-          batch(() => {
-            setProjects(res as string[])
-            changeSelectedPath(url)
-            setLoading(false)
-          })
-        })
-        .catch((error) => {
-          console.log('error', error)
-          batch(() => {
-            setLoading(false)
-            setUrl((prevState) => prevState.splice(0, url.length - 1))
-          })
-          notification.error({
-            title: error.message,
-            message: error.error.path
-          })
-        })
+      // Api.POST('/api/folders', {
+      //   url: `/${arrUrl.join('/')}`,
+      //   hidden: false
+      // })
+      //   .then((res) => {
+      //     batch(() => {
+      //       setProjects(res as string[])
+      //       changeSelectedPath(url)
+      //       setLoading(false)
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.log('error', error)
+      //     batch(() => {
+      //       setLoading(false)
+      //       setUrl((prevState) => prevState.splice(0, url.length - 1))
+      //     })
+      //     notification.error({
+      //       title: error.message,
+      //       message: error.error.path
+      //     })
+      //   })
     },
     [url]
   )
