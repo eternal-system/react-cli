@@ -9,5 +9,6 @@ export const SettingsContext = createContext({
   changeTheme: noop,
   changeLocale: noop,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  changeSelectedPath: (path: string[]) => {}
+  changeSelectedPath: (path: string[]) => {},
+  socket: {}
 })

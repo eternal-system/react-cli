@@ -21,6 +21,16 @@ const io = require('socket.io')(http)
 
 io.on('connection', (client) => {
   console.log('New connection')
+
+  client.emit('folders', [])
+
+  client.emit('projects', [])
+
+  // client.emit('news', { hello: 'world' })
+  // client.on('data', function (data) {
+  //   console.log(data)
+  // })
+
   client.on('disconnect', () => {
     console.log('user disconnected')
   })

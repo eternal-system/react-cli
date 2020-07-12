@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { I18nextProvider } from 'react-i18next'
 import ReactNotification from 'react-notifications-component'
@@ -18,13 +18,22 @@ import css from './style/main.module.scss'
 const socket = openSocket('http://localhost:8081')
 
 export default function App () {
-  // const URL = 'ws://localhost:8080'
   const settings = useSettings()
   const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
-  // const ws = useRef(null)
+  settings.socket = socket
 
   useEffect(() => {
-    console.log(socket)
+    socket.connect()
+
+    // socket.on('folders', (data) => {
+    //   console.log('folders', data)
+    // })
+
+    // socket.on('projects', (project) => {
+    //   console.log(project)
+    // })
+
+    // console.log(socket)
   }, [])
 
   // useEffect(() => {

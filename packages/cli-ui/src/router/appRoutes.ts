@@ -77,7 +77,21 @@ export const AppRoutes: RoutesCollection = {
   },
   dashboard: {
     paths: {
-      root: Routes.DASHBOARD
+      root: Routes.DASHBOARD,
+      dashboard: {
+        paths: {
+          root: Routes.DASHBOARD
+        },
+        exact: true,
+        Component: Dashboard
+      },
+      projectSelect: {
+        paths: {
+          root: Routes.DEPENDENCIES
+        },
+        exact: true,
+        Component: Depend
+      }
     },
     exact: true,
     Component: DashboardContainer
