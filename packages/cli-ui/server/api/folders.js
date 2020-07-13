@@ -40,7 +40,9 @@ class FolderApi {
                     })
                 }
                 
-              this.client.emit('folders', data.projects)
+              this.client.emit('folders', { 
+                  data: data.projects
+              })
             })
           } catch (error) {
             this.client.emit('erro', { 

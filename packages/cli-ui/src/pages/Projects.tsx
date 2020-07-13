@@ -16,6 +16,10 @@ export default function Projects () {
     socket.on('projects', (res) => {
       console.log("test get projects", res.data)
     })
+
+    return () => {
+      socket.off('projects')
+    }
   }, [])
 
   return (

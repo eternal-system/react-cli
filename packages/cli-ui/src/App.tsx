@@ -22,30 +22,6 @@ export default function App () {
   const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
   settings.socket = socket
 
-  useEffect(() => {
-    socket.connect()
-
-    // socket.on('folders', (data) => {
-    //   console.log('folders', data)
-    // })
-
-    // socket.on('projects', (project) => {
-    //   console.log(project)
-    // })
-
-    // console.log(socket)
-  }, [])
-
-  // useEffect(() => {
-  //   ws.current = new WebSocket(URL)
-  //   ws.current.onopen = () => console.log('ws opened')
-  //   ws.current.onclose = () => console.log('ws closed')
-
-  //   return () => {
-  //     ws.current.close()
-  //   }
-  // }, [])
-
   return (
     <I18nextProvider i18n={i18n}>
       <SettingsContext.Provider value={settings}>
