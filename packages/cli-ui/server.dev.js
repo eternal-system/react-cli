@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config.js')
 const PORT = process.env.SERVER_PORT || 8080
+const chalk = require('chalk')
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
@@ -18,21 +19,27 @@ const expressLogger = expressPino({ logger })
 // ws
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
+const api = require('./server/api')
+
+app.set('socket', io)
 
 io.on('connection', (client) => {
-  console.log('New connection')
+  console.log(chalk.hex('#009688')('🚀 Socket: Connection Succeeded.'))
 
-  client.emit('folders', [])
+  // add data
+  // client.emit('folders', [])
+  // client.emit('projects', [])
 
-  client.emit('projects', [])
+  client.on('message', message => api(message, client))
 
+ 
   // client.emit('news', { hello: 'world' })
   // client.on('data', function (data) {
   //   console.log(data)
   // })
 
   client.on('disconnect', () => {
-    console.log('user disconnected')
+    console.log(chalk.hex('#009688')('🚀 Socket: Disconnected.'))
   })
 })
 
