@@ -26,17 +26,7 @@ app.set('socket', io)
 io.on('connection', (client) => {
   console.log(chalk.hex('#009688')('🚀 Socket: Connection Succeeded.'))
 
-  // add data
-  // client.emit('folders', [])
-  // client.emit('projects', [])
-
   client.on('message', message => api(message, client))
-
- 
-  // client.emit('news', { hello: 'world' })
-  // client.on('data', function (data) {
-  //   console.log(data)
-  // })
 
   client.on('disconnect', () => {
     console.log(chalk.hex('#009688')('🚀 Socket: Disconnected.'))
