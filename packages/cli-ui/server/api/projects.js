@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const router = Router()
 // db
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
@@ -37,7 +36,7 @@ class ProjectApi {
      * @param {string} manager Manager new project (npm/yarn)
      * @param {string} preset Preset new project (create-react-app/other...)
      */
-    createProject(name, pathProject, manager, preset) {
+    async createProject(name, pathProject, manager, preset) {
     
         let subprocess
         if (manager === 'npm') {

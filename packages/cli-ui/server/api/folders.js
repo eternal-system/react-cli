@@ -54,7 +54,7 @@ class FolderApi {
      * Create new folder
      *  @param {string} dir URL for new folder
      */
-    createFolder(dir) {
+    async createFolder(dir) {
         try {
             if (dir && !fs.existsSync(dir)) {
               await fs.mkdirSync(dir, { recursive: true })

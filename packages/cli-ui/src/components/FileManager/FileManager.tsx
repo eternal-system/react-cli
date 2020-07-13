@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 
 import Api from 'api'
@@ -11,7 +11,7 @@ import { Folders, Toolbar } from '../index'
 export default function FileManager () {
   const notification = useNotification()
   // State
-  const { socket, selectedPath, changeSelectedPath } = React.useContext(SettingsContext)
+  const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
   const [projects, setProjects] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
