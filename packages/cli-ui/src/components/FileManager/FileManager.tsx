@@ -54,7 +54,7 @@ export default function FileManager () {
     if (selectedPath.length && selectedPath !== url) {
       setUrl(selectedPath)
     }
-  }, [selectedPath, socket])
+  }, [selectedPath])
 
   useEffect(() => {
     getFoldersData(url)
