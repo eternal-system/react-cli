@@ -9,6 +9,8 @@ class FolderApi {
 
      /**
      * Get list folders
+     * @param {string} url URL folder
+     * @param {boolian} hidden Hidden folder with dot
      */
     getFolders(url, hidden) {
         try {
@@ -41,15 +43,35 @@ class FolderApi {
               this.client.emit('folders', data.projects)
             })
           } catch (error) {
-            this.client.emit('erro', { message: 'Что-то пошло не так, попробуйте снова' })
+            this.client.emit('erro', { 
+                message: 'Что-то пошло не так, попробуйте снова',
+                error
+            })
         } 
     }
 
     /**
      * Create new folder
+     *  @param {string} dir URL for new folder
      */
-    createFolder() {
-
+    createFolder(dir) {
+        try {
+            if (dir && !fs.existsSync(dir)) {
+              await fs.mkdirSync(dir, { recursive: true })
+              this.client.emit("notification",{
+                message: 'Folder successfully create'
+              })
+            } else {
+                this.client.emit("notification",{
+                    message: 'Folder already exists'
+                })
+            }
+          } catch (error) {
+            this.client.emit('erro', { 
+                message: 'Что-то пошло не так, попробуйте снова', 
+                error
+            })
+        }
     }
 }
 
