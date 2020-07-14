@@ -17,10 +17,10 @@ export default function FileManager () {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    socket.send({ 
-      type: "GET_FOLDERS",  
-      url: `/${url.join('/')}`,  
-      hidden: false 
+    socket.send({
+      type: 'GET_FOLDERS',
+      url: `/${url.join('/')}`,
+      hidden: false
     })
 
     socket.on('folders', (res) => {
@@ -33,14 +33,13 @@ export default function FileManager () {
     })
 
     socket.on('erro', (error) => {
-    
       batch(() => {
         setLoading(false)
         setUrl((prevState) => prevState.splice(0, url.length - 1))
       })
       notification.error({
-          title: error.message,
-          message: error.error.path
+        title: error.message,
+        message: error.error.path
       })
     })
 
@@ -63,10 +62,10 @@ export default function FileManager () {
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
       setLoading(true)
-      socket.send({ 
-        type: "GET_FOLDERS",  
-        url: `/${url.join('/')}`,  
-        hidden: false 
+      socket.send({
+        type: 'GET_FOLDERS',
+        url: `/${url.join('/')}`,
+        hidden: false
       })
     },
     [url]
@@ -99,7 +98,6 @@ export default function FileManager () {
   function backFolder () {
     setUrl((prevState) => prevState.splice(0, url.length - 1))
   }
-
 
   return (
     <>
