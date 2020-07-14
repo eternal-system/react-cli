@@ -142,11 +142,23 @@ button {
 }
 
 .content{
+	text-align: center;
+    font-weight: bold;
 	&.show {
 	 	display: block;
 	}
 	&.hidden {
 	 	display: none;
+	}
+
+	.connected{
+		background: #61dafb;
+		padding: 16px;
+	}
+
+	.disconnected{
+		background: red;
+		padding: 16px;
 	}
 }
 

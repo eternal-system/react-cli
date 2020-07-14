@@ -10,24 +10,27 @@ export default function ConnectionStatus () {
   useEffect(() => {
     socket.on('connect', () => {
         setStatus('show')
+        console.log('connect')
         setConnected(true)
         setTimeout(() => {
             setStatus('hidden')
-        }, 300)
+        }, 500)
         socket.on('disconnect', function() {
             setStatus('show')
+            console.log('disconnect')
             setTimeout(() => {
                 setStatus('hidden')
-            }, 300)
+            }, 500)
             setConnected(false)
         })
     })
     return () => {
         socket.off('connect')
         socket.off('disconnect')
+        console.log('disconnect')
         setConnected(false)
       }
-  }, [status])
+  }, [])
 
   return (
     <div className={`content ${status}`}>
