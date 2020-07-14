@@ -141,6 +141,15 @@ button {
 	}
 }
 
+.content{
+	&.show {
+	 	display: block;
+	}
+	&.hidden {
+	 	display: none;
+	}
+}
+
 @keyframes slideOutRight {
   from {
     transform: translate3d(0, 0, 0);
