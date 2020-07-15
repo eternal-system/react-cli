@@ -5,7 +5,7 @@ import ReactNotification from 'react-notifications-component'
 import cn from 'classnames'
 
 import i18n from './i18n'
-import { Footer } from './components'
+import { Footer, ConnectionStatus } from './components'
 import { SettingsContext } from './context'
 import { useSettings } from './hooks'
 import { renderRoutes } from './router'
@@ -27,6 +27,7 @@ export default function App () {
       <SettingsContext.Provider value={settings}>
         <Router>
           <div className={styles}>
+            <ConnectionStatus />
             {renderRoutes()}
             <Footer />
             <ReactNotification />
