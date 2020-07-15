@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { SettingsContext } from '../../context'
+import { unstable_batchedUpdates as batch } from 'react-dom'
 import css from './style.module.scss'
 
 export default function ConnectionStatus () {
@@ -10,22 +11,25 @@ export default function ConnectionStatus () {
 
   useEffect(() => {
     socket.on('connect', () => {
+      batch(() => {
         setStatus('show')
         setConnected(true)
         setTimeout(() => {
-            setStatus('hidden')
+          setStatus('hidden')
         }, 700)
-        socket.on('disconnect', function() {
-            console.log('disconnect')
-            setStatus('show')
-            setConnected(false)
+      })
+      socket.on('disconnect', function () {
+        batch(() => {
+          setStatus('show')
+          setConnected(false)
         })
+      })
     })
     return () => {
-        socket.off('connect')
-        socket.off('disconnect')
-        setConnected(false)
-      }
+      socket.off('connect')
+      socket.off('disconnect')
+      setConnected(false)
+    }
   }, [])
 
   return (

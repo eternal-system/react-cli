@@ -24,8 +24,8 @@ export default function FileManager () {
     })
 
     socket.on('folders', (res) => {
-      setLoading(true)
       batch(() => {
+        setLoading(true)
         setProjects(res.data as string[])
         changeSelectedPath(url)
         setLoading(false)
