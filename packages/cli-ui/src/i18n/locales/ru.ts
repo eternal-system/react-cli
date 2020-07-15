@@ -6,7 +6,9 @@ const locale = {
     path: 'Путь',
     reset: 'сбросить',
     newFolder: 'новая папка',
-    select: 'Выбрать'
+    select: 'Выбрать',
+    connect: 'Соединение',
+    disconnect: 'Нет соединения'
   },
   project: {
     headerTitle: 'React Проектный менеджер',

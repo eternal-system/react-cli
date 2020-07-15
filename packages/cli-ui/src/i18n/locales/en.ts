@@ -7,7 +7,9 @@ const locale = {
     path: 'Path',
     reset: 'reset',
     newFolder: 'new folder',
-    select: 'Select'
+    select: 'Select',
+    connect: 'Connected',
+    disconnect: 'Disconnected'
   },
   project: {
     headerTitle: 'React Project Manager',

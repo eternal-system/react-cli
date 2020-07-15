@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { SettingsContext } from '../../context'
 import { unstable_batchedUpdates as batch } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 import css from './style.module.scss'
 
 export default function ConnectionStatus () {
   const { socket } = React.useContext(SettingsContext)
-
+  const { t } = useTranslation('common')
   const [connected, setConnected] = useState(true)
   const [status, setStatus] = useState('show')
 
@@ -35,9 +36,9 @@ export default function ConnectionStatus () {
   return (
     <div className={`${css.content} ${status === 'show' ? css.show : css.hidden}`}>
       {connected ? (<div className={css.connected}>
-        Connected
+        {t('connect')}
       </div>) : (<div className={css.disconnected}>
-        Disconnected
+        {t('disconnect')}
       </div>)}
     </div>
   )
