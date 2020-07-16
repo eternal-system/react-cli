@@ -1,20 +1,15 @@
-.content{
-	text-align: center;
-    font-weight: bold;
-	&.show {
-	 	display: block;
+.filter {
+	margin: 0 auto;
+	.input {
+		border-radius: 21px;
+		background-color: #c8f3ff8a;
+		margin: 6px 0;
+		padding: 0 10px;
+		border: 1px solid #c8f3ff;
+		color: #2c3e50;
+		height: 30px;
+		width: 174px;
+		outline: none;
 	}
-	&.hidden {
-	 	display: none;
-	}
-
-	.connected{
-		background: #61dafb;
-		padding: 16px;
-	}
-
-	.disconnected{
-		background: red;
-		padding: 16px;
-	}
+	
 }
