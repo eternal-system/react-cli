@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Layout, Content, Empty, ProjectFilter, ProjectList } from '../components'
+import { unstable_batchedUpdates as batch } from 'react-dom'
+import { Layout, Content, Empty, ProjectFilter, ProjectList, Loader } from '../components'
+import { useNotification } from 'hooks'
 import { SettingsContext } from '../context'
 
 export interface Project {
@@ -14,8 +15,11 @@ export interface Project {
 
 export default function Projects () {
   const { t } = useTranslation('project')
+  const notification = useNotification()
   const { socket } = useContext(SettingsContext)
   const [projects, setProjects] = useState<Project[]>([])
+  const [filters, setFilters] = useState<Project[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     socket.send({
@@ -23,27 +27,49 @@ export default function Projects () {
     })
 
     socket.on('projects', (res) => {
-      console.log('test get projects', res.data)
-      setProjects(res.data)
+      batch(() => {
+        setLoading(true)
+        setProjects(res.data)
+        setFilters(res.data)
+        setTimeout(() => {
+          setLoading(false)
+        }, 300)
+      })
+    })
+
+    socket.on('erro', (error) => {
+      setLoading(true)
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
     })
 
     return () => {
       socket.off('projects')
+      socket.off('erro')
     }
   }, [])
+
+  if (loading) {
+    return (
+      <Layout>
+        <Content>
+          <Loader />
+        </Content>
+      </Layout>
+    )
+  }
 
   return (
     <Layout>
       <Content>
-        {
-          projects.length ? (
-            <>
-              <ProjectFilter projects={projects} onChange={setProjects} />
-              <ProjectList projects={projects}/>
-            </>
-          )
-            : <Empty text={t('notFoundProjects')} />
-        }
+        { projects.length
+          ? <ProjectFilter projects={projects} onChange={setFilters} />
+          : null}
+        { filters.length
+          ? <ProjectList projects={filters}/>
+          : <Empty text={t('notFoundProjects')} /> }
       </Content>
     </Layout>
   )
