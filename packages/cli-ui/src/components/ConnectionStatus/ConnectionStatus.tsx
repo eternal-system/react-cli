@@ -7,7 +7,7 @@ import css from './style.module.scss'
 export default function ConnectionStatus () {
   const { socket } = React.useContext(SettingsContext)
   const { t } = useTranslation('common')
-  const [connected, setConnected] = useState(true)
+  const [connected, setConnected] = useState(false)
   const [status, setStatus] = useState('show')
 
   useEffect(() => {
