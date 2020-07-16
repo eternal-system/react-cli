@@ -38,7 +38,7 @@ export default function Projects () {
         {
           projects.length ? (
             <>
-              <ProjectFilter projects={projects} />
+              <ProjectFilter projects={projects} onChange={setProjects} />
               <ProjectList projects={projects}/>
             </>
           )
