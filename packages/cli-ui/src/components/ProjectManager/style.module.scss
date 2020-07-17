@@ -27,9 +27,26 @@
 	grid-template-rows: auto;
 	grid-template-areas: "icon info actions";
 	grid-gap: 16px;
+	cursor: pointer;
+
+	&:hover{
+		background-color: #c8f3ff8a;
+	}
+
+	&.active{
+		background-color: #c8f3ff8a;
+	}
 
 	.favorite{
 		grid-area: icon;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-align: center;
+		align-items: center;
+		-ms-flex-pack: center;
+		justify-content: center;
 		button {
 			line-height: 11px;
 		}

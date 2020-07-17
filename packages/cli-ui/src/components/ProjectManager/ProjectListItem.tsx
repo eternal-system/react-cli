@@ -4,12 +4,13 @@ import CloseIcon from '$icons/close.svg'
 import StarIcon from '$icons/star.svg'
 
 interface Props {
+  id: number;
   name: string;
   path: string;
 }
-export default function ProjectListItem ({ name, path }: Props) {
+export default function ProjectListItem ({ id, name, path }: Props) {
   return (
-    <div className={css.content}>
+    <div className={`${css.content} ${id === 1 ? css.active : ''}`}>
       <div className={css.favorite}>
         <button>
           <StarIcon />
