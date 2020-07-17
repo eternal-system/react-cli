@@ -27,6 +27,17 @@
 	grid-template-rows: auto;
 	grid-template-areas: "icon info actions";
 	grid-gap: 16px;
+
+	.favorite{
+		grid-area: icon;
+		button {
+			line-height: 11px;
+		}
+		svg{
+			width: 13px;
+			fill: #fff;
+		}
+	}
 	
 	.info{
 		grid-area: info;
@@ -37,6 +48,24 @@
 			color: #2c3e5080;
 			font-size: 16px;
 			font-weight: 300;
+		}
+		
+	}
+
+	.actions{
+		grid-area: actions;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-align: center;
+		align-items: center;
+		button {
+			line-height: 11px;
+		}
+		svg{
+			width: 13px;
+			fill: #fff;
 		}
 	}
 }

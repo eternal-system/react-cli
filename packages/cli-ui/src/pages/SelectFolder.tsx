@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { Routes } from 'router'
 import { Layout, Content, FileManager } from '../components'
 
+import AddIcon from '$icons/add.svg'
+
 import mainCss from '../style/main.module.scss'
 
 // Create new project
@@ -25,7 +27,7 @@ export default function Create () {
   function renderActionBtn () {
     return (
       <button className={mainCss.foulderBtn} onClick={handleSubmit}>
-        {isImportPage ? `+ ${t('importProject')}` : `+ ${t('createNewProject')}`}
+        <AddIcon />{isImportPage ? `${t('importProject')}` : `${t('createNewProject')}`}
       </button>
     )
   }

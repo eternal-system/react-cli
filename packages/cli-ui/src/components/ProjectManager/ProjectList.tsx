@@ -8,12 +8,11 @@ interface ProjectList {
 }
 
 export default function ProjectList ({ projects }: ProjectList) {
-  console.log("ProjectList", projects)
   return (
     <div className={css.projectList}>
-        {projects.map(project => (
-          <ProjectListItem key={project.id} {...project}/>
-        ))}
+      {projects.map(project => (
+        <ProjectListItem key={project.id} {...project}/>
+      ))}
     </div>
   )
 }
