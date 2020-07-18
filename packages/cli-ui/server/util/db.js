@@ -7,12 +7,13 @@ const db = new Lowdb(new FileSync(filePath))
 
 // Empty DB
 db.defaults({
-      projects: [],
-      foldersFavorite: [],
-      tasks: [],
-      config: {}
-}).write() 
+  projects: [],
+  projectsFavorite: [],
+  foldersFavorite: [],
+  tasks: [],
+  config: {}
+}).write()
 
-module.exports = { 
+module.exports = {
   db
 }

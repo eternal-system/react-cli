@@ -9,108 +9,141 @@ const db = low(adapter)
 const { craNpm, craYarn } = require('../util/create')
 
 class ProjectApi {
-    
-    constructor(client) {
+    constructor (client) {
         this.client = client
     }
 
     /**
      * Get list project
      */
-    getProjects() {
+    getProjects () {
         if (fs.existsSync(folderDbPath)) {
-            this.client.emit('projects', { 
-                data: db.get('projects').value() 
+            this.client.emit('projects', {
+                data: db.get('projects').value()
             })
-          } else {
-            this.client.emit('erro', { 
+        } else {
+            this.client.emit('erro', {
                 message: 'Что-то пошло не так, попробуйте снова'
-            })
-        }
+            })}
     }
 
-     /**
+    /**
      * Create new project
      * @param {string} name Name new project
      * @param {array} pathProject Path new project
      * @param {string} manager Manager new project (npm/yarn)
      * @param {string} preset Preset new project (create-react-app/other...)
      */
-    async createProject(name, pathProject, manager, preset) {
-    
-        let subprocess
-        if (manager === 'npm') {
-            subprocess = craNpm(pathProject, name)
-        } else {
-            subprocess = craYarn(pathProject, name)
-        }
-        subprocess.stdout.pipe(process.stdout)
-        try {
-            
-            const { stdout } = await subprocess
-            console.log('stdout', stdout)
-
-            // add db project
-            if (stdout) {
-                db.get('projects').push({
-                    id: db.get('projects').value().length + 1,
-                    name,
-                    path: pathProject,
-                    manager,
-                    preset
-                }).write()
-            }
-
-            this.client.emit("notification",{
-                message: 'Project successfully create'
-            })
-        } catch (error) {
-            this.client.emit('erro', { 
-                message: 'Что-то пошло не так, попробуйте снова'
-            })
-        }
+    async createProject (name, pathProject, manager, preset) {
+    let subprocess
+    if (manager === 'npm') {
+        subprocess = craNpm(pathProject, name)
+    } else {
+        subprocess = craYarn(pathProject, name)
     }
+    subprocess.stdout.pipe(process.stdout)
+    try {
+        const { stdout } = await subprocess
+        console.log('stdout', stdout)
 
-     /**
+        // add db project
+        if (stdout) {
+        db.get('projects').push({
+            id: db.get('projects').value().length + 1,
+            name,
+            path: pathProject,
+            manager,
+            preset
+        }).write()
+        }
+
+        this.client.emit('notification', {
+        message: 'Project successfully create'
+        })
+    } catch (error) {
+        this.client.emit('erro', {
+        message: 'Что-то пошло не так, попробуйте снова'
+        })
+    }}
+
+    /**
      * Get project by Id
      * @param {number} id ID project
      */
-    getProjectById(id) {
+    getProjectById (id) {
         this.client.emit('project', {
             data: db.get('projects')
-              .filter({ id })
-              .value()
+            .filter({ id })
+            .value()
         })
     }
 
-     /**
+    /**
      * Delete project by Id
      * @param {number} id ID project
      */
-    deleteProjectById(id) {
+    deleteProjectById (id) {
         if (id) {
             db.get('projects')
-            .remove({ id })
-            .write()
-            this.client.emit('projects', { 
-                data: db.get('projects').value() 
+                .remove({ id })
+                .write()
+            this.client.emit('projects', {
+                data: db.get('projects').value()
             })
         } else {
-            this.client.emit('projects', { 
-                data: db.get('projects').value() 
+            this.client.emit('projects', {
+                data: db.get('projects').value()
             })
         }
     }
 
-     /**
+    /**
+     * Get list Favorite projects
+     */
+    getFavoriteProjects() {
+        if (fs.existsSync(folderDbPath)) {
+            this.client.emit('projectsFavorite', {
+                data: db.get('projectsFavorite').value()
+            })
+        } else {
+            this.client.emit('erro', {
+                message: 'Что-то пошло не так, попробуйте снова'
+            })}
+    }
+    /**
+     * Add Favorite project by id
+     * @param {number} id ID project
+     */
+    addFavoriteProjectById (id) {
+        const pr = db.get('projects')
+                        .filter({ id })
+                        .value()[0]
+        db.get('projectsFavorite')
+            .push(pr)
+            .write()
+
+        this.client.emit('projectsFavorite', {
+            data: db.get('projectsFavorite').value()
+        })
+       this.deleteProjectById(id)
+    }
+
+    /**
+     * Delete Favorite project by id
+     * @param {number} id ID project
+     */
+    deleteFavoriteProjectById (id) {
+
+    }
+
+    /**
      * Clear db
      */
-    clearDb() {
+    clearDb () {
         db.get('projects')
-          .remove().write()
-          
-        this.client.emit('projects', { 
-            data: db.get('projects').value() 
+        .remove().write()
+        this.client.emit('projects', {
+            data: db.get('projects').value()
         })
     }
 }

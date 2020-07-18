@@ -30,6 +30,14 @@ function api(message, client) {
         new ProjectApi(client).deleteProjectById(message.id)
     }
 
+    if(message.type === "GET_FAVORITE_PROJECTS") {
+        new ProjectApi(client).getFavoriteProjects()
+    }
+
+    if(message.type === "ADD_FAVORITE_BY_ID") {
+        new ProjectApi(client).addFavoriteProjectById(message.id)
+    }
+
     if(message.type === "CLEAR_DB") {
         new ProjectApi(client).clearDb()
     }

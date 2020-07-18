@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function ProjectFilter ({ projects, onChange }: Props) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
     const searchValue = event.target.value
     const filter = projects.filter(project => project.name.indexOf(searchValue) !== -1)
     onChange(filter)
