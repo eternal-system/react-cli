@@ -1,5 +1,7 @@
 import React from 'react'
 import { Project } from '../../pages/Projects'
+import SearchIcon from '$icons/search.svg'
+
 import css from './style.module.scss'
 
 interface Props {
@@ -17,10 +19,10 @@ export default function ProjectFilter ({ projects, onChange }: Props) {
   return (
     <div className={css.filter}>
       <div className={css.filter.filter}>
+        <SearchIcon />
         <input
           className={css.input}
           onChange={handleChange}
-          placeholder="Filter"
           type="text"
         />
       </div>

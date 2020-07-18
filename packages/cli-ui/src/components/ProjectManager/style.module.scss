@@ -1,6 +1,7 @@
 .filter {
 	margin: 0 auto;
 	padding-bottom: 25px;
+	position: relative;
 	.input {
 		border-radius: 21px;
 		background-color: #c8f3ff8a;
@@ -11,6 +12,13 @@
 		height: 30px;
 		width: 174px;
 		outline: none;
+		padding-left: 29px;
+	}
+	svg{
+		width: 13px;
+		position: absolute;
+		top: 16px;
+		left: 12px;
 	}
 }
 
