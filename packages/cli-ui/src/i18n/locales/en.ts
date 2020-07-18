@@ -19,7 +19,9 @@ const locale = {
     notFoundProjects: 'No existing projects',
     folders: 'Folders',
     createNewProject: 'Create a new project here',
-    importProject: 'Import project'
+    importProject: 'Import project',
+    favoriteProjects: 'Favorite projects',
+    otherProjects: 'Other projects'
   },
   projectCreate: {
     createProjectTitle: 'Create new project',

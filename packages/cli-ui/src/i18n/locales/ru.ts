@@ -18,7 +18,9 @@ const locale = {
     notFoundProjects: 'Не найдено проектов',
     folders: 'Папки',
     createNewProject: 'Создать новый проект',
-    importProject: 'Импортировать проект'
+    importProject: 'Импортировать проект',
+    favoriteProjects: 'Любимые проекты',
+    otherProjects: 'Другие проекты'
   },
   projectCreate: {
     createProjectTitle: 'Создание нового проекта',
