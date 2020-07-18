@@ -103,11 +103,13 @@ export default function Projects () {
 		<Content>
 			{ projects.length
 			? <ProjectFilter 
-					projects={projects} 
-					onChange={setFilters} 
+					projects={projects}
+					favorits={projectsFavorite}
+					onChange={setFilters}
+					onChangeFavorite={setFiltersFavorite}
 				/>
 			: null}
-			{ filters.length
+			{ filters.length || filtersFavorite.length
 			? <ProjectList 
 					favorits={filtersFavorite} 
 					projects={filters} 
