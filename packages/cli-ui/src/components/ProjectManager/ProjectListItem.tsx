@@ -9,8 +9,8 @@ interface Props {
   name: string;
   path: string;
   favorite: boolean;
-  onDelete(id: number): void;
-  onFavorite(id: number): void;
+  onDelete(id: number, favorite: boolean): void;
+  onFavorite(id: number, favorite: boolean): void;
 }
 
 export default function ProjectListItem ({ id, favorite, name, path, onDelete, onFavorite }: Props) {
@@ -18,7 +18,7 @@ export default function ProjectListItem ({ id, favorite, name, path, onDelete, o
     // TODO add logic active element
     <div className={`${css.content} ${id === 1 ? css.active : ''}`}>
       <div className={css.favorite}>
-        <button onClick={() => onFavorite(id)}>
+        <button onClick={() => onFavorite(id, favorite)}>
             { favorite ? <StarAddIcon /> : <StarIcon /> }
         </button>
       </div>
@@ -27,7 +27,7 @@ export default function ProjectListItem ({ id, favorite, name, path, onDelete, o
         <div className={css.path}>{ typeof path === 'object' ? `/${path.join('/')}` : `/${path}`}</div>
       </div>
       <div className={css.actions}>
-        <button onClick={() => onDelete(id)}>
+        <button onClick={() => onDelete(id, favorite)}>
           <CloseIcon/>
         </button>
       </div>

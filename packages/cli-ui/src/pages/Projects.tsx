@@ -72,20 +72,35 @@ export default function Projects () {
 		}
 	}, [])
 
-	function handleFavorite (id: number) {
+	function handleFavorite (id: number, favorite: boolean) {
 		console.log('favorite', id)
-		socket.send({
-			type: 'ADD_FAVORITE_BY_ID',
-			id
-		})
+		if(favorite) {
+			socket.send({
+				type: 'EXCLUDE_FAVORITE_BY_ID',
+				id
+			})
+		} else {
+			socket.send({
+				type: 'ADD_FAVORITE_BY_ID',
+				id
+			})
+		}
 	}
 
-	function handleDelete (id: number): void {
+	function handleDelete (id: number, favorite: boolean): void {
 		console.log('delete', id)
-		socket.send({
-			type: 'DELETE_PROJECT_BY_ID',
-			id
-		})
+		if(favorite){
+			socket.send({
+				type: 'DELETE_FAVORITE_BY_ID',
+				id
+			})
+		} else {
+			socket.send({
+				type: 'DELETE_PROJECT_BY_ID',
+				id
+			})
+		}
+		
 	}
 
 	function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
@@ -94,8 +109,7 @@ export default function Projects () {
 		const filterFavorite = projectsFavorite.filter(favorite => favorite.name.indexOf(searchValue) !== -1)
 		setFilters(filter)
 		setFiltersFavorite(filterFavorite)
-	  }
-
+	}
 
 	if (loading) {
 		return (

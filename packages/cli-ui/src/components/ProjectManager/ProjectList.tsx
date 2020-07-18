@@ -7,8 +7,8 @@ import css from './style.module.scss'
 interface ProjectList {
       projects: Project[];
       favorits: Project[];
-      onDelete(id: number): void;
-      onFavorite(id: number): void;
+      onDelete(id: number, favorite: boolean): void;
+      onFavorite(id: number, favorite: boolean): void;
 }
 
 export default function ProjectList ({ favorits, projects, onDelete, onFavorite }: ProjectList) {

@@ -38,6 +38,14 @@ function api(message, client) {
         new ProjectApi(client).addFavoriteProjectById(message.id)
     }
 
+    if(message.type === "EXCLUDE_FAVORITE_BY_ID") {
+        new ProjectApi(client).excludeFavoriteProjectById(message.id)
+    }
+
+    if(message.type === "DELETE_FAVORITE_BY_ID") {
+        new ProjectApi(client).deleteFavoriteProjectById(message.id)
+    }
+
     if(message.type === "CLEAR_DB") {
         new ProjectApi(client).clearDb()
     }

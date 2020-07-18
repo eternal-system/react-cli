@@ -35,13 +35,13 @@ class ProjectApi {
      * @param {string} preset Preset new project (create-react-app/other...)
      */
     async createProject (name, pathProject, manager, preset) {
-    let subprocess
-    if (manager === 'npm') {
-        subprocess = craNpm(pathProject, name)
-    } else {
-        subprocess = craYarn(pathProject, name)
-    }
-    subprocess.stdout.pipe(process.stdout)
+        let subprocess
+        if (manager === 'npm') {
+            subprocess = craNpm(pathProject, name)
+        } else {
+            subprocess = craYarn(pathProject, name)
+        }
+        subprocess.stdout.pipe(process.stdout)
     try {
         const { stdout } = await subprocess
         console.log('stdout', stdout)
@@ -62,7 +62,7 @@ class ProjectApi {
         })
     } catch (error) {
         this.client.emit('erro', {
-        message: 'Что-то пошло не так, попробуйте снова'
+            message: 'Что-то пошло не так, попробуйте снова'
         })
     }}
 
@@ -118,6 +118,7 @@ class ProjectApi {
         const pr = db.get('projects')
                         .filter({ id })
                         .value()[0]
+
         db.get('projectsFavorite')
             .push(pr)
             .write()
@@ -125,7 +126,28 @@ class ProjectApi {
         this.client.emit('projectsFavorite', {
             data: db.get('projectsFavorite').value()
         })
+
        this.deleteProjectById(id)
+    }
+
+    /**
+     * Exclude Favorite project by id
+     * @param {number} id 
+     */
+    excludeFavoriteProjectById (id) {
+        const pr = db.get('projectsFavorite')
+                        .filter({ id })
+                        .value()[0]
+
+        db.get('projects')
+            .push(pr)
+            .write()
+
+        this.client.emit('projects', {
+            data: db.get('projects').value()
+        })
+
+        this.deleteFavoriteProjectById(id)
     }
 
     /**
@@ -133,7 +155,18 @@ class ProjectApi {
      * @param {number} id ID project
      */
     deleteFavoriteProjectById (id) {
-
+        if (id) {
+            db.get('projectsFavorite')
+                .remove({ id })
+                .write()
+            this.client.emit('projectsFavorite', {
+                data: db.get('projectsFavorite').value()
+            })
+        } else {
+            this.client.emit('projectsFavorite', {
+                data: db.get('projectsFavorite').value()
+            })
+        }
     }
 
     /**
