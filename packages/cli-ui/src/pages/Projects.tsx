@@ -88,6 +88,15 @@ export default function Projects () {
 		})
 	}
 
+	function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
+		const searchValue = event.target.value
+		const filter = projects.filter(project => project.name.indexOf(searchValue) !== -1)
+		const filterFavorite = projectsFavorite.filter(favorite => favorite.name.indexOf(searchValue) !== -1)
+		setFilters(filter)
+		setFiltersFavorite(filterFavorite)
+	  }
+
+
 	if (loading) {
 		return (
 			<Layout>
@@ -101,14 +110,7 @@ export default function Projects () {
 	return (
 		<Layout>
 		<Content>
-			{ projects.length
-			? <ProjectFilter 
-					projects={projects}
-					favorits={projectsFavorite}
-					onChange={setFilters}
-					onChangeFavorite={setFiltersFavorite}
-				/>
-			: null}
+			{ projects.length ? <ProjectFilter onChange={handleChange} /> : null}
 			{ filters.length || filtersFavorite.length
 			? <ProjectList 
 					favorits={filtersFavorite} 
