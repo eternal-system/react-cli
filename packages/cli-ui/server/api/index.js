@@ -4,50 +4,54 @@ const ProjectApi = require('./projects')
 // WS api
 function api(message, client) {
 
+    const folder = new FolderApi(client)
+    const project = new ProjectApi(client)
+    const { type, name, url, id, hidden, path, manager, preset } = message
+
     // Folders
-    if (message.type === "GET_FOLDERS") {
-        new FolderApi(client).getFolders(message.url, message.hidden)
+    if (type === "GET_FOLDERS") {
+        folder.getFolders(url, hidden)
     }
 
-    if(message.type === "CREATE_FOLDER") {
-        new FolderApi(client).createFolder(message.url)
+    if(type === "CREATE_FOLDER") {
+        folder.createFolder(url)
     }
 
     // Projects
-    if(message.type === "GET_PROJECTS") {
-        new ProjectApi(client).getProjects()
+    if(type === "GET_PROJECTS") {
+        project.getProjects()
     }
    
-    if(message.type === "CREATE_FOLDER") {
-        new ProjectApi(client).createProject(message.name, message.path, message.manager, message.preset)
+    if(type === "CREATE_FOLDER") {
+        project.createProject(name, path, manager, preset)
     }
 
-    if(message.type === "GET_PROJECT_BY_ID") {
-        new ProjectApi(client).getProjectById(message.id)
+    if(type === "GET_PROJECT_BY_ID") {
+        project.getProjectById(id)
     }
 
-    if(message.type === "DELETE_PROJECT_BY_ID") {
-        new ProjectApi(client).deleteProjectById(message.id)
+    if(type === "DELETE_PROJECT_BY_ID") {
+        project.deleteProjectById(id)
     }
 
-    if(message.type === "GET_FAVORITE_PROJECTS") {
-        new ProjectApi(client).getFavoriteProjects()
+    if(type === "GET_FAVORITE_PROJECTS") {
+        project.getFavoriteProjects()
     }
 
-    if(message.type === "ADD_FAVORITE_BY_ID") {
-        new ProjectApi(client).addFavoriteProjectById(message.id)
+    if(type === "ADD_FAVORITE_BY_ID") {
+        project.addFavoriteProjectById(id)
     }
 
-    if(message.type === "EXCLUDE_FAVORITE_BY_ID") {
-        new ProjectApi(client).excludeFavoriteProjectById(message.id)
+    if(type === "EXCLUDE_FAVORITE_BY_ID") {
+        project.excludeFavoriteProjectById(id)
     }
 
-    if(message.type === "DELETE_FAVORITE_BY_ID") {
-        new ProjectApi(client).deleteFavoriteProjectById(message.id)
+    if(type === "DELETE_FAVORITE_BY_ID") {
+        project.deleteFavoriteProjectById(id)
     }
 
-    if(message.type === "CLEAR_DB") {
-        new ProjectApi(client).clearDb()
+    if(type === "CLEAR_DB") {
+        project.clearDb()
     }
 
 }

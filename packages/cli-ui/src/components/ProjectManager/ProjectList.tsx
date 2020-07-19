@@ -11,17 +11,17 @@ interface ProjectList {
       onFavorite(id: number, favorite: boolean): void;
 }
 
-export default function ProjectList ({ favorits, projects, onDelete, onFavorite }: ProjectList) {
-    console.log('favorits', favorits)
-    console.log('projects', projects)
+export default function ProjectList ({ favorites, projects, onDelete, onFavorite }: ProjectList) {
+    console.log('favorits', favorites)
+    console.log('projects', projectes)
     const { t } = useTranslation('project')
 
     return (
         <div className={css.projectList}>
-            { favorits.length 
+            { favorites.length 
                 ? <div>{t('favoriteProjects')}</div> : null }
 
-            { favorits.map(favorite => (
+            { favorites.map(favorite => (
                     <ProjectListItem
                             favorite={true}
                             key={favorite.id}
@@ -32,7 +32,7 @@ export default function ProjectList ({ favorits, projects, onDelete, onFavorite 
                     )
             )}
 
-            { projects.length && favorits.length 
+            { projects.length && favorites.length 
                 ? <div>{t('otherProjects')}</div> : null }
 
             { projects.map(project => (
