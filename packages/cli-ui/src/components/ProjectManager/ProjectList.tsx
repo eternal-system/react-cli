@@ -6,7 +6,7 @@ import css from './style.module.scss'
 
 interface ProjectList {
       projects: Project[];
-      onDelete(id: number, favorite: boolean): void;
+      onDelete(id: number): void;
       onFavorite(id: number, favorite: boolean): void;
 }
 
@@ -15,7 +15,7 @@ export default function ProjectList ({ projects, onDelete, onFavorite }: Project
 
     const listFavorites = projects.filter(p => p.favorite === true)
     const listProjects = projects.filter(p => p.favorite === false)
-    
+
     return (
         <div className={css.projectList}>
              { listFavorites.length 
@@ -31,7 +31,7 @@ export default function ProjectList ({ projects, onDelete, onFavorite }: Project
                 )
             )} 
 
-            { listProjects.length  
+            { listProjects.length && listFavorites.length
                 ? <div>{t('otherProjects')}</div> : null }
 
             { listProjects.map(project => (

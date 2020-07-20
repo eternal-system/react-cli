@@ -34,20 +34,8 @@ function api(message, client) {
         project.deleteProjectById(id)
     }
 
-    if(type === "GET_FAVORITE_PROJECTS") {
-        project.getFavoriteProjects()
-    }
-
     if(type === "ADD_FAVORITE_BY_ID") {
         project.addFavoriteProjectById(id)
-    }
-
-    if(type === "EXCLUDE_FAVORITE_BY_ID") {
-        project.excludeFavoriteProjectById(id)
-    }
-
-    if(type === "DELETE_FAVORITE_BY_ID") {
-        project.deleteFavoriteProjectById(id)
     }
 
     if(type === "CLEAR_DB") {

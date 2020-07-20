@@ -99,75 +99,27 @@ class ProjectApi {
     }
 
     /**
-     * Get list Favorite projects
-     */
-    getFavoriteProjects() {
-        // if (fs.existsSync(folderDbPath)) {
-        //     this.client.emit('projectsFavorite', {
-        //         data: db.get('projectsFavorite').value()
-        //     })
-        // } else {
-        //     this.client.emit('erro', {
-        //         message: 'Что-то пошло не так, попробуйте снова'
-        //     })}
-    }
-    /**
      * Add Favorite project by id
      * @param {number} id ID project
      */
     addFavoriteProjectById (id) {
         const pr = db.get('projects')
-                        .filter({ id })
-                        .value()[0]
-
-        db.get('projectsFavorite')
-            .push(pr)
-            .write()
-
-        this.client.emit('projectsFavorite', {
-            data: db.get('projectsFavorite').value()
-        })
-
-       this.deleteProjectById(id)
-    }
-
-    /**
-     * Exclude Favorite project by id
-     * @param {number} id 
-     */
-    excludeFavoriteProjectById (id) {
-        const pr = db.get('projectsFavorite')
-                        .filter({ id })
-                        .value()[0]
-
-        db.get('projects')
-            .push(pr)
-            .write()
-
+                        .find({ id })
+                        .value()
+        if( pr.favorite) {
+           db.get('projects')
+                .find({ id })
+                .assign({ 'favorite': false})
+                .write()
+        } else {
+            db.get('projects')
+                .find({ id })
+                .assign({ 'favorite': true})
+                .write()
+        }
         this.client.emit('projects', {
             data: db.get('projects').value()
         })
-
-        this.deleteFavoriteProjectById(id)
-    }
-
-    /**
-     * Delete Favorite project by id
-     * @param {number} id ID project
-     */
-    deleteFavoriteProjectById (id) {
-        if (id) {
-            db.get('projectsFavorite')
-                .remove({ id })
-                .write()
-            this.client.emit('projectsFavorite', {
-                data: db.get('projectsFavorite').value()
-            })
-        } else {
-            this.client.emit('projectsFavorite', {
-                data: db.get('projectsFavorite').value()
-            })
-        }
     }
 
     /**

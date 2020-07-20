@@ -9,7 +9,7 @@ interface Props {
   name: string;
   path: string;
   favorite: boolean;
-  onDelete(id: number, favorite: boolean): void;
+  onDelete(id: number): void;
   onFavorite(id: number, favorite: boolean): void;
 }
 
@@ -27,7 +27,7 @@ export default function ProjectListItem ({ id, favorite, name, path, onDelete, o
         <div className={css.path}>{ typeof path === 'object' ? `/${path.join('/')}` : `/${path}`}</div>
       </div>
       <div className={css.actions}>
-        <button onClick={() => onDelete(id, favorite)}>
+        <button onClick={() => onDelete(id)}>
           <CloseIcon/>
         </button>
       </div>
