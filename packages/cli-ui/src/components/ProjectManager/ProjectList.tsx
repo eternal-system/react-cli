@@ -1,48 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Project } from '../../pages/Projects'
 import ProjectListItem from './ProjectListItem'
-import { useTranslation } from 'react-i18next'
 import css from './style.module.scss'
 
 interface ProjectList {
       projects: Project[];
-      favorits: Project[];
       onDelete(id: number, favorite: boolean): void;
       onFavorite(id: number, favorite: boolean): void;
 }
 
-export default function ProjectList ({ favorites, projects, onDelete, onFavorite }: ProjectList) {
-    console.log('favorits', favorites)
-    console.log('projects', projectes)
+export default function ProjectList ({ projects, onDelete, onFavorite }: ProjectList) {
     const { t } = useTranslation('project')
 
+    const listFavorites = projects.filter(p => p.favorite === true)
+    const listProjects = projects.filter(p => p.favorite === false)
+    
     return (
         <div className={css.projectList}>
-            { favorites.length 
+             { listFavorites.length 
                 ? <div>{t('favoriteProjects')}</div> : null }
 
-            { favorites.map(favorite => (
+            { listFavorites.map(favorite => (
                     <ProjectListItem
-                            favorite={true}
-                            key={favorite.id}
-                            {...favorite}
-                            onFavorite={onFavorite}
-                            onDelete={onDelete}
-                    />
-                    )
-            )}
-
-            { projects.length && favorites.length 
-                ? <div>{t('otherProjects')}</div> : null }
-
-            { projects.map(project => (
-                    <ProjectListItem
-                        favorite={false}
-                        key={project.id}
-                        {...project}
+                        key={favorite.id}
+                        {...favorite}
                         onFavorite={onFavorite}
                         onDelete={onDelete}
                     />
+                )
+            )} 
+
+            { listProjects.length  
+                ? <div>{t('otherProjects')}</div> : null }
+
+            { listProjects.map(project => (
+                <ProjectListItem
+                    key={project.id}
+                    {...project}
+                    onFavorite={onFavorite}
+                    onDelete={onDelete}
+                />
             )) }
         </div>
     )

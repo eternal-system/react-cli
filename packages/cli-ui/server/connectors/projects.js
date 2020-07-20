@@ -53,8 +53,9 @@ class ProjectApi {
             name,
             path: pathProject,
             manager,
-            preset
-        }).write()
+            preset,
+            favorite: false
+            }).write()
         }
 
         this.client.emit('notification', {
@@ -101,14 +102,14 @@ class ProjectApi {
      * Get list Favorite projects
      */
     getFavoriteProjects() {
-        if (fs.existsSync(folderDbPath)) {
-            this.client.emit('projectsFavorite', {
-                data: db.get('projectsFavorite').value()
-            })
-        } else {
-            this.client.emit('erro', {
-                message: 'Что-то пошло не так, попробуйте снова'
-            })}
+        // if (fs.existsSync(folderDbPath)) {
+        //     this.client.emit('projectsFavorite', {
+        //         data: db.get('projectsFavorite').value()
+        //     })
+        // } else {
+        //     this.client.emit('erro', {
+        //         message: 'Что-то пошло не так, попробуйте снова'
+        //     })}
     }
     /**
      * Add Favorite project by id

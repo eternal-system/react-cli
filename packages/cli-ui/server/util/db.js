@@ -8,7 +8,6 @@ const db = new Lowdb(new FileSync(filePath))
 // Empty DB
 db.defaults({
   projects: [],
-  projectsFavorite: [],
   foldersFavorite: [],
   tasks: [],
   config: {}

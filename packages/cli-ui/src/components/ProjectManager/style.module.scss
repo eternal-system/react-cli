@@ -14,16 +14,12 @@
 		outline: none;
 		padding-left: 29px;
 	}
-	svg{
+	svg {
 		width: 13px;
 		position: absolute;
 		top: 16px;
 		left: 12px;
 	}
-}
-
-.projectList {
-	
 }
 
 .content {
@@ -38,15 +34,15 @@
 	grid-gap: 16px;
 	cursor: pointer;
 
-	&:hover{
+	&:hover {
 		background-color: #c8f3ff8a;
 	}
 
-	&.active{
+	&.active {
 		background-color: #c8f3ff8a;
 	}
 
-	.favorite{
+	.favorite {
 		grid-area: icon;
 		display: -ms-flexbox;
 		display: flex;
@@ -59,7 +55,7 @@
 		button {
 			line-height: 11px;
 		}
-		svg{
+		svg {
 			width: 13px;
 			fill: #fff;
 		}
@@ -67,7 +63,7 @@
 	
 	.info{
 		grid-area: info;
-		.name{
+		.name {
 			font-size: 16px;
 		}
 		.path {
@@ -89,7 +85,7 @@
 		button {
 			line-height: 11px;
 		}
-		svg{
+		svg {
 			width: 13px;
 			fill: #fff;
 		}

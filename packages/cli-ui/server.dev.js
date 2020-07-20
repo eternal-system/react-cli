@@ -19,7 +19,7 @@ const expressLogger = expressPino({ logger })
 // ws
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
-const api = require('./server/api')
+const api = require('./server/connectors')
 
 app.set('socket', io)
 
