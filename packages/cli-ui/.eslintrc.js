@@ -33,6 +33,7 @@ module.exports = {
     }]
   },
   settings: {
+    indent: ['error', 4, { ignoreComments: true }],
     react: {
       pragma: 'React',
       version: 'detect'

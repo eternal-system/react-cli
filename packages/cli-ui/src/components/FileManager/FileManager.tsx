@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 
-import Api from 'api'
 import { SettingsContext } from 'context'
 import { ProgressBar } from 'common'
 import { useNotification } from 'hooks'
