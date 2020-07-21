@@ -8,40 +8,43 @@ function api(message, client) {
     const project = new ProjectApi(client)
     const { type, name, url, id, hidden, path, manager, preset } = message
 
-    // Folders
-    if (type === "GET_FOLDERS") {
-        folder.getFolders(url, hidden)
-    }
+    switch(type) {
+         // Folders
+        case "GET_FOLDERS":
+            folder.getFolders(url, hidden)
+            break;
 
-    if(type === "CREATE_FOLDER") {
-        folder.createFolder(url)
-    }
+        case "CREATE_FOLDER":
+            folder.createFolder(url)
+            break;
 
-    // Projects
-    if(type === "GET_PROJECTS") {
-        project.getProjects()
+         // Projects
+         case "GET_PROJECTS":
+            project.getProjects()
+            break;
+        
+        case "CREATE_FOLDER":
+            project.createProject(name, path, manager, preset)
+            break;
+
+        case "GET_PROJECT_BY_ID":
+            project.getProjectById(id)
+            break;
+        
+        case "DELETE_PROJECT_BY_ID":
+            project.deleteProjectById(id)
+            break;
+        
+        case "ADD_FAVORITE_BY_ID":
+            project.addFavoriteProjectById(id)
+            break;
+        
+        case "CLEAR_DB":
+            project.clearDb()
+            break;
+
     }
    
-    if(type === "CREATE_FOLDER") {
-        project.createProject(name, path, manager, preset)
-    }
-
-    if(type === "GET_PROJECT_BY_ID") {
-        project.getProjectById(id)
-    }
-
-    if(type === "DELETE_PROJECT_BY_ID") {
-        project.deleteProjectById(id)
-    }
-
-    if(type === "ADD_FAVORITE_BY_ID") {
-        project.addFavoriteProjectById(id)
-    }
-
-    if(type === "CLEAR_DB") {
-        project.clearDb()
-    }
-
 }
 
 module.exports = api
