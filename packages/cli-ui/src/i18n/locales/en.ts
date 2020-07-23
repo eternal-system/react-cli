@@ -31,6 +31,11 @@ const locale = {
     selectPreset: 'Select a preset',
     typeName: 'Type a name'
   },
+  dashboard: {
+    dashboard: 'Project',
+    stats: 'Statistics',
+    active: 'Active'
+  },
   modal: {
     selectFolder: 'Select folder',
     createNew: 'Create new folder',

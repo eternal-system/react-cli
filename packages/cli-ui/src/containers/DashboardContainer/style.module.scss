@@ -1,0 +1,88 @@
+.wrapperHeader {
+	position: absolute;
+	top: 0;
+	bottom: 30px;
+	left: 0;
+	background-color: #313336;
+	color: #ffffff;
+	width: 20%;
+
+	.nav {
+		margin-top: 20px;
+		width: 100%;
+		line-height: 60px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		align-self: center;
+
+		.active {
+			color: #61dafb;
+			border-bottom: 2px solid #61dafb;
+
+			svg {
+				fill: #61dafb;
+			}
+		}
+
+		a {
+			color: #fff;
+			font-size: 16px;
+			font-weight: 300;
+			cursor: pointer;
+			display: flex;
+
+			&:hover{
+				background: #61dafb3f;
+				width: 100%;
+			}
+
+			svg {
+				fill: #fff;
+				width: 25px;
+				height: 25px;
+				margin-right: 8px;
+				align-self: center;
+			}
+
+			&:hover {
+				&:not(:focus) {
+					color: #61dafb;
+					svg {
+						fill: #61dafb;
+					}
+				}
+			}
+		}
+	}
+
+	.wrapperLayout {
+		display: flex;
+		flex-direction: column;
+		padding: 20px 20px 0;
+		margin-left: auto;
+		margin-right: auto;
+	
+		.wrapperLogo {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 315px;
+			margin-right: 10px;
+			color: #61dafb;
+			height: 100%;
+
+			span {
+				color: inherit;
+				margin-left: 10px;
+				font-weight: 500;
+				font-size: 20px;
+			}
+
+			img {
+				display: inline-block;
+				vertical-align: top;
+				height: 25px;
+			}
+		}
+	}
+}
