@@ -17,8 +17,6 @@ export default function App () {
   const settings = useSettings()
   const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
 
-  console.log('1')
-
   return (
     <I18nextProvider i18n={i18n}>
       <SettingsContext.Provider value={settings}>
