@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
 import { useModal, useNotification } from 'hooks'
 import { useHistory } from 'react-router-dom'
-import Api from 'api'
 import { SettingsContext } from 'context'
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
@@ -26,7 +25,7 @@ export default function CreateProject () {
   const history = useHistory()
   const notification = useNotification()
   const { visible, showModal, closeModal } = useModal()
-  const { selectedPath } = React.useContext(SettingsContext)
+  const { socket, selectedPath } = React.useContext(SettingsContext)
 
   // State
   const [state, setState] = useState({
@@ -34,6 +33,24 @@ export default function CreateProject () {
     manager: optionsManager[0],
     preset: optionsPreset[0]
   })
+
+  useEffect(() => {
+    socket.on('notification', () => {
+      setLoading(false)
+      history.push(Routes.DASHBOARD)
+    })
+    socket.on('erro', (error) => {
+      setLoading(false)
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
+    })
+    return () => {
+      socket.off('notification')
+      socket.off('erro')
+    }
+  }, [])
 
   const [loading, setLoading] = useState(false)
 
@@ -44,21 +61,12 @@ export default function CreateProject () {
   function createProject () {
     const { name, manager, preset } = state
     setLoading(true)
-    Api.POST('/api/projects/create', {
+    socket.send({
+      type: "CREATE_PROJECT",
       name,
       path: selectedPath,
       manager: manager.value,
       preset: preset.value
-    }).then(() => {
-      setLoading(false)
-      history.push(Routes.DASHBOARD)
-    }).catch((error) => {
-      console.log('error', error)
-      setLoading(false)
-      notification.error({
-        title: error.message,
-        message: error.error.path
-      })
     })
   }
 

@@ -76,7 +76,7 @@ class ProjectApi {
         }
 
         this.client.emit('notification', {
-        message: 'Project successfully create'
+            message: 'Project successfully create'
         })
     } catch (error) {
         this.client.emit('erro', {

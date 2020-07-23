@@ -27,7 +27,7 @@ function api(message, client) {
             project.getProjects()
             break;
         
-        case "CREATE_FOLDER":
+        case "CREATE_PROJECT":
             project.createProject(name, path, manager, preset)
             break;
 
