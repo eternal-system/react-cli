@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 
-import Api from 'api'
 import { SettingsContext } from 'context'
 import { ProgressBar } from 'common'
 import { useNotification } from 'hooks'
@@ -11,10 +10,42 @@ import { Folders, Toolbar } from '../index'
 export default function FileManager () {
   const notification = useNotification()
   // State
-  const { selectedPath, changeSelectedPath } = React.useContext(SettingsContext)
+  const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
   const [projects, setProjects] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    socket.send({
+      type: 'GET_FOLDERS',
+      url: `/${url.join('/')}`,
+      hidden: false
+    })
+
+    socket.on('folders', (res) => {
+      batch(() => {
+        setLoading(true)
+        setProjects(res.data as string[])
+        setLoading(false)
+      })
+    })
+
+    socket.on('erro', (error) => {
+      batch(() => {
+        setLoading(false)
+        setUrl((prevState) => prevState.splice(0, url.length - 1))
+      })
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
+    })
+
+    return () => {
+      socket.off('folders')
+      socket.off('erro')
+    }
+  }, [])
 
   useEffect(() => {
     if (selectedPath.length && selectedPath !== url) {
@@ -28,29 +59,15 @@ export default function FileManager () {
 
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
-      setLoading(true)
-      Api.POST('/api/folders', {
-        url: `/${arrUrl.join('/')}`,
+      batch(() => {
+        changeSelectedPath(arrUrl)
+        setLoading(true)
+      })
+      socket.send({
+        type: 'GET_FOLDERS',
+        url: `/${url.join('/')}`,
         hidden: false
       })
-        .then((res) => {
-          batch(() => {
-            setProjects(res as string[])
-            changeSelectedPath(url)
-            setLoading(false)
-          })
-        })
-        .catch((error) => {
-          console.log('error', error)
-          batch(() => {
-            setLoading(false)
-            setUrl((prevState) => prevState.splice(0, url.length - 1))
-          })
-          notification.error({
-            title: error.message,
-            message: error.error.path
-          })
-        })
     },
     [url]
   )

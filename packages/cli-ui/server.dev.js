@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config.js')
 const PORT = process.env.SERVER_PORT || 8080
+const chalk = require('chalk')
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 
@@ -14,6 +15,23 @@ const pino = require('pino')
 const expressPino = require('express-pino-logger')
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' })
 const expressLogger = expressPino({ logger })
+
+// ws
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+const api = require('./server/connectors')
+
+app.set('socket', io)
+
+io.on('connection', (client) => {
+  console.log(chalk.hex('#009688')('🚀 Socket: Connection Succeeded.'))
+
+  client.on('message', message => api(message, client))
+
+  client.on('disconnect', () => {
+    console.log(chalk.hex('#009688')('🚀 Socket: Disconnected.'))
+  })
+})
 
 // db
 if (!fs.existsSync('db.json')) {
@@ -47,6 +65,6 @@ if (process.env.DEV_SERVER.trim() === 'true') {
   })
 }
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   logger.info('Server running on port %d', PORT)
 })

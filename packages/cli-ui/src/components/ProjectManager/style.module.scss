@@ -1,0 +1,93 @@
+.filter {
+	margin: 0 auto;
+	padding-bottom: 25px;
+	position: relative;
+	.input {
+		border-radius: 21px;
+		background-color: #c8f3ff8a;
+		margin: 6px 0;
+		padding: 0 10px;
+		border: 1px solid #c8f3ff;
+		color: #2c3e50;
+		height: 30px;
+		width: 174px;
+		outline: none;
+		padding-left: 29px;
+	}
+	svg {
+		width: 13px;
+		position: absolute;
+		top: 16px;
+		left: 12px;
+	}
+}
+
+.content {
+	padding: 16px;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: auto 1fr auto;
+	grid-template-columns: auto 1fr auto;
+	-ms-grid-rows: auto;
+	grid-template-rows: auto;
+	grid-template-areas: "icon info actions";
+	grid-gap: 16px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #c8f3ff8a;
+	}
+
+	&.active {
+		background-color: #c8f3ff8a;
+	}
+
+	.favorite {
+		grid-area: icon;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-align: center;
+		align-items: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		button {
+			line-height: 11px;
+		}
+		svg {
+			width: 13px;
+			fill: #fff;
+		}
+	}
+	
+	.info{
+		grid-area: info;
+		.name {
+			font-size: 16px;
+		}
+		.path {
+			color: #2c3e5080;
+			font-size: 16px;
+			font-weight: 300;
+		}
+		
+	}
+
+	.actions{
+		grid-area: actions;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-align: center;
+		align-items: center;
+		button {
+			line-height: 11px;
+		}
+		svg {
+			width: 13px;
+			fill: #fff;
+		}
+	}
+}
