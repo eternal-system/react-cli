@@ -6,11 +6,13 @@ import css from './style.module.scss'
 
 interface ProjectList {
       projects: Project[];
+      active: number;
+      onOpen(id: number): void;
       onDelete(id: number): void;
-      onFavorite(id: number, favorite: boolean): void;
+      onFavorite(id: number): void;
 }
 
-export default function ProjectList ({ projects, onDelete, onFavorite }: ProjectList) {
+export default function ProjectList ({ active, projects, onOpen, onDelete, onFavorite }: ProjectList) {
     const { t } = useTranslation('project')
 
     const listFavorites = projects.filter(p => p.favorite === true)
@@ -25,6 +27,8 @@ export default function ProjectList ({ projects, onDelete, onFavorite }: Project
                     <ProjectListItem
                         key={favorite.id}
                         {...favorite}
+                        active={active}
+                        onOpen={onOpen}
                         onFavorite={onFavorite}
                         onDelete={onDelete}
                     />
@@ -38,6 +42,8 @@ export default function ProjectList ({ projects, onDelete, onFavorite }: Project
                 <ProjectListItem
                     key={project.id}
                     {...project}
+                    active={active}
+                    onOpen={onOpen}
                     onFavorite={onFavorite}
                     onDelete={onDelete}
                 />

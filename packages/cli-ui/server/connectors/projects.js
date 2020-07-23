@@ -14,6 +14,23 @@ class ProjectApi {
     }
 
     /**
+     * Open project
+     * @param {number} id Number string 
+     */
+    open (id) {
+        db.set('config.lastOpenProject', id).write()
+    }
+
+    /**
+     * Get config
+     */
+    getConfig () {
+        this.client.emit('config', {
+            data: db.get('config').value()
+        })
+    }
+
+    /**
      * Get list project
      */
     getProjects () {
@@ -59,7 +76,7 @@ class ProjectApi {
         }
 
         this.client.emit('notification', {
-        message: 'Project successfully create'
+            message: 'Project successfully create'
         })
     } catch (error) {
         this.client.emit('erro', {

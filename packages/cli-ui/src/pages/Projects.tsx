@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { unstable_batchedUpdates as batch } from 'react-dom'
-import { Layout, Content, Empty, ProjectFilter, ProjectList, Loader } from '../components'
+import { useHistory } from 'react-router-dom'
 import { useNotification } from 'hooks'
+import { Layout, Content, Empty, ProjectFilter, ProjectList, Loader } from '../components'
 import { SettingsContext } from '../context'
+import { Routes } from '../router'
+
 
 export interface Project {
   id: number;
@@ -15,7 +18,8 @@ export interface Project {
 }
 
 export default function Projects () {
-	
+
+	const history = useHistory()
 	const { t } = useTranslation('project')
 	const notification = useNotification()
 	const { socket } = useContext(SettingsContext)
@@ -23,10 +27,15 @@ export default function Projects () {
 	const [projects, setProjects] = useState<Project[]>([])
 	const [filters, setFilters] = useState<Project[]>([])
 	const [loading, setLoading] = useState(false)
+	const [active, setActive] = useState(null)
 
 	useEffect(() => {
 		socket.send({
 			type: 'GET_PROJECTS'
+		})
+
+		socket.send({
+			type: 'GET_CONFIG'
 		})
 
 		socket.on('projects', (res) => {
@@ -34,10 +43,14 @@ export default function Projects () {
 				setLoading(true)
 				setProjects(res.data)
 				setFilters(res.data)
-			setTimeout(() => {
-				setLoading(false)
-			}, 300)
+				setTimeout(() => {
+					setLoading(false)
+				}, 300)
 			})
+		})
+
+		socket.on('config', (res) => {
+			setActive(res.data?.lastOpenProject || 1)
 		})
 
 		socket.on('erro', (error) => {
@@ -50,11 +63,22 @@ export default function Projects () {
 
 	return () => {
 			socket.off('projects')
+			socket.off('config')
 			socket.off('erro')
 		}
 	}, [])
 
-	function handleFavorite (id: number, favorite: boolean) {
+	function openProject (id: number) {
+		if(id){
+			socket.send({
+				type: 'OPEN_PROJECT',
+				id
+			})
+			history.push(Routes.DASHBOARD)
+		}
+	}
+
+	function handleFavorite (id: number) {
 		if(id){
 			socket.send({
 				type: 'ADD_FAVORITE_BY_ID',
@@ -64,7 +88,6 @@ export default function Projects () {
 	}
 
 	function handleDelete (id: number): void {
-		console.log('delete', id)
 		if(id){
 			socket.send({
 				type: 'DELETE_PROJECT_BY_ID',
@@ -95,7 +118,9 @@ export default function Projects () {
 			{ projects.length ? <ProjectFilter onChange={handleChange} /> : null}
 			{ filters.length
 			? <ProjectList
-					projects={filters} 
+					active={active}
+					projects={filters}
+					onOpen={openProject}
 					onFavorite={handleFavorite} 
 					onDelete={handleDelete}
 				/>

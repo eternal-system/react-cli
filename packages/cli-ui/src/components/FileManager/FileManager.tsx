@@ -26,7 +26,6 @@ export default function FileManager () {
       batch(() => {
         setLoading(true)
         setProjects(res.data as string[])
-        changeSelectedPath(url)
         setLoading(false)
       })
     })
@@ -60,7 +59,10 @@ export default function FileManager () {
 
   const getFoldersData = useCallback(
     (arrUrl: string[]) => {
-      setLoading(true)
+      batch(() => {
+        changeSelectedPath(arrUrl)
+        setLoading(true)
+      })
       socket.send({
         type: 'GET_FOLDERS',
         url: `/${url.join('/')}`,

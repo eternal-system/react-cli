@@ -19,11 +19,15 @@ function api(message, client) {
             break;
 
          // Projects
-         case "GET_PROJECTS":
+        case "OPEN_PROJECT":
+            project.open(id)
+            break;
+
+        case "GET_PROJECTS":
             project.getProjects()
             break;
         
-        case "CREATE_FOLDER":
+        case "CREATE_PROJECT":
             project.createProject(name, path, manager, preset)
             break;
 
@@ -41,6 +45,11 @@ function api(message, client) {
         
         case "CLEAR_DB":
             project.clearDb()
+            break;
+
+        // config
+        case "GET_CONFIG":
+            project.getConfig()
             break;
 
     }
