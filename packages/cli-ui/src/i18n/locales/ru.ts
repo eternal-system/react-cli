@@ -26,6 +26,11 @@ const locale = {
     selectPreset: 'Выбор базовых настроек',
     typeName: 'Введите имя'
   },
+  dashboard: {
+    dashboard: 'Проект',
+    stats: 'Статистика',
+    active: 'Активность'
+  },
   modal: {
     selectFolder: 'Выбор директории',
     createNew: 'Добавить новую папку',

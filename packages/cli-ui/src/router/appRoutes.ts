@@ -4,7 +4,10 @@ import {
   SelectFolder,
   Depend,
   PageNotFound,
-  CreateProject
+  DBoard,
+  CreateProject,
+  Active,
+  Statistics
 } from 'pages'
 
 /** Url's основных страниц */
@@ -12,6 +15,8 @@ export enum Routes {
   MAIN = '/',
   PROJECT = '/project',
   DASHBOARD = '/dashboard',
+  DASHBOARD_ACTIVE = '/dashboard/active',
+  DASHBOARD_STATS = '/dashboard/stats',
   DEPENDENCIES = '/dependencies',
   PROJECT_SELECT = '/project/select',
   PROJECT_CREATE = '/project/create',
@@ -77,9 +82,30 @@ export const AppRoutes: RoutesCollection = {
   },
   dashboard: {
     paths: {
-      root: Routes.DASHBOARD
+      root: Routes.DASHBOARD,
+      project: {
+        paths: {
+          root: Routes.DASHBOARD
+        },
+        exact: true,
+        Component: DBoard
+      },
+      dashboardActive: {
+        paths: {
+          root: Routes.DASHBOARD_ACTIVE
+        },
+        exact: true,
+        Component: Active
+      },
+      dashboardStats: {
+        paths: {
+          root: Routes.DASHBOARD_STATS
+        },
+        exact: true,
+        Component: Statistics
+      }
     },
-    exact: true,
+    exact: false,
     Component: DashboardContainer
   },
   dependencies: {
