@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+
 import { Content, Loader } from 'components'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
 import { useModal, useNotification } from 'hooks'
-import { useHistory } from 'react-router-dom'
 import { SettingsContext } from 'context'
+import { Routes } from '../../router'
+
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
-import { Routes } from '../../router'
 
 const optionsManager = [
   { value: 'npm', label: 'npm' },
@@ -62,7 +64,7 @@ export default function CreateProject () {
     const { name, manager, preset } = state
     setLoading(true)
     socket.send({
-      type: "CREATE_PROJECT",
+      type: 'CREATE_PROJECT',
       name,
       path: selectedPath,
       manager: manager.value,
