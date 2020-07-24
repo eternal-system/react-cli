@@ -1,9 +1,8 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
-import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
 import { Routes } from 'router'
+import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
 
 import css from './style.module.scss'
 
@@ -42,7 +41,6 @@ export default function Dashboard () {
   }), [activeTab, locale])
 
   return (
-    <div className={css.flexible}>
       <div className={css.wrapperHeader}>
         <div className={css.wrapperLayout}>
           <div className={css.nav}>
@@ -50,6 +48,5 @@ export default function Dashboard () {
           </div>
         </div>
       </div>
-    </div>
   )
 }

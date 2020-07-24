@@ -49,7 +49,6 @@ export default function ProjectContainer () {
   }), [activeTab, locale])
 
   return (
-    <>
       <header className={css.wrapperHeader}>
         <div className={css.wrapperLayout}>
           <div className={css.wrapperLogo}>
@@ -61,6 +60,5 @@ export default function ProjectContainer () {
           </div>
         </div>
       </header>
-    </>
   )
 }
