@@ -30,6 +30,7 @@ export interface RouteEntity {
     root: string;
     [key: string]: string | RouteEntity;
   };
+  isRowDirection?: boolean;
   exact?: boolean;
 }
 
@@ -105,6 +106,7 @@ export const AppRoutes: RoutesCollection = {
         Component: Statistics
       }
     },
+    isRowDirection: true,
     exact: false,
     Component: DashboardContainer
   },

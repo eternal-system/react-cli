@@ -19,7 +19,7 @@ export default function Dashboard () {
     { key: Routes.DASHBOARD_ACTIVE, label: t('active'), Icon: ActiveIcon },
     { key: Routes.DASHBOARD_STATS, label: t('stats'), Icon: StatsIcon }
   ]
-  
+
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
     return (
       <NavLink
@@ -41,12 +41,12 @@ export default function Dashboard () {
   }), [activeTab, locale])
 
   return (
-      <div className={css.wrapperHeader}>
-        <div className={css.wrapperLayout}>
-          <div className={css.nav}>
-            {renderChildren}
-          </div>
+    <div className={css.wrapperHeader}>
+      <div className={css.wrapperLayout}>
+        <div className={css.nav}>
+          {renderChildren}
         </div>
       </div>
+    </div>
   )
 }
