@@ -1,5 +1,11 @@
 .wrapper{
     position: absolute;
-    top: 20px;
-    left: 22%;
+    top: 40px;
+    left: 20%;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper{
+        left: 70px;
+    }
 }

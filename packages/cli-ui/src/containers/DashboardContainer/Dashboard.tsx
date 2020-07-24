@@ -1,4 +1,4 @@
-import React, { useMemo, Children } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -36,7 +36,7 @@ export default function Dashboard () {
         }}
       >
         <Icon />
-        { label }
+        <span className={css.disableTitle}>{ label }</span>
       </NavLink>
     )
   }), [activeTab, locale])
