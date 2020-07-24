@@ -40,7 +40,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
   }
 
   function onChangeEditable () {
-    if (isEdit) {
+    if (isEdit && editPath) {
       setUrlPath(editPath.split('/'))
     }
     return setIsEdit(prevState => !prevState)
