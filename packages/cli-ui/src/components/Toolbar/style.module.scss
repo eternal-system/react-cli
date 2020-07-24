@@ -20,22 +20,34 @@
     }
   }
   
-  .urlPaths {
+  .urlPathsContainer {
     display: flex;
+    justify-content: space-between;
     flex: auto;
     margin-right: 5px;
     border-radius: 3px;
     background-color: #c8f3ff;
 
+    .urlPaths {
+      display: flex;
+      justify-content: start;
+      width: 100%;
+    }
+
     button {
       background-color: #c8f3ff;
       border-right: 2px solid #fff;
-      border-radius: 2px 0 0 2px;
+      border-radius: 3px 0 0 3px;
 
       svg {
         fill: #20232a;
         @include click-rule;
       }
+    }
+
+    button.editBtn {
+      border-left: 2px solid #fff;
+      border-radius: 0 3px 3px 0;
     }
 
     .urlElement {
@@ -44,6 +56,17 @@
       background-color: #c8f3ff;
       cursor: pointer;
       border-right: 2px solid #fff;
+    }
+
+    div[class^="inputContent"] {
+      margin: 0;
+      border-bottom: 2px solid #3bd3fc;
+      border-radius: 0;
+
+      input {
+        font-size: 17px;
+        width: 100%;
+      }
     }
   }
 
