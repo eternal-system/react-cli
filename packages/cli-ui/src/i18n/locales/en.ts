@@ -32,9 +32,9 @@ const locale = {
     typeName: 'Type a name'
   },
   dashboard: {
-    dashboard: 'Project',
-    stats: 'Statistics',
-    active: 'Active'
+    dashboard: 'Dashboard',
+    dependencies: 'Dependencies',
+    tasks: 'Tasks'
   },
   modal: {
     selectFolder: 'Select folder',

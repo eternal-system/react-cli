@@ -5,7 +5,7 @@ import { Routes } from 'router'
 import { SettingsContext } from 'context'
 
 export interface MenuItems {
-  key: Routes.DASHBOARD | Routes.DASHBOARD_ACTIVE | Routes.DASHBOARD_STATS;
+  key: Routes.DASHBOARD | Routes.DASHBOARD_TASKS | Routes.DEPENDENCIES;
   label: string;
   Icon: React.FC;
 }

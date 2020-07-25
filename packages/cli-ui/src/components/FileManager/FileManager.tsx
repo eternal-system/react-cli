@@ -54,6 +54,7 @@ export default function FileManager () {
   }, [selectedPath])
 
   useEffect(() => {
+    console.log(url)
     getFoldersData(url)
   }, [url])
 

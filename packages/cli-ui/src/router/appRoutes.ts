@@ -2,11 +2,11 @@ import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
 import {
   Projects,
   SelectFolder,
-  Depend,
+  Dependencies,
   PageNotFound,
-  DBoard,
+  Dashboard,
   CreateProject,
-  Active,
+  Tasks,
   Statistics
 } from 'pages'
 
@@ -15,9 +15,8 @@ export enum Routes {
   MAIN = '/',
   PROJECT = '/project',
   DASHBOARD = '/dashboard',
-  DASHBOARD_ACTIVE = '/dashboard/active',
-  DASHBOARD_STATS = '/dashboard/stats',
-  DEPENDENCIES = '/dependencies',
+  DASHBOARD_TASKS = '/dashboard/tasks',
+  DEPENDENCIES = '/dashboard/dependencies',
   PROJECT_SELECT = '/project/select',
   PROJECT_CREATE = '/project/create',
   PROJECT_IMPORT = '/project/import',
@@ -30,6 +29,7 @@ export interface RouteEntity {
     root: string;
     [key: string]: string | RouteEntity;
   };
+  isRowDirection?: boolean;
   exact?: boolean;
 }
 
@@ -88,32 +88,26 @@ export const AppRoutes: RoutesCollection = {
           root: Routes.DASHBOARD
         },
         exact: true,
-        Component: DBoard
+        Component: Dashboard
       },
-      dashboardActive: {
+      dashboardTasks: {
         paths: {
-          root: Routes.DASHBOARD_ACTIVE
+          root: Routes.DASHBOARD_TASKS
         },
         exact: true,
-        Component: Active
+        Component: Tasks
       },
       dashboardStats: {
         paths: {
-          root: Routes.DASHBOARD_STATS
+          root: Routes.DEPENDENCIES
         },
         exact: true,
-        Component: Statistics
+        Component: Dependencies
       }
     },
+    isRowDirection: true,
     exact: false,
     Component: DashboardContainer
-  },
-  dependencies: {
-    paths: {
-      root: Routes.DEPENDENCIES
-    },
-    exact: true,
-    Component: Depend
   },
   notFound: {
     paths: {

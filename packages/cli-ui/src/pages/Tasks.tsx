@@ -1,15 +1,14 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { DashboardWrap } from 'components'
 
-import  { DashboardWrap }  from 'components'
-
-export default function Statistics () {
+export default function Tasks () {
   const { t } = useTranslation('dashboard')
 
   return (
     <DashboardWrap>
-      <div>Statistics</div>
+      <div>Tasks</div>
     </DashboardWrap>
-    
+            
   )
 }

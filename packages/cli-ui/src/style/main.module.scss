@@ -5,6 +5,17 @@
   justify-content: space-between;
 }
 
+.routeRowContainer, 
+.routeColumnContainer {
+  display: flex;
+  height: 100%;
+}
+
+.routeColumnContainer {
+  flex-direction: column;
+  width: 100%;
+}
+
 .foulderBtn {
   width: 240px;
   margin: 22px auto 0;
