@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AttachFileIcon from '$icons/attach-file.svg'
+import AttachFileIcon from '@icons/attach-file.svg'
 
 import css from './style.module.scss'
 

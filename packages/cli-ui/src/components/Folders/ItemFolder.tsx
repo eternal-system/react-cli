@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FolderIcon from '$icons/folder.svg'
+import FolderIcon from '@icons/folder.svg'
 
 import css from './style.module.scss'
 

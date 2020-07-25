@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
-import { Content, Loader } from 'components'
+import { Content, Loader } from '@components'
+import { useModal, useNotification } from '@hooks'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
-import { useModal, useNotification } from 'hooks'
 import { SettingsContext } from 'context'
 import { Routes } from '../../router'
 

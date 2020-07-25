@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import SelectComponent, { Props } from 'react-select'
 import cn from 'classnames'
 
-import FolderFilledIcon from '$icons/folder-filled.svg'
+import FolderFilledIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 

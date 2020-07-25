@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import { Input } from 'common'
+import { useModal } from '@hooks'
 import { ModalFolder } from '../../modals'
-import { useModal } from '../../hooks/modal.hook'
 
-import EditIcon from '$icons/edit-pen.svg'
-import ArrowUpIcon from '$icons/arrow-up.svg'
-import RefrechIcon from '$icons/refresh.svg'
-import CreateFolderIcon from '$icons/folder-create-filled.svg'
-import FolderFilledIcon from '$icons/folder-filled.svg'
+import EditIcon from '@icons/edit-pen.svg'
+import ArrowUpIcon from '@icons/arrow-up.svg'
+import RefrechIcon from '@icons/refresh.svg'
+import CreateFolderIcon from '@icons/folder-create-filled.svg'
+import FolderFilledIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 

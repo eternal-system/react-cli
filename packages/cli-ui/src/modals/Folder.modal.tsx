@@ -3,9 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import Api from 'api'
 
-import Modal from '../components/Modal'
-import { Input } from '../components/Form'
-import { useNotification } from 'hooks'
+import { Modal, Input } from '@components'
+import { useNotification } from '@hooks'
 
 export interface ModalFolder {
   visible?: boolean;

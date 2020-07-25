@@ -1,11 +1,11 @@
 import React from 'react'
-import { Project } from '../../pages/Projects'
-import SearchIcon from '$icons/search.svg'
+
+import SearchIcon from '@icons/search.svg'
 
 import css from './style.module.scss'
 
 interface Props {
-      onChange?: any;
+  onChange?: any;
 }
 
 export default function ProjectFilter ({ onChange }: Props) {

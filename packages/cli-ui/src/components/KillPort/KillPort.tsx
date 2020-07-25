@@ -26,6 +26,7 @@ export default function KillPort () {
     <div className={css.wrapperCard}>
       <div className={css.killPors}>
         <div className={css.title}>Kill Port</div>
+        <div className={css.description}>Ready to kill</div>
         <div className={css.content}>
           <input type="number" value={value} onChange={handleChange} />
           <button onClick={handleKill}>Kill</button>

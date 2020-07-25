@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Layout, Header, Footer, Content } from '../components'
+import { Layout, Header, Footer, Content } from '@components'
 
 export default function Home () {
   return (

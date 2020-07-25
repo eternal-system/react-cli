@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import CheckBoxTheme from '../CheckBoxTheme/CheckBoxTheme'
-import logo from '../../../public/logo192.png'
+import logo from '@public/logo192.png'
 import css from './style.module.scss'
 
 export default function Header ({ setTab, active, children }: any) {

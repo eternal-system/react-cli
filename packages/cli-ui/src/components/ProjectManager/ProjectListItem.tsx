@@ -1,8 +1,8 @@
 import React from 'react'
 import css from './style.module.scss'
-import CloseIcon from '$icons/close.svg'
-import StarIcon from '$icons/star.svg'
-import StarAddIcon from '$icons/star-add.svg'
+import CloseIcon from '@icons/close.svg'
+import StarIcon from '@icons/star.svg'
+import StarAddIcon from '@icons/star-add.svg'
 
 interface Props {
   id: number;
@@ -20,7 +20,7 @@ export default function ProjectListItem ({ id, active, favorite, name, path, onO
     <div className={`${css.content} ${id === active ? css.active : ''}`}>
       <div className={css.favorite}>
         <button onClick={() => onFavorite(id)}>
-            { favorite ? <StarAddIcon /> : <StarIcon /> }
+          { favorite ? <StarAddIcon /> : <StarIcon /> }
         </button>
       </div>
       <div className={css.info} onClick={() => onOpen(id)}>

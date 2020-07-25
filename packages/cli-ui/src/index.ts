@@ -11,5 +11,5 @@ if (typeof document !== 'undefined') {
     throw new Error('Not found dom element `id: root`')
   }
 
-  ReactDOM.render(<App />, rootElem)
+  ReactDOM.render(React.createElement(App), rootElem)
 }

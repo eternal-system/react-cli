@@ -6,9 +6,9 @@ import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
 
 import css from './style.module.scss'
 
-import DashboardIcon from '$icons/dashboard-project.svg'
-import ActiveIcon from '$icons/dashboard-tasks.svg'
-import StatsIcon from '$icons/dashboard-config.svg'
+import DashboardIcon from '@icons/dashboard-project.svg'
+import ActiveIcon from '@icons/dashboard-tasks.svg'
+import StatsIcon from '@icons/dashboard-config.svg'
 
 export default function Dashboard () {
   const { t } = useTranslation('dashboard')
