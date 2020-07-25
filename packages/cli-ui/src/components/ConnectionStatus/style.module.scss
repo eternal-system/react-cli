@@ -1,20 +1,64 @@
 .content{
 	text-align: center;
-    font-weight: bold;
+	font-weight: bold;
+
 	&.show {
-	 	display: block;
+		display: block;
 	}
+
 	&.hidden {
-	 	display: none;
+		display: none;
 	}
 
-	.connected{
+	.connected, .disconnected {
 		background: #61dafb;
-		padding: 16px;
+		color: #fff;
+		font-family: 'Roboto-Light', sans-serif;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 10px;
+
+		svg {
+			width: 22px;
+			height: 22px;
+			margin-right: 16px;
+			fill: #fff;
+		}
+
+		svg.svgConnected {
+			width: 30px;
+			margin: 0;
+			animation: load 1.5s infinite linear;
+			-webkit-animation: load 1.5s infinite linear;
+		}
 	}
 
-	.disconnected{
+	.disconnected {
 		background: red;
-		padding: 16px;
 	}
+}
+
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

@@ -17,17 +17,60 @@
 		}
 
 		.description {
+			display: flex;
+			align-items: center;
 			color: #2c3e50;
 			margin: 20px 0;
+
+			.descriptionIcon {
+				background: #00000008;
+				border-radius: 30px;
+				padding: 9px;
+				width: 34px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-right: 10px;
+
+				svg {
+					fill: #6a8bad;
+					height: 30px;
+					width: 30px;
+				}
+			}
 		}
 
 		.content {
-			margin-top: 10px;
-		
-			input {
+			display: flex;
+			align-items: center;
+
+			button {
+				height: 45px;
+				display: flex;
+				min-width: 100px;
+				padding: 10px 20px;
+				justify-content: center;
+				align-items: center;
+
+				span {
+					font-family: 'Roboto-Light', sans-serif;
+					font-size: 17px;
+				}
+
+				svg {
+					fill: #fff;
+					height: 30px;
+					width: 30px;
+				}
+			}
+			
+			div[class^="inputContent"] {
+				height: 45px;
 				margin-right: 10px;
-				height: 21px;
-				padding: 5px;
+
+				input {
+					font-size: 17px;
+				}
 			}
 		}
 	}

@@ -1,12 +1,12 @@
 .wrapperHeader {
-	background-color: #20232a;
+	background-color: #262e41;
     color: #ffffff;
     width: 220px;
     height: 100%;
     position: relative;
 
 	.nav {
-		margin-top: 20px;
+		margin-top: 64px;
 		width: 100%;
 		line-height: 60px;
 		overflow-x: auto;
@@ -22,10 +22,10 @@
 		}
 
 		a {
+			cursor: pointer;
 			color: #fff;
 			font-size: 16px;
 			font-weight: 300;
-			cursor: pointer;
 			display: flex;
 			padding: 0 16px;
 
@@ -82,18 +82,23 @@
 			}
 		}
 	}
+
+	.tooltip {
+		min-width: 100px;
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 768px) {
 
 	.wrapperHeader {
 		width: 50px;
-	
+
 		.nav {
 			.active {
 				border-bottom: 0px;
 			}
-	
+
 			a {
 				padding: 0;
 
@@ -103,13 +108,13 @@
 				}
 			}
 		}
-	
+
 		.wrapperLayout {
 			padding: 0;
 		}
 	}
 
-	.disableTitle{
+	.disableTitle {
 		display: none;
 	}
 }

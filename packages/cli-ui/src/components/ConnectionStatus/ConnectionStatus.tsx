@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { SettingsContext } from '../../context'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useTranslation } from 'react-i18next'
+import cn from 'classnames'
+
+import DisconectIcon from '@icons/cloud-off.svg'
+import ConnectingIcon from '@icons/react-logo.svg'
+
+import { SettingsContext } from 'context'
 import css from './style.module.scss'
 
 export default function ConnectionStatus () {
-  const { socket } = React.useContext(SettingsContext)
   const { t } = useTranslation('common')
+  const { socket } = React.useContext(SettingsContext)
+
   const [connected, setConnected] = useState(false)
   const [status, setStatus] = useState('show')
+
+  const styleCss = cn(css.content, status === 'show' ? css.show : css.hidden)
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -33,13 +41,26 @@ export default function ConnectionStatus () {
     }
   }, [])
 
-  return (
-    <div className={`${css.content} ${status === 'show' ? css.show : css.hidden}`}>
-      {connected ? (<div className={css.connected}>
-        {t('connect')}
-      </div>) : (<div className={css.disconnected}>
+  function renderStatus () {
+    if (connected) {
+      return (
+        <div className={css.connected}>
+          <ConnectingIcon className={css.svgConnected}/>
+          {t('connect')}
+        </div>
+      )
+    }
+    return (
+      <div className={css.disconnected}>
+        <DisconectIcon />
         {t('disconnect')}
-      </div>)}
+      </div>
+    )
+  }
+
+  return (
+    <div className={styleCss}>
+      {renderStatus()}
     </div>
   )
 }
