@@ -1,7 +1,7 @@
 .wrapperHeader {
 	background-color: #262e41;
     color: #ffffff;
-    width: 220px;
+    width: 55px;
     height: 100%;
     position: relative;
 
@@ -22,12 +22,12 @@
 		}
 
 		a {
+			cursor: pointer;
 			color: #fff;
 			font-size: 16px;
 			font-weight: 300;
-			cursor: pointer;
 			display: flex;
-			padding: 0 16px;
+			padding: 16px;
 
 			&:hover{
 				background: #61dafb3f;
@@ -38,7 +38,6 @@
 				fill: #fff;
 				width: 25px;
 				height: 25px;
-				margin-right: 8px;
 				align-self: center;
 			}
 
@@ -82,18 +81,22 @@
 			}
 		}
 	}
+
+	.tooltip {
+		min-width: 200px;
+	}
 }
 
 @media screen and (max-width: 768px) {
 
 	.wrapperHeader {
 		width: 50px;
-	
+
 		.nav {
 			.active {
 				border-bottom: 0px;
 			}
-	
+
 			a {
 				padding: 0;
 
@@ -103,13 +106,13 @@
 				}
 			}
 		}
-	
+
 		.wrapperLayout {
 			padding: 0;
 		}
 	}
 
-	.disableTitle{
+	.disableTitle {
 		display: none;
 	}
 }

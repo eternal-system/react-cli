@@ -11,7 +11,7 @@ export interface MenuItems {
 }
 
 interface HookProps {
-  locale: string;
+  locale: string | null;
   activeTab: string;
   handleSetTab(menuItem: MenuItems): void;
 }

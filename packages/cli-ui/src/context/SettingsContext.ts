@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react'
 
 function noop () {}
@@ -12,6 +13,7 @@ interface SettingsContextProps {
   socket: {
     on(status: string, noop: any): void,
     off(status: string): void;
+    send(status: object): void;
   }
 }
 
@@ -21,14 +23,10 @@ export const SettingsContext = createContext<SettingsContextProps>({
   selectedPath: [],
   changeTheme: noop,
   changeLocale: noop,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  changeSelectedPath: (path: string[]) => {},
+  changeSelectedPath: (path) => {},
   socket: {
-    on (status: string, noop: any) {
-      return { status, noop }
-    },
-    off (status: string) {
-      return { status }
-    }
+    on (status, noop) {},
+    off (status) {},
+    send (status) {}
   }
 })

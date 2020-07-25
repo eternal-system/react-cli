@@ -1,14 +1,20 @@
 import React, { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Routes } from 'router'
-import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
+import ReactTooltip from 'react-tooltip'
 
-import css from './style.module.scss'
+import { Routes } from 'router'
 
 import DashboardIcon from '@icons/dashboard-project.svg'
 import ActiveIcon from '@icons/dashboard-tasks.svg'
 import StatsIcon from '@icons/dashboard-config.svg'
+
+import { uuid } from 'utils'
+import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
+
+import css from './style.module.scss'
+
+const TOOLTIP_ID = uuid()
 
 export default function Dashboard () {
   const { t } = useTranslation('dashboard')
@@ -17,16 +23,18 @@ export default function Dashboard () {
   const menu: MenuItems[] = [
     { key: Routes.DASHBOARD, label: t('dashboard'), Icon: DashboardIcon },
     { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
-    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon },
+    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
   ]
 
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
     return (
       <NavLink
         key={key}
-        exact={true}
         to={key}
+        exact={true}
         activeClassName={css.active}
+        data-tip={`<div class="${css.tooltip}">${label}</div>`}
+        data-for={TOOLTIP_ID}
         isActive={(_, location) => {
           if (key === location.pathname) {
             return true
@@ -35,7 +43,6 @@ export default function Dashboard () {
         }}
       >
         <Icon />
-        <span className={css.disableTitle}>{ label }</span>
       </NavLink>
     )
   }), [activeTab, locale])
@@ -47,6 +54,13 @@ export default function Dashboard () {
           {renderChildren}
         </div>
       </div>
+      <ReactTooltip
+        id={TOOLTIP_ID}
+        place="right"
+        effect="solid"
+        offset={{ left: 30 }}
+        html
+      />
     </div>
   )
 }

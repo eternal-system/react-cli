@@ -29,7 +29,7 @@ io.on('connection', (client) => {
   client.on('message', message => api(message, client))
 
   client.on('disconnect', () => {
-    console.log(chalk.hex('#009688')('🚀 Socket: Disconnected.'))
+    console.log(chalk.hex('#009688')('❌ Socket: Disconnected.'))
   })
 })
 
@@ -66,5 +66,5 @@ if (process.env.DEV_SERVER.trim() === 'true') {
 }
 
 http.listen(PORT, () => {
-  logger.info('Server running on port %d', PORT)
+  logger.info('🌠 Server running on port %d', PORT)
 })
