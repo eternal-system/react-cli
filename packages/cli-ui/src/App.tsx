@@ -21,7 +21,6 @@ export default function App () {
   const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
   settings.socket = socket
 
-  console.log('1111', settings)
   return (
     <I18nextProvider i18n={i18n}>
       <SettingsContext.Provider value={settings}>

@@ -31,9 +31,9 @@ const locale = {
     typeName: 'Введите имя'
   },
   dashboard: {
-    dashboard: 'Проект',
-    stats: 'Статистика',
-    active: 'Активность'
+    dashboard: 'Панель',
+    dependencies: 'Зависимости',
+    tasks: 'Задачи'
   },
   modal: {
     selectFolder: 'Выбор директории',

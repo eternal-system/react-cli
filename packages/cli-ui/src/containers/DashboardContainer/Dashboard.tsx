@@ -16,8 +16,8 @@ export default function Dashboard () {
 
   const menu: MenuItems[] = [
     { key: Routes.DASHBOARD, label: t('dashboard'), Icon: DashboardIcon },
-    { key: Routes.DASHBOARD_ACTIVE, label: t('active'), Icon: ActiveIcon },
-    { key: Routes.DASHBOARD_STATS, label: t('stats'), Icon: StatsIcon }
+    { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
+    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon },
   ]
 
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {

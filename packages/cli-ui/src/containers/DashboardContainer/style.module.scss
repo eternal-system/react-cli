@@ -15,8 +15,7 @@
 
 		.active {
 			color: #61dafb;
-			border-bottom: 2px solid #61dafb;
-
+			background: #61dafb3f;
 			svg {
 				fill: #61dafb;
 			}
@@ -28,6 +27,7 @@
 			font-weight: 300;
 			cursor: pointer;
 			display: flex;
+			padding: 0 16px;
 
 			&:hover{
 				background: #61dafb3f;
@@ -56,7 +56,6 @@
 	.wrapperLayout {
 		display: flex;
 		flex-direction: column;
-		padding: 20px 20px 0;
 		margin-left: auto;
 		margin-right: auto;
 	
