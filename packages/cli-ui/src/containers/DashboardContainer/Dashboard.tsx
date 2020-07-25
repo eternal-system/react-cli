@@ -59,7 +59,7 @@ export default function Dashboard () {
         id={TOOLTIP_ID}
         place="right"
         effect="solid"
-        delayShow={2000}
+        delayShow={1000}
         offset={{ left: 30 }}
         html
       />
