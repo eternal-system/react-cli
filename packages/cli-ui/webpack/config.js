@@ -22,9 +22,6 @@ const regExp = {
   svgInlineRegexp: /\.inline\.svg$/
 }
 
-console.log('appDirectory', appDirectory)
-console.log('resolveApp', resolveApp)
-
 const paths = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('dist'),
