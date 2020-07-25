@@ -1,7 +1,7 @@
 .wrapperHeader {
 	background-color: #262e41;
     color: #ffffff;
-    width: 55px;
+    width: 220px;
     height: 100%;
     position: relative;
 
@@ -27,7 +27,7 @@
 			font-size: 16px;
 			font-weight: 300;
 			display: flex;
-			padding: 16px;
+			padding: 0 16px;
 
 			&:hover{
 				background: #61dafb3f;
@@ -38,6 +38,7 @@
 				fill: #fff;
 				width: 25px;
 				height: 25px;
+				margin-right: 8px;
 				align-self: center;
 			}
 
@@ -83,7 +84,8 @@
 	}
 
 	.tooltip {
-		min-width: 200px;
+		min-width: 100px;
+		text-align: center;
 	}
 }
 

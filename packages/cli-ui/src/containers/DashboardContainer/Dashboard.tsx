@@ -43,6 +43,7 @@ export default function Dashboard () {
         }}
       >
         <Icon />
+        <span className={css.disableTitle}>{ label }</span>
       </NavLink>
     )
   }), [activeTab, locale])
