@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { Routes } from 'router'
 import { SettingsContext } from 'context'
 
-import TranlateIcon from '$icons/translate.svg'
-import DarkIcon from '$icons/dark-mode.svg'
-import LightIcon from '$icons/light-mode.svg'
-import HomeIcon from '$icons/home-filled.svg'
+import TranlateIcon from '@icons/translate.svg'
+import DarkIcon from '@icons/dark-mode.svg'
+import LightIcon from '@icons/light-mode.svg'
+import HomeIcon from '@icons/home-filled.svg'
 
 import css from './style.module.scss'
 

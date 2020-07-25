@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { Routes } from 'router'
-import { Layout, Content, FileManager } from '../components'
+import { Layout, Content, FileManager } from '@components'
 
-import AddIcon from '$icons/add.svg'
+import AddIcon from '@icons/add.svg'
 
 import mainCss from '../style/main.module.scss'
 

@@ -22,12 +22,16 @@ const regExp = {
   svgInlineRegexp: /\.inline\.svg$/
 }
 
+console.log('appDirectory', appDirectory)
+console.log('resolveApp', resolveApp)
+
 const paths = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('dist'),
   appSrc: resolveApp('src'),
   appComponents: resolveApp('src/components'),
   appPages: resolveApp('src/pages'),
+  appHooks: resolveApp('src/hooks'),
   appPublic: resolveApp('public'),
   appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
@@ -35,24 +39,30 @@ const paths = {
 }
 
 module.exports = {
+  context: paths.appPath,
+
   mode: 'production',
-  entry: path.join(__dirname, 'src', 'index.tsx'),
+
+  entry: [
+    './src/index'
+  ],
+
+  output: {
+    path: paths.appBuild,
+    publicPath: '/',
+    filename: 'js/[name].[hash:5].js'
+  },
 
   resolve: {
     modules: [paths.appNodeModules, paths.appSrc],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.scss'],
     alias: {
-      components: paths.appComponents,
-      pages: paths.appPages,
-      public: paths.appPublic,
-      $icons: paths.appIcons
+      '@components': paths.appComponents,
+      '@pages': paths.appPages,
+      '@public': paths.appPublic,
+      '@icons': paths.appIcons,
+      '@hooks': paths.appHooks
     }
-  },
-
-  output: {
-    path: paths.appBuild,
-    publicPath: '/',
-    filename: '[name].[hash:5].js'
   },
 
   stats: {
@@ -68,21 +78,25 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
+
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
+      template: path.resolve(paths.appPublic, 'index.html'),
       filename: 'index.html'
     }),
+
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'public/favicon.ico'),
+          from: path.resolve(paths.appPublic, 'favicon.ico'),
           to: paths.appBuild
         }
       ]
     }),
+
     new MiniCssExtractPlugin({
-      filename: '[name].[hash:5].css'
+      filename: 'css/[name].[hash:5].css'
     }),
+
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -92,6 +106,7 @@ module.exports = {
       minRatio: 0.8,
       deleteOriginalAssets: false
     }),
+
     new ManifestPlugin()
   ],
 

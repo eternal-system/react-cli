@@ -3,7 +3,7 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 
 import { SettingsContext } from 'context'
 import { ProgressBar } from 'common'
-import { useNotification } from 'hooks'
+import { useNotification } from '@hooks'
 import { Folders, Toolbar } from '../index'
 
 // Create new project
@@ -54,7 +54,6 @@ export default function FileManager () {
   }, [selectedPath])
 
   useEffect(() => {
-    console.log(url)
     getFoldersData(url)
   }, [url])
 

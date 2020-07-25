@@ -6,9 +6,8 @@ import {
   PageNotFound,
   Dashboard,
   CreateProject,
-  Tasks,
-  Statistics
-} from 'pages'
+  Tasks
+} from '@pages'
 
 /** Url's основных страниц */
 export enum Routes {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CloceIcon from '$icons/close.svg'
+import CloceIcon from '@icons/close.svg'
 
 import css from './style.module.scss'
 

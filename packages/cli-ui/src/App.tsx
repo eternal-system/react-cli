@@ -6,9 +6,9 @@ import cn from 'classnames'
 import openSocket from 'socket.io-client'
 
 import i18n from './i18n'
-import { Footer, ConnectionStatus } from './components'
+import { Footer, ConnectionStatus } from '@components'
+import { useSettings } from '@hooks'
 import { SettingsContext } from './context'
-import { useSettings } from './hooks'
 import { renderRoutes } from './router'
 
 import 'react-notifications-component/dist/theme.css'

@@ -5,10 +5,10 @@ import { NavLink } from 'react-router-dom'
 import { Routes } from 'router'
 import useProjectContainer, { TabItem } from './projectContainer.hook'
 
-import ProjectIcon from '$icons/nav-projects.svg'
-import SelectFoulderIcon from '$icons/nav-select-folder.svg'
-import ImportIcon from '$icons/nav-import.svg'
-import logo from '../../../public/logo192.png'
+import logo from '@public/logo192.png'
+import ProjectIcon from '@icons/nav-projects.svg'
+import SelectFoulderIcon from '@icons/nav-select-folder.svg'
+import ImportIcon from '@icons/nav-import.svg'
 
 import css from './style.module.scss'
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import cn from 'classnames'
 
-import FolderFilledIcon from '$icons/folder-filled.svg'
+import FolderFilledIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 

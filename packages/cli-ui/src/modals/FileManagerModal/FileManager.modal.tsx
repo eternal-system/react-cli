@@ -2,9 +2,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from 'context'
-import { Modal, FileManager } from '../../components'
+import { Modal, FileManager } from '@components'
 
-import EditIcon from '$icons/edit-pen.svg'
+import EditIcon from '@icons/edit-pen.svg'
 
 import css from './style.module.scss'
 
