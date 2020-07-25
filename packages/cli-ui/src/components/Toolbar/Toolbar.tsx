@@ -57,8 +57,23 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
     }
   }
 
+  function handleClickFolder (e) {
+    return setUrlPath(path.slice(0, Number(e.target.dataset.id) + 1))
+  }
+
   function renderUrlPath () {
-    if (!isEdit) return path.map((url: string) => <div key={url} className={css.urlElement}>{url}</div>)
+    if (!isEdit) {
+      return path.map((url: string, index: number) => (
+        <div
+          key={url}
+          data-id={index}
+          className={css.urlElement}
+          onClick={handleClickFolder}
+        >
+          {url}
+        </div>
+      ))
+    }
     return <Input
       name="path"
       value={editPath}
