@@ -9,14 +9,14 @@ import FlashIcon from '@icons/flash-filled.svg'
 import css from './style.module.scss'
 
 export default function KillPort () {
-  const [value, setValue] = useState()
+  const [value, setValue] = useState('')
   const notification = useNotification()
 
-  const handleKill = (ev: any) => {
+  function handleKill (ev: any) {
     ev.preventDefault()
     Api.GET(`/api/kill?port=${value}`)
       .then((res) => {
-        console.log('res', res)
+        setValue('')
         notification.success({
           title: res.title,
           message: res.message
@@ -29,12 +29,15 @@ export default function KillPort () {
       })
   }
 
-  const handleChange = (ev: any) => {
-    console.log(ev.value)
+  function handleChange (ev: any) {
     setValue(ev.value)
   }
 
-  // Killed successfully!
+  function handleKeyPress (ev: React.KeyboardEvent) {
+    if (ev.charCode === 13) {
+      return handleKill(ev)
+    }
+  }
 
   return (
     <div className={css.wrapperCard}>
@@ -45,7 +48,7 @@ export default function KillPort () {
           <span>Ready to kill</span>
         </div>
         <div className={css.content}>
-          <Input type="number" value={value} onChange={handleChange} />
+          <Input type="number" value={value} onChange={handleChange} onKeyPress={handleKeyPress} />
           <button onClick={handleKill}>
             <FlashIcon />
             <span>Kill</span>
