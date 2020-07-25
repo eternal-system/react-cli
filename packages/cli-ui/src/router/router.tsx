@@ -18,10 +18,19 @@ export default function renderRoutes () {
         const { Component, paths, exact = false, isRowDirection } = appRoutes[key] as RouteEntity
         return (
           <Route exact={exact} path={Object.values(createPathsArray(paths)) as string[]} key={key}>
-            <div className={isRowDirection ? css.routeRowContainer : css.routeColumnContainer}>
-              <Component />
-              {createMainRoutes(createPathsArray(paths, 'findDeepRoutes'))}
-            </div>
+            {
+              isRowDirection ? (
+                <div className={css.routeRowContainer}>
+                  <Component />
+                  {createMainRoutes(createPathsArray(paths, 'findDeepRoutes'))}
+                </div>
+              ) : (
+                <>
+                  <Component />
+                  {createMainRoutes(createPathsArray(paths, 'findDeepRoutes'))}
+                </>
+              )
+            }
           </Route>
         )
       })
