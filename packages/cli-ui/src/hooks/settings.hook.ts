@@ -1,10 +1,13 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
+import openSocket from 'socket.io-client'
 
 import i18n from '../i18n'
 
 const storageThemeName = 'darkTheme'
 const storageLocaleName = 'locale'
 const storageSelectedPathName = 'selectedPath'
+
+const initSocket = openSocket('http://localhost:8081')
 
 export function useSettings () {
   const [darkTheme, setDarkTheme] = useState<boolean | null>(null)
@@ -38,7 +41,10 @@ export function useSettings () {
     setSelectedPath(newPath)
   }, [selectedPath])
 
+  const socket = useMemo(() => initSocket, [])
+
   return {
+    socket,
     locale,
     darkTheme,
     selectedPath,

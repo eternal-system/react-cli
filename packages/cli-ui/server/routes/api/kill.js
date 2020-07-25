@@ -12,12 +12,15 @@ router.get('/', async (req, res) => {
   } else {
     try {
       await fkill(`:${port}`)
-      // res.send(kill)
-      res.send(`🌠 Port :${port} successfully killed`)
+      return res.status(200).json({
+        title: `🌠 Port: ${port}`,
+        message: 'Successfully killed'
+      })
     } catch (error) {
-    // res.send(error)
-      console.log(error)
-      res.send(error)
+      return res.status(400).json({
+        title: `❌ Port: ${port}`,
+        message: 'Couldn\'t kill process'
+      })
     }
   }
 })
