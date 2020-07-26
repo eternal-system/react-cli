@@ -14,6 +14,7 @@ export default function KillPort () {
 
   function handleKill (ev: any) {
     ev.preventDefault()
+    if (!value) return
     Api.GET(`/api/kill?port=${value}`)
       .then((res) => {
         setValue('')

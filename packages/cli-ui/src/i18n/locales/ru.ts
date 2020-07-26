@@ -28,7 +28,8 @@ const locale = {
     createProject: 'Создать проект',
     packageManager: 'Пакетный менеджер',
     selectPreset: 'Выбор базовых настроек',
-    typeName: 'Введите имя'
+    typeName: 'Введите имя',
+    creatingProject: 'Создание проекта'
   },
   dashboard: {
     dashboard: 'Панель',

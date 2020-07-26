@@ -29,7 +29,8 @@ const locale = {
     createProject: 'Create Project',
     packageManager: 'Package manager',
     selectPreset: 'Select a preset',
-    typeName: 'Type a name'
+    typeName: 'Type a name',
+    creatingProject: 'Creating project'
   },
   dashboard: {
     dashboard: 'Dashboard',
