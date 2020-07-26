@@ -56,8 +56,8 @@ export default function CreateProject () {
     socket.on('erro', (error) => {
       setLoading(false)
       notification.error({
-        title: error.message,
-        message: error.error.path
+        title: error.title,
+        message: error.message
       })
     })
     return () => {
@@ -69,6 +69,17 @@ export default function CreateProject () {
 
   function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
+  }
+
+  function renderAnimatedDots () {
+    return new Array(3).fill('.').map((content, i) => (
+      <i
+        key={`key-${i}`}
+        className={css[`loadingDot${i + 1}`]}
+      >
+        {content}
+      </i>
+    ))
   }
 
   function createProject () {
@@ -90,9 +101,7 @@ export default function CreateProject () {
           <Loader />
           <span>
             {`${t('creatingProject')} ${state.name}`}
-            <i className={css.loadingDot1}>.</i>
-            <i className={css.loadingDot2}>.</i>
-            <i className={css.loadingDot3}>.</i>
+            {renderAnimatedDots()}
           </span>
           <div className={css.loadingDescription}>{logInfo}</div>
         </div>
