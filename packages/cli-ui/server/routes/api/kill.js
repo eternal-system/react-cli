@@ -5,10 +5,11 @@ const router = Router()
 router.get('/', async (req, res) => {
   const port = req.query.port
   console.log('port', port, typeof port)
-  if (port === 'undefined') {
-    res.send('note')
-  } else if (port === '') {
-    res.send('note')
+  if (port === 'undefined' || port === '') {
+    return res.status(400).json({
+      title: '❌ Has\'t port to kill',
+      message: 'Couldn\'t kill process'
+    })
   } else {
     try {
       await fkill(`:${port}`)

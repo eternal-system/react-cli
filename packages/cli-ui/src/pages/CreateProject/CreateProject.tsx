@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
+import cn from 'classnames'
 
-import { Content, Loader } from '@components'
+import Loader from '@icons/react-logo.svg'
+
+import { Content } from '@components'
 import { useModal, useNotification } from '@hooks'
 import { Input, Select } from 'common'
 import { FileManagerModal } from 'modals'
 import { SettingsContext } from 'context'
-import { Routes } from '../../router'
+import { Routes } from 'router'
 
 import css from './style.module.scss'
 import mainCss from '../../style/main.module.scss'
@@ -26,10 +29,12 @@ export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
   const history = useHistory()
   const notification = useNotification()
-  const { visible, showModal, closeModal } = useModal()
   const { socket, selectedPath } = React.useContext(SettingsContext)
 
   // State
+  const { visible, showModal, closeModal } = useModal()
+  const [logInfo, setLogInfo] = useState('')
+  const [loading, setLoading] = useState(false)
   const [state, setState] = useState({
     name: '',
     manager: optionsManager[0],
@@ -37,6 +42,13 @@ export default function CreateProject () {
   })
 
   useEffect(() => {
+    socket.on('check', (msg) => {
+      setLogInfo(prevState =>
+        msg.message !== '\n'
+          ? msg.message.replace('\n', ' ')
+          : prevState
+      )
+    })
     socket.on('notification', () => {
       setLoading(false)
       history.push(Routes.DASHBOARD)
@@ -49,12 +61,11 @@ export default function CreateProject () {
       })
     })
     return () => {
+      socket.off('check')
       socket.off('notification')
       socket.off('erro')
     }
   }, [])
-
-  const [loading, setLoading] = useState(false)
 
   function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
@@ -73,7 +84,20 @@ export default function CreateProject () {
   }
 
   if (loading) {
-    return <Loader />
+    return (
+      <Content>
+        <div className={cn(css.createContainer, css.loading)}>
+          <Loader />
+          <span>
+            {`${t('creatingProject')} ${state.name}`}
+            <i className={css.loadingDot1}>.</i>
+            <i className={css.loadingDot2}>.</i>
+            <i className={css.loadingDot3}>.</i>
+          </span>
+          <div className={css.loadingDescription}>{logInfo}</div>
+        </div>
+      </Content>
+    )
   }
 
   return (
