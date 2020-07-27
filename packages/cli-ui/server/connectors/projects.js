@@ -52,45 +52,56 @@ class ProjectApi {
      * @param {string} manager Manager new project (npm/yarn)
      * @param {string} preset Preset new project (create-react-app/other...)
      */
-  async createProject (name, pathProject, manager, preset) {
-    let subprocess
-    if (manager === 'npm') {
-      subprocess = craNpm(pathProject, name)
-    } else {
-      subprocess = craYarn(pathProject, name)
-    }
+  createProject (name, pathProject, manager, preset) {
+    fs.readdir(path.join('/', ...pathProject, name), async (err, files) => {
+      if (err) {
+        let subprocess
+        if (manager === 'npm') {
+          subprocess = craNpm(pathProject, name)
+        } else {
+          subprocess = craYarn(pathProject, name)
+        }
 
-    try {
-      subprocess.stdout.pipe(process.stdout)
+        try {
+          subprocess.stdout.pipe(process.stdout)
 
-      subprocess.stdout.on('data', data => {
-        this.client.emit('check', {
-          message: data.toString('utf8')
-        })
-      })
+          subprocess.stdout.on('data', data => {
+            this.client.emit('check', {
+              message: data.toString('utf8')
+            })
+          })
 
-      const { stdout } = await subprocess
+          const { stdout } = await subprocess
 
-      // add db project
-      if (stdout) {
-        db.get('projects').push({
-          id: db.get('projects').value().length + 1,
-          name,
-          path: pathProject,
-          manager,
-          preset,
-          favorite: false
-        }).write()
+          // add db project
+          if (stdout) {
+            db.get('projects').push({
+              id: db.get('projects').value().length + 1,
+              name,
+              path: pathProject,
+              manager,
+              preset,
+              favorite: false
+            }).write()
+          }
+
+          this.client.emit('notification', {
+            message: 'Project successfully create'
+          })
+        } catch (error) {
+          this.client.emit('erro', {
+            message: 'Что-то пошло не так, попробуйте снова'
+          })
+        }
       }
 
-      this.client.emit('notification', {
-        message: 'Project successfully create'
-      })
-    } catch (error) {
-      this.client.emit('erro', {
-        message: 'Что-то пошло не так, попробуйте снова'
-      })
-    }
+      if (files) {
+        this.client.emit('erro', {
+          title: 'Ошибка создания проекта',
+          message: `Директория ${name} - уже существует`
+        })
+      }
+    })
   }
 
   /**
