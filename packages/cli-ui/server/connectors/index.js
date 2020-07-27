@@ -11,7 +11,6 @@ const folderDbPath = path.normalize(path.join(__dirname, '../../db.json'))
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
 
-
 // WS api
 function api (message, client) {
   const folder = new FolderApi(client, db)
@@ -29,12 +28,12 @@ function api (message, client) {
     case 'CREATE_FOLDER':
       folder.createFolder(url)
       break
-    
+
     // Favorite folder
     case 'SET_FAVORITE':
       folder.setFavorite(file)
       break
-    
+
     case 'LIST_FAVORITE':
       folder.listFavorite()
       break
@@ -67,7 +66,7 @@ function api (message, client) {
     case 'ADD_FAVORITE_BY_ID':
       project.addFavoriteProjectById(id)
       break
-    
+
     case 'OPEN_LAST_PROJECT':
       project.autoOpenLastProject()
       break
@@ -80,7 +79,7 @@ function api (message, client) {
     case 'GET_LIST_DEPENDINCIES':
       dependencies.list(path)
       break
-    
+
     // Config
     case 'GET_CONFIG':
       project.getConfig()
@@ -90,7 +89,7 @@ function api (message, client) {
     case 'GET_LOGS':
       logs.list()
       break
-    
+
     case 'ADD_LOGS':
       logs.add(log)
       break
@@ -102,7 +101,6 @@ function api (message, client) {
     case 'CLEAR_LOG':
       logs.clear()
       break
-
   }
 }
 

@@ -83,7 +83,7 @@ class FolderApi {
     return false
   }
 
-  readPackage(file) {
+  readPackage (file) {
     const pkgFile = path.join(file, 'package.json')
     if (fs.existsSync(pkgFile)) {
       const pkg = fs.readJsonSync(pkgFile)
@@ -118,11 +118,11 @@ class FolderApi {
       )
     })
   }
-  
+
   isFavorite (file) {
     return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
   }
-  
+
   setFavorite ({ file, favorite }) {
     const collection = this.context.get('foldersFavorite')
     if (favorite) {
