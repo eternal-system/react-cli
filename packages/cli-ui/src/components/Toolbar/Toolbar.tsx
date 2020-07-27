@@ -115,7 +115,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
             {renderIcon(RefrechIcon)}
           </button>
 
-          <button onClick={() => addFavorite(isFavorite ? false : true)}>
+          <button onClick={() => addFavorite(!isFavorite)}>
             { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
           </button>
 
