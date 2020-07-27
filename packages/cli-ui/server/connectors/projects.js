@@ -1,11 +1,13 @@
 const fs = require('fs')
 const path = require('path')
+const FolderApi = require('./folders')
 const { craNpm, craYarn } = require('../util/create')
 
 class ProjectApi {
-  constructor (client, db) {
+  constructor (client, db, folder) {
     this.client = client
     this.context = db
+    this.folder = folder
   }
 
   /**
@@ -163,6 +165,38 @@ class ProjectApi {
     this.client.emit('projects', {
       data: this.context.get('projects').value()
     })
+  }
+
+  /**
+   * Import Project
+   */
+  importProject (pathProject) {
+
+    if (!fs.existsSync(path.join(`/${pathProject.join('/')}`, 'node_modules'))) {
+      this.client.emit('erro-import-project', {
+        title: 'NO_MODULES',
+        message: 'It seems the project is missing the "node_modules" folder. Please check you installed the dependencies before importing.'
+      })
+    } else {
+      const project = {
+        id: this.context.get('projects').value().length + 1,
+        path: pathProject,
+        favorite: false
+      }
+  
+      const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
+                                  
+      project.name = packageData.name
+      this.context.get('projects').push(project).write()
+      this.open(project.id)
+      this.client.emit('notification', {
+          message: 'Import successfully project'
+      })
+      this.client.emit('projects', {
+        data: this.context.get('projects').value()
+      })
+    }
+
   }
 }
 

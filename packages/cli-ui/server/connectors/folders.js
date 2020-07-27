@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs = require('fs-extra')
+const path = require('path')
 
 class FolderApi {
   constructor (client, db) {
@@ -86,7 +87,6 @@ class FolderApi {
     const pkgFile = path.join(file, 'package.json')
     if (fs.existsSync(pkgFile)) {
       const pkg = fs.readJsonSync(pkgFile)
-      pkgCache.set(file, pkg)
       return pkg
     }
   }

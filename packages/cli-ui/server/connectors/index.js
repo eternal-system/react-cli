@@ -15,7 +15,7 @@ const db = low(adapter)
 // WS api
 function api (message, client) {
   const folder = new FolderApi(client, db)
-  const project = new ProjectApi(client, db)
+  const project = new ProjectApi(client, db, folder)
   const logs = new LogsApi(client, db)
   const { type, name, url, id, hidden, path, manager, preset, log } = message
 
@@ -40,6 +40,10 @@ function api (message, client) {
 
     case 'CREATE_PROJECT':
       project.createProject(name, path, manager, preset)
+      break
+
+    case 'IMPORT_PROJECT':
+      project.importProject(path)
       break
 
     case 'GET_PROJECT_BY_ID':
