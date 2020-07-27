@@ -1,0 +1,61 @@
+const path = require('path')
+const Module = require('module')
+
+const semver = require('semver')
+
+// https://github.com/benmosher/eslint-plugin-import/pull/1591
+// https://github.com/benmosher/eslint-plugin-import/pull/1602
+// Polyfill Node's `Module.createRequireFromPath` if not present (added in Node v10.12.0)
+// Use `Module.createRequire` if available (added in Node v12.2.0)
+const createRequire = Module.createRequire || Module.createRequireFromPath || function (filename) {
+    const mod = new Module(filename, null)
+    mod.filename = filename
+    mod.paths = Module._nodeModulePaths(path.dirname(filename))
+  
+    mod._compile(`module.exports = require;`, filename)
+  
+    return mod.exports
+}
+
+function resolveFallback (request, options) {
+    const isMain = false
+    const fakeParent = new Module('', null)
+  
+    const paths = []
+  
+    for (let i = 0; i < options.paths.length; i++) {
+      const p = options.paths[i]
+      fakeParent.paths = Module._nodeModulePaths(p)
+      const lookupPaths = Module._resolveLookupPaths(request, fakeParent, true)
+  
+      if (!paths.includes(p)) paths.push(p)
+  
+      for (let j = 0; j < lookupPaths.length; j++) {
+        if (!paths.includes(lookupPaths[j])) paths.push(lookupPaths[j])
+      }
+    }
+  
+    const filename = Module._findPath(request, paths, isMain)
+    if (!filename) {
+      const err = new Error(`Cannot find module '${request}'`)
+      err.code = 'MODULE_NOT_FOUND'
+      throw err
+    }
+    return filename
+}
+
+const resolve = semver.satisfies(process.version, '>=10.0.0')
+  ? require.resolve
+  : resolveFallback
+
+exports.resolveModule = function (request, context) {
+    let resolvedPath
+    try {
+      try {
+        resolvedPath = createRequire(path.resolve(context, 'package.json')).resolve(request)
+      } catch (e) {
+        resolvedPath = resolve(request, { paths: [context] })
+      }
+    } catch (e) {}
+    return resolvedPath
+  }

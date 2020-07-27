@@ -20,7 +20,7 @@ export default function FileManager () {
   const [projects, setProjects] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [favorites, setFavorites] = useState<Favorites[]>([])
-
+ 
   useEffect(() => {
     socket.send({
       type: 'GET_FOLDERS',
@@ -68,7 +68,9 @@ export default function FileManager () {
   }, [selectedPath])
 
   useEffect(() => {
-    getFoldersData(url)
+    setTimeout(() => {
+      getFoldersData(url)
+    }, 200);
   }, [url])
 
   const getFoldersData = useCallback(

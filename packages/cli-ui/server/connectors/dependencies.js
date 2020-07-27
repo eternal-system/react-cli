@@ -1,5 +1,7 @@
 const path = require('path')
+const fs = require('fs')
 const { resolveModuleRoot } = require('../util/resolve-path')
+const { resolveModule } = require('../util/modules')
 
 class DependenciesApi {
     constructor (client, db, folders) {
@@ -10,13 +12,22 @@ class DependenciesApi {
     }
 
     list(file) {
-        const pkg = this.folders.readPackage(path.join(`/${file.join('/')}`))
-        this.dependencies = this.dependencies.concat(
-            findDependencies(pkg.devDependencies || {}, 'devDependencies', file)
-        )
-        this.dependencies = this.dependencies.concat(
-            findDependencies(pkg.dependencies || {}, 'dependencies', file)
-        )
+       
+        const filePath = `/${file.join('/')}`
+        const pkg = this.folders.readPackage(path.join(filePath))
+       
+        if(pkg){
+            this.dependencies = this.dependencies.concat(
+                this.findDependencies(pkg.devDependencies || {}, 'devDependencies', filePath)
+            )
+            this.dependencies = this.dependencies.concat(
+                this.findDependencies(pkg.dependencies || {}, 'dependencies', filePath)
+            )
+        }
+
+        this.client.emit('dependencies', {
+           data: this.dependencies
+        })
     }
 
     findDependencies (deps, type, file) {
@@ -24,8 +35,8 @@ class DependenciesApi {
           id => ({
             id,
             versionRange: deps[id],
-            installed: isInstalled({ id, file }),
-            website: getLink({ id, file }),
+            installed: this.isInstalled({ id, file }),
+            website: this.getLink({ id, file }),
             type,
             baseFir: file
           })
@@ -33,7 +44,7 @@ class DependenciesApi {
     }
 
     isInstalled ({ id, file }) {
-        const resolvedPath = getPath({ id, file })
+        const resolvedPath = this.getPath({ id, file })
         return resolvedPath && fs.existsSync(resolvedPath)
     }
 
@@ -43,8 +54,8 @@ class DependenciesApi {
         return resolveModuleRoot(filePath, id)
     }
 
-    getLink ({ id, file }, context) {
-        const pkg = readPackage({ id, file })
+    getLink ({ id, file }) {
+        const pkg = this.readPackage({ id, file })
         return pkg.homepage ||
           (pkg.repository && pkg.repository.url) ||
           `https://www.npmjs.com/package/${id.replace('/', '%2F')}`
@@ -52,7 +63,7 @@ class DependenciesApi {
 
     readPackage ({ id, file }) {
         try {
-          return folders.readPackage(getPath({ id, file }))
+          return this.folders.readPackage(this.getPath({ id, file }))
         } catch (e) {
           console.log(e)
         }
