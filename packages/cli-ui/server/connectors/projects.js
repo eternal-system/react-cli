@@ -1,42 +1,52 @@
 const fs = require('fs')
 const path = require('path')
-// db
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const folderDbPath = path.normalize(path.join(__dirname, '../../db.json'))
-const adapter = new FileSync(folderDbPath)
-const db = low(adapter)
+const FolderApi = require('./folders')
 const { craNpm, craYarn } = require('../util/create')
 
 class ProjectApi {
-  constructor (client) {
+  constructor (client, db, folder) {
     this.client = client
+    this.context = db
+    this.folder = folder
   }
 
   /**
-     * Open project
-     * @param {number} id Number string
-     */
+   * Open project
+   * @param {number} id Number string
+   */
   open (id) {
-    db.set('config.lastOpenProject', id).write()
+
+    if(id) {
+      // Date
+      this.context.get('projects').find({ id }).assign({
+        openDate: Date.now()
+      }).write()
+
+      this.context.set('config.lastOpenProject', id).write()
+
+      this.client.emit('lastOpenProject', {
+        data: this.context.get('projects').find({ id })
+      })
+    }
+
   }
 
   /**
-     * Get config
-     */
+   * Get config
+   */
   getConfig () {
     this.client.emit('config', {
-      data: db.get('config').value()
+      data: this.context.get('config').value()
     })
   }
 
   /**
-     * Get list project
-     */
-  getProjects () {
+   * Get list project
+   */
+  getProjects (folderDbPath) {
     if (fs.existsSync(folderDbPath)) {
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     } else {
       this.client.emit('erro', {
@@ -46,12 +56,12 @@ class ProjectApi {
   }
 
   /**
-     * Create new project
-     * @param {string} name Name new project
-     * @param {array} pathProject Path new project
-     * @param {string} manager Manager new project (npm/yarn)
-     * @param {string} preset Preset new project (create-react-app/other...)
-     */
+   * Create new project
+   * @param {string} name Name new project
+   * @param {array} pathProject Path new project
+   * @param {string} manager Manager new project (npm/yarn)
+   * @param {string} preset Preset new project (create-react-app/other...)
+   */
   createProject (name, pathProject, manager, preset) {
     fs.readdir(path.join('/', ...pathProject, name), async (err, files) => {
       if (err) {
@@ -75,8 +85,8 @@ class ProjectApi {
 
           // add db project
           if (stdout) {
-            db.get('projects').push({
-              id: db.get('projects').value().length + 1,
+            this.context.get('projects').push({
+              id: this.context.get('projects').value().length + 1,
               name,
               path: pathProject,
               manager,
@@ -105,70 +115,114 @@ class ProjectApi {
   }
 
   /**
-     * Get project by Id
-     * @param {number} id ID project
-     */
+   * Get project by Id
+   * @param {number} id ID project
+   */
   getProjectById (id) {
     this.client.emit('project', {
-      data: db.get('projects')
+      data: this.context.get('projects')
         .filter({ id })
         .value()
     })
   }
 
   /**
-     * Delete project by Id
-     * @param {number} id ID project
-     */
+   * Delete project by Id
+   * @param {number} id ID project
+   */
   deleteProjectById (id) {
     if (id) {
-      db.get('projects')
+      this.context.get('projects')
         .remove({ id })
         .write()
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     } else {
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     }
   }
 
   /**
-     * Add Favorite project by id
-     * @param {number} id ID project
-     */
+   * Add Favorite project by id
+   * @param {number} id ID project
+   */
   addFavoriteProjectById (id) {
-    const pr = db.get('projects')
+    const pr = this.context.get('projects')
       .find({ id })
       .value()
     if (pr.favorite) {
-      db.get('projects')
+      this.context.get('projects')
         .find({ id })
         .assign({ favorite: false })
         .write()
     } else {
-      db.get('projects')
+      this.context.get('projects')
         .find({ id })
         .assign({ favorite: true })
         .write()
     }
     this.client.emit('projects', {
-      data: db.get('projects').value()
+      data: this.context.get('projects').value()
     })
   }
 
   /**
-     * Clear db
-     */
+   * Clear db
+   */
   clearDb () {
-    db.get('projects')
+    this.context.get('projects')
       .remove().write()
     this.client.emit('projects', {
-      data: db.get('projects').value()
+      data: this.context.get('projects').value()
     })
   }
+
+  /**
+   * Import Project
+   */
+  importProject (pathProject) {
+
+    if (!fs.existsSync(path.join(`/${pathProject.join('/')}`, 'node_modules'))) {
+      this.client.emit('erro-import-project', {
+        title: 'NO_MODULES',
+        message: 'It seems the project is missing the "node_modules" folder. Please check you installed the dependencies before importing.'
+      })
+    } else {
+      const project = {
+        id: this.context.get('projects').value().length + 1,
+        path: pathProject,
+        favorite: false
+      }
+  
+      const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
+                                  
+      project.name = packageData.name
+      this.context.get('projects').push(project).write()
+      this.open(project.id)
+      this.client.emit('notification', {
+          message: 'Import successfully project'
+      })
+      this.client.emit('projects', {
+        data: this.context.get('projects').value()
+      })
+    }
+
+  }
+
+
+  /**
+  *  Open last project
+  */
+  autoOpenLastProject() {
+    const id = this.context.get('config.lastOpenProject').value()
+    if (id) {
+      open(id)
+    }
+  }
+
 }
 
 module.exports = ProjectApi

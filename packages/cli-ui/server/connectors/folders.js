@@ -1,15 +1,17 @@
-const fs = require('fs')
+const fs = require('fs-extra')
+const path = require('path')
 
 class FolderApi {
-  constructor (client) {
+  constructor (client, db) {
     this.client = client
+    this.context = db
   }
 
   /**
-     * Get list folders
-     * @param {string} url URL folder
-     * @param {boolian} hidden Hidden folder with dot
-     */
+   * Get list folders
+   * @param {string} url URL folder
+   * @param {boolian} hidden Hidden folder with dot
+   */
   getFolders (url, hidden) {
     try {
       const data = {
@@ -49,9 +51,9 @@ class FolderApi {
   }
 
   /**
-     * Create new folder
-     *  @param {string} dir URL for new folder
-     */
+   * Create new folder
+   *  @param {string} dir URL for new folder
+   */
   async createFolder (dir) {
     try {
       if (dir && !fs.existsSync(dir)) {
@@ -70,6 +72,69 @@ class FolderApi {
         error
       })
     }
+  }
+
+  isPackage (file) {
+    try {
+      return fs.existsSync(path.join(file, 'package.json'))
+    } catch (e) {
+      console.warn(e.message)
+    }
+    return false
+  }
+
+  readPackage(file) {
+    const pkgFile = path.join(file, 'package.json')
+    if (fs.existsSync(pkgFile)) {
+      const pkg = fs.readJsonSync(pkgFile)
+      return pkg
+    }
+  }
+
+  generateFolder (file) {
+    return {
+      name: path.basename(file),
+      path: file
+    }
+  }
+
+  isReactProject (file) {
+    if (!isPackage(file)) return false
+    try {
+      const pkg = readPackage(file)
+      return Object.keys(pkg.devDependencies || {}).includes('react')
+    } catch (e) {
+      if (process.env.DEV_SERVER) {
+        console.log(e)
+      }
+    }
+    return false
+  }
+
+  listFavorite () {
+    this.client.emit('foldersFavorite', {
+      data: this.context.get('foldersFavorite').value().map(
+        file => this.generateFolder(file.id)
+      )
+    })
+  }
+  
+  isFavorite (file) {
+    return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
+  }
+  
+  setFavorite ({ file, favorite }) {
+    const collection = this.context.get('foldersFavorite')
+    if (favorite) {
+      collection.push({ id: file }).write()
+    } else {
+      collection.remove({ id: file }).write()
+    }
+    this.client.emit('foldersFavorite', {
+      data: this.context.get('foldersFavorite').value().map(
+        file => this.generateFolder(file.id)
+      )
+    })
   }
 }
 

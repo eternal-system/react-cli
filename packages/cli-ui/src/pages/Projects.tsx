@@ -21,7 +21,7 @@ export default function Projects () {
   const history = useHistory()
   const { t } = useTranslation('project')
   const notification = useNotification()
-  const { socket } = useContext(SettingsContext)
+  const { socket, changeSelectedPath } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [filters, setFilters] = useState<ProjectProps[]>([])
@@ -73,6 +73,8 @@ export default function Projects () {
         type: 'OPEN_PROJECT',
         id
       })
+      const project = projects.find(project => project.id === id)
+      changeSelectedPath(project.path)
       history.push(Routes.DASHBOARD)
     }
   }
