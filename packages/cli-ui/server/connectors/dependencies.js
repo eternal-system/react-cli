@@ -1,3 +1,4 @@
+const path = require('path')
 const { resolveModuleRoot } = require('../util/resolve-path')
 
 class DependenciesApi {
@@ -8,8 +9,8 @@ class DependenciesApi {
         this.dependencies = []
     }
 
-    list() {
-        const pkg = this.folders.readPackage(file)
+    list(file) {
+        const pkg = this.folders.readPackage(path.join(`/${file.join('/')}`))
         this.dependencies = this.dependencies.concat(
             findDependencies(pkg.devDependencies || {}, 'devDependencies', file)
         )
@@ -18,13 +19,13 @@ class DependenciesApi {
         )
     }
 
-    findDependencies (deps, type, file, context) {
+    findDependencies (deps, type, file) {
         return Object.keys(deps).map(
           id => ({
             id,
             versionRange: deps[id],
             installed: isInstalled({ id, file }),
-            website: getLink({ id, file }, context),
+            website: getLink({ id, file }),
             type,
             baseFir: file
           })
@@ -43,10 +44,19 @@ class DependenciesApi {
     }
 
     getLink ({ id, file }, context) {
-        const pkg = readPackage({ id, file }, context)
+        const pkg = readPackage({ id, file })
         return pkg.homepage ||
           (pkg.repository && pkg.repository.url) ||
           `https://www.npmjs.com/package/${id.replace('/', '%2F')}`
+    }
+
+    readPackage ({ id, file }) {
+        try {
+          return folders.readPackage(getPath({ id, file }))
+        } catch (e) {
+          console.log(e)
+        }
+        return {}
     }
 
 }

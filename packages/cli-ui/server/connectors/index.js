@@ -67,9 +67,18 @@ function api (message, client) {
     case 'ADD_FAVORITE_BY_ID':
       project.addFavoriteProjectById(id)
       break
+    
+    case 'OPEN_LAST_PROJECT':
+      project.autoOpenLastProject()
+      break
 
     case 'CLEAR_DB':
       project.clearDb()
+      break
+
+    // Dependencies
+    case 'GET_LIST_DEPENDINCIES':
+      dependencies.list(path)
       break
     
     // Config
