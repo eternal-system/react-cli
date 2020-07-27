@@ -11,16 +11,16 @@ class ProjectApi {
   }
 
   /**
-     * Open project
-     * @param {number} id Number string
-     */
+   * Open project
+   * @param {number} id Number string
+   */
   open (id) {
     this.context.set('config.lastOpenProject', id).write()
   }
 
   /**
-     * Get config
-     */
+   * Get config
+   */
   getConfig () {
     this.client.emit('config', {
       data: this.context.get('config').value()
@@ -28,8 +28,8 @@ class ProjectApi {
   }
 
   /**
-     * Get list project
-     */
+   * Get list project
+   */
   getProjects (folderDbPath) {
     if (fs.existsSync(folderDbPath)) {
       this.client.emit('projects', {
@@ -43,12 +43,12 @@ class ProjectApi {
   }
 
   /**
-     * Create new project
-     * @param {string} name Name new project
-     * @param {array} pathProject Path new project
-     * @param {string} manager Manager new project (npm/yarn)
-     * @param {string} preset Preset new project (create-react-app/other...)
-     */
+   * Create new project
+   * @param {string} name Name new project
+   * @param {array} pathProject Path new project
+   * @param {string} manager Manager new project (npm/yarn)
+   * @param {string} preset Preset new project (create-react-app/other...)
+   */
   createProject (name, pathProject, manager, preset) {
     fs.readdir(path.join('/', ...pathProject, name), async (err, files) => {
       if (err) {
@@ -102,9 +102,9 @@ class ProjectApi {
   }
 
   /**
-     * Get project by Id
-     * @param {number} id ID project
-     */
+   * Get project by Id
+   * @param {number} id ID project
+   */
   getProjectById (id) {
     this.client.emit('project', {
       data: this.context.get('projects')
@@ -114,9 +114,9 @@ class ProjectApi {
   }
 
   /**
-     * Delete project by Id
-     * @param {number} id ID project
-     */
+   * Delete project by Id
+   * @param {number} id ID project
+   */
   deleteProjectById (id) {
     if (id) {
       this.context.get('projects')
@@ -133,9 +133,9 @@ class ProjectApi {
   }
 
   /**
-     * Add Favorite project by id
-     * @param {number} id ID project
-     */
+   * Add Favorite project by id
+   * @param {number} id ID project
+   */
   addFavoriteProjectById (id) {
     const pr = this.context.get('projects')
       .find({ id })
@@ -157,8 +157,8 @@ class ProjectApi {
   }
 
   /**
-     * Clear db
-     */
+   * Clear db
+   */
   clearDb () {
     this.context.get('projects')
       .remove().write()

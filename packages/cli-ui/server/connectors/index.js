@@ -17,7 +17,7 @@ function api (message, client) {
   const folder = new FolderApi(client, db)
   const project = new ProjectApi(client, db, folder)
   const logs = new LogsApi(client, db)
-  const { type, name, url, id, hidden, path, manager, preset, log } = message
+  const { type, name, url, id, hidden, path, manager, preset, log, file } = message
 
   switch (type) {
     // Folders
@@ -27,6 +27,15 @@ function api (message, client) {
 
     case 'CREATE_FOLDER':
       folder.createFolder(url)
+      break
+    
+    // Favorite folder
+    case 'SET_FAVORITE':
+      folder.setFavorite(file)
+      break
+    
+    case 'LIST_FAVORITE':
+      folder.listFavorite()
       break
 
     // Projects
@@ -61,7 +70,7 @@ function api (message, client) {
     case 'CLEAR_DB':
       project.clearDb()
       break
-
+    
     // Config
     case 'GET_CONFIG':
       project.getConfig()

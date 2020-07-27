@@ -91,7 +91,7 @@ class FolderApi {
     }
   }
 
-  generateFolder (file, context) {
+  generateFolder (file) {
     return {
       name: path.basename(file),
       path: file
@@ -112,23 +112,29 @@ class FolderApi {
   }
 
   listFavorite () {
-    return this.context.get('foldersFavorite').value().map(
-      file => this.generateFolder(file.id, context)
-    )
+    this.client.emit('foldersFavorite', {
+      data: this.context.get('foldersFavorite').value().map(
+        file => this.generateFolder(file.id)
+      )
+    })
   }
   
   isFavorite (file) {
     return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
   }
   
-  setFavorite ({ file, favorite }, context) {
+  setFavorite ({ file, favorite }) {
     const collection = this.context.get('foldersFavorite')
     if (favorite) {
       collection.push({ id: file }).write()
     } else {
       collection.remove({ id: file }).write()
     }
-    return this.generateFolder(file, context)
+    this.client.emit('foldersFavorite', {
+      data: this.context.get('foldersFavorite').value().map(
+        file => this.generateFolder(file.id)
+      )
+    })
   }
 }
 

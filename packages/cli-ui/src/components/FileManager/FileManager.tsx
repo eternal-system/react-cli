@@ -6,6 +6,11 @@ import { ProgressBar } from 'common'
 import { useNotification } from '@hooks'
 import { Folders, Toolbar } from '../index'
 
+type Favorites = {
+  name: string;
+  path: string;
+}
+
 // Create new project
 export default function FileManager () {
   const notification = useNotification()
@@ -13,7 +18,8 @@ export default function FileManager () {
   const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
   const [projects, setProjects] = useState<string[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [favorites, setFavorites] = useState<Favorites[]>([])
 
   useEffect(() => {
     socket.send({
@@ -21,13 +27,20 @@ export default function FileManager () {
       url: `/${url.join('/')}`,
       hidden: false
     })
-
+    socket.send({
+      type: 'LIST_FAVORITE',
+    })
+    
     socket.on('folders', (res) => {
       batch(() => {
         setLoading(true)
         setProjects(res.data as string[])
         setLoading(false)
       })
+    })
+
+    socket.on('foldersFavorite', (res) => {
+      setFavorites(res.data)
     })
 
     socket.on('erro', (error) => {
@@ -43,6 +56,7 @@ export default function FileManager () {
 
     return () => {
       socket.off('folders')
+      socket.off('foldersFavorite')
       socket.off('erro')
     }
   }, [])
@@ -100,12 +114,24 @@ export default function FileManager () {
     setUrl((prevState) => prevState.splice(0, url.length - 1))
   }
 
+  function handleAddFavorite (favorite) {
+    socket.send({
+      type: 'SET_FAVORITE',
+      file: {
+        file: `/${url.join('/')}`,
+        favorite
+      }
+    })
+  }
+
   return (
     <>
       <Toolbar
         back={backFolder}
         updateFolderData={handleReset}
         setUrlPath={setUrl}
+        addFavorite={handleAddFavorite}
+        favorites={favorites}
         path={url}
       />
       { loading && <ProgressBar progress={75} /> }

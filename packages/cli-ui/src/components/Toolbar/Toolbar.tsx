@@ -7,27 +7,38 @@ import { ModalFolder } from '../../modals'
 import EditIcon from '@icons/edit-pen.svg'
 import ArrowUpIcon from '@icons/arrow-up.svg'
 import RefrechIcon from '@icons/refresh.svg'
+import Star from '@icons/star.svg'
+import StarAdd from '@icons/star-add.svg'
 import CreateFolderIcon from '@icons/folder-create-filled.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 
+type Favorites = {
+  name: string;
+  path: string;
+}
+
 interface Props {
   setUrlPath(url: string[]): void;
   updateFolderData(): void;
+  addFavorite(): void;
+  favorites: Favorites[]
   back(): void;
   path: string[];
 }
 
 // eslint-disable-next-line react/prop-types
-function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
+function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favorites }: Props) {
   const { visible, showModal, closeModal } = useModal()
   const [isEdit, setIsEdit] = useState(false)
   const [editPath, setEditPath] = useState('')
+  const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
+  const isFavorite = favorites.some(f => f.path === check)
 
   useEffect(() => {
     setEditPath(path.join('/'))
-  }, [path])
+  }, [path, favorites])
 
   function renderIcon (Component: React.FC) {
     return (
@@ -103,6 +114,11 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back }: Props) {
           <button onClick={updateFolderData}>
             {renderIcon(RefrechIcon)}
           </button>
+
+          <button onClick={() => addFavorite(isFavorite ? false : true)}>
+            { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
+          </button>
+
           <button onClick={showModal}>
             {renderIcon(CreateFolderIcon)}
           </button>
