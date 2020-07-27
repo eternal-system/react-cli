@@ -2,12 +2,15 @@ const FolderApi = require('./folders')
 const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
 
+const path = require('path')
+
 // db
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const folderDbPath = path.normalize(path.join(__dirname, '../../db.json'))
 const adapter = new FileSync(folderDbPath)
 const db = low(adapter)
+
 
 // WS api
 function api (message, client) {
@@ -32,7 +35,7 @@ function api (message, client) {
       break
 
     case 'GET_PROJECTS':
-      project.getProjects()
+      project.getProjects(folderDbPath)
       break
 
     case 'CREATE_PROJECT':

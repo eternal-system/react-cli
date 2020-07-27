@@ -28,7 +28,7 @@ class ProjectApi {
   /**
      * Get list project
      */
-  getProjects () {
+  getProjects (folderDbPath) {
     if (fs.existsSync(folderDbPath)) {
       this.client.emit('projects', {
         data: this.context.get('projects').value()

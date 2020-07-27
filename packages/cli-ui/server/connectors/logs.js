@@ -11,12 +11,11 @@
 
 class LogsApi {
 
-  /** @type {Log []} */
-  this.logs = []
-
   constructor (client, db) {
     this.client = client
     this.context = db
+    /** @type {Log []} */
+    this.logs = []
   }
 
   /**
@@ -59,3 +58,5 @@ class LogsApi {
   }
 
 }
+
+module.exports = LogsApi
