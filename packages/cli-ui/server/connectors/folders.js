@@ -99,9 +99,9 @@ class FolderApi {
   }
 
   isReactProject (file) {
-    if (!isPackage(file)) return false
+    if (!this.isPackage(file)) return false
     try {
-      const pkg = readPackage(file)
+      const pkg = this.readPackage(file)
       return Object.keys(pkg.devDependencies || {}).includes('react')
     } catch (e) {
       if (process.env.DEV_SERVER) {
