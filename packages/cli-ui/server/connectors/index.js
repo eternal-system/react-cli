@@ -1,11 +1,13 @@
 const FolderApi = require('./folders')
 const ProjectApi = require('./projects')
+const LogsApi = require('./logs')
 
 // WS api
 function api (message, client) {
   const folder = new FolderApi(client)
   const project = new ProjectApi(client)
-  const { type, name, url, id, hidden, path, manager, preset } = message
+  const logs = new LogsApi(client)
+  const { type, name, url, id, hidden, path, manager, preset, log } = message
 
   switch (type) {
     // Folders
@@ -17,7 +19,7 @@ function api (message, client) {
       folder.createFolder(url)
       break
 
-      // Projects
+    // Projects
     case 'OPEN_PROJECT':
       project.open(id)
       break
@@ -46,10 +48,28 @@ function api (message, client) {
       project.clearDb()
       break
 
-      // config
+    // Config
     case 'GET_CONFIG':
       project.getConfig()
       break
+
+    // Logs
+    case 'GET_LOGS':
+      logs.list()
+      break
+    
+    case 'ADD_LOGS':
+      logs.add(log)
+      break
+
+    case 'GET_LAST_LOG':
+      logs.last()
+      break
+
+    case 'CLEAR_LOG':
+      logs.clear()
+      break
+
   }
 }
 

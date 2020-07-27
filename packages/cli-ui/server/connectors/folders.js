@@ -6,10 +6,10 @@ class FolderApi {
   }
 
   /**
-     * Get list folders
-     * @param {string} url URL folder
-     * @param {boolian} hidden Hidden folder with dot
-     */
+   * Get list folders
+   * @param {string} url URL folder
+   * @param {boolian} hidden Hidden folder with dot
+   */
   getFolders (url, hidden) {
     try {
       const data = {
@@ -49,9 +49,9 @@ class FolderApi {
   }
 
   /**
-     * Create new folder
-     *  @param {string} dir URL for new folder
-     */
+   * Create new folder
+   *  @param {string} dir URL for new folder
+   */
   async createFolder (dir) {
     try {
       if (dir && !fs.existsSync(dir)) {
@@ -71,6 +71,39 @@ class FolderApi {
       })
     }
   }
+
+  isPackage (file) {
+    try {
+      return fs.existsSync(path.join(file, 'package.json'))
+    } catch (e) {
+      console.warn(e.message)
+    }
+    return false
+  }
+
+  readPackage(file) {
+    const pkgFile = path.join(file, 'package.json')
+    if (fs.existsSync(pkgFile)) {
+      const pkg = fs.readJsonSync(pkgFile)
+      pkgCache.set(file, pkg)
+      return pkg
+    }
+  }
+
+  isReactProject (file) {
+    if (!isPackage(file)) return false
+    try {
+      const pkg = readPackage(file)
+      return Object.keys(pkg.devDependencies || {}).includes('react')
+    } catch (e) {
+      if (process.env.VUE_APP_CLI_UI_DEBUG) {
+        console.log(e)
+      }
+    }
+    return false
+  }
+
+
 }
 
 module.exports = FolderApi
