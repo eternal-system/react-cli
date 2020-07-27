@@ -15,7 +15,20 @@ class ProjectApi {
    * @param {number} id Number string
    */
   open (id) {
-    this.context.set('config.lastOpenProject', id).write()
+
+    if(id) {
+      // Date
+      this.context.get('projects').find({ id }).assign({
+        openDate: Date.now()
+      }).write()
+
+      this.context.set('config.lastOpenProject', id).write()
+
+      this.client.emit('lastOpenProject', {
+        data: this.context.get('projects').find({ id })
+      })
+    }
+
   }
 
   /**
@@ -198,6 +211,18 @@ class ProjectApi {
     }
 
   }
+
+
+  /**
+  *  Open last project
+  */
+  autoOpenLastProject() {
+    const id = this.context.get('config.lastOpenProject').value()
+    if (id) {
+      open(id)
+    }
+  }
+
 }
 
 module.exports = ProjectApi

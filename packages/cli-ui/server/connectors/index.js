@@ -1,7 +1,7 @@
 const FolderApi = require('./folders')
 const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
-
+const DependenciesApi = require('./dependencies')
 const path = require('path')
 
 // db
@@ -16,6 +16,7 @@ const db = low(adapter)
 function api (message, client) {
   const folder = new FolderApi(client, db)
   const project = new ProjectApi(client, db, folder)
+  const dependencies = new DependenciesApi(client, db, folder)
   const logs = new LogsApi(client, db)
   const { type, name, url, id, hidden, path, manager, preset, log, file } = message
 
