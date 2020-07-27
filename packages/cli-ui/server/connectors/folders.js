@@ -83,7 +83,7 @@ class FolderApi {
     return false
   }
 
-  readPackage(file) {
+  readPackage (file) {
     const pkgFile = path.join(file, 'package.json')
     if (fs.existsSync(pkgFile)) {
       const pkg = fs.readJsonSync(pkgFile)
@@ -99,9 +99,9 @@ class FolderApi {
   }
 
   isReactProject (file) {
-    if (!isPackage(file)) return false
+    if (!this.isPackage(file)) return false
     try {
-      const pkg = readPackage(file)
+      const pkg = this.readPackage(file)
       return Object.keys(pkg.devDependencies || {}).includes('react')
     } catch (e) {
       if (process.env.DEV_SERVER) {
@@ -118,11 +118,11 @@ class FolderApi {
       )
     })
   }
-  
+
   isFavorite (file) {
     return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
   }
-  
+
   setFavorite ({ file, favorite }) {
     const collection = this.context.get('foldersFavorite')
     if (favorite) {

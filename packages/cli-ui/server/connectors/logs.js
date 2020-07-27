@@ -10,7 +10,6 @@
  */
 
 class LogsApi {
-
   constructor (client, db) {
     this.client = client
     this.context = db
@@ -50,13 +49,12 @@ class LogsApi {
     return null
   }
 
-  clear() {
+  clear () {
     this.logs = []
     this.client.emit('log', {
       data: this.logs
     })
   }
-
 }
 
 module.exports = LogsApi

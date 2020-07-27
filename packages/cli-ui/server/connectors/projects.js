@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const FolderApi = require('./folders')
 const { craNpm, craYarn } = require('../util/create')
 
 class ProjectApi {
@@ -15,8 +14,7 @@ class ProjectApi {
    * @param {number} id Number string
    */
   open (id) {
-
-    if(id) {
+    if (id) {
       // Date
       this.context.get('projects').find({ id }).assign({
         openDate: Date.now()
@@ -28,7 +26,6 @@ class ProjectApi {
         data: this.context.get('projects').find({ id })
       })
     }
-
   }
 
   /**
@@ -91,16 +88,20 @@ class ProjectApi {
               path: pathProject,
               manager,
               preset,
-              favorite: false
+              favorite: false,
+              type: 'react',
+              openDate: Date.now()
             }).write()
           }
 
           this.client.emit('notification', {
-            message: 'Project successfully create'
+            title: 'Success',
+            message: `Project ${name} successfully create`
           })
         } catch (error) {
           this.client.emit('erro', {
-            message: 'Что-то пошло не так, попробуйте снова'
+            title: 'Failure',
+            message: `Project ${name} create error`
           })
         }
       }
@@ -184,7 +185,6 @@ class ProjectApi {
    * Import Project
    */
   importProject (pathProject) {
-
     if (!fs.existsSync(path.join(`/${pathProject.join('/')}`, 'node_modules'))) {
       this.client.emit('erro-import-project', {
         title: 'NO_MODULES',
@@ -196,33 +196,30 @@ class ProjectApi {
         path: pathProject,
         favorite: false
       }
-  
+
       const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
-                                  
+
       project.name = packageData.name
       this.context.get('projects').push(project).write()
       this.open(project.id)
       this.client.emit('notification', {
-          message: 'Import successfully project'
+        message: 'Import successfully project'
       })
       this.client.emit('projects', {
         data: this.context.get('projects').value()
       })
     }
-
   }
-
 
   /**
   *  Open last project
   */
-  autoOpenLastProject() {
+  autoOpenLastProject () {
     const id = this.context.get('config.lastOpenProject').value()
     if (id) {
       open(id)
     }
   }
-
 }
 
 module.exports = ProjectApi
