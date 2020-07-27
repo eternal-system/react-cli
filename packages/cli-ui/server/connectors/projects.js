@@ -1,16 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-// db
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const folderDbPath = path.normalize(path.join(__dirname, '../../db.json'))
-const adapter = new FileSync(folderDbPath)
-const db = low(adapter)
 const { craNpm, craYarn } = require('../util/create')
 
 class ProjectApi {
-  constructor (client) {
+  constructor (client, db) {
     this.client = client
+    this.context = db
   }
 
   /**
@@ -18,7 +13,7 @@ class ProjectApi {
      * @param {number} id Number string
      */
   open (id) {
-    db.set('config.lastOpenProject', id).write()
+    this.context.set('config.lastOpenProject', id).write()
   }
 
   /**
@@ -26,7 +21,7 @@ class ProjectApi {
      */
   getConfig () {
     this.client.emit('config', {
-      data: db.get('config').value()
+      data: this.context.get('config').value()
     })
   }
 
@@ -36,7 +31,7 @@ class ProjectApi {
   getProjects () {
     if (fs.existsSync(folderDbPath)) {
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     } else {
       this.client.emit('erro', {
@@ -75,8 +70,8 @@ class ProjectApi {
 
           // add db project
           if (stdout) {
-            db.get('projects').push({
-              id: db.get('projects').value().length + 1,
+            this.context.get('projects').push({
+              id: this.context.get('projects').value().length + 1,
               name,
               path: pathProject,
               manager,
@@ -110,7 +105,7 @@ class ProjectApi {
      */
   getProjectById (id) {
     this.client.emit('project', {
-      data: db.get('projects')
+      data: this.context.get('projects')
         .filter({ id })
         .value()
     })
@@ -122,15 +117,15 @@ class ProjectApi {
      */
   deleteProjectById (id) {
     if (id) {
-      db.get('projects')
+      this.context.get('projects')
         .remove({ id })
         .write()
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     } else {
       this.client.emit('projects', {
-        data: db.get('projects').value()
+        data: this.context.get('projects').value()
       })
     }
   }
@@ -140,22 +135,22 @@ class ProjectApi {
      * @param {number} id ID project
      */
   addFavoriteProjectById (id) {
-    const pr = db.get('projects')
+    const pr = this.context.get('projects')
       .find({ id })
       .value()
     if (pr.favorite) {
-      db.get('projects')
+      this.context.get('projects')
         .find({ id })
         .assign({ favorite: false })
         .write()
     } else {
-      db.get('projects')
+      this.context.get('projects')
         .find({ id })
         .assign({ favorite: true })
         .write()
     }
     this.client.emit('projects', {
-      data: db.get('projects').value()
+      data: this.context.get('projects').value()
     })
   }
 
@@ -163,10 +158,10 @@ class ProjectApi {
      * Clear db
      */
   clearDb () {
-    db.get('projects')
+    this.context.get('projects')
       .remove().write()
     this.client.emit('projects', {
-      data: db.get('projects').value()
+      data: this.context.get('projects').value()
     })
   }
 }

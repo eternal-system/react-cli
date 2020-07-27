@@ -1,8 +1,9 @@
 const fs = require('fs')
 
 class FolderApi {
-  constructor (client) {
+  constructor (client, db) {
     this.client = client
+    this.context = db
   }
 
   /**
@@ -96,14 +97,32 @@ class FolderApi {
       const pkg = readPackage(file)
       return Object.keys(pkg.devDependencies || {}).includes('react')
     } catch (e) {
-      if (process.env.VUE_APP_CLI_UI_DEBUG) {
+      if (process.env.DEV_SERVER) {
         console.log(e)
       }
     }
     return false
   }
 
-
+  listFavorite () {
+    return this.context.get('foldersFavorite').value().map(
+      file => generateFolder(file.id, context)
+    )
+  }
+  
+  isFavorite (file) {
+    return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
+  }
+  
+  setFavorite ({ file, favorite }, context) {
+    const collection = this.context.get('foldersFavorite')
+    if (favorite) {
+      collection.push({ id: file }).write()
+    } else {
+      collection.remove({ id: file }).write()
+    }
+    return generateFolder(file, context)
+  }
 }
 
 module.exports = FolderApi

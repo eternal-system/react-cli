@@ -2,11 +2,18 @@ const FolderApi = require('./folders')
 const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
 
+// db
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const folderDbPath = path.normalize(path.join(__dirname, '../../db.json'))
+const adapter = new FileSync(folderDbPath)
+const db = low(adapter)
+
 // WS api
 function api (message, client) {
-  const folder = new FolderApi(client)
-  const project = new ProjectApi(client)
-  const logs = new LogsApi(client)
+  const folder = new FolderApi(client, db)
+  const project = new ProjectApi(client, db)
+  const logs = new LogsApi(client, db)
   const { type, name, url, id, hidden, path, manager, preset, log } = message
 
   switch (type) {

@@ -14,8 +14,9 @@ class LogsApi {
   /** @type {Log []} */
   this.logs = []
 
-  constructor (client) {
+  constructor (client, db) {
     this.client = client
+    this.context = db
   }
 
   /**
