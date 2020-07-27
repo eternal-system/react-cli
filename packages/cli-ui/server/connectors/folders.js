@@ -91,6 +91,13 @@ class FolderApi {
     }
   }
 
+  generateFolder (file, context) {
+    return {
+      name: path.basename(file),
+      path: file
+    }
+  }
+
   isReactProject (file) {
     if (!isPackage(file)) return false
     try {
@@ -106,7 +113,7 @@ class FolderApi {
 
   listFavorite () {
     return this.context.get('foldersFavorite').value().map(
-      file => generateFolder(file.id, context)
+      file => this.generateFolder(file.id, context)
     )
   }
   
@@ -121,7 +128,7 @@ class FolderApi {
     } else {
       collection.remove({ id: file }).write()
     }
-    return generateFolder(file, context)
+    return this.generateFolder(file, context)
   }
 }
 
