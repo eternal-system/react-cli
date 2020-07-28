@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-// import ReactTooltip from 'react-tooltip'
+import ReactTooltip from 'react-tooltip'
 
 import { Routes } from 'router'
 
@@ -55,14 +55,14 @@ export default function Dashboard () {
           {renderChildren}
         </div>
       </div>
-      {/* <ReactTooltip
+      <ReactTooltip
         id={TOOLTIP_ID}
         place="right"
         effect="solid"
         delayShow={1000}
         offset={{ left: 30 }}
         html
-      /> */}
+      />
     </div>
   )
 }
