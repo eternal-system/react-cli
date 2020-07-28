@@ -2,6 +2,8 @@
     height: 100%;
     width: 100%;
     background: #61dafb3f;
+    overflow:auto;
+
 }
 
 .top {
@@ -12,10 +14,18 @@
 
 .content {
     padding: 35px;
+    display: flex;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 951px) {
     .wrapper{
         left: 70px;
+        overflow:auto;
+    }
+
+    .content {
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
     }
 }

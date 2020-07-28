@@ -1,9 +1,10 @@
 import React from 'react'
-import { DashboardWrap, KillPort } from '@components'
+import { DashboardWrap, KillPort, WelcomeTips } from '@components'
 
 export default function Dashboard () {
   return (
     <DashboardWrap>
+      <WelcomeTips />
       <KillPort />
     </DashboardWrap>
   )
