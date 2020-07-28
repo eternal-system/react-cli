@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useContext } from 'react'
+import { SettingsContext } from 'context'
+
 
 import css from './style.module.scss'
 
@@ -7,20 +11,33 @@ import DashboardIcon from '@icons/dashboard-project.svg'
 import Arrow from '@icons/arrow-back.svg'
 import Home from '@icons/home-filled.svg'
 
-
-
-
 export default function WelcomeTips() {
+    const { t } = useTranslation('welcometips')
+  const { locale } = useContext(SettingsContext)
+
+
+    const menu = [
+        { label: t('tip1'), Icon: DashboardIcon },
+        { label: t('tip2'), Icon: Arrow },
+        { label: t('tip3'), Icon: Home }
+    ]
+
+      const renderChildren = useMemo(() => menu.map(({ label, Icon }) => {
+        return (
+          <li>
+            <span><Icon /></span>
+            <span>{ label }</span>
+          </li> 
+        )
+      }), [locale])
     return(
         <div className={css.wrapper}>
-            <p className={css.blot}>Приветственные советы</p>
+            <p className={css.blot}>{t('blot')}</p>
             <div className={css.content}>
                 <img src={logo} className={css.logo} />
-                <h1>Добро пожаловать в ваш новый проект!</h1>
+                <h1>{t('welcome')}</h1>
                 <ul className={css.list}>
-                    <li><span><DashboardIcon /></span><span>Сейчас перед вами главная страница проекта, где вы можете разместить различные виджеты. Нажмите кнопку "Настроить" чтобы добавить виджеты! Все изменения автоматически сохраняются.</span></li>
-                    <li><span><Arrow /></span><span>Слева находятся различные страницы.'Плагины' позволяет добавлять новые плагины CLI , 'Зависимости' для управления пакетами , 'Конфигурация' чтобы настроить инструменты и "задачи" для выполнения скриптов(например webpack)</span></li>
-                    <li><span><Home /></span><span>Вернитесь к менеджеру проектов с помощью выпадающего меню в левом верхнем углу экрана или кнопки "Домой" в строке состояния внизу.</span></li>
+                    {renderChildren}
                 </ul>
             </div>
         </div>
