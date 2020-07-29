@@ -1,0 +1,99 @@
+.wrapper {
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 6px 6px 0 0;
+    background: #61dafb3f;
+    min-width: 700px;
+    padding: 10px 0px 10px 0px;
+    .title {
+        margin: 16px;
+        color: #000;
+        font-size: 18px;
+    }
+}
+
+.content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: default;
+    height: 44px;
+
+    &:hover {
+        background: #61dafb3f;
+    }
+
+    .itemLogo{
+        -ms-flex: auto 0 0px;
+        flex: auto 0 0;
+        margin-right: 16px;
+        position: relative;
+        width: 42px;
+        height: 42px;
+    }
+    .listItemInfo{
+        -ms-flex: 100% 1 1;
+        flex: 100% 1 1;
+        width: 0;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        -ms-flex-pack: center;
+        justify-content: center;
+
+        .name {
+            -ms-flex: auto 0 0px;
+            flex: auto 0 0;
+        }
+
+        .description {
+            color: #2c3e5080;
+            display: block;
+            -ms-flex: auto 0 0px;
+            flex: auto 0 0;
+            .info {
+                margin-right: 19px;
+                display: inline-block;
+                .like {
+                    svg{
+                        width: 19px;
+                        position: relative;
+                        top: 5px;
+                        fill: #2b849c;
+                    }
+                    
+                }
+            }
+
+            a {
+                color: #2b849c;
+                font-weight: bold;
+                &:hover {
+                    color: #fff;
+                    background: #2b849c;
+                    padding: 4px;
+                    border-radius: 4px;
+                    svg {
+                        fill: #fff; 
+                    }
+                }
+
+                svg {
+                    width: 17px;
+                    fill: #2b849c;
+                    position: relative;
+                    top: 3px;
+                }
+            }
+        }
+    }
+}
