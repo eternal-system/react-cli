@@ -17,19 +17,20 @@ export default function WelcomeTips() {
 
 
     const menu = [
-        { label: t('tip1'), Icon: DashboardIcon },
-        { label: t('tip2'), Icon: Arrow },
-        { label: t('tip3'), Icon: Home }
+        { key: 1, label: t('tip1'), Icon: DashboardIcon },
+        { key: 2, label: t('tip2'), Icon: Arrow },
+        { key: 3, label: t('tip3'), Icon: Home }
     ]
 
-      const renderChildren = useMemo(() => menu.map(({ label, Icon }) => {
+      const renderChildren = useMemo(() => menu.map(({ key, label, Icon }) => {
         return (
-          <li>
+          <li key={key}>
             <span><Icon /></span>
             <span>{ label }</span>
           </li> 
         )
       }), [locale])
+
     return(
         <div className={css.wrapper}>
             <p className={css.blot}>{t('blot')}</p>
