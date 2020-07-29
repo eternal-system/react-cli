@@ -25,9 +25,7 @@ export default function Dependencies () {
 
   return (
     <DashboardWrap>
-      <ProjectDependencies 
-        list={dependencies}
-      />
+      <ProjectDependencies list={dependencies}/>
     </DashboardWrap>
   )
 }

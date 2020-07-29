@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect, useContext } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
+
 import { Routes } from '../../router'
 import db from '../../../db.json'
 

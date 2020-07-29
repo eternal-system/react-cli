@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
 import ProjectDependencyItem from './ProjectDependencyItem'
 import css from './style.module.scss'
 
@@ -24,14 +25,14 @@ export default function ProjectDependencies ({list}: PropsDepend) {
 
   return (
     <div className={css.wrapper}>
-      {listDepend.length ? <div className={css.title}>{t('main')}</div> : null}
+      {!!listDepend.length && <div className={css.title}>{t('main')}</div>}
       {listDepend.map(dep => (
         <ProjectDependencyItem 
          key={dep.id}
          {...dep}
         />
       ))}
-      {listDevDepend.length ? <div>{t('dev')}</div> : null}
+      {!!listDevDepend.length && <div>{t('dev')}</div>}
       {listDevDepend.map(dep => (
         <ProjectDependencyItem
          key={dep.id}

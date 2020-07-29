@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
 import LinkIcon from '@icons/link.svg'
 import LikeIcon from '@icons/like.svg'
 import css from './style.module.scss'
