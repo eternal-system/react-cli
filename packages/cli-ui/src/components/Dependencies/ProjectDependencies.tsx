@@ -17,22 +17,21 @@ interface PropsDepend {
 }
 
 export default function ProjectDependencies ({list}: PropsDepend) {
-  console.log("list", list)
-  const { t } = useTranslation('project')
+  const { t } = useTranslation('dependencies')
 
   const listDepend = list.filter(p => p.type === "dependencies")
   const listDevDepend = list.filter(p => p.type === "devDependencies")
 
   return (
     <div className={css.wrapper}>
-      {listDepend.length ? <div className={css.title}>Main dependencies</div> : null}
+      {listDepend.length ? <div className={css.title}>{t('main')}</div> : null}
       {listDepend.map(dep => (
         <ProjectDependencyItem 
          key={dep.id}
          {...dep}
         />
       ))}
-      {listDevDepend.length ? <div>Development dependencies</div> : null}
+      {listDevDepend.length ? <div>{t('dev')}</div> : null}
       {listDevDepend.map(dep => (
         <ProjectDependencyItem
          key={dep.id}

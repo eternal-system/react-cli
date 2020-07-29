@@ -36,6 +36,14 @@ const locale = {
     dependencies: 'Зависимости',
     tasks: 'Задачи'
   },
+  dependencies: {
+    main: 'Основные зависимости',
+    dev: 'Зависимости для разработке',
+    version: 'версия',
+    installed: 'установлен',
+    noInstalled: 'не установлен',
+    moreInfo: 'Больше информации'
+  },
   modal: {
     selectFolder: 'Выбор директории',
     createNew: 'Добавить новую папку',
