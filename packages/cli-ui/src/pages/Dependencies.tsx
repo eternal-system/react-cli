@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { DashboardWrap } from '@components'
+import { DashboardWrap, ProjectDependencies } from '@components'
 import { SettingsContext } from '../context'
 
 export default function Dependencies () {
@@ -25,9 +25,7 @@ export default function Dependencies () {
 
   return (
     <DashboardWrap>
-      Dependencies list component
-      <br/>
-      {JSON.stringify(dependencies)}
+      <ProjectDependencies list={dependencies}/>
     </DashboardWrap>
   )
 }

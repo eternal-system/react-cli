@@ -37,6 +37,14 @@ const locale = {
     dependencies: 'Dependencies',
     tasks: 'Tasks'
   },
+  dependencies: {
+    main: 'Main dependencies',
+    dev: 'Development dependencies',
+    version: 'version',
+    installed: 'installed',
+    noInstalled: 'not installed',
+    moreInfo: 'More info'
+  },
   modal: {
     selectFolder: 'Select folder',
     createNew: 'Create new folder',
