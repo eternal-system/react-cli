@@ -34,7 +34,10 @@ const locale = {
   dashboard: {
     dashboard: 'Панель',
     dependencies: 'Зависимости',
-    tasks: 'Задачи'
+    tasks: 'Задачи',
+    titleDashboar: 'Панель инструментов проекта',
+    titleDepend: 'Зависимости проекта',
+    titleTasks: 'Задачи проекта'
   },
   dependencies: {
     main: 'Основные зависимости',

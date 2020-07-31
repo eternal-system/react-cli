@@ -1,29 +1,82 @@
-import React, { useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ReactTooltip from 'react-tooltip'
-
+import { uuid } from 'utils'
 import { Routes } from 'router'
 
+import { useNotification } from '@hooks'
 import DashboardIcon from '@icons/dashboard-project.svg'
-import ActiveIcon from '@icons/dashboard-tasks.svg'
+// import ActiveIcon from '@icons/dashboard-tasks.svg'
+import { SettingsContext } from '../../context'
 import StatsIcon from '@icons/dashboard-config.svg'
 
-import { uuid } from 'utils'
 import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
 
 import css from './style.module.scss'
 
 const TOOLTIP_ID = uuid()
 
+export interface ProjectProps {
+  id: number;
+  manager: string;
+  name: string;
+  path: string;
+  preset: string;
+  favorite: boolean;
+}
+
 export default function Dashboard () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useDashboardContainer()
+  const notification = useNotification()
+  const { socket } = useContext(SettingsContext)
+
+  const [projects, setProjects] = useState<ProjectProps[]>([])
+  const [active, setActive] = useState(null)
+  const [title, setTitle] = useState<string>('')
+
+  useEffect(() => {
+    socket.send({
+      type: 'GET_CONFIG'
+    })
+
+    socket.send({
+      type: 'GET_PROJECTS'
+    })
+
+    socket.on('config', (res) => {
+      setActive(res.data?.lastOpenProject || 1)
+    })
+
+    socket.on('projects', (res) => {
+      setProjects(res.data)
+    })
+
+    socket.on('erro', (error) => {
+      notification.error({
+        title: error.message,
+        message: error.error.path
+      })
+    })
+
+    return () => {
+      socket.off('config')
+      socket.off('projects')
+      socket.off('erro')
+    }
+  }, [])
+
+  useEffect(() => {
+    const title = !!projects.length && projects.find(p => p.id === active)
+    setTitle(title ? title.name : '')
+  }, [active, projects])
 
   const menu: MenuItems[] = [
     { key: Routes.DASHBOARD, label: t('dashboard'), Icon: DashboardIcon },
     { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
-    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
+    // TODO Скрыт до следующего релиза где дудет добавлен данный функционал
+    // { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
   ]
 
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
@@ -51,6 +104,9 @@ export default function Dashboard () {
   return (
     <div className={css.wrapperHeader}>
       <div className={css.wrapperLayout}>
+        <div className={css.dropdown}>
+          {title}
+        </div>
         <div className={css.nav}>
           {renderChildren}
         </div>

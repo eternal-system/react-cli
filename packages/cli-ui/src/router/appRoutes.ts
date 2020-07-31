@@ -89,13 +89,14 @@ export const AppRoutes: RoutesCollection = {
         exact: true,
         Component: Dashboard
       },
-      dashboardTasks: {
-        paths: {
-          root: Routes.DASHBOARD_TASKS
-        },
-        exact: true,
-        Component: Tasks
-      },
+       // TODO Скрыт до следующего релиза где дудет добавлен данный функционал
+      // dashboardTasks: {
+      //   paths: {
+      //     root: Routes.DASHBOARD_TASKS
+      //   },
+      //   exact: true,
+      //   Component: Tasks
+      // },
       dashboardStats: {
         paths: {
           root: Routes.DEPENDENCIES
