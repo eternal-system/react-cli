@@ -4,7 +4,7 @@ import { DashboardWrap } from '@components'
 
 export default function Tasks () {
   return (
-    <DashboardWrap>
+    <DashboardWrap title={"Project tasks"}>
       <div>Tasks</div>
     </DashboardWrap>
 
