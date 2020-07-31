@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { DashboardWrap, ProjectDependencies } from '@components'
+import { useTranslation } from 'react-i18next'
 import { SettingsContext } from '../context'
 
 export default function Dependencies () {
-
+  const { t } = useTranslation('dashboard')
   const { socket, selectedPath } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
 
@@ -24,7 +25,7 @@ export default function Dependencies () {
   }, [])
 
   return (
-    <DashboardWrap title={"Project dependencies"}>
+    <DashboardWrap title={t('titleDepend')}>
       <ProjectDependencies list={dependencies}/>
     </DashboardWrap>
   )

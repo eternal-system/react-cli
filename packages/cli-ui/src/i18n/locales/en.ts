@@ -35,7 +35,10 @@ const locale = {
   dashboard: {
     dashboard: 'Dashboard',
     dependencies: 'Dependencies',
-    tasks: 'Tasks'
+    tasks: 'Tasks',
+    titleDashboar: 'Project dashboard',
+    titleDepend: 'Project dependencies',
+    titleTasks: 'Project tasks'
   },
   dependencies: {
     main: 'Main dependencies',
