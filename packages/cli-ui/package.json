@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run clear-dist\" \"npm run server\" \"npm run start\"",
-    "dev-server": "cross-env DEBUG=express:* DEV_SERVER=true LOG_LEVEL=debug concurrently \"npm run clear-dist\" \"npm run server\"",
+    "dev-server": "cross-env DEBUG=express:* DEV_SERVER=true LOG_LEVEL=debug concurrently \"npm run server\"",
     "server": "nodemon server.dev.js | pino-pretty",
     "start": "webpack-dev-server --config ./webpack/config.dev.js --open",
     "build": "npx webpack --display-error-details --config ./webpack/config.js",
-    "clear-dist": "rm -rf dist",
     "test": "jest"
   },
   "repository": {

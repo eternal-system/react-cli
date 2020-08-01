@@ -49,16 +49,16 @@ export default function ProjectContainer () {
   }), [activeTab, locale])
 
   return (
-      <header className={css.wrapperHeader}>
-        <div className={css.wrapperLayout}>
-          <div className={css.wrapperLogo}>
-            <img src={logo} alt="logo" />
-            <span>{t('headerTitle')}</span>
-          </div>
-          <div className={css.nav}>
-            {renderChildren}
-          </div>
+    <header className={css.wrapperHeader}>
+      <div className={css.wrapperLayout}>
+        <div className={css.wrapperLogo}>
+          <img src={logo} alt="logo" />
+          <span>{t('headerTitle')}</span>
         </div>
-      </header>
+        <div className={css.nav}>
+          {renderChildren}
+        </div>
+      </div>
+    </header>
   )
 }

@@ -42,18 +42,14 @@ export default function CreateProject () {
   })
 
   useEffect(() => {
-    socket.on('check', (msg) => {
-      setLogInfo(prevState =>
-        msg.message !== '\n'
-          ? msg.message.replace('\n', ' ')
-          : prevState
-      )
+    socket.on('logging', (msg: any) => {
+      setLogInfo(msg.message)
     })
     socket.on('notification', () => {
       setLoading(false)
       history.push(Routes.DASHBOARD)
     })
-    socket.on('erro', (error) => {
+    socket.on('erro', (error: any) => {
       setLoading(false)
       notification.error({
         title: error.title,
@@ -61,7 +57,7 @@ export default function CreateProject () {
       })
     })
     return () => {
-      socket.off('check')
+      socket.off('logging')
       socket.off('notification')
       socket.off('erro')
     }
