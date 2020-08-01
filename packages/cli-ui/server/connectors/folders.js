@@ -4,7 +4,7 @@ const path = require('path')
 class FolderApi {
   constructor (client, db) {
     this.client = client
-    this.context = db
+    this.db = db
   }
 
   /**
@@ -113,25 +113,25 @@ class FolderApi {
 
   listFavorite () {
     this.client.emit('foldersFavorite', {
-      data: this.context.get('foldersFavorite').value().map(
+      data: this.db.get('foldersFavorite').value().map(
         file => this.generateFolder(file.id)
       )
     })
   }
 
   isFavorite (file) {
-    return !!this.context.get('foldersFavorite').find({ id: file }).size().value()
+    return !!this.db.get('foldersFavorite').find({ id: file }).size().value()
   }
 
   setFavorite ({ file, favorite }) {
-    const collection = this.context.get('foldersFavorite')
+    const collection = this.db.get('foldersFavorite')
     if (favorite) {
       collection.push({ id: file }).write()
     } else {
       collection.remove({ id: file }).write()
     }
     this.client.emit('foldersFavorite', {
-      data: this.context.get('foldersFavorite').value().map(
+      data: this.db.get('foldersFavorite').value().map(
         file => this.generateFolder(file.id)
       )
     })
