@@ -17,6 +17,7 @@ const devConfig = {
     host: 'localhost',
     port: process.env.DEV_CLIENT_PORT,
     historyApiFallback: true,
+    open: true,
     proxy: {
       '/api': {
         target: `http://0.0.0.0:${process.env.SERVER_PORT}`,

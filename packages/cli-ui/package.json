@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run server\" \"npm run start\"",
     "dev-server": "cross-env DEBUG=express:* DEV_SERVER=true LOG_LEVEL=debug concurrently \"npm run server\"",
-    "server": "nodemon server.dev.js | pino-pretty",
-    "start": "webpack-dev-server --config ./webpack/config.dev.js --open",
+    "server": "nodemon --ignore 'db.json' server.dev.js | pino-pretty",
+    "start": "webpack-dev-server --config ./webpack/config.dev.js",
     "build": "npx webpack --display-error-details --config ./webpack/config.js",
     "test": "jest"
   },
