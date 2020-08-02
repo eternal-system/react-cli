@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+
 const { craNpm, craYarn } = require('../util/create')
+const { v4: uuid } = require('uuid')
 
 class ProjectApi {
   constructor (client, db, folder) {
@@ -75,7 +77,7 @@ class ProjectApi {
           subprocess.stdout.on('data', data => {
             const message = data.toString('utf8')
             message !== '\n' && this.client.emit('logging', {
-              message: message.replace(/(\\n|\[36|\[39m)/gmi, () => '')
+              message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
             })
           })
 
@@ -84,7 +86,7 @@ class ProjectApi {
           // add db project
           if (stdout) {
             this.db.get('projects').push({
-              id: this.db.get('projects').value().length + 1,
+              id: uuid(),
               name,
               path: pathProject,
               manager,
@@ -102,7 +104,8 @@ class ProjectApi {
         } catch (error) {
           this.client.emit('erro', {
             title: 'Failure',
-            message: `Project ${name} create error`
+            message: `Project ${name} create error`,
+            error
           })
         }
       }

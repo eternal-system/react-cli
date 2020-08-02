@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ReactTooltip from 'react-tooltip'
-import { uuid } from 'utils'
-import { Routes } from 'router'
+import { v4 as uuid } from 'uuid'
 
+import { Routes } from 'router'
 import { useNotification } from '@hooks'
 import DashboardIcon from '@icons/dashboard-project.svg'
 // import ActiveIcon from '@icons/dashboard-tasks.svg'
@@ -45,15 +45,15 @@ export default function Dashboard () {
       type: 'GET_PROJECTS'
     })
 
-    socket.on('config', (res) => {
+    socket.on('config', (res: any) => {
       setActive(res.data?.lastOpenProject || 1)
     })
 
-    socket.on('projects', (res) => {
+    socket.on('projects', (res: any) => {
       setProjects(res.data)
     })
 
-    socket.on('erro', (error) => {
+    socket.on('erro', (error: any) => {
       notification.error({
         title: error.message,
         message: error.error.path

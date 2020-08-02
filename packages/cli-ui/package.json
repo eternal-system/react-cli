@@ -3,10 +3,22 @@
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
+  "nodemonConfig": {
+    "ext": "js",
+    "watch": [
+      "server.dev.js",
+      "server.js",
+      "server/**/*"
+    ],
+    "ignore": [
+      "db.json"
+    ],
+    "delay": "2"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run server\" \"npm run start\"",
     "dev-server": "cross-env DEBUG=express:* DEV_SERVER=true LOG_LEVEL=debug concurrently \"npm run server\"",
-    "server": "nodemon --ignore 'db.json' server.dev.js | pino-pretty",
+    "server": "nodemon server.dev.js | pino-pretty",
     "start": "webpack-dev-server --config ./webpack/config.dev.js",
     "build": "npx webpack --display-error-details --config ./webpack/config.js",
     "test": "jest"
@@ -36,7 +48,6 @@
     "fs-extra": "^9.0.1",
     "i18next": "^19.5.1",
     "lowdb": "^1.0.0",
-    "nodemon": "^2.0.4",
     "pino": "^6.3.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -49,6 +60,7 @@
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "svg-url-loader": "^6.0.0",
+    "uuid": "^8.3.0",
     "ws": "^7.3.1"
   },
   "devDependencies": {
@@ -65,6 +77,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/react-select": "^3.0.14",
     "@types/socket.io-client": "^1.4.33",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
     "autoprefixer": "^9.8.1",
@@ -88,6 +101,7 @@
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "pino-pretty": "^4.0.0",
     "postcss-loader": "^3.0.0",
