@@ -119,6 +119,12 @@ class FolderApi {
     })
   }
 
+  getLastOpenProject () {
+    this.client.emit('lastOpenProject', {
+      data: this.db.get('config.lastOpenProject', false).value()
+    })
+  }
+
   isFavorite (file) {
     return !!this.db.get('foldersFavorite').find({ id: file }).size().value()
   }

@@ -1,18 +1,19 @@
-const Lowdb = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
 const path = require('path')
+const low = require('lowdb')
+const FileAsync = require('lowdb/adapters/FileAsync')
 
-const filePath = path.resolve(process.cwd(), 'db.json')
-const db = new Lowdb(new FileSync(filePath))
-
-// Empty DB
-db.defaults({
-  projects: [],
-  foldersFavorite: [],
-  tasks: [],
-  config: {}
-}).write()
+const dbPath = path.resolve(process.cwd(), 'db.json')
+const adapter = new FileAsync(dbPath, {
+  defaultValue: {
+    projects: [],
+    foldersFavorite: [],
+    tasks: [],
+    config: {}
+  }
+})
+const db = low(adapter)
 
 module.exports = {
-  db
+  db,
+  dbPath
 }

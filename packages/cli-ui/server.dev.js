@@ -5,7 +5,7 @@ const fs = require('fs')
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack/config.js')
-const PORT = process.env.SERVER_PORT || 8080
+const PORT = process.env.SERVER_PORT || 8081
 const chalk = require('chalk')
 const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
@@ -33,12 +33,6 @@ io.on('connection', (client) => {
   })
 })
 
-// db
-if (!fs.existsSync('db.json')) {
-  console.log('create new db')
-  require('./server/util/db')
-}
-
 // logger
 app.use(expressLogger)
 
@@ -54,7 +48,7 @@ if (process.env.DEV_SERVER.trim() === 'true') {
     if (fs.existsSync(filePath)) {
       fs.createReadStream(filePath).pipe(res)
     } else {
-      webpack(webpackConfig, (err, stats) => {
+      webpack(webpackConfig, (err) => {
         if (err) {
           console.error(err)
           return
@@ -65,6 +59,6 @@ if (process.env.DEV_SERVER.trim() === 'true') {
   })
 }
 
-http.listen(PORT, () => {
-  logger.info('🌠 Server running on port %d', PORT)
-})
+http.listen(PORT, () =>
+  console.log(chalk.hex('#009688')('🌠 Server - running on port:', PORT))
+)

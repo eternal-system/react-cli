@@ -1,19 +1,15 @@
 const { Router } = require('express')
 const fs = require('fs')
-const path = require('path')
 const router = Router()
 // db
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const folderDbPath = path.normalize(path.join(__dirname, '../../../db.json'))
-const adapter = new FileSync(folderDbPath)
-const db = low(adapter)
+const { db, dbPath } = require('../../util/db')
+
 const { craNpm, craYarn } = require('../../util/create')
 
 // Get list project
 router.get('/', (req, res) => {
   req.log.info('GET project')
-  if (fs.existsSync(folderDbPath)) {
+  if (fs.existsSync(dbPath)) {
     res.status(200).json({
       data: db.get('projects').value()
     })
@@ -25,7 +21,7 @@ router.get('/', (req, res) => {
 })
 
 // Create new project
-router.post('/create', async (req, res, next) => {
+router.post('/create', async (req, res) => {
   const {
     name,
     path: pathProject,
@@ -45,7 +41,6 @@ router.post('/create', async (req, res, next) => {
   try {
     req.log.info('POST project/create')
     const { stdout } = await subprocess
-    console.log('stdout', stdout)
     // add db project
     if (stdout) {
       db.get('projects').push({

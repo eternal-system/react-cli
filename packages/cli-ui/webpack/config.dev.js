@@ -1,5 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const chalk = require('chalk')
+
 const common = require('./config')
 
 const devConfig = {
@@ -24,7 +26,12 @@ const devConfig = {
         proxyTimeout: 1000 * 60 * 10,
         timeout: 1000 * 60 * 10
       }
-    }
+    },
+    onListening: (server) =>
+      console.log(chalk.hex('#009688')(
+        '🌠 Frontend - listening on port:',
+        server.listeningApp.address().port
+      ))
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 }

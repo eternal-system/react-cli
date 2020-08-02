@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run clear-dist\" \"npm run server\" \"npm run start\"",
+    "dev": "cross-env NODE_ENV=development DEV_SERVER=false concurrently \"npm run server\" \"npm run start\"",
     "dev-server": "cross-env DEBUG=express:* DEV_SERVER=true LOG_LEVEL=debug concurrently \"npm run server\"",
     "server": "nodemon server.dev.js | pino-pretty",
     "start": "webpack-dev-server --config ./webpack/config.dev.js --open",
