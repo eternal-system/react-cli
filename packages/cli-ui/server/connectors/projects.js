@@ -44,6 +44,16 @@ class ProjectApi {
    */
   getProjects (folderDbPath) {
     if (fs.existsSync(folderDbPath)) {
+      this.db.get('projects')
+        .value()
+        .filter((project) => {
+          if (fs.existsSync(path.join('/', ...project.path, project.name))) {
+            return true
+          } else {
+            this.db.get('projects').remove({ id: project.id }).write()
+            return false
+          }
+        })
       this.client.emit('projects', {
         data: this.db.get('projects').value()
       })
