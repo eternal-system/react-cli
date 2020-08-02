@@ -20,10 +20,22 @@
 
 		.folderName {
 			display: flex;
+			align-items: center;
 			white-space: nowrap;
 
-			&Text {
+			.folderNameText {
+				display: flex;
+				align-items: center;		
 				margin-left: 16px;
+
+				.reactIcon {
+					fill: #4bd7fd;
+				}
+
+				svg {
+					width: 24px;
+					height: 24px;
+				}
 			}
 
 			svg {

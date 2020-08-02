@@ -1,10 +1,35 @@
 const fs = require('fs-extra')
 const path = require('path')
+const { get } = require('lodash')
 
 class StaticMethods {
-  constructor (client, db) {
-    this.client = client
+  constructor (db) {
     this.db = db
+  }
+
+  /**
+   * Создание информационного объекта о папке
+   * @param {string} pathFolder - запрашиваемый путь
+   * @param {string} namefolder - название директории
+   */
+  checkFramework (pathFolder, namefolder) {
+    const folderItem = { name: namefolder }
+    const packageJson = path.join(pathFolder, namefolder, 'package.json')
+    const exist = fs.existsSync(packageJson)
+    if (exist) {
+      const packageJsonFile = fs.readFileSync(packageJson, 'utf8')
+      const packageJsonObj = JSON.parse(packageJsonFile)
+      if (get(packageJsonObj, 'dependencies.react')) {
+        folderItem.type = 'react'
+      } else if (get(packageJsonObj, 'dependencies.vue')) {
+        folderItem.type = 'vue'
+      } else {
+        folderItem.type = 'undefined'
+      }
+    } else {
+      folderItem.type = 'empty'
+    }
+    return folderItem
   }
 
   isPackage (file) {
@@ -24,6 +49,10 @@ class StaticMethods {
     }
   }
 
+  /**
+   * Формирование информационного объекта папки
+   * @param {string} file
+   */
   generateFolder (file) {
     return {
       name: path.basename(file),

@@ -4,7 +4,7 @@ const StaticMethods = require('./utils')
 
 class FolderApi extends StaticMethods {
   constructor (client, db) {
-    super(client, db)
+    super(db)
     this.client = client
     this.db = db
   }
@@ -34,10 +34,10 @@ class FolderApi extends StaticMethods {
         if (files) {
           files.forEach(file => {
             if (data.isHidden && !file.match(/\.[0-9a-z]{1,5}$/)) {
-              data.project.push({ file })
+              data.project.push(this.checkFramework(data.folder, file))
               return data.projects.push(file)
             } else if (!file.startsWith('.') && !file.match(/\.[0-9a-z]{1,5}$/)) {
-              data.project.push({ file })
+              data.project.push(this.checkFramework(data.folder, file))
               return data.projects.push(file)
             }
           })

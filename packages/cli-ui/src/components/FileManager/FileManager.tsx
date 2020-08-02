@@ -17,10 +17,10 @@ export default function FileManager () {
   // State
   const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
-  const [projects, setProjects] = useState<string[]>([])
+  const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [favorites, setFavorites] = useState<Favorites[]>([])
- 
+
   useEffect(() => {
     socket.send({
       type: 'GET_FOLDERS',
@@ -28,22 +28,22 @@ export default function FileManager () {
       hidden: false
     })
     socket.send({
-      type: 'LIST_FAVORITE',
+      type: 'LIST_FAVORITE'
     })
-    
-    socket.on('folders', (res) => {
+
+    socket.on('folders', (res: any) => {
       batch(() => {
         setLoading(true)
-        setProjects(res.data as string[])
+        setProjects(res.project)
         setLoading(false)
       })
     })
 
-    socket.on('foldersFavorite', (res) => {
+    socket.on('foldersFavorite', (res: any) => {
       setFavorites(res.data)
     })
 
-    socket.on('erro', (error) => {
+    socket.on('erro', (error: any) => {
       batch(() => {
         setLoading(false)
         setUrl((prevState) => prevState.splice(0, url.length - 1))
@@ -70,7 +70,7 @@ export default function FileManager () {
   useEffect(() => {
     setTimeout(() => {
       getFoldersData(url)
-    }, 200);
+    }, 200)
   }, [url])
 
   const getFoldersData = useCallback(
