@@ -7,8 +7,18 @@ import FolderFilledIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 
+interface Folder {
+  name: string;
+  type: 'react' | 'vue' | 'unknown' | 'empty';
+}
+
+interface Props {
+  folder: Folder;
+  select(folderName: string): void;
+}
+
 // Item Folder
-export default function ItemFolder ({ folder, select }: any) {
+export default function ItemFolder ({ folder, select }: Props) {
   function renderFolderIcon () {
     if (folder.type === 'empty') return <FolderIcon />
     return <FolderFilledIcon />

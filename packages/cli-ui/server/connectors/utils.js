@@ -24,7 +24,7 @@ class StaticMethods {
       } else if (get(packageJsonObj, 'dependencies.vue')) {
         folderItem.type = 'vue'
       } else {
-        folderItem.type = 'undefined'
+        folderItem.type = 'unknown'
       }
     } else {
       folderItem.type = 'empty'
