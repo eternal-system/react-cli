@@ -1,84 +1,86 @@
 .wrapper {
-    width: 45%;
-    background: #fff;
+  width: 45%;
+  background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 4px 15px rgba(0,0,0,.05);
-    margin: 0 20px 20px 20px;
-    padding: 20px;
-    max-width: 600px;
+  margin: 0 20px 20px 20px;
+  padding: 20px;
+  min-width: 600px;
 
-    .blot{
-        color: gray;
-        margin-bottom: 20px;
+  .blot {
+    color: gray;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    text-align: center;
+    padding: 20px 20px 30px 20px;
+    font-weight: bold;
+
+    .logo {
+      fill: #4bd7fd;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #d8f7ff;
     }
 
-    .content{
-        text-align: center;
-        padding: 20px 20px 30px 20px;
-        font-weight: bold;
+    .list {
+      list-style: none;
+      margin-top: 50px;
 
-        .logo{
-            width: 90px;
-            border-radius: 50%;
-            background: rgb(216, 247, 255);
-            padding: 10px;
+      li {
+        display: flex;
+        justify-content: start;
+        padding: 20px 0;
+
+        svg {
+          fill: #6a8bad;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #d8f7ff;
+          padding: 10px;
+          margin-right: 20px;
         }
 
-        .list {
-            list-style: none;
-            margin-top: 50px;
-
-            li{
-                display: flex;
-                justify-content: start;
-                padding: 20px 0;
-
-                svg{
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 50%;
-                    background: rgb(216, 247, 255);
-                    padding: 5px;
-                    margin-right: 20px;
-                }
-
-                span{
-                    text-align: left;
-                    align-self: center;
-                }
-            }
+        span {
+          text-align: left;
+          align-self: center;
         }
+      }
     }
+  }
 }
 
 @media screen and (max-width: 951px) {
-    .wrapper{
-        width: 70%;
-        margin: 0 auto 40px auto ;
-    }
+  .wrapper {
+    width: 70%;
+    margin: 0 auto 40px auto ;
+  }
 }
 
 @media screen and (max-width: 560px) {
-    .wrapper{
-        width:80%;
-        margin: 0 auto 40px auto ;
+  .wrapper {
+    width:80%;
+    margin: 0 auto 40px auto ;
 
-    .content{
-        padding: 0;
+    .content {
+      padding: 0;
 
-    .list {
-        li{
-            flex-direction: column;
+      .list {
+        li {
+          flex-direction: column;
 
-            span{
-                text-align: center;
-            }
+          span {
+            text-align: center;
+          }
 
-            svg{
-                margin: 0 10px 20px 0;
-            }
+          svg {
+            margin: 0 10px 20px 0;
+          }
         }
+      }
     }
-}
-}
+  }
 }

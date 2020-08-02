@@ -1,8 +1,10 @@
 const fs = require('fs-extra')
-const path = require('path')
 
-class FolderApi {
+const StaticMethods = require('./utils')
+
+class FolderApi extends StaticMethods {
   constructor (client, db) {
+    super(client, db)
     this.client = client
     this.db = db
   }
@@ -17,7 +19,8 @@ class FolderApi {
       const data = {
         folder: url || '/',
         isHidden: hidden || false,
-        projects: []
+        projects: [],
+        project: []
       }
 
       fs.readdir(data.folder, (err, files) => {
@@ -31,15 +34,18 @@ class FolderApi {
         if (files) {
           files.forEach(file => {
             if (data.isHidden && !file.match(/\.[0-9a-z]{1,5}$/)) {
+              data.project.push({ file })
               return data.projects.push(file)
             } else if (!file.startsWith('.') && !file.match(/\.[0-9a-z]{1,5}$/)) {
+              data.project.push({ file })
               return data.projects.push(file)
             }
           })
         }
 
         this.client.emit('folders', {
-          data: data.projects
+          data: data.projects,
+          project: data.project
         })
       })
     } catch (error) {
@@ -74,43 +80,6 @@ class FolderApi {
     }
   }
 
-  isPackage (file) {
-    try {
-      return fs.existsSync(path.join(file, 'package.json'))
-    } catch (e) {
-      console.warn(e.message)
-    }
-    return false
-  }
-
-  readPackage (file) {
-    const pkgFile = path.join(file, 'package.json')
-    if (fs.existsSync(pkgFile)) {
-      const pkg = fs.readJsonSync(pkgFile)
-      return pkg
-    }
-  }
-
-  generateFolder (file) {
-    return {
-      name: path.basename(file),
-      path: file
-    }
-  }
-
-  isReactProject (file) {
-    if (!this.isPackage(file)) return false
-    try {
-      const pkg = this.readPackage(file)
-      return Object.keys(pkg.devDependencies || {}).includes('react')
-    } catch (e) {
-      if (process.env.DEV_SERVER) {
-        console.log(e)
-      }
-    }
-    return false
-  }
-
   listFavorite () {
     this.client.emit('foldersFavorite', {
       data: this.db.get('foldersFavorite').value().map(
@@ -123,10 +92,6 @@ class FolderApi {
     this.client.emit('lastOpenProject', {
       data: this.db.get('config.lastOpenProject', false).value()
     })
-  }
-
-  isFavorite (file) {
-    return !!this.db.get('foldersFavorite').find({ id: file }).size().value()
   }
 
   setFavorite ({ file, favorite }) {
