@@ -21,6 +21,9 @@
     "server": "nodemon server.dev.js | pino-pretty",
     "start": "webpack-dev-server --config ./webpack/config.dev.js",
     "build": "npx webpack --display-error-details --config ./webpack/config.js",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "stylelint": "stylelint './src/**/*.{css|scss}'",
+    "precommit": "lint && stylelint",
     "test": "jest"
   },
   "repository": {
@@ -40,6 +43,11 @@
     "server.js"
   ],
   "homepage": "https://github.com/eternal-system/react-cli#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "express": "^4.17.1",
@@ -100,15 +108,22 @@
     "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "pino-pretty": "^4.0.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.5",
     "react-svg-loader": "^3.0.3",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
