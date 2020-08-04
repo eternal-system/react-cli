@@ -6,7 +6,7 @@ const { resolveModule } = require('../util/modules')
 class DependenciesApi {
   constructor (client, db, folders) {
     this.client = client
-    this.context = db
+    this.db = db
     this.folders = folders
     this.dependencies = []
   }

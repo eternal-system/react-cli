@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const fkill = require('fkill')
+// const fkill = require('fkill')
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   const port = req.query.port
   console.log('port', port, typeof port)
   if (port === 'undefined' || port === '') {
@@ -11,18 +11,19 @@ router.get('/', async (req, res) => {
       message: 'Couldn\'t kill process'
     })
   } else {
-    try {
-      await fkill(`:${port}`)
+    require('child_process').exec(`kill -9 $(lsof -t -i:${port} -sTCP:LISTEN)`, (err) => {
+      if (err) {
+        console.log('err', err)
+        return res.status(400).json({
+          title: `❌ Port: ${port}`,
+          message: 'Couldn\'t kill process'
+        })
+      }
       return res.status(200).json({
         title: `🌠 Port: ${port}`,
         message: 'Successfully killed'
       })
-    } catch (error) {
-      return res.status(400).json({
-        title: `❌ Port: ${port}`,
-        message: 'Couldn\'t kill process'
-      })
-    }
+    })
   }
 })
 

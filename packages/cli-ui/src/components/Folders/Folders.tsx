@@ -12,9 +12,9 @@ interface Props {
 
 function Folders ({ folders, onSelect }: Props) {
   function renderFoulderList () {
-    return folders.map((name, i) => {
+    return folders.map((folder, i) => {
       return (
-        <ItemFolder name={name} key={i} select={onSelect}/>
+        <ItemFolder folder={folder} key={i} select={onSelect}/>
       )
     })
   }

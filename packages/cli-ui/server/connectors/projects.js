@@ -1,11 +1,13 @@
 const fs = require('fs')
 const path = require('path')
+
 const { craNpm, craYarn } = require('../util/create')
+const { v4: uuid } = require('uuid')
 
 class ProjectApi {
   constructor (client, db, folder) {
     this.client = client
-    this.context = db
+    this.db = db
     this.folder = folder
   }
 
@@ -16,14 +18,14 @@ class ProjectApi {
   open (id) {
     if (id) {
       // Date
-      this.context.get('projects').find({ id }).assign({
+      this.db.get('projects').find({ id }).assign({
         openDate: Date.now()
       }).write()
 
-      this.context.set('config.lastOpenProject', id).write()
+      this.db.set('config.lastOpenProject', id).write()
 
       this.client.emit('lastOpenProject', {
-        data: this.context.get('projects').find({ id })
+        data: this.db.get('projects').find({ id })
       })
     }
   }
@@ -33,7 +35,7 @@ class ProjectApi {
    */
   getConfig () {
     this.client.emit('config', {
-      data: this.context.get('config').value()
+      data: this.db.get('config').value()
     })
   }
 
@@ -42,8 +44,15 @@ class ProjectApi {
    */
   getProjects (folderDbPath) {
     if (fs.existsSync(folderDbPath)) {
+      this.db.get('projects')
+        .value()
+        .forEach((project) => {
+          if (!fs.existsSync(path.join('/', ...project.path, project.name))) {
+            this.db.get('projects').remove({ id: project.id }).write()
+          }
+        })
       this.client.emit('projects', {
-        data: this.context.get('projects').value()
+        data: this.db.get('projects').value()
       })
     } else {
       this.client.emit('erro', {
@@ -73,8 +82,9 @@ class ProjectApi {
           subprocess.stdout.pipe(process.stdout)
 
           subprocess.stdout.on('data', data => {
-            this.client.emit('check', {
-              message: data.toString('utf8')
+            const message = data.toString('utf8')
+            message !== '\n' && this.client.emit('logging', {
+              message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
             })
           })
 
@@ -82,8 +92,8 @@ class ProjectApi {
 
           // add db project
           if (stdout) {
-            this.context.get('projects').push({
-              id: this.context.get('projects').value().length + 1,
+            this.db.get('projects').push({
+              id: uuid(),
               name,
               path: pathProject,
               manager,
@@ -91,17 +101,18 @@ class ProjectApi {
               favorite: false,
               type: 'react',
               openDate: Date.now()
-            }).write()
+            })
+              .write()
+              .then(() => this.client.emit('notification', {
+                title: 'Success',
+                message: `Project ${name} successfully create`
+              }))
           }
-
-          this.client.emit('notification', {
-            title: 'Success',
-            message: `Project ${name} successfully create`
-          })
         } catch (error) {
           this.client.emit('erro', {
             title: 'Failure',
-            message: `Project ${name} create error`
+            message: `Project ${name} create error`,
+            error
           })
         }
       }
@@ -121,7 +132,7 @@ class ProjectApi {
    */
   getProjectById (id) {
     this.client.emit('project', {
-      data: this.context.get('projects')
+      data: this.db.get('projects')
         .filter({ id })
         .value()
     })
@@ -133,15 +144,15 @@ class ProjectApi {
    */
   deleteProjectById (id) {
     if (id) {
-      this.context.get('projects')
+      this.db.get('projects')
         .remove({ id })
         .write()
       this.client.emit('projects', {
-        data: this.context.get('projects').value()
+        data: this.db.get('projects').value()
       })
     } else {
       this.client.emit('projects', {
-        data: this.context.get('projects').value()
+        data: this.db.get('projects').value()
       })
     }
   }
@@ -151,22 +162,22 @@ class ProjectApi {
    * @param {number} id ID project
    */
   addFavoriteProjectById (id) {
-    const pr = this.context.get('projects')
+    const pr = this.db.get('projects')
       .find({ id })
       .value()
     if (pr.favorite) {
-      this.context.get('projects')
+      this.db.get('projects')
         .find({ id })
         .assign({ favorite: false })
         .write()
     } else {
-      this.context.get('projects')
+      this.db.get('projects')
         .find({ id })
         .assign({ favorite: true })
         .write()
     }
     this.client.emit('projects', {
-      data: this.context.get('projects').value()
+      data: this.db.get('projects').value()
     })
   }
 
@@ -174,10 +185,10 @@ class ProjectApi {
    * Clear db
    */
   clearDb () {
-    this.context.get('projects')
+    this.db.get('projects')
       .remove().write()
     this.client.emit('projects', {
-      data: this.context.get('projects').value()
+      data: this.db.get('projects').value()
     })
   }
 
@@ -192,7 +203,7 @@ class ProjectApi {
       })
     } else {
       const project = {
-        id: this.context.get('projects').value().length + 1,
+        id: this.db.get('projects').value().length + 1,
         path: pathProject,
         favorite: false
       }
@@ -200,13 +211,13 @@ class ProjectApi {
       const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
 
       project.name = packageData.name
-      this.context.get('projects').push(project).write()
+      this.db.get('projects').push(project).write()
       this.open(project.id)
       this.client.emit('notification', {
         message: 'Import successfully project'
       })
       this.client.emit('projects', {
-        data: this.context.get('projects').value()
+        data: this.db.get('projects').value()
       })
     }
   }
@@ -215,7 +226,7 @@ class ProjectApi {
   *  Open last project
   */
   autoOpenLastProject () {
-    const id = this.context.get('config.lastOpenProject').value()
+    const id = this.db.get('config.lastOpenProject').value()
     if (id) {
       open(id)
     }

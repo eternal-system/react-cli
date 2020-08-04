@@ -30,7 +30,8 @@ module.exports = {
       vars: 'all',
       args: 'after-used',
       ignoreRestSiblings: true
-    }]
+    }],
+    'react/prop-types': 0
   },
   settings: {
     indent: ['error', 2],
