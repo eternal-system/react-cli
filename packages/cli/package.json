@@ -1,5 +1,5 @@
 {
-  "name": "@react/cli",
+  "name": "@react-cli-ui/cli",
   "version": "0.0.1",
   "description": "Command line interface for React.js development",
   "main": "index.js",

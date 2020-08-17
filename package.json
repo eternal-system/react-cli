@@ -1,20 +1,13 @@
 {
   "private": true,
-  "name": "react-cli",
-  "version": "0.0.1",
-  "description": "",
-  "scripts": {
-    "test": "npx jest",
-    "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix ./"
-  },
   "workspaces": [
     "packages/*"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "",
-      "commit-msg": ""
-    }
+  "scripts": {
+    "test": "npx jest",
+    "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix ./",
+    "release": "",
+    "version": "node scripts/genChangelog.js"
   },
   "repository": {
     "type": "git",
@@ -40,10 +33,12 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.2.5",
+    "execa": "^4.0.3",
     "jest": "^26.0.1",
     "lerna": "^3.22.0",
+    "lerna-changelog": "^1.0.1",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0"
-  }
+  },
+  "dependencies": {}
 }

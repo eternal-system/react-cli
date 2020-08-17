@@ -1,5 +1,5 @@
 {
-  "name": "@react/cli-service",
+  "name": "@react-cli-ui/cli-service",
   "version": "0.0.1",
   "description": "local service for react-cli projects",
   "main": "index.js",
