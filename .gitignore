@@ -4,3 +4,4 @@ dist
 .idea
 .vscode
 .changelog
+lerna-debug.log
