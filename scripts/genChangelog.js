@@ -4,13 +4,11 @@ const execa = require('execa')
 
 async function genNewRelease () {
   const nextVersion = require('../lerna.json').version
-  console.log("nextVersion =", nextVersion)
-  const data = await execa(require.resolve('lerna-changelog/bin/cli'), [
+  const { stdout } = await execa(require.resolve('lerna-changelog/bin/cli'), [
     '--next-version',
     nextVersion
   ])
-  console.log("stdout =", data)
-  return data.stdout
+  return stdout
 }
 
 const gen = (module.exports = async () => {
