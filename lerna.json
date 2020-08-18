@@ -1,12 +1,11 @@
 {
   "npmClient": "yarn",
   "useWorkspaces": true,
+  "version": "0.0.1",
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.2",
   "changelog": {
-    "ignoreCommitters": ["allcontributors"],
     "repo": "eternal-system/react-cli",
     "labels": {
       "PR: New Feature": ":rocket: New Features",
