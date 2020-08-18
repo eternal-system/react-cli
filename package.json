@@ -7,7 +7,8 @@
     "test": "npx jest",
     "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix ./",
     "release": "node scripts/release.js",
-    "version": "node scripts/genChangelog.js"
+    "version": "node scripts/genChangelog.js",
+    "update:version": "lerna version --no-push"
   },
   "repository": {
     "type": "git",
