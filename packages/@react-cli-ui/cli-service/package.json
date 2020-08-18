@@ -1,6 +1,11 @@
 {
   "name": "@react-cli-ui/cli-service",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternal-system/react-cli.git",
+    "directory": "packages/@react-cli-ui/cli-service"
+  },
   "description": "local service for react-cli projects",
   "main": "index.js",
   "bin": {
@@ -11,10 +16,6 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eternal-system/react-cli.git"
   },
   "keywords": [
     "react",

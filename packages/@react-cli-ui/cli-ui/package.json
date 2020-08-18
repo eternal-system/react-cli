@@ -28,7 +28,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eternal-system/react-cli.git"
+    "url": "git+https://github.com/eternal-system/react-cli.git",
+    "directory": "packages/@react-cli-ui/cli-ui"
   },
   "keywords": [
     "server",
