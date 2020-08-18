@@ -1,19 +1,18 @@
 {
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packages": [
-    "packages/*"
+    "packages/@react-cli-ui/cli",
+    "packages/@react-cli-ui/cli-service",
+    "packages/@react-cli-ui/cli-ui"
   ],
   "changelog": {
     "repo": "eternal-system/react-cli",
     "labels": {
-      "PR: New Feature": ":rocket: New Features",
-      "PR: Breaking Change": ":boom: Breaking Changes",
-      "PR: Bug Fix": ":bug: Bug Fix",
-      "PR: Documentation": ":memo: Documentation",
-      "PR: Internal": ":house: Internal",
-      "PR: Underlying Tools": ":hammer: Underlying Tools"
+      "feature": "New Feature",
+      "bug": "Bug Fix",
+      "chore": "Chore"
     },
     "cacheDir": ".changelog"
   }
