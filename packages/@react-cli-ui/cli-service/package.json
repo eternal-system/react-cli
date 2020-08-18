@@ -1,20 +1,21 @@
 {
-  "name": "@react/cli",
-  "version": "0.0.1",
-  "description": "Command line interface for React.js development",
+  "name": "@react-cli-ui/cli-service",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternal-system/react-cli.git",
+    "directory": "packages/@react-cli-ui/cli-service"
+  },
+  "description": "local service for react-cli projects",
   "main": "index.js",
   "bin": {
-    "react-cli-ui": "bin/react.js"
+    "react-cli-service": "bin/react-cli-service.js"
   },
   "scripts": {
     "test": "jest"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eternal-system/react-cli.git"
   },
   "keywords": [
     "react",

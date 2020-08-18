@@ -1,7 +1,17 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "independent"
+  "version": "0.0.4",
+  "packages": [
+    "packages/@react-cli-ui/*"
+  ],
+  "changelog": {
+    "repo": "eternal-system/react-cli",
+    "labels": {
+      "feature": "New Feature",
+      "bug": "Bug Fix",
+      "chore": "Chore"
+    },
+    "cacheDir": ".changelog"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@react/cli-ui",
-  "version": "0.0.1",
+  "name": "@react-cli-ui/cli-ui",
+  "version": "0.0.4",
   "description": "",
   "main": "server.js",
   "nodemonConfig": {
@@ -28,7 +28,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eternal-system/react-cli.git"
+    "url": "git+https://github.com/eternal-system/react-cli.git",
+    "directory": "packages/@react-cli-ui/cli-ui"
   },
   "keywords": [
     "server",
@@ -47,6 +48,9 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "classnames": "^2.2.6",

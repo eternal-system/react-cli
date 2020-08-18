@@ -3,3 +3,5 @@ node_modules
 dist
 .idea
 .vscode
+.changelog
+lerna-debug.log
