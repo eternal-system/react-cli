@@ -3,9 +3,7 @@
   "useWorkspaces": true,
   "version": "0.0.3",
   "packages": [
-    "packages/@react-cli-ui/cli",
-    "packages/@react-cli-ui/cli-service",
-    "packages/@react-cli-ui/cli-ui"
+    "packages/@react-cli-ui/*"
   ],
   "changelog": {
     "repo": "eternal-system/react-cli",
