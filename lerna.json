@@ -6,6 +6,7 @@
   ],
   "version": "0.0.0",
   "changelog": {
+    "ignoreCommitters": ["allcontributors"],
     "repo": "eternal-system/react-cli",
     "labels": {
       "PR: New Feature": ":rocket: New Features",
