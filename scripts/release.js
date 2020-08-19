@@ -73,6 +73,7 @@ const release = async () => {
     '--dist-tag',
     distTag
   ]
+
   // keep all packages' versions in sync
   lernaArgs.push('--force-publish')
 
