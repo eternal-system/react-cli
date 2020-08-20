@@ -1,4 +1,18 @@
 .dropdown {
+  position: relative;
+  .list {
+    position: absolute;
+    top: 35px;
+    border: 1px solid #cacaca;
+    background: #fff;
+    width: fit-content;
+    padding: 5px 10px;
+    z-index: 1000;
+    color: #000;
+    right: 0px;
+    min-width: 200px;
+  }
+
   .icon {
     width: 16px;
     height: 16px;
@@ -8,3 +22,4 @@
     }
   }
 }
+

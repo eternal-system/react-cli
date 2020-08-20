@@ -32,17 +32,15 @@ export default function Dropdown () {
   }
 
   return (
-      <>
-        <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
-            {renderIcon(DropIcon)}
-        </button>
-        {open && (
-            <div ref={divRef}>
-                <ui>
-                    <li> list favorite </li>
-                </ui>
-            </div>
-        )}
-      </>
+    <>
+      <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
+        {renderIcon(DropIcon)}
+      {open && (
+        <div className={css.list} ref={divRef}>
+          <div> list favorite </div> 
+        </div>
+      )}
+      </button>
+    </>
   )
 }
