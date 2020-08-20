@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Input } from 'common'
 import { useModal } from '@hooks'
 import { ModalFolder } from '../../modals'
+import { Dropdown } from '@components'
 
 import EditIcon from '@icons/edit-pen.svg'
 import ArrowUpIcon from '@icons/arrow-up.svg'
@@ -35,6 +36,13 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
   const [editPath, setEditPath] = useState('')
   const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
   const isFavorite = favorites.some(f => f.path === check)
+
+    const data = [
+        { text: 'Mustard', value: 'mustard' },
+        { text: 'Ketchup', value: 'ketchup' },
+        { text: 'Relish', value: 'relish' },
+        { text: 'Mayo', value: 'mayo' },
+    ]
 
   useEffect(() => {
     setEditPath(path.join('/'))
@@ -118,6 +126,8 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
           <button onClick={() => addFavorite(!isFavorite)}>
             { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
           </button>
+
+          <Dropdown data={data} />
 
           <button onClick={showModal}>
             {renderIcon(CreateFolderIcon)}

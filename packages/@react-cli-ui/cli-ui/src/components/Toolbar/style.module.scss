@@ -5,7 +5,11 @@
 	flex-direction: row;
   align-items: center;
   justify-content: space-between;
-	padding: 16px 0;
+  padding: 16px 0;
+  
+  .favoriteBnt {
+    margin-left: 10px;
+  }
 
   button {
     color: #fff;

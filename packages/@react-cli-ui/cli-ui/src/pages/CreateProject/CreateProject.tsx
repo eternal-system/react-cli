@@ -22,7 +22,8 @@ const optionsManager = [
 
 const optionsPreset = [
   { value: 'create-react-app', label: 'create-react-app' },
-  { value: 'custom-react-app', label: 'custom-react-app' }
+  // TODO create custorm-react-app
+  // { value: 'custom-react-app', label: 'custom-react-app' }
 ]
 
 export default function CreateProject () {
