@@ -4,8 +4,11 @@ const path = require('path')
 const { craNpm, craYarn } = require('../util/create')
 const { v4: uuid } = require('uuid')
 
-class ProjectApi {
+const StaticMethods = require('./utils')
+
+class ProjectApi extends StaticMethods {
   constructor (client, db, folder) {
+    super(db)
     this.client = client
     this.db = db
     this.folder = folder
@@ -47,7 +50,7 @@ class ProjectApi {
       this.db.get('projects')
         .value()
         .forEach((project) => {
-          if (!fs.existsSync(path.join('/', ...project.path, project.name))) {
+          if (!fs.existsSync(path.join('/', ...project.path.slice(0,-1), project.name))) {
             this.db.get('projects').remove({ id: project.id }).write()
           }
         })
@@ -92,16 +95,19 @@ class ProjectApi {
 
           // add db project
           if (stdout) {
-            this.db.get('projects').push({
-              id: uuid(),
-              name,
-              path: pathProject,
-              manager,
-              preset,
-              favorite: false,
-              type: 'react',
-              openDate: Date.now()
-            })
+            const id = uuid()
+            this.db.set('config.lastOpenProject', id).write()
+            this.db.get('projects')
+              .push({
+                id,
+                name,
+                path: [...pathProject, name],
+                manager,
+                preset,
+                favorite: false,
+                type: 'react',
+                openDate: Date.now()
+              })
               .write()
               .then(() => this.client.emit('notification', {
                 title: 'Success',
@@ -203,13 +209,11 @@ class ProjectApi {
       })
     } else {
       const project = {
-        id: this.db.get('projects').value().length + 1,
+        id: uuid(),
         path: pathProject,
         favorite: false
       }
-
       const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
-
       project.name = packageData.name
       this.db.get('projects').push(project).write()
       this.open(project.id)

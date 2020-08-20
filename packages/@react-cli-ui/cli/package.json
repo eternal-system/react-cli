@@ -12,7 +12,7 @@
   "description": "Command line interface for React.js development",
   "main": "index.js",
   "bin": {
-    "react-cli-ui": "bin/react.js"
+    "react": "bin/react.js"
   },
   "publishConfig": {
     "access": "public"

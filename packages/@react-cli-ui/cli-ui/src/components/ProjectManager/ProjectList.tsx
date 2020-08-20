@@ -5,7 +5,7 @@ import ProjectListItem from './ProjectListItem'
 import css from './style.module.scss'
 
 interface ProjectList {
-  active: number;
+  active: number | null;
   projects: any[];
 
   onOpen(id: number): void;

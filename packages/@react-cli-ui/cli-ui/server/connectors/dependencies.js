@@ -3,8 +3,11 @@ const fs = require('fs')
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
 
-class DependenciesApi {
+const StaticMethods = require('./utils')
+
+class DependenciesApi extends StaticMethods {
   constructor (client, db, folders) {
+    super(db)
     this.client = client
     this.db = db
     this.folders = folders
@@ -13,8 +16,8 @@ class DependenciesApi {
 
   list (file) {
     const filePath = `/${file.join('/')}`
-    const pkg = this.folders.readPackage(path.join(filePath))
-
+    const pkg = this.readPackage(path.join(filePath))
+   
     if (pkg) {
       this.dependencies = this.dependencies.concat(
         this.findDependencies(pkg.devDependencies || {}, 'devDependencies', filePath)
@@ -54,15 +57,15 @@ class DependenciesApi {
   }
 
   getLink ({ id, file }) {
-    const pkg = this.readPackage({ id, file })
+    const pkg = this.readPackageDep({ id, file })
     return pkg.homepage ||
           (pkg.repository && pkg.repository.url) ||
           `https://www.npmjs.com/package/${id.replace('/', '%2F')}`
   }
 
-  readPackage ({ id, file }) {
+  readPackageDep ({ id, file }) {
     try {
-      return this.folders.readPackage(this.getPath({ id, file }))
+      return this.readPackage(this.getPath({ id, file }))
     } catch (e) {
       console.log(e)
     }
