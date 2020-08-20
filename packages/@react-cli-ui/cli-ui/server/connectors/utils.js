@@ -43,6 +43,7 @@ class StaticMethods {
 
   readPackage (file) {
     const pkgFile = path.join(file, 'package.json')
+    console.log("pkgFile", pkgFile)
     if (fs.existsSync(pkgFile)) {
       const pkg = fs.readJsonSync(pkgFile)
       return pkg
