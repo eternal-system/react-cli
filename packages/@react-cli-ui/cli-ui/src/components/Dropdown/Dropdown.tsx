@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
+
 import DropIcon from '@icons/drop-down.svg'
+import FolderIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 
-export default function Dropdown () {
+interface Props {
+  data: { name: string, path: string }
+}
+
+export default function Dropdown ({data}: Props) {
   const [open, setOpen] = useState(false);
   const divRef = useRef(null);
   const btnRef = useRef(null);
@@ -31,15 +37,23 @@ export default function Dropdown () {
     )
   }
 
+  function handleClick (value: string) {
+    console.log(value)
+  }
+
   return (
     <>
       <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
         {renderIcon(DropIcon)}
-      {open && (
-        <div className={css.list} ref={divRef}>
-          <div> list favorite </div> 
-        </div>
-      )}
+        {open && (
+          <div className={css.list} ref={divRef}>
+            {data.map((f, i) => {
+              return (
+                <div key={i} onClick={() => handleClick(f.path)}><FolderIcon /><span>{f.path}</span></div> 
+              )
+            })}
+          </div>
+        )}
       </button>
     </>
   )

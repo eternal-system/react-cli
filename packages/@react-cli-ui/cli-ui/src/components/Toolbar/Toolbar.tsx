@@ -37,13 +37,6 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
   const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
   const isFavorite = favorites.some(f => f.path === check)
 
-    const data = [
-        { text: 'Mustard', value: 'mustard' },
-        { text: 'Ketchup', value: 'ketchup' },
-        { text: 'Relish', value: 'relish' },
-        { text: 'Mayo', value: 'mayo' },
-    ]
-
   useEffect(() => {
     setEditPath(path.join('/'))
   }, [path, favorites])
@@ -127,7 +120,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
             { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
           </button>
 
-          <Dropdown data={data} />
+          <Dropdown data={favorites} />
 
           <button onClick={showModal}>
             {renderIcon(CreateFolderIcon)}
