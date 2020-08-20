@@ -120,7 +120,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
             { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
           </button>
 
-          <Dropdown data={favorites} />
+          <Dropdown data={favorites} edit={setUrlPath}/>
 
           <button onClick={showModal}>
             {renderIcon(CreateFolderIcon)}

@@ -6,10 +6,11 @@ import FolderIcon from '@icons/folder-filled.svg'
 import css from './style.module.scss'
 
 interface Props {
-  data: { name: string, path: string }
+  data: { name: string, path: string },
+  edit: any;
 }
 
-export default function Dropdown ({data}: Props) {
+export default function Dropdown ({data, edit}: Props) {
   const [open, setOpen] = useState(false);
   const divRef = useRef(null);
   const btnRef = useRef(null);
@@ -37,8 +38,8 @@ export default function Dropdown ({data}: Props) {
     )
   }
 
-  function handleClick (value: string) {
-    console.log(value)
+  function handleClick (url: string) {
+    edit(url.split('/').filter(Boolean))
   }
 
   return (
