@@ -74,17 +74,17 @@ function api (message, client) {
         project.clearDb()
         break
 
-        // Dependencies
+      // Dependencies
       case 'GET_LIST_DEPENDINCIES':
         dependencies.list(path)
         break
 
-        // Config
+      // Config
       case 'GET_CONFIG':
         project.getConfig()
         break
 
-        // Logs
+      // Logs
       case 'GET_LOGS':
         logs.list()
         break

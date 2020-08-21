@@ -5,17 +5,15 @@ import { SettingsContext } from '../context'
 
 export default function Dependencies () {
   const { t } = useTranslation('dashboard')
-  const { socket, selectedPath } = useContext(SettingsContext)
+  const { socket } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
 
   useEffect(() => {
-
     socket.send({
-      type: 'GET_LIST_DEPENDINCIES',
-      path: selectedPath
+      type: 'GET_LIST_DEPENDINCIES'
     })
 
-    socket.on('dependencies', (res) => {
+    socket.on('dependencies', (res: any) => {
       setDependencies(res.data)
     })
 

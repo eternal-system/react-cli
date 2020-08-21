@@ -14,10 +14,13 @@ class DependenciesApi extends StaticMethods {
     this.dependencies = []
   }
 
-  list (file) {
-    const filePath = `/${file.join('/')}`
+  list () {
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
+
+    const filePath = `/${activeProject.path.join('/')}`
     const pkg = this.readPackage(path.join(filePath))
-   
+
     if (pkg) {
       this.dependencies = this.dependencies.concat(
         this.findDependencies(pkg.devDependencies || {}, 'devDependencies', filePath)
