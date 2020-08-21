@@ -1,4 +1,3 @@
-
 const StaticMethods = require('./utils')
 const launch = require('launch-editor')
 
