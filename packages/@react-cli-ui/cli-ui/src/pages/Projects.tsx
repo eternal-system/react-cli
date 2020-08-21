@@ -79,6 +79,15 @@ export default function Projects () {
     }
   }
 
+  function handleOpenEdit (path: string[]) {
+    if (path.length) {
+      socket.send({
+        type: 'OPEN_EDIT_FILE',
+        path
+      })
+    }
+  }
+
   function handleFavorite (id: number) {
     if (id) {
       socket.send({
@@ -122,6 +131,7 @@ export default function Projects () {
             active={active}
             projects={filters}
             onOpen={openProject}
+            onOpenEdit={handleOpenEdit}
             onFavorite={handleFavorite}
             onDelete={handleDelete}
           />

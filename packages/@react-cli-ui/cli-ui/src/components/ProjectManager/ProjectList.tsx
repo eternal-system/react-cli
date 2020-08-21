@@ -9,11 +9,12 @@ interface ProjectList {
   projects: any[];
 
   onOpen(id: number): void;
+  onOpenEdit(path: string[]): void;
   onDelete(id: number): void;
   onFavorite(id: number): void;
 }
 
-export default function ProjectList ({ active, projects, onOpen, onDelete, onFavorite }: ProjectList) {
+export default function ProjectList ({ active, projects, onOpen, onOpenEdit, onDelete, onFavorite }: ProjectList) {
   const { t } = useTranslation('project')
 
   const listFavorites = projects.filter(p => p.favorite === true)
@@ -30,6 +31,7 @@ export default function ProjectList ({ active, projects, onOpen, onDelete, onFav
           {...favorite}
           active={active}
           onOpen={onOpen}
+          onOpenEdit={onOpenEdit}
           onFavorite={onFavorite}
           onDelete={onDelete}
         />
@@ -45,6 +47,7 @@ export default function ProjectList ({ active, projects, onOpen, onDelete, onFav
           {...project}
           active={active}
           onOpen={onOpen}
+          onOpenEdit={onOpenEdit}
           onFavorite={onFavorite}
           onDelete={onDelete}
         />
