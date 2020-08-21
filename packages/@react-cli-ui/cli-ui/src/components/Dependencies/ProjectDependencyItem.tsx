@@ -28,12 +28,12 @@ export default function ProjectDependencyItem (item: PropsItem) {
             {t('version')}: {item.versionRange}
           </div>
           <div className={css.info}>
-           { item.installed 
-              ? <div className={css.like}><LikeIcon /> {t('installed')}</div> 
+            { item.installed
+              ? <div className={css.like}><LikeIcon /> {t('installed')}</div>
               : <div>{t('noInstalled')}</div>}
           </div>
           <div className={css.info}>
-            <a href={item.website} target="_blank">
+            <a href={item.website} target="_blank" rel="noreferrer">
               <LinkIcon/> {t('moreInfo')}
             </a>
           </div>
