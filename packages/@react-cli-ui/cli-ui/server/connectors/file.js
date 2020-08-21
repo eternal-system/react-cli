@@ -15,15 +15,15 @@ class FileApi extends StaticMethods {
   async openInEditor (path) {
     const currentPath = `/${path.join('/')}`
     launch(
-      currentPath, 
+      currentPath,
       process.env.EDITOR || 'code',
       (fileName, errorMsg) => {
-        console.error(`Unable to open '${fileName}'`, errorMessage)
+        console.error(`Unable to open '${fileName}'`, errorMsg)
         this.client.emit('erro', {
           message: 'Ошибка работы с файловой системой',
-          error: errorMessage
+          error: errorMsg
         })
-    })
+      })
   }
 }
 

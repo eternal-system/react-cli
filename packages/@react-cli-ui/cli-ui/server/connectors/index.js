@@ -24,7 +24,7 @@ function api (message, client) {
       case 'CREATE_FOLDER':
         folder.createFolder(url)
         break
-      
+
       // File
       case 'OPEN_EDIT_FILE':
         files.openInEditor(path)
