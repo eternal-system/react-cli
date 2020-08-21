@@ -79,6 +79,10 @@ export default function Projects () {
     }
   }
 
+  function handleOpenEdit (path: string[]) {
+    console.log(path)
+  }
+
   function handleFavorite (id: number) {
     if (id) {
       socket.send({
@@ -122,6 +126,7 @@ export default function Projects () {
             active={active}
             projects={filters}
             onOpen={openProject}
+            onOpenEdit={handleOpenEdit}
             onFavorite={handleFavorite}
             onDelete={handleDelete}
           />
