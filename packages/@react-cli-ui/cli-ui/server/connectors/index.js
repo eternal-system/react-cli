@@ -1,5 +1,6 @@
 const { db: dbAsync, dbPath } = require('../util/db')
 const FolderApi = require('./folders')
+const FileApi = require('./file')
 const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
 const DependenciesApi = require('./dependencies')
@@ -8,13 +9,14 @@ const DependenciesApi = require('./dependencies')
 function api (message, client) {
   dbAsync.then(db => {
     const folder = new FolderApi(client, db)
+    const files = new FileApi(client, db)
     const project = new ProjectApi(client, db, folder)
     const dependencies = new DependenciesApi(client, db, folder)
     const logs = new LogsApi(client, db)
     const { type, name, url, id, hidden, path, manager, preset, log, file } = message
 
     switch (type) {
-    // Folders
+      // Folders
       case 'GET_FOLDERS':
         folder.getFolders(url, hidden)
         break
@@ -22,13 +24,18 @@ function api (message, client) {
       case 'CREATE_FOLDER':
         folder.createFolder(url)
         break
+      
+      // File
+      case 'OPEN_EDIT_FILE':
+        files.openInEditor(path)
+        break
 
-        // Favorite folder
+      // Favorite folder
       case 'SET_FAVORITE':
         folder.setFavorite(file)
         break
 
-        // Last open project
+      // Last open project
       case 'GET_LAST_OPEN_PROJECT':
         folder.getLastOpenProject()
         break
@@ -37,7 +44,7 @@ function api (message, client) {
         folder.listFavorite()
         break
 
-        // Projects
+      // Projects
       case 'OPEN_PROJECT':
         project.open(id)
         break

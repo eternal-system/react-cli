@@ -80,7 +80,12 @@ export default function Projects () {
   }
 
   function handleOpenEdit (path: string[]) {
-    console.log(path)
+    if (path.length) {
+      socket.send({
+        type: 'OPEN_EDIT_FILE',
+        path
+      })
+    }
   }
 
   function handleFavorite (id: number) {
