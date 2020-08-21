@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import ReactTooltip from 'react-tooltip'
 
 import { useTranslation } from 'react-i18next'
