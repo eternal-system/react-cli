@@ -1,0 +1,35 @@
+.loading {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  svg {
+    fill: #61dafb;
+    width: 120px;
+    animation: load 1.5s infinite linear;
+    -webkit-animation: load 1.5s infinite linear;
+  }
+}
+
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

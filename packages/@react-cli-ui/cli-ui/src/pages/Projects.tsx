@@ -37,7 +37,7 @@ export default function Projects () {
       type: 'GET_CONFIG'
     })
 
-    socket.on('projects', (res) => {
+    socket.on('projects', (res: any) => {
       batch(() => {
         setLoading(true)
         setProjects(res.data)
@@ -48,15 +48,15 @@ export default function Projects () {
       })
     })
 
-    socket.on('config', (res) => {
+    socket.on('config', (res: any) => {
       setActive(res.data?.lastOpenProject || 1)
     })
 
-    socket.on('erro', (error) => {
-      setLoading(true)
+    socket.on('erro', (error: any) => {
+      setLoading(false)
       notification.error({
-        title: error.message,
-        message: error.error.path
+        title: error.title,
+        message: error.message
       })
     })
 
