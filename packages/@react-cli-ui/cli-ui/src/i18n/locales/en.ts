@@ -21,7 +21,8 @@ const locale = {
     createNewProject: 'Create a new project here',
     importProject: 'Import project',
     favoriteProjects: 'Favorite projects',
-    otherProjects: 'Other projects'
+    otherProjects: 'Other projects',
+    emptyFavoriteFolders: 'Empty favorite folders'
   },
   projectCreate: {
     createProjectTitle: 'Create new project',

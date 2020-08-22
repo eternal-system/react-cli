@@ -1,20 +1,20 @@
 .wrapperHeader {
 	background-color: #262e41;
-    color: #ffffff;
-    width: 220px;
-    height: 100%;
+  color: #ffffff;
+  width: 220px;
+  height: 100%;
 	position: relative;
 	
 	.dropdown{
-	    background-color: #61dafb3f;
+		text-align: center;
+		background-color: #61dafb3f;
 		border: 3px solid transparent;
 		color: #61dafb;
 		background-clip: padding-box;
 		border-radius: 25px;
 		margin: 15px;
 		padding: 5px 0px 5px 12px;
-		cursor: default;
-		margin-bottom: 25px;	
+		cursor: default;	
 	}
 
 	.nav {
