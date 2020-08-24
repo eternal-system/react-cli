@@ -1,0 +1,23 @@
+.path {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 8px;
+  height: 100%;
+  cursor: default;
+  font-size: 15px;
+  .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    svg {
+      fill: #fff;
+    }
+  }
+  &:hover {
+    background-color: #61dafb23;
+  }
+}

@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid'
 import { Routes } from 'router'
 import { useNotification } from '@hooks'
 import DashboardIcon from '@icons/dashboard-project.svg'
-// import ActiveIcon from '@icons/dashboard-tasks.svg'
+import ActiveIcon from '@icons/dashboard-tasks.svg'
 import { SettingsContext } from '../../context'
 import StatsIcon from '@icons/dashboard-config.svg'
 
@@ -75,8 +75,7 @@ export default function Dashboard () {
   const menu: MenuItems[] = [
     { key: Routes.DASHBOARD, label: t('dashboard'), Icon: DashboardIcon },
     { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
-    // TODO Скрыт до следующего релиза где дудет добавлен данный функционал
-    // { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
+    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
   ]
 
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
