@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Routes } from 'router'
 import { SettingsContext } from 'context'
@@ -12,6 +12,8 @@ import HomeIcon from '@icons/home-filled.svg'
 import css from './style.module.scss'
 
 export default function Footer () {
+  const location = useLocation()
+  const [toggle, setToggle] = useState(location.pathname.replace('/', ''))
   const { darkTheme, changeTheme, changeLocale } = useContext(SettingsContext)
 
   function renderThemeIcon () {
@@ -20,9 +22,16 @@ export default function Footer () {
       : <DarkIcon onClick={changeTheme} />
   }
 
+  function handleClick () {
+    const value = toggle === 'project' ? 'dashboard' : 'project'
+    setToggle(value)
+  }
+
   return (
     <div className={css.footer}>
-      <Link to={Routes.PROJECT} className={css.icon}>
+      <Link to={toggle === 'project'
+        ? Routes.DASHBOARD
+        : Routes.PROJECT } onClick={handleClick} className={css.icon}>
         <HomeIcon />
       </Link>
       <div className={css.rightGroup}>
