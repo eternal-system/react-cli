@@ -63,6 +63,16 @@ const locale = {
     tip1: 'You are looking at the project dashboard where you can put widgets. Use the "Customize" button to add more! Everything is automatically saved.',
     tip2: 'On the left are the different available pages. "Plugins" let you add new React CLI plugins, "Dependencies" for managing the packages, "Configuration" to configure the tools and "Tasks" to run scripts (for example webpack).',
     tip3: 'Return to the project manager with the dropdown at the top left of the screen or the home button in the status bar at the bottom.'
+  },
+  toolbar: {
+    tooltip: {
+      back: 'Back',
+      folder: 'Beginning',
+      path: 'Specified path',
+      update: 'Update',
+      favorite: 'Add to favorites',
+      newFolder: 'Create new folder'
+    }
   }
 }
 

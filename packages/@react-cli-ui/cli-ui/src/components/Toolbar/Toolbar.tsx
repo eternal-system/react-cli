@@ -4,6 +4,8 @@ import { Input } from 'common'
 import { useModal } from '@hooks'
 import { ModalFolder } from '../../modals'
 import { Dropdown } from '@components'
+import ReactTooltip from 'react-tooltip'
+import { useTranslation } from 'react-i18next'
 
 import EditIcon from '@icons/edit-pen.svg'
 import ArrowUpIcon from '@icons/arrow-up.svg'
@@ -36,6 +38,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
   const [editPath, setEditPath] = useState('')
   const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
   const isFavorite = favorites.some(f => f.path === check)
+  const { t } = useTranslation('toolbar')
 
   useEffect(() => {
     setEditPath(path.join('/'))
@@ -97,35 +100,41 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
   return (
     <>
       <div className={css.toolbar}>
-        <button onClick={back}>
+        <button onClick={back} data-tip={t('tooltip.back')} >
           {renderIcon(ArrowUpIcon)}
         </button>
         <div className={css.urlPathsContainer}>
           <div className={css.urlPaths}>
-            <button onClick={clearUrlPath}>
+            <button onClick={clearUrlPath} data-tip={t('tooltip.folder')}>
               {renderIcon(FolderFilledIcon)}
             </button>
             {renderUrlPath()}
           </div>
-          <button className={css.editBtn} onClick={onChangeEditable}>
+          <button className={css.editBtn} onClick={onChangeEditable} data-tip={t('tooltip.path')} >
             {renderIcon(EditIcon)}
           </button>
         </div>
         <div>
-          <button onClick={updateFolderData}>
+          <button onClick={updateFolderData} data-tip={t('tooltip.update')} >
             {renderIcon(RefrechIcon)}
           </button>
 
-          <button onClick={() => addFavorite(!isFavorite)}>
+          <button onClick={() => addFavorite(!isFavorite)} data-tip={t('tooltip.favorite')} >
             { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
           </button>
 
           <Dropdown data={favorites} edit={setUrlPath}/>
 
-          <button onClick={showModal}>
+          <button onClick={showModal} data-tip={t('tooltip.newFolder')} >
             {renderIcon(CreateFolderIcon)}
           </button>
         </div>
+
+        <ReactTooltip place="top"
+          effect="solid"
+          delayShow={500}
+          offset={{ top: -10 }}
+        />
       </div>
       <ModalFolder
         get={setUrlPath}
