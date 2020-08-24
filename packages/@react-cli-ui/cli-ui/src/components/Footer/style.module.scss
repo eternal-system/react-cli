@@ -2,15 +2,15 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 	color: #fff;
 	height: 30px;
 	width: 100%;
 	background-color: #20232a;
-
 	.rightGroup {
 		display: flex;
+    margin-left: auto;
 	}
 
 	.icon {
