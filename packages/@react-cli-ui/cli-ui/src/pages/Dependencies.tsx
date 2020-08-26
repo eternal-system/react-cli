@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { DashboardWrap, ProjectDependencies } from '@components'
 import { useTranslation } from 'react-i18next'
+
+import AddIcon from '@icons/add.svg'
+import UpdateIcon from '@icons/update.svg'
+
 import { SettingsContext } from '../context'
 
 export default function Dependencies () {
@@ -25,8 +29,8 @@ export default function Dependencies () {
   function renderButton (){
     return (
       <div>
-        <button>Install dependency</button>
-        <button>Update all dependencies</button>
+        <button><AddIcon />Install dependency</button>
+        <button><UpdateIcon />Update all dependencies</button>
       </div>
     )
   }

@@ -23,6 +23,18 @@
   }
   .rightGroup {
     margin-left: auto;
+    button {
+      svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        position: relative;
+        fill: #fff;
+        line-height: 12px;
+        margin-top: -5px;
+        top: 4px;
+      }
+    }
   }
 }
 
