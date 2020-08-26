@@ -8,7 +8,7 @@ import UpdateIcon from '@icons/update.svg'
 import { SettingsContext } from '../context'
 
 export default function Dependencies () {
-  const { t } = useTranslation('dashboard')
+  const { t } = useTranslation('dependencies')
   const { socket } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
 
@@ -29,8 +29,8 @@ export default function Dependencies () {
   function renderButton (){
     return (
       <div>
-        <button><AddIcon />Install dependency</button>
-        <button><UpdateIcon />Update all dependencies</button>
+        <button><AddIcon />{t('install')}</button>
+        <button><UpdateIcon />{t('update')}</button>
       </div>
     )
   }
