@@ -22,8 +22,17 @@ export default function Dependencies () {
     }
   }, [])
 
+  function renderButton (){
+    return (
+      <div>
+        <button>Install dependency</button>
+        <button>Update all dependencies</button>
+      </div>
+    )
+  }
+
   return (
-    <DashboardWrap title={t('titleDepend')}>
+    <DashboardWrap title={t('titleDepend')} btn={renderButton()}>
       <ProjectDependencies list={dependencies}/>
     </DashboardWrap>
   )

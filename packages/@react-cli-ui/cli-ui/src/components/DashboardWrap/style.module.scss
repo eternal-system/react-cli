@@ -17,10 +17,12 @@
   height: 32px;
   z-index: 1;
   background: #61dafb3f;
-  width: 100%;
   .title {
     font-size: 26px;
     font-weight: lighter;
+  }
+  .rightGroup {
+    margin-left: auto;
   }
 }
 
