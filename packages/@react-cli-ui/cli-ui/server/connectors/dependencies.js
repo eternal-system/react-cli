@@ -74,6 +74,23 @@ class DependenciesApi extends StaticMethods {
     }
     return {}
   }
+
+  install () {
+
+  }
+
+  uninstall ({ id }) {
+
+  }
+
+  update ({ id }) {
+    
+  }
+
+  updateAll () {
+
+  }
+
 }
 
 module.exports = DependenciesApi
