@@ -49,7 +49,9 @@ const locale = {
     noInstalled: 'not installed',
     moreInfo: 'More info',
     install: 'Install dependency',
-    update: 'Update all dependencies'
+    update: 'Update all dependencies',
+    type: 'Type',
+    search: 'Search'
   },
   modal: {
     selectFolder: 'Select folder',

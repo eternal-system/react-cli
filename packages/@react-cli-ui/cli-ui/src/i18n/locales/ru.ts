@@ -48,7 +48,9 @@ const locale = {
     noInstalled: 'не установлен',
     moreInfo: 'Больше информации',
     install: 'Установить пакет',
-    update: 'Обновить пакеты'
+    update: 'Обновить пакеты',
+    type: 'Тип',
+    search: 'Поиск пакета'
   },
   modal: {
     selectFolder: 'Выбор директории',

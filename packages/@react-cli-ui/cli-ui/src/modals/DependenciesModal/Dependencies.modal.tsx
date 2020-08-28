@@ -21,7 +21,7 @@ function DependenciesModal({visible, closeModal}: ModalFolder) {
    const { t } = useTranslation('modal')
    const [state, setState] = useState({
       type: optionsType[0],
-      name: '',
+      search: '',
     })
 
    function handleChange ({ value, name }: { value: string, name: string }) {
@@ -44,17 +44,17 @@ function DependenciesModal({visible, closeModal}: ModalFolder) {
          >
          <Select
             name="type"
-            label={t('packageManager')}
+            label={t('dependencies:type')}
             onChange={handleChange}
             options={optionsType}
             value={state.type}
          />
          <Input
-            name="name"
-            label={t('nameProject')}
-            placeholder={t('typeName')}
+            name="search"
+            label={t('dependencies:search')}
+            placeholder={t('dependencies:search')}
             className={css.projectName}
-            value={state.name}
+            value={state.search}
             onChange={handleChange}
             />
             Componet list
