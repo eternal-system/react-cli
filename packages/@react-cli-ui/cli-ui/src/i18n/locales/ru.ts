@@ -52,10 +52,12 @@ const locale = {
   },
   modal: {
     selectFolder: 'Выбор директории',
+    titleDepend: 'Установка зависимостей',
     createNew: 'Добавить новую папку',
     create: 'Добавить',
     title: 'Заголовок',
     newFolder: 'Новая папка',
+    install: 'Установить',
     cancel: 'Отмена'
   },
   welcometips: {

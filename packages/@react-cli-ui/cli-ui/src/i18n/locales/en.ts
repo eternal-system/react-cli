@@ -54,9 +54,11 @@ const locale = {
   modal: {
     selectFolder: 'Select folder',
     createNew: 'Create new folder',
+    titleDepend: 'Install new dependency',
     create: 'Create',
     title: 'title',
     newFolder: 'New folder',
+    install: 'Install',
     cancel: 'Cancel'
   },
   welcometips: {
