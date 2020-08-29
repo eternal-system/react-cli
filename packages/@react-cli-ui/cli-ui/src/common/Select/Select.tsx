@@ -18,6 +18,7 @@ interface OwnProps extends Props {
   autoFocus?: boolean;
   prefix?: string;
   /** @TODO add to real types */
+  styles?: any;
   onChange?: any;
   onKeyPress?: any;
   onFocus?: any;
@@ -33,7 +34,8 @@ function Select (props: OwnProps) {
     name = null,
     value = '',
     label = '',
-    prefix = null
+    prefix = null,
+    styles = {}
   } = props
 
   function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
@@ -59,6 +61,7 @@ function Select (props: OwnProps) {
         {renderPrefix}
         <SelectComponent
           className={css.select}
+          styles={styles}
           {...(onChange && { onChange: handleChange })}
           {...(options && { options })}
           {...(value && { value })}
