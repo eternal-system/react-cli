@@ -80,7 +80,7 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
           />
           <div className={css.wrapper}>
               {!!packages.length && packages.map(el => {
-                const key = el.package.name ||`${el.package.links.npm}_${idx}`
+                const key = el.package.name || `${el.package.links.npm}`
                 return <ItemPackages key={key} pkg={el.package}/>
               })}
           </div>

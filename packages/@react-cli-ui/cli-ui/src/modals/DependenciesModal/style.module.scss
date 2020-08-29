@@ -59,7 +59,9 @@
               .icon {
                 flex: auto 0 0;
                 img {
-                  width: 30px;
+                  width: 42px;
+                  height: 42px;
+                  margin-right: 16px;
                 }
               }
               .info {
@@ -68,7 +70,29 @@
                   flex: auto 0 0;
                 }
                 .description {
-    
+                  .link {
+                      a {
+                        color: #2b849c;
+                        font-weight: bold;
+                        &:hover {
+                          color: #fff;
+                          background: #2b849c;
+                          padding: 4px;
+                          border-radius: 4px;
+                          svg {
+                            fill: #fff; 
+                          }
+                        }
+                
+                        svg {
+                          width: 17px;
+                          fill: #2b849c;
+                          position: relative;
+                          top: 3px;
+                        }
+                      }
+                  }
+                  
                 }
               }
             }
