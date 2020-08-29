@@ -8,14 +8,14 @@ import { DependenciesModal } from 'modals'
 import AddIcon from '@icons/add.svg'
 import UpdateIcon from '@icons/update.svg'
 
-import { SettingsContext } from '../context'
+import { SettingsContext } from '../../context'
 
 export default function Dependencies () {
   const { t } = useTranslation('dependencies')
   const { socket } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
   const { visible, showModal, closeModal } = useModal()
-
+  
   useEffect(() => {
     socket.send({
       type: 'GET_LIST_DEPENDINCIES'

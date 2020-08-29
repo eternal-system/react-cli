@@ -103,58 +103,6 @@ class DependenciesApi extends StaticMethods {
     return {}
   }
 
-  // getVersion ({ id, installed, versionRange, baseDir }) {
-  //   let current
-
-  //   // Read module package.json
-  //   if (installed) {
-  //     const pkg = this.readPackage({ id, file: baseDir })
-  //     current = pkg.version
-  //   } else {
-  //     current = null
-  //   }
-  
-  //   // Metadata
-  //   let latest, wanted
-  //   const metadata = await getMetadata(id)
-  //   if (metadata) {
-  //     latest = metadata['dist-tags'].latest
-  
-  //     const versions = Array.isArray(metadata.versions) ? metadata.versions : Object.keys(metadata.versions)
-  //     wanted = semver.maxSatisfying(versions, versionRange)
-  //   }
-  
-  //   if (!latest) latest = current
-  //   if (!wanted) wanted = current
-  
-  //   return {
-  //     current,
-  //     latest,
-  //     wanted,
-  //     range: versionRange,
-  //   }
-  // }
-
-  // async function getMetadata (id, context) {
-  //   let metadata = metadataCache.get(id)
-  //   if (metadata) {
-  //     return metadata
-  //   }
-  
-  //   try {
-  //     metadata = await (new PackageManager({ context: cwd.get() })).getMetadata(id)
-  //   } catch (e) {
-  //     // No connection?
-  //   }
-  
-  //   if (metadata) {
-  //     metadataCache.set(id, metadata)
-  //     return metadata
-  //   } else {
-  //     log('Dependencies', chalk.yellow('Can\'t load metadata'), id)
-  //   }
-  // }
-
   install () {
 
   }

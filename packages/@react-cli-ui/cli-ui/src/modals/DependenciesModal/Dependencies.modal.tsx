@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next'
 
 import { Modal } from '@components'
 import { Input, Select } from 'common'
+import { useGetPackages } from '@hooks'
+
+import ItemPackages from './ItemPackages'
 
 import css from './style.module.scss'
 
@@ -32,14 +35,21 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
     type: optionsType[0],
     search: ''
   })
+  const {packages, fetchPackages} = useGetPackages('')
 
   function handleChange ({ value, name }: { value: string, name: string }) {
     setState((prevState) => ({ ...prevState, [name]: value }))
   }
 
+  function onInputChange ({ value, name }: { value: string, name: string }) {
+    setState((prevState) => ({ ...prevState, [name]: value }))
+    fetchPackages(value)
+  }
+
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    typeof closeModal === 'function' && closeModal(e)
+    console.log(state)
+    //typeof closeModal === 'function' && closeModal(e)
   }
 
   return (
@@ -59,15 +69,22 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
           options={optionsType}
           value={state.type}
         />
-        <Input
-          name="search"
-          label={t('dependencies:search')}
-          placeholder={t('dependencies:search')}
-          className={css.projectName}
-          value={state.search}
-          onChange={handleChange}
-        />
-            Componet list
+        <div className={`${css.search} ${packages.length && css.active}`}>
+          <Input
+            name="search"
+            label={t('dependencies:search')}
+            placeholder={t('dependencies:search')}
+            className={css.projectName}
+            value={state.search}
+            onChange={onInputChange}
+          />
+          <div className={css.wrapper}>
+              {!!packages.length && packages.map(el => {
+                const key = el.package.name ||`${el.package.links.npm}_${idx}`
+                return <ItemPackages key={key} pkg={el.package}/>
+              })}
+          </div>
+        </div>
       </Modal>
     </div>
   )
