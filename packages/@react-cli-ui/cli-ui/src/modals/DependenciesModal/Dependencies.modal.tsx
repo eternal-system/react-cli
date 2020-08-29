@@ -35,6 +35,8 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
     type: optionsType[0],
     search: ''
   })
+  const [active, setActive] = useState(null)
+
   const {packages, fetchPackages} = useGetPackages('')
 
   function handleChange ({ value, name }: { value: string, name: string }) {
@@ -48,7 +50,7 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
 
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    console.log(state)
+    console.log(state.type, active)
     //typeof closeModal === 'function' && closeModal(e)
   }
 
@@ -81,7 +83,7 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
           <div className={css.wrapper}>
               {!!packages.length && packages.map(el => {
                 const key = el.package.name || `${el.package.links.npm}`
-                return <ItemPackages key={key} pkg={el.package}/>
+                return <ItemPackages key={key} active={active} change={setActive} pkg={el.package}/>
               })}
           </div>
         </div>
