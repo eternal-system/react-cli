@@ -68,7 +68,7 @@ class DependenciesApi extends StaticMethods {
     }
   }
 
-  getMetadata(pkg) {
+  getMetadata (pkg) {
     return fetch(`http://registry.npmjs.org/${pkg}`)
             .then(res => res.json())
             .then(json => {
@@ -103,8 +103,8 @@ class DependenciesApi extends StaticMethods {
     return {}
   }
 
-  install () {
-
+  install (name, dep) {
+    console.log('install npm', name, dep)
   }
 
   uninstall ({ id }) {

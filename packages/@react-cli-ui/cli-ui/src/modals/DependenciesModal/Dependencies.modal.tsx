@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Modal } from '@components'
 import { Input, Select } from 'common'
+import { SettingsContext } from 'context'
 import { useGetPackages } from '@hooks'
 
 import ItemPackages from './ItemPackages'
@@ -13,6 +14,11 @@ export interface ModalFolder {
     visible?: boolean;
     showModal?(e: React.MouseEvent<HTMLElement>): void;
     closeModal?(e: React.MouseEvent<HTMLElement>): void;
+}
+
+export interface Props {
+  value: string;
+  name: strin;
 }
 
 const optionsType = [
@@ -31,27 +37,31 @@ const selectStyles = {
 
 function DependenciesModal ({ visible, closeModal }: ModalFolder) {
   const { t } = useTranslation('modal')
+  const { socket } = useContext(SettingsContext)
   const [state, setState] = useState({
     type: optionsType[0],
     search: ''
   })
   const [active, setActive] = useState(null)
+  const { packages, fetchPackages } = useGetPackages('')
 
-  const {packages, fetchPackages} = useGetPackages('')
-
-  function handleChange ({ value, name }: { value: string, name: string }) {
+  function handleChange ({ value, name }: Props) {
     setState((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  function onInputChange ({ value, name }: { value: string, name: string }) {
-    setState((prevState) => ({ ...prevState, [name]: value }))
+  function onInputChange ({ value, name }: Props) {
+    handleChange({ value, name })
     fetchPackages(value)
   }
 
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    console.log(state.type, active)
-    //typeof closeModal === 'function' && closeModal(e)
+    socket.send({
+      type: 'INSTALL_DEPENDINCIES',
+      name: active,
+      dep: state.type.value
+    })
+    // typeof closeModal === 'function' && closeModal(e)
   }
 
   return (
@@ -81,10 +91,17 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
             onChange={onInputChange}
           />
           <div className={css.wrapper}>
-              {!!packages.length && packages.map(el => {
-                const key = el.package.name || `${el.package.links.npm}`
-                return <ItemPackages key={key} active={active} change={setActive} pkg={el.package}/>
-              })}
+            {!!packages.length && packages.map(el => {
+              const key = el.package.name || `${el.package.links.npm}`
+              return (
+                <ItemPackages
+                  key={key}
+                  active={active}
+                  change={setActive}
+                  pkg={el.package}
+                />
+              )
+            })}
           </div>
         </div>
       </Modal>
