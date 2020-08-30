@@ -40,7 +40,7 @@ export default function ProjectDependencyItem (item: PropsItem) {
             </a>
           </div>
           <div className={css.delete}>
-              <DeleteIcon onClick={() => item.delete(item.id)} />
+            <DeleteIcon onClick={() => item.delete(item.id)} />
           </div>
         </div>
       </div>
