@@ -32,7 +32,7 @@ export default function ProjectDependencies ({ list }: PropsDepend) {
           {...dep}
         />
       ))}
-      {!!listDevDepend.length && <div>{t('dev')}</div>}
+      {!!listDevDepend.length && <div className={css.title}>{t('dev')}</div>}
       {listDevDepend.map(dep => (
         <ProjectDependencyItem
           key={dep.id}

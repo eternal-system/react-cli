@@ -61,7 +61,12 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
       name: active,
       dep: state.type.value
     })
-    // typeof closeModal === 'function' && closeModal(e)
+    setState({
+      type: optionsType[0],
+      search: ''
+    })
+    setActive(null)
+    typeof closeModal === 'function' && closeModal(e)
   }
 
   return (

@@ -6,6 +6,7 @@ const semver = require('semver')
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
 const { npmInstall, npmUninstall } = require('../util/npm')
+const { notify } = require('../util/notification')
 
 const StaticMethods = require('./utils')
 
@@ -109,25 +110,56 @@ class DependenciesApi extends StaticMethods {
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
     const filePath = `/${activeProject.path.join('/')}`
-    console.log('filePath', filePath)
-    console.log('install npm', name, dep)
    
     let subprocess
     subprocess = npmInstall(name, filePath, dep)
 
     try {
       subprocess.stdout.pipe(process.stdout)
-
       const { stdout } = await subprocess
       console.log("stdout", stdout)
+      if(stdout) {
+        notify({
+          title: 'Dependency installed',
+          message: `Dependency ${name} successfully installed`,
+          icon: 'done'
+        })
+      }
     } catch (error) {
-      console.log('errorr!!!', error)
+      this.client.emit('erro', {
+        title: 'Failure',
+        message: `npm install ${name} error`,
+        error
+      })
     }
 
   }
 
-  uninstall ({ id }) {
+  uninstall (name) {
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
+    const filePath = `/${activeProject.path.join('/')}`
+    let subprocess
+    subprocess = npmUninstall(name, filePath)
+    try {
+      subprocess.stdout.pipe(process.stdout)
+      const { stdout } = await subprocess
+      console.log("stdout", stdout)
+      if(stdout) {
+        notify({
+          title: 'Dependency uninstalled',
+          message: `Dependency ${name} successfully uninstalled`,
+          icon: 'done'
+        })
+      }
+    } catch (error) {
+      this.client.emit('erro', {
+        title: 'Failure',
+        message: `npm uninstall ${name} error`,
+        error
+      })
+    }
   }
 
   update ({ id }) {
