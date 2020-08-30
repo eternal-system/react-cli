@@ -5,6 +5,7 @@ const semver = require('semver')
 
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
+const { npmInstall, npmUninstall } = require('../util/npm')
 
 const StaticMethods = require('./utils')
 
@@ -103,8 +104,26 @@ class DependenciesApi extends StaticMethods {
     return {}
   }
 
-  install (name, dep) {
+  async install (name, dep) {
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
+
+    const filePath = `/${activeProject.path.join('/')}`
+    console.log('filePath', filePath)
     console.log('install npm', name, dep)
+   
+    let subprocess
+    subprocess = npmInstall(name, filePath, dep)
+
+    try {
+      subprocess.stdout.pipe(process.stdout)
+
+      const { stdout } = await subprocess
+      console.log("stdout", stdout)
+    } catch (error) {
+      console.log('errorr!!!', error)
+    }
+
   }
 
   uninstall ({ id }) {
