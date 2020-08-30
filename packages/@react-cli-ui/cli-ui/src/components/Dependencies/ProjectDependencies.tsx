@@ -15,9 +15,10 @@ interface PropsItem {
 
 interface PropsDepend {
   list: PropsItem[];
+  onDelete: (name: string) => void
 }
 
-export default function ProjectDependencies ({ list }: PropsDepend) {
+export default function ProjectDependencies ({ list, onDelete }: PropsDepend) {
   const { t } = useTranslation('dependencies')
 
   const listDepend = list.filter(p => p.type === 'dependencies')
@@ -29,6 +30,7 @@ export default function ProjectDependencies ({ list }: PropsDepend) {
       {listDepend.map(dep => (
         <ProjectDependencyItem
           key={dep.id}
+          delete={onDelete}
           {...dep}
         />
       ))}
@@ -36,6 +38,7 @@ export default function ProjectDependencies ({ list }: PropsDepend) {
       {listDevDepend.map(dep => (
         <ProjectDependencyItem
           key={dep.id}
+          delete={onDelete}
           {...dep}
         />
       ))}

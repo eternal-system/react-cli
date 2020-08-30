@@ -89,6 +89,10 @@ function api (message, client) {
       case 'INSTALL_DEPENDINCIES':
         dependencies.install(name, dep)
         break
+      
+      case 'UNINSTALL_DEPENDINCIES':
+        dependencies.uninstall(name)
+        break
 
       // Config
       case 'GET_CONFIG':

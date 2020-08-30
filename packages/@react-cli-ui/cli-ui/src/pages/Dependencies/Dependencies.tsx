@@ -39,6 +39,10 @@ export default function Dependencies () {
     )
   }
 
+  function removeDepend (name: string) {
+    console.log(name)
+  }
+
   return (
     <DashboardWrap title={t('titleDepend')} btn={renderButton()}>
       <DependenciesModal 
@@ -46,7 +50,10 @@ export default function Dependencies () {
         closeModal={closeModal}
         showModal={showModal}
       />
-      <ProjectDependencies list={dependencies}/>
+      <ProjectDependencies 
+        list={dependencies} 
+        onDelete={removeDepend}
+      />
     </DashboardWrap>
   )
 }

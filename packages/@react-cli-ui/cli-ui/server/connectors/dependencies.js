@@ -135,7 +135,7 @@ class DependenciesApi extends StaticMethods {
 
   }
 
-  uninstall (name) {
+  async uninstall (name) {
     const activeProjectId = this.db.get('config.lastOpenProject').value()
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
