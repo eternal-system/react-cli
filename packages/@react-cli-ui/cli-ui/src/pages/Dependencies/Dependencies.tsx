@@ -15,7 +15,7 @@ export default function Dependencies () {
   const { socket } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
   const { visible, showModal, closeModal } = useModal()
-  
+
   useEffect(() => {
     socket.send({
       type: 'GET_LIST_DEPENDINCIES'
@@ -30,7 +30,7 @@ export default function Dependencies () {
     }
   }, [])
 
-  function renderButton (){
+  function renderButton () {
     return (
       <div>
         <button onClick={showModal}><AddIcon />{t('install')}</button>
@@ -40,18 +40,23 @@ export default function Dependencies () {
   }
 
   function removeDepend (name: string) {
-    console.log(name)
+    if (name) {
+      socket.send({
+        type: 'UNINSTALL_DEPENDINCIES',
+        name
+      })
+    }
   }
 
   return (
     <DashboardWrap title={t('titleDepend')} btn={renderButton()}>
-      <DependenciesModal 
+      <DependenciesModal
         visible={visible}
         closeModal={closeModal}
         showModal={showModal}
       />
-      <ProjectDependencies 
-        list={dependencies} 
+      <ProjectDependencies
+        list={dependencies}
         onDelete={removeDepend}
       />
     </DashboardWrap>
