@@ -34,7 +34,7 @@ export default function ProjectDependencies ({ list, onDelete }: PropsDepend) {
           {...dep}
         />
       ))}
-      {!!listDevDepend.length && <div className={css.title}>{t('dev')}</div>}
+      {Boolean(listDevDepend.length) && <div className={css.title}>{t('dev')}</div>}
       {listDevDepend.map(dep => (
         <ProjectDependencyItem
           key={dep.id}
