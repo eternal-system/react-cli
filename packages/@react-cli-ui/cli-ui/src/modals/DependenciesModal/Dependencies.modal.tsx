@@ -16,11 +16,11 @@ type Title = {
 }
 
 export interface ModalFolder {
+    setLoading(loading: boolean): void;
+    setTitle(props: Title): void;
     visible?: boolean;
     showModal?(e: React.MouseEvent<HTMLElement>): void;
     closeModal?(e: React.MouseEvent<HTMLElement>): void;
-    setLoading(loading: boolean): void;
-    setTitle(props: Title): void;
 }
 
 export interface Props {
@@ -106,13 +106,14 @@ function DependenciesModal ({ visible, closeModal, setLoading, setTitle }: Modal
           />
           <div className={css.wrapper}>
             {!!packages.length && packages.map(el => {
-              const key = el.package.name || `${el.package.links.npm}`
+              const { package } = el
+              const key = package.name || `${package?.links.npm}`
               return (
                 <ItemPackages
                   key={key}
                   active={active}
                   change={setActive}
-                  pkg={el.package}
+                  pkg={package}
                 />
               )
             })}

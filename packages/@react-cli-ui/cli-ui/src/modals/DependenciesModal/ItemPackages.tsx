@@ -8,32 +8,34 @@ import css from './style.module.scss'
 interface ItemProps {
   // TODO add type
   pkg: any;
-  active: string | null; 
+  active: string | null;
   change(activ: string | null): void;
 }
 
-export default function ItemPackages ({pkg, active, change}: any) {
+export default function ItemPackages ({ pkg, active, change }: any) {
   // console.log(pkg)
   const { t } = useTranslation('dependencies')
+  const { name, links, description, version } = pkg
+  const { repository } = links
 
   function handleClick (name: string) {
     change(name)
   }
 
   return (
-    <div className={`${css.item} ${active === pkg.name ? css.active : ''}`} onClick={() => handleClick(pkg.name)} >
+    <div className={`${css.item} ${active === name ? css.active : ''}`} onClick={() => handleClick(name)} >
       <div className={css.icon}>
-       {pkg.links.repository && <img src={`https://github.com/${pkg.links.repository.split('/',4)[3]}.png`} alt=""/>}
+        {repository && <img src={`https://github.com/${repository.split('/', 4)[3]}.png`} alt=""/>}
       </div>
       <div className={css.info}>
         <div className={css.name}>
-          <span>{pkg.name}</span>
-          <span>{pkg.version}</span>
+          <span>{name}</span>
+          <span>{version}</span>
         </div>
         <div className={css.description}>
-          <span>{pkg.description}</span>
+          <span>{description}</span>
           <span className={css.link}>
-            <a href={pkg.links.repository} target="_blank" rel="noreferrer">
+            <a href={repository} target="_blank" rel="noreferrer">
               <LinkIcon/> {t('moreInfo')}
             </a>
           </span>
