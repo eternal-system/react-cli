@@ -9,7 +9,7 @@ interface ItemProps {
   // TODO add type
   pkg: any;
   active: string | null;
-  change(activ: string | null): void;
+  change(active: string | null): void;
 }
 
 export default function ItemPackages ({ pkg, active, change }: any) {
