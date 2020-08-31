@@ -34,8 +34,8 @@ function FileManagerModal ({ folderName, visible, closeModal, showModal }: Modal
         <EditIcon />
       </button>
       <Modal
-        title={`${t('selectFolder')}`}
-        okText={`${t('common:select')}`}
+        title={t('selectFolder')}
+        okText={t('common:select')}
         visible={visible}
         onOk={onSubmit}
         onCancel={closeModal}

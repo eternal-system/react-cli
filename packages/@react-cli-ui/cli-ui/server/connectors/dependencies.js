@@ -1,7 +1,12 @@
 const path = require('path')
 const fs = require('fs')
+const fetch = require('node-fetch')
+const semver = require('semver')
+
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
+const { npmInstall, npmUninstall } = require('../util/npm')
+const { notify } = require('../util/notification')
 
 const StaticMethods = require('./utils')
 
@@ -74,6 +79,95 @@ class DependenciesApi extends StaticMethods {
     }
     return {}
   }
+
+  async install (name, dep) {
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
+
+    const filePath = `/${activeProject.path.join('/')}`
+   
+    let subprocess
+    subprocess = npmInstall(name, filePath, dep)
+
+    try {
+      subprocess.stdout.pipe(process.stdout)
+      subprocess.stdout.on('data', data => {
+        const message = data.toString('utf8')
+        message !== '\n' && this.client.emit('logging', {
+          message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
+        })
+      })
+
+      const { stdout } = await subprocess
+      
+      if(stdout) {
+        this.client.emit('notification', {
+          title: 'Success',
+          message: `Dependency ${name} successfully installed`
+        })
+        notify({
+          title: 'Dependency installed',
+          message: `Dependency ${name} successfully installed`,
+          icon: 'done'
+        })
+      }
+    } catch (error) {
+      this.client.emit('erro', {
+        title: 'Failure',
+        message: `npm install ${name} error`,
+        error
+      })
+    }
+
+  }
+
+  async uninstall (name) {
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
+
+    const filePath = `/${activeProject.path.join('/')}`
+    let subprocess
+    subprocess = npmUninstall(name, filePath)
+    try {
+      subprocess.stdout.pipe(process.stdout)
+      
+      subprocess.stdout.on('data', data => {
+        const message = data.toString('utf8')
+        message !== '\n' && this.client.emit('logging', {
+          message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
+        })
+      })
+
+      const { stdout } = await subprocess
+      
+      if(stdout) {
+        this.client.emit('notification', {
+          title: 'Success',
+          message: `Dependency ${name} successfully uninstalled`
+        })
+        notify({
+          title: 'Dependency uninstalled',
+          message: `Dependency ${name} successfully uninstalled`,
+          icon: 'done'
+        })
+      }
+    } catch (error) {
+      this.client.emit('erro', {
+        title: 'Failure',
+        message: `npm uninstall ${name} error`,
+        error
+      })
+    }
+  }
+
+  update ({ id }) {
+    
+  }
+
+  updateAll () {
+
+  }
+
 }
 
 module.exports = DependenciesApi

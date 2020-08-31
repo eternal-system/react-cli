@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import LinkIcon from '@icons/link.svg'
 import LikeIcon from '@icons/like.svg'
+import DeleteIcon from '@icons/remove.svg'
 import css from './style.module.scss'
 
 interface PropsItem {
@@ -12,6 +13,7 @@ interface PropsItem {
   type: string;
   versionRange: string;
   website: string;
+  delete: (name: string) => void;
 }
 
 export default function ProjectDependencyItem (item: PropsItem) {
@@ -36,6 +38,9 @@ export default function ProjectDependencyItem (item: PropsItem) {
             <a href={item.website} target="_blank" rel="noreferrer">
               <LinkIcon/> {t('moreInfo')}
             </a>
+          </div>
+          <div className={css.delete}>
+            <DeleteIcon onClick={() => item.delete(item.id)} />
           </div>
         </div>
       </div>

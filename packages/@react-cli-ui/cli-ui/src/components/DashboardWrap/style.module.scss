@@ -17,10 +17,24 @@
   height: 32px;
   z-index: 1;
   background: #61dafb3f;
-  width: 100%;
   .title {
     font-size: 26px;
     font-weight: lighter;
+  }
+  .rightGroup {
+    margin-left: auto;
+    button {
+      svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        position: relative;
+        fill: #fff;
+        line-height: 12px;
+        margin-top: -5px;
+        top: 4px;
+      }
+    }
   }
 }
 

@@ -37,23 +37,31 @@ const locale = {
     dependencies: 'Зависимости',
     tasks: 'Задачи',
     titleDashboar: 'Панель инструментов проекта',
-    titleDepend: 'Зависимости проекта',
-    titleTasks: 'Задачи проекта'
+    titleTasks: 'Задачи проекта',
   },
   dependencies: {
+    titleDepend: 'Зависимости проекта',
     main: 'Основные зависимости',
     dev: 'Зависимости для разработке',
     version: 'версия',
     installed: 'установлен',
     noInstalled: 'не установлен',
-    moreInfo: 'Больше информации'
+    moreInfo: 'Больше информации',
+    install: 'Установить пакет',
+    update: 'Обновить пакеты',
+    type: 'Тип',
+    search: 'Поиск пакета',
+    npmInstall: 'Установка',
+    npmUninstall: 'Удаление'
   },
   modal: {
     selectFolder: 'Выбор директории',
+    titleDepend: 'Установка зависимостей',
     createNew: 'Добавить новую папку',
     create: 'Добавить',
     title: 'Заголовок',
     newFolder: 'Новая папка',
+    install: 'Установить',
     cancel: 'Отмена'
   },
   welcometips: {

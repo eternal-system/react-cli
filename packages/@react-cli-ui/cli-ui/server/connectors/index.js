@@ -13,7 +13,7 @@ function api (message, client) {
     const project = new ProjectApi(client, db, folder)
     const dependencies = new DependenciesApi(client, db, folder)
     const logs = new LogsApi(client, db)
-    const { type, name, url, id, hidden, path, manager, preset, log, file } = message
+    const { type, name, url, id, hidden, path, manager, preset, log, file, dep } = message
 
     switch (type) {
       // Folders
@@ -84,6 +84,14 @@ function api (message, client) {
       // Dependencies
       case 'GET_LIST_DEPENDINCIES':
         dependencies.list(path)
+        break
+      
+      case 'INSTALL_DEPENDINCIES':
+        dependencies.install(name, dep)
+        break
+      
+      case 'UNINSTALL_DEPENDINCIES':
+        dependencies.uninstall(name)
         break
 
       // Config

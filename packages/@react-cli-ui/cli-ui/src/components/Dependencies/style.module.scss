@@ -74,6 +74,27 @@
         }
       }
 
+      .delete {
+        display: inline-block;
+        float: right;
+        margin-right: 20px;
+        svg {
+          width: 17px;
+          fill: #2b849c;
+          position: relative;
+          padding: 4px;
+          cursor: pointer;
+          top: 3px;
+          &:hover {
+            color: #fff;
+            background: #2b849c;
+            padding: 4px;
+            border-radius: 4px;
+            fill: #fff; 
+          }
+        }
+      }
+
       a {
         color: #2b849c;
         font-weight: bold;
