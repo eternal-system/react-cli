@@ -1,0 +1,90 @@
+
+.createContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  
+    &.loading {
+      height: 100%;
+      justify-content: center;
+  
+      @for $i from 1 through 3 {
+        .loadingDot#{$i} {
+          -webkit-animation: blink 1s + $i * 0.1 linear infinite;
+          animation: blink 1s + $i * 0.1 linear infinite;
+        }
+      }
+  
+      .loadingDescription {
+        color: #80808078;
+        white-space: nowrap;
+        width: 500px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin: 10px 0;
+        text-align: center;
+      }
+  
+          svg {
+        fill: #61dafb;
+              width: 120px;
+              animation: load 1.5s infinite linear;
+              -webkit-animation: load 1.5s infinite linear;
+          }
+    }
+  
+    & > div {
+      margin-bottom: 20px;
+    }
+  
+    .createTitle {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+  
+    .projectName {
+      input {
+        width: 100%;
+      }
+    }
+  }
+  
+  @-webkit-keyframes load {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes blink {
+    50% { color: rgb(34, 34, 34); }
+    51% { color: rgba(34, 34, 34, 0); }
+    100% { color: rgba(34, 34, 34, 0); }
+  }
+  @keyframes blink {
+    50% { color: rgb(34, 34, 34); }
+    51% { color: rgba(34, 34, 34, 0); }
+    100% { color: rgba(34, 34, 34, 0); }
+  }
+  

@@ -116,9 +116,20 @@ class DependenciesApi extends StaticMethods {
 
     try {
       subprocess.stdout.pipe(process.stdout)
+      subprocess.stdout.on('data', data => {
+        const message = data.toString('utf8')
+        message !== '\n' && this.client.emit('logging', {
+          message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
+        })
+      })
+
       const { stdout } = await subprocess
-      console.log("stdout", stdout)
+      
       if(stdout) {
+        this.client.emit('notification', {
+          title: 'Success',
+          message: `Dependency ${name} successfully installed`
+        })
         notify({
           title: 'Dependency installed',
           message: `Dependency ${name} successfully installed`,
@@ -144,9 +155,21 @@ class DependenciesApi extends StaticMethods {
     subprocess = npmUninstall(name, filePath)
     try {
       subprocess.stdout.pipe(process.stdout)
+      
+      subprocess.stdout.on('data', data => {
+        const message = data.toString('utf8')
+        message !== '\n' && this.client.emit('logging', {
+          message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
+        })
+      })
+
       const { stdout } = await subprocess
-      console.log("stdout", stdout)
+      
       if(stdout) {
+        this.client.emit('notification', {
+          title: 'Success',
+          message: `Dependency ${name} successfully uninstalled`
+        })
         notify({
           title: 'Dependency uninstalled',
           message: `Dependency ${name} successfully uninstalled`,

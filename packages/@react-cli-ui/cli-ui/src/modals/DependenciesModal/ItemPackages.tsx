@@ -5,11 +5,18 @@ import LinkIcon from '@icons/link.svg'
 
 import css from './style.module.scss'
 
+interface ItemProps {
+  // TODO add type
+  pkg: any;
+  active: string | null; 
+  change(activ: string | null): void;
+}
+
 export default function ItemPackages ({pkg, active, change}: any) {
   // console.log(pkg)
   const { t } = useTranslation('dependencies')
 
-  function handleClick (name) {
+  function handleClick (name: string) {
     change(name)
   }
 

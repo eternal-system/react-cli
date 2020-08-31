@@ -50,7 +50,9 @@ const locale = {
     install: 'Установить пакет',
     update: 'Обновить пакеты',
     type: 'Тип',
-    search: 'Поиск пакета'
+    search: 'Поиск пакета',
+    npmInstall: 'Установка',
+    npmUninstall: 'Удаление'
   },
   modal: {
     selectFolder: 'Выбор директории',

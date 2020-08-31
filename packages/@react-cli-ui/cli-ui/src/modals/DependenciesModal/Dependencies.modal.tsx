@@ -10,15 +10,22 @@ import ItemPackages from './ItemPackages'
 
 import css from './style.module.scss'
 
+type Title = {
+  name: string | null,
+  type: string
+}
+
 export interface ModalFolder {
     visible?: boolean;
     showModal?(e: React.MouseEvent<HTMLElement>): void;
     closeModal?(e: React.MouseEvent<HTMLElement>): void;
+    setLoading(loading: boolean): void;
+    setTitle(props: Title): void;
 }
 
 export interface Props {
   value: string;
-  name: strin;
+  name: string;
 }
 
 const optionsType = [
@@ -35,7 +42,7 @@ const selectStyles = {
   })
 }
 
-function DependenciesModal ({ visible, closeModal }: ModalFolder) {
+function DependenciesModal ({ visible, closeModal, setLoading, setTitle }: ModalFolder) {
   const { t } = useTranslation('modal')
   const { socket } = useContext(SettingsContext)
   const [state, setState] = useState({
@@ -65,7 +72,9 @@ function DependenciesModal ({ visible, closeModal }: ModalFolder) {
       type: optionsType[0],
       search: ''
     })
+    setTitle({ name: active, type: 'INSTALL' })
     setActive(null)
+    setLoading(true)
     typeof closeModal === 'function' && closeModal(e)
   }
 

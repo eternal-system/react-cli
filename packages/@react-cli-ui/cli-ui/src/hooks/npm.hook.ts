@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 export function useGetPackages (str: string) {
   const [packages, setResults] = useState([])
 
-  async function fetchPackages (string) {
+  async function fetchPackages (url: string) {
     const API = `https://api.npms.io/v2/search/suggestions${
-        string ? `?q=${string}` : ''
+        url ? `?q=${url}` : ''
       }`
 
     const res = await fetch(API, {

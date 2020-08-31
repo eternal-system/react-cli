@@ -51,7 +51,9 @@ const locale = {
     install: 'Install dependency',
     update: 'Update all dependencies',
     type: 'Type',
-    search: 'Search'
+    search: 'Search',
+    npmInstall: 'Install',
+    npmUninstall: 'Uninstall'
   },
   modal: {
     selectFolder: 'Select folder',
