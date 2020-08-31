@@ -81,8 +81,8 @@ function DependenciesModal ({ visible, closeModal, setLoading, setTitle }: Modal
   return (
     <div className={css.modal}>
       <Modal
-        title={`${t('titleDepend')}`}
-        okText={`${t('install')}`}
+        title={t('titleDepend')}
+        okText={t('install')}
         visible={visible}
         onOk={onSubmit}
         onCancel={closeModal}
