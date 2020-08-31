@@ -47,35 +47,10 @@ class DependenciesApi extends StaticMethods {
         versionRange: deps[id],
         installed: this.isInstalled({ id, file }),
         website: this.getLink({ id, file }),
-       // wanted: this.getVersion(id).wanted,
-       // latest: this.getVersion(id).latest,
         type,
         baseFir: file
       })
     )
-  }
-
-  getVersion (id) {
-    console.log(id)
-    let latest, wanted
-    const metadata = this.getMetadata(id)
-    if(metadata) {
-      latest = metadata['dist-tags'] ? metadata['dist-tags'].latest : ''
-      const versions = Array.isArray(metadata.versions) ? metadata.versions : Object.keys(metadata.versions)
-      wanted = semver.maxSatisfying(versions, versionRange)
-    }
-    return {
-      latest,
-      wanted
-    }
-  }
-
-  getMetadata (pkg) {
-    return fetch(`http://registry.npmjs.org/${pkg}`)
-            .then(res => res.json())
-            .then(json => {
-              return json
-            })
   }
 
   isInstalled ({ id, file }) {

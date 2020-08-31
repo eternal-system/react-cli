@@ -16,7 +16,7 @@ export default function DashboardWrap ({ children, title, btn }: DashboardProps)
           {title}
         </div>
         <div className={css.rightGroup}>
-          {btn && btn} 
+          {btn}
         </div>
       </div>
       <div className={css.content}>
