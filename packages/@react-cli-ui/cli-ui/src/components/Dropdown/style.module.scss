@@ -1,5 +1,6 @@
 .dropdown {
   position: relative;
+
   .list {
     position: absolute;
     top: 35px;
@@ -37,5 +38,16 @@
         fill: #fff;
     }
   }
-}
 
+  div[class^="emptyInfo"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      top: 0;
+      height: 18px;
+      margin: 0 5px 0 0;
+    }
+  }
+}
