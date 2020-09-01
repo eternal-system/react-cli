@@ -2,7 +2,6 @@ import React from 'react'
 
 import css from './style.module.scss'
 
-
 interface DashboardProps {
   title: string;
   children: React.PropsWithChildren<React.ReactNode>;
