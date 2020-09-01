@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { Layout, Content, Empty, ProjectFilter, ProjectList, Loader } from '@components'
 import { useNotification } from '@hooks'

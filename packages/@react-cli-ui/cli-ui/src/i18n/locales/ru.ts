@@ -20,7 +20,8 @@ const locale = {
     createNewProject: 'Создать новый проект',
     importProject: 'Избранное',
     favoriteProjects: 'Любимые проекты',
-    otherProjects: 'Другие проекты'
+    otherProjects: 'Другие проекты',
+    emptyFavoriteFolders: 'Избраные папки отсутствуют'
   },
   projectCreate: {
     createProjectTitle: 'Создание нового проекта',
