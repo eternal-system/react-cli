@@ -4,6 +4,7 @@ const FileApi = require('./file')
 const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
 const DependenciesApi = require('./dependencies')
+const TaskApi = require('./tasks')
 
 // WS api
 function api (message, client) {
@@ -13,6 +14,7 @@ function api (message, client) {
     const project = new ProjectApi(client, db, folder)
     const dependencies = new DependenciesApi(client, db, folder)
     const logs = new LogsApi(client, db)
+    const tasks = new TaskApi(client, db)
     const { type, name, url, id, hidden, path, manager, preset, log, file, dep } = message
 
     switch (type) {
@@ -92,6 +94,15 @@ function api (message, client) {
       
       case 'UNINSTALL_DEPENDINCIES':
         dependencies.uninstall(name)
+        break
+      
+      // Tasks
+      case 'GET_LIST_TASKS':
+        tasks.list()
+        break
+      
+      case 'RUN_TASK':
+        tasks.run(name)
         break
 
       // Config
