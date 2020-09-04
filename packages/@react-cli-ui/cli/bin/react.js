@@ -16,10 +16,10 @@ function checkNode (wanted, id) {
   }
 }
 
-checkNode(requiredVersion, '@react/cli')
+checkNode(requiredVersion, '@react-cli-ui/cli')
 
 program
-  .version(`@react/cli ${pack.version}`)
+  .version(`@react-cli-ui/cli ${pack.version}`)
   .usage('<command> [options]')
 
 program
@@ -50,7 +50,7 @@ program
         Binaries: ['Node', 'Yarn', 'npm'],
         Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
         npmPackages: '/**/{typescript,*/}',
-        npmGlobalPackages: ['@react/cli']
+        npmGlobalPackages: ['@react-cli-ui/cli']
       },
       {
         showNotFound: true,

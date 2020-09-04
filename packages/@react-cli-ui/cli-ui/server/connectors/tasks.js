@@ -32,8 +32,7 @@ class TaskApi extends StaticMethods {
 
     const filePath = `/${activeProject.path.join('/')}`
 
-    let subprocess
-    subprocess = runScripts(name, filePath)
+    let subprocess = runScripts(name, filePath)
     const { stdout } = await subprocess
       
       if(stdout) {
