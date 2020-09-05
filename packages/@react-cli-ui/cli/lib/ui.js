@@ -4,8 +4,7 @@ const port = 8080
 
 function ui (args = {}) {
   const host = args.host || 'localhost'
-  console.log('ui arg', args)
-
+  
   if (!args.quiet) console.log('🚀  Starting GUI...')
 
   // Config for server enveronment
