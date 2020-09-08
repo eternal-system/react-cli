@@ -8,7 +8,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack/config.js')
 const PORT = process.env.SERVER_PORT || 8081
 const chalk = require('chalk')
-const app = express()
 const filePath = path.resolve(__dirname, 'dist', 'index.html')
 const compiler = webpack(webpackConfig)
 
@@ -18,13 +17,15 @@ const expressPino = require('express-pino-logger')
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' })
 const expressLogger = expressPino({ logger })
 
-// ws
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-const api = require('./server/connectors')
-
 module.exports.server = (options, cb = null) => {
-  // const distPath = path.resolve(__dirname, 'dist')
+ 
+  // Express server
+  const app = express()
+
+  // ws
+  const http = require('http').createServer(app)
+  const io = require('socket.io')(http)
+  const api = require('./server/connectors')
 
   app.set('socket', io)
 
