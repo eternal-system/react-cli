@@ -2,7 +2,7 @@ const path = require('path')
 const low = require('lowdb')
 const FileAsync = require('lowdb/adapters/FileAsync')
 
-const dbPath = path.resolve(process.cwd(), 'db.json')
+const dbPath = path.resolve(__dirname, '../../db.json')
 const adapter = new FileAsync(dbPath, {
   defaultValue: {
     projects: [],

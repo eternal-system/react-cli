@@ -1,4 +1,4 @@
-const { server } = require('../../cli-ui/server')
+const { server } = require('@react-cli-ui/cli-ui/server')
 const { openBrowser } = require('./util/openBrowser')
 const port = 8080
 
