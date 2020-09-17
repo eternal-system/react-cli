@@ -40,24 +40,24 @@ app.use(express.json({ extended: true }))
 app.use(require('./server/routes'))
 
 /* static server */
-if (process.env.DEV_SERVER.trim() === 'true') {
-  app.use(webpackHotMiddleware(webpack(webpackConfig)))
-  app.use('/', express.static(path.join(__dirname, 'dist')))
 
-  app.get('*', function (req, res) {
-    if (fs.existsSync(filePath)) {
+app.use(webpackHotMiddleware(webpack(webpackConfig)))
+app.use('/', express.static(path.join(__dirname, 'dist')))
+
+app.get('*', function (req, res) {
+  if (fs.existsSync(filePath)) {
+    fs.createReadStream(filePath).pipe(res)
+  } else {
+    webpack(webpackConfig, (err) => {
+      if (err) {
+        console.error(err)
+        return
+      }
       fs.createReadStream(filePath).pipe(res)
-    } else {
-      webpack(webpackConfig, (err) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        fs.createReadStream(filePath).pipe(res)
-      })
-    }
-  })
-}
+    })
+  }
+})
+
 
 http.listen(PORT, () =>
   console.log(chalk.hex('#009688')('🌠 Server - running on port:', PORT))
