@@ -11,10 +11,8 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 const __parentDir = path.dirname(module.parent.filename)
-// const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
-const appDirectory = fs.realpathSync(process.cwd())
-console.log('__parentDir', __parentDir)
-console.log('appDirectory', appDirectory)
+const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
+// const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 const regExp = {
@@ -114,6 +112,30 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js|\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            require.resolve('@babel/preset-env'),
+            require.resolve('@babel/preset-react'),
+            require.resolve('@babel/preset-typescript')
+          ]
+        }
+      },
+      {
+        test: /\.ts|\.tsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            require.resolve('@babel/preset-env'),
+            require.resolve('@babel/preset-react'),
+            require.resolve('@babel/preset-typescript')
+          ]
+        }
+      },
+      {
         test: /\.css$/,
         exclude: regExp.cssModuleRegex,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
@@ -155,18 +177,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.(js|ts)x?$/,
-        exclude: /node_modules/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          presets: [
-            require.resolve('@babel/preset-env'),
-            require.resolve('@babel/preset-react'),
-            require.resolve('@babel/preset-typescript')
-          ]
-        }
-      },
-      {
         test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
@@ -195,7 +205,14 @@ module.exports = {
         exclude: regExp.svgInlineRegexp,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                require.resolve('@babel/preset-env'),
+                require.resolve('@babel/preset-react'),
+                require.resolve('@babel/preset-typescript')
+              ]
+            }
           },
           {
             loader: 'react-svg-loader',
