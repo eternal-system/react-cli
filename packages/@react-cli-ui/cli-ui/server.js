@@ -32,26 +32,29 @@ module.exports.server = (options, cb = null) => {
 
   io.on('connection', (client) => {
     console.log(chalk.hex('#009688')('🚀 Socket: Connection Succeeded.'))
-
     client.on('message', message => api(message, client))
-
     client.on('disconnect', () => {
       console.log(chalk.hex('#009688')('❌ Socket: Disconnected.'))
     })
   })
 
   // Logger
-  app.use(expressLogger)
+  if (process.env.LOG_LEVEL) {
+    app.use(expressLogger)
+  }
 
   app.use(express.json({ extended: true }))
   app.use(require('./server/routes'))
 
   app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    stats: { colors: true }
   }))
 
   app.use(webpackHotMiddleware(compiler))
 
+  /* static client */
   app.use('/', express.static(path.join(__dirname, 'dist')))
 
   /* static server */
