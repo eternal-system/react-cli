@@ -34,16 +34,18 @@ const paths = {
   appPublic: resolveApp('public'),
   appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appNodeModules: resolveApp('node_modules')
+  appNodeModules: resolveApp('node_modules'),
+  appNodeModulesProd: path.resolve(__dirname, '..', '..', '..', '..', 'node_modules')
 }
 
+console.log(isDev)
 module.exports = {
   context: paths.appPath,
 
   mode: 'production',
 
   entry: [
-    path.resolve(__dirname, '..', 'src') + '/index.tsx'
+    isDev ? './src/index.tsx' : path.resolve(__dirname, '..', 'src') + '/index.tsx'
   ],
 
   output: {
@@ -53,7 +55,7 @@ module.exports = {
   },
 
   resolve: {
-    modules: [paths.appNodeModules, paths.appSrc],
+    modules: [isDev ? paths.appNodeModules : paths.appNodeModulesProd, paths.appSrc],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.scss'],
     alias: {
       '@components': paths.appComponents,
@@ -113,7 +115,7 @@ module.exports = {
     rules: [
       {
         test: /\.js|\.jsx$/,
-        exclude: /node_modules/,
+        exclude: '/node_modules/',
         loader: 'babel-loader',
         options: {
           presets: [
@@ -125,7 +127,7 @@ module.exports = {
       },
       {
         test: /\.ts|\.tsx$/,
-        exclude: /node_modules/,
+        exclude: '/node_modules/',
         loader: 'babel-loader',
         options: {
           presets: [

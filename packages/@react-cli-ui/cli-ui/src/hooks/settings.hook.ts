@@ -7,7 +7,7 @@ const storageThemeName = 'darkTheme'
 const storageLocaleName = 'locale'
 const storageSelectedPathName = 'selectedPath'
 
-const initSocket = openSocket('http://localhost:8081')
+const initSocket = openSocket('http://localhost:8080')
 
 export function useSettings () {
   const [darkTheme, setDarkTheme] = useState<boolean | null>(null)
