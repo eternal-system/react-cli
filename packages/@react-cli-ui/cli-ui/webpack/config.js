@@ -10,8 +10,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
-const __parentDir = path.dirname(module.parent.filename);
+const __parentDir = path.dirname(module.parent.filename)
 const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
+// const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 const regExp = {
@@ -33,8 +34,46 @@ const paths = {
   appPublic: resolveApp('public'),
   appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appNodeModules: resolveApp('node_modules')
+  appNodeModules: resolveApp('node_modules'),
+  appNodeModulesProd: path.resolve(__dirname, '..', '..', '..', '..', 'node_modules')
 }
+
+const rulesSX = isDev ? [
+  { test: /\.(js|ts)x?$/,
+    exclude: /node_modules/,
+    loader: require.resolve('babel-loader'),
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  }] : [
+  {
+    test: /\.js|\.jsx$/,
+    exclude: '/node_modules/',
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  },
+  {
+    test: /\.ts|\.tsx$/,
+    exclude: '/node_modules/',
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  }]
 
 module.exports = {
   context: paths.appPath,
@@ -42,7 +81,7 @@ module.exports = {
   mode: 'production',
 
   entry: [
-    './src/index'
+    isDev ? './src/index.tsx' : path.resolve(__dirname, '..', 'src') + '/index.tsx'
   ],
 
   output: {
@@ -52,7 +91,7 @@ module.exports = {
   },
 
   resolve: {
-    modules: [paths.appNodeModules, paths.appSrc],
+    modules: [isDev ? paths.appNodeModules : paths.appNodeModulesProd, paths.appSrc],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.scss'],
     alias: {
       '@components': paths.appComponents,
@@ -110,6 +149,7 @@ module.exports = {
 
   module: {
     rules: [
+      ...rulesSX,
       {
         test: /\.css$/,
         exclude: regExp.cssModuleRegex,
@@ -152,18 +192,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.(js|ts)x?$/,
-        exclude: /node_modules/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          presets: [
-            require.resolve('@babel/preset-env'),
-            require.resolve('@babel/preset-react'),
-            require.resolve('@babel/preset-typescript')
-          ]
-        }
-      },
-      {
         test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
@@ -192,7 +220,14 @@ module.exports = {
         exclude: regExp.svgInlineRegexp,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                require.resolve('@babel/preset-env'),
+                require.resolve('@babel/preset-react'),
+                require.resolve('@babel/preset-typescript')
+              ]
+            }
           },
           {
             loader: 'react-svg-loader',

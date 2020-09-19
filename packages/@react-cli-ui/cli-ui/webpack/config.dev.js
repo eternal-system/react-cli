@@ -8,7 +8,6 @@ const devConfig = {
   mode: 'development',
   devtool: 'source-map',
   entry: [
-    './src/index.ts',
     `webpack-dev-server/client?http://localhost:${process.env.CLIENT_PORT}`,
     'webpack/hot/only-dev-server'
   ],
