@@ -38,7 +38,43 @@ const paths = {
   appNodeModulesProd: path.resolve(__dirname, '..', '..', '..', '..', 'node_modules')
 }
 
-console.log(isDev)
+const rulesSX = isDev ? [
+  { test: /\.(js|ts)x?$/,
+    exclude: /node_modules/,
+    loader: require.resolve('babel-loader'),
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  }] : [
+  {
+    test: /\.js|\.jsx$/,
+    exclude: '/node_modules/',
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  },
+  {
+    test: /\.ts|\.tsx$/,
+    exclude: '/node_modules/',
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-typescript')
+      ]
+    }
+  }]
+
 module.exports = {
   context: paths.appPath,
 
@@ -113,30 +149,7 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.js|\.jsx$/,
-        exclude: '/node_modules/',
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            require.resolve('@babel/preset-env'),
-            require.resolve('@babel/preset-react'),
-            require.resolve('@babel/preset-typescript')
-          ]
-        }
-      },
-      {
-        test: /\.ts|\.tsx$/,
-        exclude: '/node_modules/',
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            require.resolve('@babel/preset-env'),
-            require.resolve('@babel/preset-react'),
-            require.resolve('@babel/preset-typescript')
-          ]
-        }
-      },
+      ...rulesSX,
       {
         test: /\.css$/,
         exclude: regExp.cssModuleRegex,
