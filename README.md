@@ -1,6 +1,6 @@
 <img src="https://images.ctfassets.net/x4we65bqi45q/79clZXZmtPwWzTux2YIlgn/a78c0f54e7e6369275eaac7e04933835/1_HSisLuifMO6KbLfPOKtLow.jpeg" title="react" alt="react">
 
-# React CLI
+# React CLI [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 > React CLI is the Tooling for React.js Development.
 
 ## Contributing
