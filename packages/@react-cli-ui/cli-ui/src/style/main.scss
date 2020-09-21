@@ -2,144 +2,148 @@
 @import './fonts.scss';
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	margin: 0;
-	overflow-x: hidden;
-	position: relative;
-	overscroll-behavior: none;
-	font-family: 'Roboto-Light', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  position: relative;
+  overscroll-behavior: none;
+  font-family: 'Roboto-Light', sans-serif;
 }
 
-html, body, #root, #root .constent{
-	height: 100%;
+html,
+body,
+#root,
+#root .constent {
+  height: 100%;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-	color: #fff;
-	background: #20232a;
-	padding: 10px;
-	margin-right: 5px;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	text-decoration: none;
-	outline: none;
+  color: #fff;
+  background: #20232a;
+  padding: 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
 }
 
 .loader {
-	border: 8px solid #f3f3f3;
-	border-top: 8px solid rgb(95, 95, 95);
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	animation: spin 2s linear infinite;
-	position: absolute;
-	top: 50%;
-	left: 50%;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid rgb(95, 95, 95);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .checktheme {
-	position: absolute;
-	top: 42px;
-	right: 50px;
+  position: absolute;
+  top: 42px;
+  right: 50px;
 
-	p {
-		margin-top: -15px;
-		text-align: center;
-		color: rgb(118,118,118);
-		font-size: 11px;
+  p {
+    margin-top: -15px;
+    text-align: center;
+    color: rgb(118, 118, 118);
+    font-size: 11px;
 
-		&.actived{
-			color: $color_title;
-		}
-	}
+    &.actived {
+      color: $color_title;
+    }
+  }
 }
 
 .checkbox {
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 .custom-checkbox {
-	position: relative;
-	cursor: pointer;
-	display: block;
-	line-height: 20px;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  line-height: 20px;
 }
 
 .custom-checkbox-button {
-	display: block;
-	margin: 0 25px;
-	width: 35px;
-	border-radius: 12px;
-	background: rgb(118, 118, 118);
-	height: 20px;
-	position: relative;
-	bottom: -4px;
-	cursor: pointer;
+  display: block;
+  margin: 0 25px;
+  width: 35px;
+  border-radius: 12px;
+  background: rgb(118, 118, 118);
+  height: 20px;
+  position: relative;
+  bottom: -4px;
+  cursor: pointer;
 }
 .custom-checkbox-button:before {
-	background: #fff;
-	content: "";
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
+  background: #fff;
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   position: absolute;
-	top: 0px;
-	left: -1px;
-	-webkit-box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3), 0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
-	box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3), 0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
-	-webkit-transition: 0.2s;
-	transition: 0.2s;
+  top: 0px;
+  left: -1px;
+  -webkit-box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3),
+    0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
+  box-shadow: 0px 0px 1px 0px rgba(44, 77, 138, 0.3), 0px 7px 8.55px 0.45px rgba(22, 44, 84, 0.15);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 .custom-checkbox-button:after {
-	content: "";
-	width: 12px;
-	height: 12px;
-	position: absolute;
-	background: #707070;
-	border-radius: 50%;
-	top: 4px;
-	left: 3px;
-	-webkit-box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
-	-webkit-transition: 0.2s;
-	transition: 0.2s;
+  content: '';
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  background: #707070;
+  border-radius: 50%;
+  top: 4px;
+  left: 3px;
+  -webkit-box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 .custom-checkbox.checked .custom-checkbox-button:before {
-	left: 16px;
+  left: 16px;
 }
 .custom-checkbox.checked .custom-checkbox-button:after {
-	left: 20px;
-	background: #61dafb;
+  left: 20px;
+  background: #61dafb;
 }
 
 .input__wrapper {
-	.input__title {
-		color: #2c3e50;
-		font-size: 16px;
-	}
+  .input__title {
+    color: #2c3e50;
+    font-size: 16px;
+  }
 
-	input {
-		display: -ms-flexbox;
-		display: flex;
-		-ms-flex-direction: column;
-		flex-direction: column;
-		-ms-flex-align: stretch;
-		align-items: stretch;
-		width: 97%;
-		line-height: 24px;
-		padding: 0px 5px;
-		font-size: 14px;
-	}
+  input {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 97%;
+    line-height: 24px;
+    padding: 0px 5px;
+    font-size: 14px;
+  }
 }
 
 @keyframes slideOutRight {
@@ -173,6 +177,251 @@ button {
 }
 
 @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.notification-container-bottom-center,
+.notification-container-bottom-left,
+.notification-container-bottom-right,
+.notification-container-center,
+.notification-container-top-center,
+.notification-container-top-left,
+.notification-container-top-right {
+  width: 325px;
+  position: absolute;
+  pointer-events: all;
+}
+.notification-container-bottom-center,
+.notification-container-center,
+.notification-container-top-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  left: calc(50% - 162.5px);
+}
+.notification-container-center {
+  top: 20px;
+  height: 100%;
+  pointer-events: none;
+}
+.notification-container-center .center-inner {
+  width: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: all;
+}
+.notification-container-top-center {
+  top: 20px;
+}
+.notification-container-bottom-center {
+  bottom: 20px;
+}
+.notification-container-top-left {
+  left: 20px;
+  top: 20px;
+}
+.notification-container-top-right {
+  right: 20px;
+  top: 20px;
+}
+.notification-container-bottom-left {
+  left: 20px;
+  bottom: 20px;
+}
+.notification-container-bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+.notification-container-mobile-bottom,
+.notification-container-mobile-top {
+  pointer-events: all;
+  position: absolute;
+}
+.notification-container-mobile-top {
+  right: 20px;
+  left: 20px;
+  top: 20px;
+}
+.notification-container-mobile-bottom {
+  right: 20px;
+  left: 20px;
+  bottom: 20px;
+  margin-bottom: -15px;
+}
+.notification-default {
+  border-left: 8px solid #0562c7;
+}
+.notification-default,
+.notification-default .timer {
+  background-color: #007bff;
+}
+.notification-default .timer-filler {
+  background-color: #fff;
+}
+.notification-default .notification-close {
+  background-color: #007bff;
+}
+.notification-success {
+  border-left: 8px solid #1f8838;
+}
+.notification-success,
+.notification-success .timer {
+  background-color: #28a745;
+}
+.notification-success .timer-filler {
+  background-color: #fff;
+}
+.notification-success .notification-close {
+  background-color: #28a745;
+}
+.notification-danger {
+  border-left: 8px solid #bd1120;
+}
+.notification-danger,
+.notification-danger .timer {
+  background-color: #dc3545;
+}
+.notification-danger .timer-filler {
+  background-color: #fff;
+}
+.notification-danger .notification-close {
+  background-color: #dc3545;
+}
+.notification-info {
+  border-left: 8px solid #138b9e;
+}
+.notification-info,
+.notification-info .timer {
+  background-color: #17a2b8;
+}
+.notification-info .timer-filler {
+  background-color: #fff;
+}
+.notification-info .notification-close {
+  background-color: #17a2b8;
+}
+.notification-warning {
+  border-left: 8px solid #ce9c09;
+}
+.notification-warning,
+.notification-warning .timer {
+  background-color: #eab000;
+}
+.notification-warning .timer-filler {
+  background-color: #fff;
+}
+.notification-warning .notification-close {
+  background-color: #eab000;
+}
+.notification-awesome {
+  border-left: 8px solid #4c3fb1;
+}
+.notification-awesome,
+.notification-awesome .timer {
+  background-color: #685dc3;
+}
+.notification-awesome .timer-filler {
+  background-color: #fff;
+}
+.notification-awesome .notification-close {
+  background-color: #685dc3;
+}
+@keyframes timer {
+  0% {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+.react-notification-root {
+  position: fixed;
+  z-index: 9000;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+.notification-item {
+  display: flex;
+  position: relative;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.notification-item .timer {
+  width: 100%;
+  margin-top: 10px;
+}
+.notification-item .timer,
+.notification-item .timer .timer-filler {
+  height: 3px;
+  border-radius: 5px;
+}
+.notification-item .notification-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.notification-item .notification-message {
+  color: #fff;
+  max-width: calc(100% - 15px);
+  font-size: 14px;
+  line-height: 150%;
+  word-wrap: break-word;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.notification-item .notification-content {
+  padding: 8px 15px;
+  display: inline-block;
+  width: 100%;
+}
+.notification-item .notification-close {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.notification-item .notification-close:after {
+  content: '\D7';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  left: 50%;
+  top: 50%;
+}
+.notification-container-mobile-bottom .notification-item,
+.notification-container-mobile-bottom .notification-parent,
+.notification-container-mobile-top .notification-item,
+.notification-container-mobile-top .notification-parent {
+  max-width: 100%;
+  width: 100%;
+}
+.notification-container-bottom-right .notification-parent,
+.notification-container-top-right .notification-parent {
+  margin-left: auto;
+}
+.notification-container-bottom-left .notification-parent,
+.notification-container-top-left .notification-parent {
+  margin-right: auto;
+}
+.notification-container-mobile-bottom .notification-parent,
+.notification-container-mobile-top .notification-parent {
+  margin-left: auto;
+  margin-right: auto;
 }

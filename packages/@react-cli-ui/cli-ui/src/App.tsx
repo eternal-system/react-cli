@@ -10,7 +10,6 @@ import { useSettings } from '@hooks'
 import { SettingsContext } from './context'
 import { renderRoutes } from './router'
 
-// import 'react-notifications-component/dist/theme.css'
 import css from './style/main.module.scss'
 
 export default function App () {
