@@ -4,8 +4,7 @@ import { DashboardWrap, TaskList } from '@components'
 
 import { SettingsContext } from '../../context'
 
-// import PlayIcon from '@icons/play.svg'
-import FolderIcon from '@icons/play.svg'
+import PlayIcon from '@icons/play.svg'
 
 import css from './style.module.scss'
 
@@ -34,7 +33,7 @@ export default function Tasks () {
         <TaskList tasks={tasks}/>
         <div className={css.panel}>
           <button onClick={() => console.log('start')}>
-            <FolderIcon /> <span>Run</span>
+            <PlayIcon /> <span>Run</span>
           </button>
         </div>
       </div>
