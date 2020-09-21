@@ -32,22 +32,20 @@ class TaskApi extends StaticMethods {
 
     const filePath = `/${activeProject.path.join('/')}`
 
-    let subprocess = runScripts(name, filePath)
+    const subprocess = runScripts(name, filePath)
     const { stdout } = await subprocess
-      
-      if(stdout) {
-        notify({
-          title: 'Script run',
-          message: `Script ${name} successfully`,
-          icon: 'done'
-        })
-      } else {
-        this.client.emit('erro', {
-          title: 'Failure',
-          message: `script run ${name} error`,
-          error
-        })
-      }
+    if(stdout) {
+      notify({
+        title: 'Script run',
+        message: `Script ${name} successfully`,
+        icon: 'done'
+      })
+    } else {
+      this.client.emit('erro', {
+        title: 'Failure',
+        message: `script run ${name} error`
+      })
+    }
   }
 }
 

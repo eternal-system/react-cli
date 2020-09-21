@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DashboardWrap } from '@components'
+import { DashboardWrap, TaskList } from '@components'
 
-import { SettingsContext } from '../context'
+import { SettingsContext } from '../../context'
+
+import PlayIcon from '@icons/play.svg'
+
+import css from './style.module.scss'
 
 export default function Tasks () {
   const { t } = useTranslation('dashboard')
@@ -25,7 +29,14 @@ export default function Tasks () {
 
   function renderTasks () {
     return (
-      <div>{JSON.stringify(tasks)}</div>
+      <div className={css.wrapper}>
+        <TaskList tasks={tasks}/>
+        <div className={css.panel}>
+          <button onClick={() => console.log('start')}>
+            <PlayIcon /> <span>Run</span>
+          </button>
+        </div>
+      </div>
     )
   }
 
