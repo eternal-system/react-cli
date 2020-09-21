@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DashboardWrap } from '@components'
+import { DashboardWrap, TaskList } from '@components'
 
-import { SettingsContext } from '../context'
+import { SettingsContext } from '../../context'
 
 export default function Tasks () {
   const { t } = useTranslation('dashboard')
@@ -25,7 +25,9 @@ export default function Tasks () {
 
   function renderTasks () {
     return (
-      <div>{JSON.stringify(tasks)}</div>
+      <div >
+        <TaskList tasks={tasks}/>
+      </div>
     )
   }
 

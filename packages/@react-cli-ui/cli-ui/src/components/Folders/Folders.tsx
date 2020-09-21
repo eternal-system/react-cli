@@ -10,8 +10,8 @@ interface Props {
   onSelect(name: string): void;
 }
 
-function Folders ({ folders, onSelect }: Props) {
-  function renderFoulderList () {
+export default function Folders ({ folders, onSelect }: Props) {
+  function renderFolderList () {
     return folders.map((folder, i) => {
       return (
         <ItemFolder folder={folder} key={i} select={onSelect}/>
@@ -21,9 +21,7 @@ function Folders ({ folders, onSelect }: Props) {
 
   return (
     <div className={css.folders}>
-      { renderFoulderList() }
+      { renderFolderList() }
     </div>
   )
 }
-
-export default Folders
