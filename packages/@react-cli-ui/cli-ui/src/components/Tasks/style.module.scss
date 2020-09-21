@@ -1,0 +1,17 @@
+.nav {
+  background: #61dafb3f;
+  .taskElement {
+    padding: 16px;
+    cursor: pointer;
+    .name {
+      display: block;
+    }
+    .text {
+      display: block;
+    }
+    &:hover {
+      background: #61dafb3f;
+    }
+  }
+}
+

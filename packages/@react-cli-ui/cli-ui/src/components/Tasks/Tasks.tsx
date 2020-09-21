@@ -1,5 +1,4 @@
 import React from 'react'
-
 import ItemTask from './ItemTask'
 
 import css from './style.module.scss'
@@ -23,7 +22,7 @@ export default function Tasks ({ tasks }: IProps) {
   }
 
   return (
-    <div className={css.folders}>
+    <div className={css.nav}>
       { renderTaskList() }
     </div>
   )
