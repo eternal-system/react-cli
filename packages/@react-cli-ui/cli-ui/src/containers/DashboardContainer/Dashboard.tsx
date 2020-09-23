@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid'
 
 import { Routes } from 'router'
 import { useNotification } from '@hooks'
+import { DropdownProject } from '@components'
 import DashboardIcon from '@icons/dashboard-project.svg'
 import ActiveIcon from '@icons/dashboard-tasks.svg'
 import { SettingsContext } from '../../context'
@@ -30,7 +31,7 @@ export default function Dashboard () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useDashboardContainer()
   const notification = useNotification()
-  const { socket } = useContext(SettingsContext)
+  const { socket, selectedPath } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [active, setActive] = useState(null)
@@ -78,6 +79,13 @@ export default function Dashboard () {
     { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
   ]
 
+  function handleOpenEdit () {
+    socket.send({
+      type: 'OPEN_EDIT_FILE',
+      path: selectedPath
+    })
+  }
+
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
     return (
       <NavLink
@@ -103,9 +111,12 @@ export default function Dashboard () {
   return (
     <div className={css.wrapperHeader}>
       <div className={css.wrapperLayout}>
-        <div className={css.dropdown}>
-          {title}
-        </div>
+        <DropdownProject
+          title={title}
+          data={[]}
+          openEdit={handleOpenEdit}
+          edit={() => console.log('edit')}
+        />
         <div className={css.nav}>
           {renderChildren}
         </div>

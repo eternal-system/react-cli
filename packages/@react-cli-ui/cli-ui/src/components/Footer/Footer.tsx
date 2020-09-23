@@ -30,9 +30,9 @@ export default function Footer () {
 
   return (
     <div className={css.footer}>
-      <Link to={toggle === 'project' 
-          ? Routes.DASHBOARD
-          : Routes.PROJECT } onClick={handleClick} className={css.icon}>
+      <Link to={toggle === 'project'
+        ? Routes.DASHBOARD
+        : Routes.PROJECT } onClick={handleClick} className={css.icon}>
         <HomeIcon />
       </Link>
       {selectedPath && (

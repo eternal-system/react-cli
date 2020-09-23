@@ -4,7 +4,11 @@ import FolderIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
 
-export default function CurrentPath ({url}: string[]) {
+interface IProps {
+  url: string[]
+}
+
+export default function CurrentPath ({ url }: IProps) {
   return (
     <div className={css.path}>
       <div className={css.icon}>

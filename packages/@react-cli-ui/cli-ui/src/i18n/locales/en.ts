@@ -22,7 +22,9 @@ const locale = {
     importProject: 'Import project',
     favoriteProjects: 'Favorite projects',
     otherProjects: 'Other projects',
-    emptyFavoriteFolders: 'Empty favorite folders'
+    emptyFavoriteFolders: 'Empty favorite folders',
+    openEditor: 'Open in editor',
+    projectManagerReact: 'Project Manager React'
   },
   projectCreate: {
     createProjectTitle: 'Create new project',
