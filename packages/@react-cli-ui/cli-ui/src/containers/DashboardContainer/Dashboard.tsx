@@ -31,7 +31,7 @@ export default function Dashboard () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useDashboardContainer()
   const notification = useNotification()
-  const { socket } = useContext(SettingsContext)
+  const { socket, selectedPath } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [active, setActive] = useState(null)
@@ -79,6 +79,13 @@ export default function Dashboard () {
     { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
   ]
 
+  function handleOpenEdit () {
+    socket.send({
+      type: 'OPEN_EDIT_FILE',
+      path: selectedPath
+    })
+  }
+
   const renderChildren = useMemo(() => menu.map(({ key, label, Icon }: MenuItems) => {
     return (
       <NavLink
@@ -107,6 +114,7 @@ export default function Dashboard () {
         <DropdownProject
           title={title}
           data={[]}
+          openEdit={handleOpenEdit}
           edit={() => console.log('edit')}
         />
         <div className={css.nav}>

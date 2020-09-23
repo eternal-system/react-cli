@@ -14,11 +14,13 @@ import css from './style.module.scss'
 interface Props {
   data: { name: string, path: string }[],
   edit: any;
+  openEdit: any;
   title: string;
 }
 
 export default function DropdownProject ({
-  title
+  title,
+  openEdit
   // data,
   // edit
 }: Props) {
@@ -71,7 +73,7 @@ export default function DropdownProject ({
         {open && (
           <div className={css.list} ref={divRef}>
             {/* {renderFavoriteProjects()} */}
-            <div onClick={() => history.push(Routes.PROJECT)}><OpenEditorIcon /><span>Open</span></div>
+            <div onClick={() => openEdit()}><OpenEditorIcon /><span>Open</span></div>
             <div onClick={() => history.push(Routes.PROJECT)}><FolderIcon /><span>Home</span></div>
           </div>
         )}
