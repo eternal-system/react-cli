@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { DashboardWrap, ProjectDependencies } from '@components'
 import { useTranslation } from 'react-i18next'
+import { unstable_batchedUpdates as batch } from 'react-dom'
 import cn from 'classnames'
 
 import { useModal, useNotification } from '@hooks'
@@ -23,9 +24,9 @@ export default function Dependencies () {
   const { t } = useTranslation('dependencies')
   const { socket } = useContext(SettingsContext)
   const [dependencies, setDependencies] = useState([])
-  const [logInfo, setLogInfo] = useState('')
+  const [logInfo, setLogInfo] = useState<String>('')
   const [title, setTitle] = useState<Title>({ name: '', type: '' })
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<Boolean>(false)
   const { visible, showModal, closeModal } = useModal()
   const notification = useNotification()
 
@@ -46,8 +47,10 @@ export default function Dependencies () {
       socket.send({
         type: 'GET_LIST_DEPENDINCIES'
       })
-      setLoading(false)
-      setLogInfo('')
+      batch(() => {
+        setLoading(false)
+        setLogInfo('')
+      })
     })
 
     socket.on('erro', (error: any) => {
@@ -58,9 +61,9 @@ export default function Dependencies () {
       })
     })
     return () => {
-      socket.off('dependencies'),
-      socket.off('logging'),
-      socket.off('notification'),
+      socket.off('dependencies')
+      socket.off('logging')
+      socket.off('notification')
       socket.off('erro')
     }
   }, [])
@@ -91,7 +94,7 @@ export default function Dependencies () {
         type: 'UNINSTALL_DEPENDINCIES',
         name
       })
-      setTitle({ name, type: 'DELETE'})
+      setTitle({ name, type: 'DELETE' })
       setLoading(true)
     }
   }
@@ -99,12 +102,12 @@ export default function Dependencies () {
   if (loading) {
     return (
       <div className={cn(css.createContainer, css.loading)}>
-          <Loader />
-          <span>
-            {`${title.type === 'INSTALL' ? t('npmInstall') : t('npmUninstall')} ${title.name} `}
-            {renderAnimatedDots()}
-          </span>
-          <div className={css.loadingDescription}>{logInfo}</div>
+        <Loader />
+        <span>
+          {`${title.type === 'INSTALL' ? t('npmInstall') : t('npmUninstall')} ${title.name} `}
+          {renderAnimatedDots()}
+        </span>
+        <div className={css.loadingDescription}>{logInfo}</div>
       </div>
     )
   }

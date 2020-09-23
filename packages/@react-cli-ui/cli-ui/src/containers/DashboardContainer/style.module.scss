@@ -18,10 +18,9 @@
 	}
 
 	.nav {
-		// margin-top: 64px;
 		width: 100%;
 		line-height: 60px;
-		overflow-x: auto;
+		overflow-x: hidden;
 		overflow-y: hidden;
 		align-self: center;
 
@@ -105,6 +104,10 @@
 
 	.wrapperHeader {
 		width: 50px;
+
+		.dropdown {
+			display: none;
+		}
 
 		.nav {
 			.active {
