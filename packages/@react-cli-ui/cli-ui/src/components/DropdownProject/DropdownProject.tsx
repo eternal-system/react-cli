@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
 import { Routes } from 'router'
@@ -24,7 +24,7 @@ export default function DropdownProject ({
   // data,
   // edit
 }: Props) {
-  // const { t } = useTranslation('project')
+  const { t } = useTranslation('project')
   const history = useHistory()
   const [open, setOpen] = useState(false)
   const divRef = useRef(null)
@@ -73,8 +73,8 @@ export default function DropdownProject ({
         {open && (
           <div className={css.list} ref={divRef}>
             {/* {renderFavoriteProjects()} */}
-            <div onClick={() => openEdit()}><OpenEditorIcon /><span>Open</span></div>
-            <div onClick={() => history.push(Routes.PROJECT)}><FolderIcon /><span>Home</span></div>
+            <div onClick={() => openEdit()}><OpenEditorIcon /><span>{t('openEditor')}</span></div>
+            <div onClick={() => history.push(Routes.PROJECT)}><FolderIcon /><span>{t('projectManagerReact')}</span></div>
           </div>
         )}
       </button>

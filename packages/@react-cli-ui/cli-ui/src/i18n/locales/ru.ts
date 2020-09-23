@@ -21,7 +21,9 @@ const locale = {
     importProject: 'Избранное',
     favoriteProjects: 'Любимые проекты',
     otherProjects: 'Другие проекты',
-    emptyFavoriteFolders: 'Избраные папки отсутствуют'
+    emptyFavoriteFolders: 'Избраные папки отсутствуют',
+    openEditor: 'Открыть в редакторе',
+    projectManagerReact: 'Менеджер проектов React'
   },
   projectCreate: {
     createProjectTitle: 'Создание нового проекта',
@@ -37,7 +39,7 @@ const locale = {
     dependencies: 'Зависимости',
     tasks: 'Задачи',
     titleDashboar: 'Панель инструментов проекта',
-    titleTasks: 'Задачи проекта',
+    titleTasks: 'Задачи проекта'
   },
   dependencies: {
     titleDepend: 'Зависимости проекта',
