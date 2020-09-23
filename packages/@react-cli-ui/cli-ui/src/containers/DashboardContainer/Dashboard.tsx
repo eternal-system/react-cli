@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid'
 
 import { Routes } from 'router'
 import { useNotification } from '@hooks'
+import { DropdownProject } from '@components'
 import DashboardIcon from '@icons/dashboard-project.svg'
 import ActiveIcon from '@icons/dashboard-tasks.svg'
 import { SettingsContext } from '../../context'
@@ -103,9 +104,11 @@ export default function Dashboard () {
   return (
     <div className={css.wrapperHeader}>
       <div className={css.wrapperLayout}>
-        <div className={css.dropdown}>
-          {title}
-        </div>
+        <DropdownProject
+          title={title}
+          data={[]}
+          edit={() => console.log('edit')}
+        />
         <div className={css.nav}>
           {renderChildren}
         </div>
