@@ -64,11 +64,11 @@ class FolderApi extends StaticMethods {
     try {
       if (dir && !fs.existsSync(dir)) {
         await fs.mkdirSync(dir, { recursive: true })
-        this.client.emit('notification', {
+        this.client.emit('notification-folder', {
           message: 'Folder successfully create'
         })
       } else {
-        this.client.emit('notification', {
+        this.client.emit('notification-folder', {
           message: 'Folder already exists'
         })
       }

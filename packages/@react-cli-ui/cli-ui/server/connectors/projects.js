@@ -90,7 +90,7 @@ class ProjectApi extends StaticMethods {
           subprocess.stdout.on('data', data => {
             const message = data.toString('utf8')
             message !== '\n' && this.client.emit('logging', {
-              message: message.replace(/(\\n|\[36|\[39m|\[32m)/gmi, () => '')
+              message: message.replace(/(\\n|\[36m|\[m|\[39m|\[32m)/gmi, () => '')
             })
           })
 
