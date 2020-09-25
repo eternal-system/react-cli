@@ -25,7 +25,7 @@ type Favorites = {
 interface Props {
   setUrlPath(url: string[]): void;
   updateFolderData(): void;
-  addFavorite(): void;
+  addFavorite(favorite: boolean): void;
   favorites: Favorites[]
   back(): void;
   path: string[];
