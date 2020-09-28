@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CurrentPath } from '@components'
 
@@ -14,8 +14,12 @@ import css from './style.module.scss'
 
 export default function Footer () {
   const location = useLocation()
-  const [toggle, setToggle] = useState(location.pathname.replace('/', ''))
+  const [toggle, setToggle] = useState('')
   const { darkTheme, changeTheme, changeLocale, selectedPath } = useContext(SettingsContext)
+
+  useEffect(() => {
+    setToggle(location.pathname.replace('/', ''))
+  }, [location])
 
   function renderThemeIcon () {
     return darkTheme
