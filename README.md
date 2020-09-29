@@ -11,6 +11,7 @@
 ```bash
 npm install -g @react-cli-ui/cli
 ```
+![](demo.gif)
 
 ## Usage
 
