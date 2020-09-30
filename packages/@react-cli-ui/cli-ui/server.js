@@ -44,7 +44,6 @@ module.exports.server = (options, cb = null) => {
   }
 
   app.use(express.json({ extended: true }))
-  app.use(require('./server/routes'))
 
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,

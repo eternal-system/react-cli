@@ -37,7 +37,6 @@ io.on('connection', (client) => {
 app.use(expressLogger)
 
 app.use(express.json({ extended: true }))
-app.use(require('./server/routes'))
 
 /* static server */
 
