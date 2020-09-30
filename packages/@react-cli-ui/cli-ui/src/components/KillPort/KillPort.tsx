@@ -1,33 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
-import Api from 'api'
 import { Input } from 'common'
 import { useNotification } from '@hooks'
 
 import FlashIcon from '@icons/flash-filled.svg'
+import { SettingsContext } from '../../context'
 
 import css from './style.module.scss'
 
 export default function KillPort () {
   const [value, setValue] = useState('')
   const notification = useNotification()
+  const { socket } = useContext(SettingsContext)
+
+  useEffect(() => {
+    socket.on('kill-port', (res: any) => {
+      setValue('')
+      notification.success({
+        title: res.title,
+        message: res.message
+      })
+    })
+    socket.on('kill-erro', (error: any) => {
+      notification.error({
+        title: error.title,
+        message: error.message
+      })
+    })
+    return () => {
+      socket.off('kill-port')
+      socket.off('kill-erro')
+    }
+  }, [])
 
   function handleKill (ev: any) {
     ev.preventDefault()
     if (!value) return
-    Api.GET(`/api/kill?port=${value}`)
-      .then((res) => {
-        setValue('')
-        notification.success({
-          title: res.title,
-          message: res.message
-        })
-      }).catch((err) => {
-        notification.error({
-          title: err.title,
-          message: err.message
-        })
-      })
+    socket.send({
+      type: 'KILL_PORT',
+      port: value
+    })
   }
 
   function handleChange (ev: any) {

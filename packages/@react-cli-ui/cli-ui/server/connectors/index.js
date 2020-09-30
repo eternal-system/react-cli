@@ -5,6 +5,7 @@ const ProjectApi = require('./projects')
 const LogsApi = require('./logs')
 const DependenciesApi = require('./dependencies')
 const TaskApi = require('./tasks')
+const KillApi = require('./kill')
 
 // WS api
 function api (message, client) {
@@ -15,7 +16,8 @@ function api (message, client) {
     const dependencies = new DependenciesApi(client, db, folder)
     const logs = new LogsApi(client, db)
     const tasks = new TaskApi(client, db)
-    const { type, name, url, id, hidden, path, manager, preset, log, file, dep } = message
+    const kill = new KillApi(client, db)
+    const { type, name, url, id, hidden, path, manager, preset, log, file, dep, port } = message
 
     switch (type) {
       // Folders
@@ -25,6 +27,11 @@ function api (message, client) {
 
       case 'CREATE_FOLDER':
         folder.createFolder(url)
+        break
+
+      // Kill port
+      case 'KILL_PORT':
+        kill.port(port)
         break
 
       // File
