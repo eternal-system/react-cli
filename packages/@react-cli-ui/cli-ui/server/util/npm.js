@@ -1,6 +1,6 @@
 const execa = require('execa')
 
-// npm install  
+// npm install
 function npmInstall (name, pathProject, dep) {
   return execa.command(
     `npm --prefix ${pathProject} install ${name} ${dep === 'devDependencies' ? '--save-dev' : ''}`,

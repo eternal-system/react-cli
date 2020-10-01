@@ -44,6 +44,5 @@ export default function Tasks () {
     <DashboardWrap title={t('titleTasks')}>
       {renderTasks()}
     </DashboardWrap>
-
   )
 }
