@@ -94,22 +94,26 @@ function api (message, client) {
       case 'GET_LIST_DEPENDINCIES':
         dependencies.list(path)
         break
-      
+
       case 'INSTALL_DEPENDINCIES':
         dependencies.install(name, dep)
         break
-      
+
       case 'UNINSTALL_DEPENDINCIES':
         dependencies.uninstall(name)
         break
-      
+
       // Tasks
       case 'GET_LIST_TASKS':
         tasks.list()
         break
-      
+
       case 'RUN_TASK':
         tasks.run(name)
+        break
+
+      case 'STOP_TASK':
+        tasks.stop()
         break
 
       // Config

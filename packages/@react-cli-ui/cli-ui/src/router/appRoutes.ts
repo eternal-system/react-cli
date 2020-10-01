@@ -132,7 +132,6 @@ export const AppRoutes: RoutesCollection = {
             Component: Tasks
           }
         },
-        // isRowDirection: true,
         exact: false,
         Component: TaskContainer
       }

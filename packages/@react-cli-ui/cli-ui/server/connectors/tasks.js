@@ -9,6 +9,7 @@ class TaskApi extends StaticMethods {
     this.client = client
     this.db = db
     this.tasks = {}
+    this.childProcess = {}
   }
 
   list () {
@@ -31,16 +32,29 @@ class TaskApi extends StaticMethods {
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
     const filePath = `/${activeProject.path.join('/')}`
-
     const subprocess = runScripts(name, filePath)
-    const { stdout } = await subprocess
-    if (stdout) {
-      notify({
-        title: 'Script run',
-        message: `Script ${name} successfully`,
-        icon: 'done'
-      })
-    } else {
+    this.db.set('tasks', []).write()
+    this.db.get('tasks').push({
+      projectId: activeProjectId,
+      status: name,
+      pid: subprocess.pid.toString()
+    }).write()
+
+    try {
+      const { stdout } = await subprocess
+      if (stdout) {
+        notify({
+          title: 'Script run',
+          message: `Script ${name} successfully`,
+          icon: 'done'
+        })
+      } else {
+        this.client.emit('erro', {
+          title: 'Failure',
+          message: `script run ${name} error`
+        })
+      }
+    } catch (error) {
       this.client.emit('erro', {
         title: 'Failure',
         message: `script run ${name} error`
@@ -49,7 +63,19 @@ class TaskApi extends StaticMethods {
   }
 
   stop () {
-    // ??
+    const activeProjectId = this.db.get('config.lastOpenProject').value()
+    const child = this.db.get('tasks').find({ projectId: activeProjectId }).value()
+    require('child_process').exec(`kill -9 ${child.pid}`, (err) => {
+      if (err) {
+        console.log('err', err)
+      } else {
+        notify({
+          title: 'Script stop',
+          message: `Script ${child.pid} successfully`,
+          icon: 'done'
+        })
+      }
+    })
   }
 }
 

@@ -82,7 +82,7 @@ export default function TaskContainer () {
   }
 
   return (
-    <DashboardWrap title={t('titleTasks')} cssStyle={{ width: '300px' }}>
+    <DashboardWrap title={t('titleTasks')} cssStyle={{ width: '500px' }}>
       {renderTask()}
     </DashboardWrap>
   )
