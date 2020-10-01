@@ -76,7 +76,7 @@ export default function Dashboard () {
   const menu: MenuItems[] = [
     { key: Routes.DASHBOARD, label: t('dashboard'), Icon: DashboardIcon },
     { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
-    { key: Routes.DASHBOARD_TASKS, label: t('tasks'), Icon: ActiveIcon }
+    { key: Routes.DASHBOARD_TASKS_START, label: t('tasks'), Icon: ActiveIcon }
   ]
 
   function handleOpenEdit () {
@@ -96,9 +96,28 @@ export default function Dashboard () {
         data-tip={`<div class="${css.tooltip}">${label}</div>`}
         data-for={TOOLTIP_ID}
         isActive={(_, location) => {
+          if (key === Routes.DASHBOARD_TASKS_START &&
+            Routes.DASHBOARD_TASKS_BUILD === location.pathname
+          ) {
+            return true
+          }
+
+          if (key === Routes.DASHBOARD_TASKS_START &&
+            Routes.DASHBOARD_TASKS_TEST === location.pathname
+          ) {
+            return true
+          }
+
+          if (key === Routes.DASHBOARD_TASKS_START &&
+            Routes.DASHBOARD_TASKS_EJECT === location.pathname
+          ) {
+            return true
+          }
+
           if (key === location.pathname) {
             return true
           }
+
           return false
         }}
       >

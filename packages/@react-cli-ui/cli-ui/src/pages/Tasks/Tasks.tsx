@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DashboardWrap, TaskList } from '@components'
-
+import { DashboardWrap } from '@components'
 import { SettingsContext } from '../../context'
+import { useLocation } from 'react-router-dom'
 
 import PlayIcon from '@icons/play.svg'
 
@@ -10,30 +10,35 @@ import css from './style.module.scss'
 
 export default function Tasks () {
   const { t } = useTranslation('dashboard')
+  const location = useLocation()
   const { socket } = useContext(SettingsContext)
-  const [tasks, setTask] = useState({})
+  const [status, setStates] = useState('')
 
   useEffect(() => {
-    socket.send({
-      type: 'GET_LIST_TASKS'
-    })
+  }, [status])
 
-    socket.on('tasks', (res: any) => {
-      setTask(res.data)
-    })
-
-    return () => {
-      socket.off('tasks')
+  function handleTask () {
+    const name = location.pathname.split('/')[3]
+    if (status === '') {
+      socket.send({
+        type: 'RUN_TASK',
+        name
+      })
+      setStates('START')
+    } else {
+      socket.send({
+        type: 'STOP_TASK'
+      })
+      setStates('')
     }
-  }, [])
+  }
 
   function renderTasks () {
     return (
       <div className={css.wrapper}>
-        <TaskList tasks={tasks}/>
         <div className={css.panel}>
-          <button onClick={() => console.log('start')}>
-            <PlayIcon /> <span>Run</span>
+          <button onClick={handleTask}>
+            <PlayIcon /> { status === 'START' ? <span>Stop</span> : <span>Run</span> }
           </button>
         </div>
       </div>
@@ -44,6 +49,5 @@ export default function Tasks () {
     <DashboardWrap title={t('titleTasks')}>
       {renderTasks()}
     </DashboardWrap>
-
   )
 }

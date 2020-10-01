@@ -3,14 +3,15 @@ import React from 'react'
 import css from './style.module.scss'
 
 interface DashboardProps {
-  title: string;
+  title?: string;
   children: React.PropsWithChildren<React.ReactNode>;
   btn?: JSX.Element;
+  cssStyle?: React.CSSProperties;
 }
 
-export default function DashboardWrap ({ children, title, btn }: DashboardProps) {
+export default function DashboardWrap ({ children, title, btn, cssStyle }: DashboardProps) {
   return (
-    <div className={css.wrapper}>
+    <div className={css.wrapper} style={cssStyle}>
       <div className={css.top}>
         <div className={css.title}>
           {title}

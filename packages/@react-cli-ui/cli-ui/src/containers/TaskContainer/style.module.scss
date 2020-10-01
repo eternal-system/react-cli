@@ -1,0 +1,37 @@
+.wrapper {
+	background: #61dafb3f;
+	.active {
+		.taskElement {
+			background: #61dafb3f;
+		}	
+	}
+	.taskElement {
+      padding: 16px;    
+      cursor: pointer;
+      .name {
+        display: block;
+      }
+      .text {
+        display: block;
+      }
+      &:hover {
+        background: #61dafb3f;
+      }
+	  }
+	.panel {
+	  padding: 16px;
+	  margin-left: 20px;
+	  background: #61dafb3f;
+	  button {
+      span {
+        position: relative;
+        top: -3px;
+      }
+      svg {
+        fill: #ffff;
+        width: 20px;
+        height: 20px;
+      }
+	  }
+	}
+}

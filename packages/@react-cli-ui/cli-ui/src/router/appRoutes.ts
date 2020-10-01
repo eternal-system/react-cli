@@ -1,4 +1,4 @@
-import { AppContainer, ProjectContainer, DashboardContainer } from 'containers'
+import { AppContainer, ProjectContainer, DashboardContainer, TaskContainer } from 'containers'
 import {
   Projects,
   SelectFolder,
@@ -16,6 +16,10 @@ export enum Routes {
   DASHBOARD = '/dashboard',
   DASHBOARD_TASKS = '/dashboard/tasks',
   DEPENDENCIES = '/dashboard/dependencies',
+  DASHBOARD_TASKS_START = '/dashboard/tasks/start',
+  DASHBOARD_TASKS_BUILD = '/dashboard/tasks/build',
+  DASHBOARD_TASKS_TEST = '/dashboard/tasks/test',
+  DASHBOARD_TASKS_EJECT = '/dashboard/tasks/eject',
   PROJECT_SELECT = '/project/select',
   PROJECT_CREATE = '/project/create',
   PROJECT_IMPORT = '/project/import',
@@ -89,19 +93,47 @@ export const AppRoutes: RoutesCollection = {
         exact: true,
         Component: Dashboard
       },
-      dashboardTasks: {
-        paths: {
-          root: Routes.DASHBOARD_TASKS
-        },
-        exact: true,
-        Component: Tasks
-      },
       dashboardStats: {
         paths: {
           root: Routes.DEPENDENCIES
         },
         exact: true,
         Component: Dependencies
+      },
+      dashboardTasks: {
+        paths: {
+          root: Routes.DASHBOARD_TASKS,
+          tastStart: {
+            paths: {
+              root: Routes.DASHBOARD_TASKS_START
+            },
+            exact: true,
+            Component: Tasks
+          },
+          tastBuild: {
+            paths: {
+              root: Routes.DASHBOARD_TASKS_BUILD
+            },
+            exact: true,
+            Component: Tasks
+          },
+          tastTest: {
+            paths: {
+              root: Routes.DASHBOARD_TASKS_TEST
+            },
+            exact: true,
+            Component: Tasks
+          },
+          tastEject: {
+            paths: {
+              root: Routes.DASHBOARD_TASKS_EJECT
+            },
+            exact: true,
+            Component: Tasks
+          }
+        },
+        exact: false,
+        Component: TaskContainer
       }
     },
     isRowDirection: true,

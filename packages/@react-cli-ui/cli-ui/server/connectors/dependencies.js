@@ -85,9 +85,8 @@ class DependenciesApi extends StaticMethods {
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
     const filePath = `/${activeProject.path.join('/')}`
-   
-    let subprocess
-    subprocess = npmInstall(name, filePath, dep)
+
+    const subprocess = npmInstall(name, filePath, dep)
 
     try {
       subprocess.stdout.pipe(process.stdout)
@@ -99,8 +98,8 @@ class DependenciesApi extends StaticMethods {
       })
 
       const { stdout } = await subprocess
-      
-      if(stdout) {
+
+      if (stdout) {
         this.client.emit('notification', {
           title: 'Success',
           message: `Dependency ${name} successfully installed`
@@ -118,7 +117,6 @@ class DependenciesApi extends StaticMethods {
         error
       })
     }
-
   }
 
   async uninstall (name) {
@@ -126,8 +124,7 @@ class DependenciesApi extends StaticMethods {
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
     const filePath = `/${activeProject.path.join('/')}`
-    let subprocess
-    subprocess = npmUninstall(name, filePath)
+    const subprocess = npmUninstall(name, filePath)
     try {
       subprocess.stdout.pipe(process.stdout)
       
@@ -139,8 +136,7 @@ class DependenciesApi extends StaticMethods {
       })
 
       const { stdout } = await subprocess
-      
-      if(stdout) {
+      if (stdout) {
         this.client.emit('notification', {
           title: 'Success',
           message: `Dependency ${name} successfully uninstalled`
