@@ -5,11 +5,9 @@ import {
   Dependencies,
   PageNotFound,
   Dashboard,
-  CreateProject
-  // Tasks
+  CreateProject,
+  Tasks
 } from '@pages'
-
-import TaskStart from '../pages/Tasks/TaskStart'
 
 /** Url's основных страниц */
 export enum Routes {
@@ -110,28 +108,28 @@ export const AppRoutes: RoutesCollection = {
               root: Routes.DASHBOARD_TASKS_START
             },
             exact: true,
-            Component: TaskStart
+            Component: Tasks
           },
           tastBuild: {
             paths: {
               root: Routes.DASHBOARD_TASKS_BUILD
             },
             exact: true,
-            Component: TaskStart
+            Component: Tasks
           },
           tastTest: {
             paths: {
               root: Routes.DASHBOARD_TASKS_TEST
             },
             exact: true,
-            Component: TaskStart
+            Component: Tasks
           },
           tastEject: {
             paths: {
               root: Routes.DASHBOARD_TASKS_EJECT
             },
             exact: true,
-            Component: TaskStart
+            Component: Tasks
           }
         },
         // isRowDirection: true,

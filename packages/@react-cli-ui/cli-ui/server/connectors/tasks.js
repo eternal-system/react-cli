@@ -34,7 +34,7 @@ class TaskApi extends StaticMethods {
 
     const subprocess = runScripts(name, filePath)
     const { stdout } = await subprocess
-    if(stdout) {
+    if (stdout) {
       notify({
         title: 'Script run',
         message: `Script ${name} successfully`,
@@ -46,6 +46,10 @@ class TaskApi extends StaticMethods {
         message: `script run ${name} error`
       })
     }
+  }
+
+  stop () {
+    // ??
   }
 }
 

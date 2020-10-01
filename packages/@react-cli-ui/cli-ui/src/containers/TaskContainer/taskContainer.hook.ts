@@ -6,6 +6,7 @@ import { SettingsContext } from 'context'
 
 export interface TabItem {
     key: Routes.PROJECT | Routes.PROJECT_SELECT | Routes.DASHBOARD_TASKS_START;
+    name: string;
     label: string;
     Icon: React.FC;
 }

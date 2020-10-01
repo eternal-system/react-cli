@@ -16,7 +16,7 @@ export default function TaskContainer () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useTaskContainer()
   const { socket } = useContext(SettingsContext)
-  const [tasks, setTask] = useState([])
+  const [tasks, setTask] = useState<any[]>([])
 
   function getKey (key: string) {
     if (key === 'start') {
