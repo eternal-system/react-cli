@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DashboardWrap } from '@components'
 import { SettingsContext } from '../../context'
+import { useLocation } from 'react-router-dom'
 
 import PlayIcon from '@icons/play.svg'
 
@@ -9,6 +10,7 @@ import css from './style.module.scss'
 
 export default function Tasks () {
   const { t } = useTranslation('dashboard')
+  const location = useLocation()
   const { socket } = useContext(SettingsContext)
   const [status, setStates] = useState('')
 
@@ -16,10 +18,11 @@ export default function Tasks () {
   }, [status])
 
   function handleTask () {
+    const name = location.pathname.split('/')[3]
     if (status === '') {
       socket.send({
         type: 'RUN_TASK',
-        name: 'start'
+        name
       })
       setStates('START')
     } else {
