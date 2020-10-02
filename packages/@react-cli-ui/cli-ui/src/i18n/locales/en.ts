@@ -9,7 +9,8 @@ const locale = {
     newFolder: 'new folder',
     select: 'Select',
     connect: 'Connecting from UI server',
-    disconnect: 'Disconnected from UI server'
+    disconnect: 'Disconnected from UI server',
+    logs: 'Logs'
   },
   project: {
     headerTitle: 'React Project Manager',
