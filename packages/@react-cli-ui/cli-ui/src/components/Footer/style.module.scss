@@ -1,57 +1,62 @@
 @import "../../style/vars.scss";
 
 .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-	color: #fff;
-	height: 30px;
-	width: 100%;
-  background-color: #20232a;
-  .log {
-    display: -ms-flexbox;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 -2px 10px rgba(0,0,0,.1);
+  .content {
     display: flex;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-align: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 8px;
-    height: 100%;
-    cursor: pointer;
-    flex: 100% 1 1;
-    font-size: 15px;
-    &:hover {
-      background-color: #61dafb23;
+    color: #fff;
+    height: 30px;
+    width: 100%;
+    background-color: #20232a;
+    .log {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 0 8px;
+      height: 100%;
+      cursor: pointer;
+      flex: 100% 1 1;
+      font-size: 15px;
+      &:hover {
+        background-color: #61dafb23;
+      }
+      .iconLog {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+        svg {
+          fill: #fff;
+        }
+      }
     }
-    .iconLog {
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
+    .rightGroup {
+      display: flex;
+      margin-left: auto;
+    }
+  
+    .icon {
+      padding: 5px 7px;
+    
+      &:hover {
+        background-color: #61dafb23;
+        cursor: pointer;
+      }
+    
       svg {
         fill: #fff;
+        margin-top: 4px;
+        height: 16px;
+        width: 16px;
+  
+        @include click-rule;
       }
     }
   }
-	.rightGroup {
-		display: flex;
-    margin-left: auto;
-	}
-
-	.icon {
-		padding: 5px 7px;
-	
-		&:hover {
-			background-color: #61dafb23;
-			cursor: pointer;
-		}
-	
-		svg {
-			fill: #fff;
-			margin-top: 4px;
-			height: 16px;
-			width: 16px;
-
-			@include click-rule;
-		}
-	}
 }

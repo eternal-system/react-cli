@@ -1,35 +1,32 @@
-.loading {
-  display: flex;
-  height: 100%;
-  justify-content: center;
+.logger {
+  background: #fff;
+  height: 174px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "toolbar"
+      "logs";
 
-  svg {
-    fill: #61dafb;
-    width: 120px;
-    animation: load 1.5s infinite linear;
-    -webkit-animation: load 1.5s infinite linear;
+  .header {
+    grid-area: toolbar;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 6px 6px 16px;
+    .icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+      svg {
+        fill: #000;
+      }
+    }
   }
-}
-
-@-webkit-keyframes load {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes load {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+  .content {
+    grid-area: logs;
+    padding: 0 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }

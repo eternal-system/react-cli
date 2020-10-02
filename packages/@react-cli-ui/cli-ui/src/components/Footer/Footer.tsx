@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { CurrentPath } from '@components'
+import { CurrentPath, Logs } from '@components'
 
 import { Routes } from 'router'
 import { SettingsContext } from 'context'
@@ -16,6 +16,7 @@ import css from './style.module.scss'
 export default function Footer () {
   const location = useLocation()
   const [toggle, setToggle] = useState('')
+  const [toggleLog, setToggleLog] = useState<boolean>(false)
   const { darkTheme, changeTheme, changeLocale, selectedPath } = useContext(SettingsContext)
 
   useEffect(() => {
@@ -33,26 +34,35 @@ export default function Footer () {
     setToggle(value)
   }
 
+  function handleToggleLog () {
+    setToggleLog(!toggleLog)
+  }
+
   return (
     <div className={css.footer}>
-      <Link to={toggle === 'project'
-        ? Routes.DASHBOARD
-        : Routes.PROJECT } onClick={handleClick} className={css.icon}>
-        <HomeIcon />
-      </Link>
-      {selectedPath && (
-        <CurrentPath url={selectedPath}/>
+      { toggleLog && (
+        <Logs />
       )}
-      <div className={css.log}>
-        <div className={css.iconLog}><ComputerIcon /></div>
-         🌠  {`Ready on http://localhost: ${process.env.DEV_CLIENT_PORT ?? 8080}`}
-      </div>
-      <div className={css.rightGroup}>
-        <div className={css.icon}>
-          {renderThemeIcon()}
+      <div className={css.content}>
+        <Link to={toggle === 'project'
+          ? Routes.DASHBOARD
+          : Routes.PROJECT } onClick={handleClick} className={css.icon}>
+          <HomeIcon />
+        </Link>
+        {selectedPath && (
+          <CurrentPath url={selectedPath}/>
+        )}
+        <div className={css.log} onClick={handleToggleLog}>
+          <div className={css.iconLog}><ComputerIcon /></div>
+          🌠  {`Ready on http://localhost: ${process.env.DEV_CLIENT_PORT ?? 8080}`}
         </div>
-        <div className={css.icon}>
-          <TranlateIcon onClick={changeLocale} />
+        <div className={css.rightGroup}>
+          <div className={css.icon}>
+            {renderThemeIcon()}
+          </div>
+          <div className={css.icon}>
+            <TranlateIcon onClick={changeLocale} />
+          </div>
         </div>
       </div>
     </div>
