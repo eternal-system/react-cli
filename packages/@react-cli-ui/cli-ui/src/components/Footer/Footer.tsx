@@ -9,6 +9,7 @@ import TranlateIcon from '@icons/translate.svg'
 import DarkIcon from '@icons/dark-mode.svg'
 import LightIcon from '@icons/light-mode.svg'
 import HomeIcon from '@icons/home-filled.svg'
+import ComputerIcon from '@icons/computer.svg'
 
 import css from './style.module.scss'
 
@@ -42,6 +43,10 @@ export default function Footer () {
       {selectedPath && (
         <CurrentPath url={selectedPath}/>
       )}
+      <div className={css.log}>
+        <div className={css.iconLog}><ComputerIcon /></div>
+         🌠  {`Ready on http://localhost: ${process.env.DEV_CLIENT_PORT ?? 8080}`}
+      </div>
       <div className={css.rightGroup}>
         <div className={css.icon}>
           {renderThemeIcon()}
