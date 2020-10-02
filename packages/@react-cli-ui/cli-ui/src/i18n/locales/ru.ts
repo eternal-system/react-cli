@@ -8,7 +8,8 @@ const locale = {
     newFolder: 'новая папка',
     select: 'Выбрать',
     connect: 'Подключение к UI серверу',
-    disconnect: 'Нет соединения с UI сервером'
+    disconnect: 'Нет соединения с UI сервером',
+    logs: 'Логи'
   },
   project: {
     headerTitle: 'React Проектный менеджер',
