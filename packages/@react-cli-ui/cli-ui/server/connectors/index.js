@@ -10,11 +10,11 @@ const KillApi = require('./kill')
 // WS api
 function api (message, client) {
   dbAsync.then(db => {
+    const logs = new LogsApi(client, db)
     const folder = new FolderApi(client, db)
     const files = new FileApi(client, db)
     const project = new ProjectApi(client, db, folder)
-    const dependencies = new DependenciesApi(client, db, folder)
-    const logs = new LogsApi(client, db)
+    const dependencies = new DependenciesApi(client, db, logs, folder)
     const tasks = new TaskApi(client, db)
     const kill = new KillApi(client, db)
     const { type, name, url, id, hidden, path, manager, preset, log, file, dep, port } = message

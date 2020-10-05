@@ -6,6 +6,13 @@ import ComputerIcon from '@icons/computer.svg'
 
 import css from './style.module.scss'
 
+interface ILog {
+  id: number;
+  date: Date;
+  message: string;
+  tag?: string;
+}
+
 export default function Logs () {
   const { t } = useTranslation('common')
   const { socket } = useContext(SettingsContext)
@@ -15,10 +22,13 @@ export default function Logs () {
     socket.send({
       type: 'GET_LOGS'
     })
-
-    socket.on('tasks', (res: any) => {
+    socket.on('list-logs', (res: any) => {
+      console.log('log', res)
       setLogs(res.data)
     })
+    return () => {
+      socket.off('list-logs')
+    }
   }, [])
 
   console.log(logs)
@@ -29,7 +39,13 @@ export default function Logs () {
         {t('logs')}
       </div>
       <div className={css.content}>
-        list
+        { logs.map((log: ILog) => {
+          return (
+            <div key={log.id}>
+              {log.message}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
