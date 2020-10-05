@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
-const fetch = require('node-fetch')
-const semver = require('semver')
+// const fetch = require('node-fetch')
+// const semver = require('semver')
 
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
@@ -127,7 +127,7 @@ class DependenciesApi extends StaticMethods {
     const subprocess = npmUninstall(name, filePath)
     try {
       subprocess.stdout.pipe(process.stdout)
-      
+
       subprocess.stdout.on('data', data => {
         const message = data.toString('utf8')
         message !== '\n' && this.client.emit('logging', {
