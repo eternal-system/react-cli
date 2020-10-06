@@ -4,12 +4,13 @@ const { notify } = require('../util/notification')
 const { runScripts } = require('../util/scripts')
 
 class TaskApi extends StaticMethods {
-  constructor (client, db) {
+  constructor (client, db, logs) {
     super(db)
     this.client = client
     this.db = db
     this.tasks = {}
     this.childProcess = {}
+    this.logs = logs
   }
 
   list () {

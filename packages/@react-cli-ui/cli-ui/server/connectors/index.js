@@ -13,8 +13,8 @@ function api (message, client) {
     const logs = new LogsApi(client, db)
     const folder = new FolderApi(client, db, logs)
     const files = new FileApi(client, db, logs)
-    const project = new ProjectApi(client, db, logs, folder)
-    const dependencies = new DependenciesApi(client, db, logs, folder)
+    const project = new ProjectApi(client, db, folder, logs)
+    const dependencies = new DependenciesApi(client, db, folder, logs)
     const tasks = new TaskApi(client, db, logs)
     const kill = new KillApi(client, db, logs)
     const { type, name, url, id, hidden, path, manager, preset, log, file, dep, port } = message

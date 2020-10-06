@@ -11,7 +11,7 @@ const { notify } = require('../util/notification')
 const StaticMethods = require('./utils')
 
 class DependenciesApi extends StaticMethods {
-  constructor (client, db, logs, folders) {
+  constructor (client, db, folders, logs) {
     super(db)
     this.client = client
     this.db = db
@@ -172,13 +172,10 @@ class DependenciesApi extends StaticMethods {
   }
 
   update ({ id }) {
-    
   }
 
   updateAll () {
-
   }
-
 }
 
 module.exports = DependenciesApi

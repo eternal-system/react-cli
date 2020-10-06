@@ -1,7 +1,8 @@
 class KillApi {
-  constructor (client, db) {
+  constructor (client, db, logs) {
     this.client = client
     this.db = db
+    this.logs = logs
   }
 
   /**
@@ -22,10 +23,18 @@ class KillApi {
             title: `❌ Port: ${port}`,
             message: 'Couldn\'t kill process'
           })
+          this.logs.add({
+            message: 'Couldn\'t kill process',
+            type: 'info'
+          })
         } else {
           this.client.emit('kill-port', {
             title: `🌠 Port: ${port}`,
             message: 'Successfully killed'
+          })
+          this.logs.add({
+            message: 'Successfully killed',
+            type: 'info'
           })
         }
       })

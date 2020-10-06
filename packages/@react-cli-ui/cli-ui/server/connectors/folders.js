@@ -3,10 +3,11 @@ const fs = require('fs-extra')
 const StaticMethods = require('./utils')
 
 class FolderApi extends StaticMethods {
-  constructor (client, db) {
+  constructor (client, db, logs) {
     super(db)
     this.client = client
     this.db = db
+    this.logs = logs
   }
 
   /**
@@ -28,6 +29,10 @@ class FolderApi extends StaticMethods {
           this.client.emit('erro', {
             message: 'Ошибка работы с файловой системой',
             error: err
+          })
+          this.logs.add({
+            message: 'Ошибка работы с файловой системой',
+            type: 'info'
           })
         }
 
@@ -67,9 +72,17 @@ class FolderApi extends StaticMethods {
         this.client.emit('notification-folder', {
           message: 'Folder successfully create'
         })
+        this.logs.add({
+          message: 'Folder successfully create',
+          type: 'info'
+        })
       } else {
         this.client.emit('notification-folder', {
           message: 'Folder already exists'
+        })
+        this.logs.add({
+          message: 'Folder already exists',
+          type: 'info'
         })
       }
     } catch (error) {
