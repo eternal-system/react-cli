@@ -10,6 +10,7 @@ interface ILog {
   id: number;
   date: Date;
   message: string;
+  type: string;
   tag?: string;
 }
 
@@ -41,8 +42,10 @@ export default function Logs () {
       <div className={css.content}>
         { logs.map((log: ILog) => {
           return (
-            <div key={log.id}>
-              {log.message}
+            <div className={css.wrapper} key={log.id}>
+              <div className={css.type}>{log.type}</div>
+              <div className={css.message}>{log.message}</div>
+              <div className={css.date}>{log.date}</div>
             </div>
           )
         })}

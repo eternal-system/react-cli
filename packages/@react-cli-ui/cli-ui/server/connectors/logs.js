@@ -41,18 +41,19 @@ class LogsApi {
   }
 
   last () {
-    if (this.logs.length) {
+    if (this.db.get('logs').velue().length) {
       this.client.emit('list-logs', {
-        data: this.logs[this.logs.length - 1]
+        data: this.db.get('logs')
+          .find({ id: this.db.get('logs').value()[this.db.get('logs') - 1] })
+          .value()
       })
     }
     return null
   }
 
   clear () {
-    this.logs = []
     this.client.emit('list-logs', {
-      data: this.logs
+      data: this.db.set('logs', []).write()
     })
   }
 }

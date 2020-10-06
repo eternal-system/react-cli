@@ -11,12 +11,12 @@ const KillApi = require('./kill')
 function api (message, client) {
   dbAsync.then(db => {
     const logs = new LogsApi(client, db)
-    const folder = new FolderApi(client, db)
-    const files = new FileApi(client, db)
-    const project = new ProjectApi(client, db, folder)
+    const folder = new FolderApi(client, db, logs)
+    const files = new FileApi(client, db, logs)
+    const project = new ProjectApi(client, db, logs, folder)
     const dependencies = new DependenciesApi(client, db, logs, folder)
-    const tasks = new TaskApi(client, db)
-    const kill = new KillApi(client, db)
+    const tasks = new TaskApi(client, db, logs)
+    const kill = new KillApi(client, db, logs)
     const { type, name, url, id, hidden, path, manager, preset, log, file, dep, port } = message
 
     switch (type) {
