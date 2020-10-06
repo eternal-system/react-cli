@@ -7,11 +7,12 @@ const { v4: uuid } = require('uuid')
 const StaticMethods = require('./utils')
 
 class ProjectApi extends StaticMethods {
-  constructor (client, db, folder) {
+  constructor (client, db, folder, logs) {
     super(db)
     this.client = client
     this.db = db
     this.folder = folder
+    this.logs = logs
   }
 
   /**
@@ -112,16 +113,26 @@ class ProjectApi extends StaticMethods {
                 openDate: Date.now()
               })
               .write()
-              .then(() => this.client.emit('notification', {
-                title: 'Success',
-                message: `Project ${name} successfully create`
-              }))
+              .then(() => {
+                this.client.emit('notification', {
+                  title: 'Success',
+                  message: `Project ${name} successfully create`
+                })
+                this.logs.add({
+                  message: `Project ${name} successfully create`,
+                  type: 'info'
+                })
+              })
           }
         } catch (error) {
           this.client.emit('erro', {
             title: 'Failure',
             message: `Project ${name} create error`,
             error
+          })
+          this.logs.add({
+            message: `Project ${name} create error`,
+            type: 'info'
           })
         }
       }
@@ -130,6 +141,10 @@ class ProjectApi extends StaticMethods {
         this.client.emit('erro', {
           title: 'Ошибка создания проекта',
           message: `Директория ${name} - уже существует`
+        })
+        this.logs.add({
+          message: 'Ошибка создания проекта',
+          type: 'info'
         })
       }
     })

@@ -28,5 +28,33 @@
     padding: 0 16px;
     overflow-x: hidden;
     overflow-y: auto;
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      font-family: Roboto Mono,monospace;
+      box-sizing: border-box;
+      padding: 2px 4px;
+      font-size: 12px;
+      .type {
+        background: #03c2e6;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .message {
+        flex: 100% 1 1;
+        width: 0;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-left: 12px
+      }
+      .date {
+        flex: auto 0 0;
+      }
+    }
   }
 }

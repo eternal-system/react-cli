@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
-const fetch = require('node-fetch')
-const semver = require('semver')
+// const fetch = require('node-fetch')
+// const semver = require('semver')
 
 const { resolveModuleRoot } = require('../util/resolve-path')
 const { resolveModule } = require('../util/modules')
@@ -11,10 +11,11 @@ const { notify } = require('../util/notification')
 const StaticMethods = require('./utils')
 
 class DependenciesApi extends StaticMethods {
-  constructor (client, db, folders) {
+  constructor (client, db, folders, logs) {
     super(db)
     this.client = client
     this.db = db
+    this.logs = logs
     this.folders = folders
     this.dependencies = []
   }
@@ -22,7 +23,6 @@ class DependenciesApi extends StaticMethods {
   list () {
     const activeProjectId = this.db.get('config.lastOpenProject').value()
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
-
     const filePath = `/${activeProject.path.join('/')}`
     const pkg = this.readPackage(path.join(filePath))
 
@@ -34,7 +34,6 @@ class DependenciesApi extends StaticMethods {
         this.findDependencies(pkg.dependencies || {}, 'dependencies', filePath)
       )
     }
-
     this.client.emit('dependencies', {
       data: this.dependencies
     })
@@ -104,6 +103,10 @@ class DependenciesApi extends StaticMethods {
           title: 'Success',
           message: `Dependency ${name} successfully installed`
         })
+        this.logs.add({
+          message: `Dependency ${name} successfully installed`,
+          type: 'info'
+        })
         notify({
           title: 'Dependency installed',
           message: `Dependency ${name} successfully installed`,
@@ -116,6 +119,10 @@ class DependenciesApi extends StaticMethods {
         message: `npm install ${name} error`,
         error
       })
+      this.logs.add({
+        message: `npm install ${name} error`,
+        type: 'info'
+      })
     }
   }
 
@@ -127,7 +134,7 @@ class DependenciesApi extends StaticMethods {
     const subprocess = npmUninstall(name, filePath)
     try {
       subprocess.stdout.pipe(process.stdout)
-      
+
       subprocess.stdout.on('data', data => {
         const message = data.toString('utf8')
         message !== '\n' && this.client.emit('logging', {
@@ -141,6 +148,10 @@ class DependenciesApi extends StaticMethods {
           title: 'Success',
           message: `Dependency ${name} successfully uninstalled`
         })
+        this.logs.add({
+          message: `Dependency ${name} successfully uninstalled`,
+          type: 'info'
+        })
         notify({
           title: 'Dependency uninstalled',
           message: `Dependency ${name} successfully uninstalled`,
@@ -153,17 +164,18 @@ class DependenciesApi extends StaticMethods {
         message: `npm uninstall ${name} error`,
         error
       })
+      this.logs.add({
+        message: `npm uninstall ${name} error`,
+        type: 'info'
+      })
     }
   }
 
   update ({ id }) {
-    
   }
 
   updateAll () {
-
   }
-
 }
 
 module.exports = DependenciesApi

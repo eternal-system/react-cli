@@ -1,3 +1,4 @@
+const { v4: uuid } = require('uuid')
 /** @typedef {'warn' | 'error' | 'info' | 'done'} LogType */
 
 /**
@@ -13,8 +14,6 @@ class LogsApi {
   constructor (client, db) {
     this.client = client
     this.db = db
-    /** @type {Log []} */
-    this.logs = []
   }
 
   /**
@@ -24,35 +23,37 @@ class LogsApi {
   add (log) {
     /** @type {Log} */
     const item = {
-      id: this.logs.length + 1,
+      id: uuid(),
       date: new Date().toISOString(),
       tag: null,
       ...log
     }
-    this.client.emit('log', {
-      data: this.logs.push(item)
+    this.db.get('logs').push(item).write()
+    this.client.emit('list-logs', {
+      data: this.db.get('logs').value()
     })
   }
 
   list () {
-    this.client.emit('log', {
-      data: this.logs
+    this.client.emit('list-logs', {
+      data: this.db.get('logs').value()
     })
   }
 
   last () {
-    if (this.logs.length) {
-      this.client.emit('log', {
-        data: this.logs[this.logs.length - 1]
+    if (this.db.get('logs').velue().length) {
+      this.client.emit('list-logs', {
+        data: this.db.get('logs')
+          .find({ id: this.db.get('logs').value()[this.db.get('logs') - 1] })
+          .value()
       })
     }
     return null
   }
 
   clear () {
-    this.logs = []
-    this.client.emit('log', {
-      data: this.logs
+    this.client.emit('list-logs', {
+      data: this.db.set('logs', []).write()
     })
   }
 }
