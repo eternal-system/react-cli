@@ -26,6 +26,17 @@
     color: #000;
     left: -14px;
     min-width: 270px;
+    .titleFavorite {
+      color: #2c3e50;
+      border-top: 1px solid rgba(44, 62, 80, 0.25);
+      &:hover{
+        background: #fff;
+        cursor: default;
+      }
+    }
+    .manager {
+      border-top: 1px solid rgba(44, 62, 80, 0.25);
+    }
     div {
       text-align: left;
       padding: 10px;

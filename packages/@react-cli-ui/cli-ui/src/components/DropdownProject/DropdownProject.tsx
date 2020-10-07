@@ -59,14 +59,14 @@ export default function DropdownProject ({
     edit(url)
   }
 
+  function renderTitle () {
+    if (!data.length) return
+    return <div className={css.titleFavorite}>Избранные проекты</div>
+  }
+
   function renderFavoriteProjects () {
-    const filterFavorite = (project: Project) => project.favorite === true
-    const filterName = (project: Project) => project.name !== title
-    const projects = data.length ? [...data].filter(filterFavorite).filter(filterName) : []
-
-    if (!projects.length) return <div><AttachFileIcon /><span>{t('emptyFavoriteFolders')}</span></div>
-
-    return projects.map((f, i) => (
+    if (!data.length) return <div><AttachFileIcon /><span>{t('emptyFavoriteFolders')}</span></div>
+    return data.map((f, i) => (
       <div key={i} onClick={() => handleClick(f.path)}><StarIcon /><span>{f.name}</span></div>
     ))
   }
@@ -84,8 +84,9 @@ export default function DropdownProject ({
               <OpenEditorIcon />
               <span>{t('openEditor')}</span>
             </div>
+            {renderTitle()}
             {renderFavoriteProjects()}
-            <div onClick={() => history.push(Routes.PROJECT)}>
+            <div className={css.manager} onClick={() => history.push(Routes.PROJECT)}>
               <FolderIcon />
               <span>{t('projectManagerReact')}</span>
             </div>

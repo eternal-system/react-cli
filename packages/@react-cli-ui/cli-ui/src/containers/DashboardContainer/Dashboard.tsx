@@ -36,6 +36,7 @@ export default function Dashboard () {
   const { socket, selectedPath } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<Project[]>([])
+  const [filterProjects, setFilterProjects] = useState<Project[]>([])
   const [active, setActive] = useState(null)
   const [title, setTitle] = useState<string>('')
 
@@ -70,9 +71,14 @@ export default function Dashboard () {
     }
   }, [])
 
+
   useEffect(() => {
-    const title = !!projects.length && projects.find(p => p.id === active)
+    const title: any = !!projects.length && projects.find(p => p.id === active)
+    const filterFavorite = (project: Project) => project.favorite === true
+    const filterName = (project: Project) => project.name !== title
+    const filterProjects = projects.length ? [...projects].filter(filterFavorite).filter(filterName) : []
     setTitle(title ? title.name : '')
+    setFilterProjects(filterProjects)
   }, [active, projects])
 
   const menu: MenuItems[] = [
@@ -134,7 +140,7 @@ export default function Dashboard () {
       <div className={css.wrapperLayout}>
         <DropdownProject
           title={title}
-          data={projects}
+          data={filterProjects}
           openEdit={handleOpenEdit}
           edit={() => console.log('edit')}
         />
