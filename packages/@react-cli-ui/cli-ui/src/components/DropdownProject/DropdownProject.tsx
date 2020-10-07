@@ -3,16 +3,18 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
 import { Routes } from 'router'
-// import { Empty } from '@components'
+import { Project } from '../../containers/DashboardContainer/Dashboard'
 
+import AttachFileIcon from '@icons/attach-file.svg'
 import DropIcon from '@icons/drop-down.svg'
 import FolderIcon from '@icons/home-filled.svg'
+import StarIcon from '@icons/star-add.svg'
 import OpenEditorIcon from '@icons/open-editor.svg'
 
 import css from './style.module.scss'
 
 interface Props {
-  data: { name: string, path: string }[],
+  data: Project[],
   edit: any;
   openEdit: any;
   title: string;
@@ -20,9 +22,9 @@ interface Props {
 
 export default function DropdownProject ({
   title,
-  openEdit
-  // data,
-  // edit
+  openEdit,
+  data,
+  edit
 }: Props) {
   const { t } = useTranslation('project')
   const history = useHistory()
@@ -53,28 +55,40 @@ export default function DropdownProject ({
     )
   }
 
-  // function handleClick (url: string) {
-  //   edit(url.split('/').filter(Boolean))
-  // }
+  function handleClick (url: string[]) {
+    edit(url)
+  }
 
-  // function renderFavoriteProjects () {
-  //   if (!data.length) return <Empty text={t('emptyFavoriteFolders')} />
+  function renderFavoriteProjects () {
+    const filterFavorite = (project: Project) => project.favorite === true
+    const filterName = (project: Project) => project.name !== title
+    const projects = data.length ? [...data].filter(filterFavorite).filter(filterName) : []
 
-  //   return data.map((f, i) => (
-  //     <div key={i} onClick={() => handleClick(f.path)}><FolderIcon /><span>{f.path}</span></div>
-  //   ))
-  // }
+    if (!projects.length) return <div><AttachFileIcon /><span>{t('emptyFavoriteFolders')}</span></div>
+
+    return projects.map((f, i) => (
+      <div key={i} onClick={() => handleClick(f.path)}><StarIcon /><span>{f.name}</span></div>
+    ))
+  }
 
   return (
     <>
       <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
-        <div className={css.title}>{title}</div>
+        <div className={css.title}>
+          {title}
+        </div>
         {renderIcon(DropIcon)}
         {open && (
           <div className={css.list} ref={divRef}>
-            {/* {renderFavoriteProjects()} */}
-            <div onClick={() => openEdit()}><OpenEditorIcon /><span>{t('openEditor')}</span></div>
-            <div onClick={() => history.push(Routes.PROJECT)}><FolderIcon /><span>{t('projectManagerReact')}</span></div>
+            <div onClick={() => openEdit()}>
+              <OpenEditorIcon />
+              <span>{t('openEditor')}</span>
+            </div>
+            {renderFavoriteProjects()}
+            <div onClick={() => history.push(Routes.PROJECT)}>
+              <FolderIcon />
+              <span>{t('projectManagerReact')}</span>
+            </div>
           </div>
         )}
       </button>

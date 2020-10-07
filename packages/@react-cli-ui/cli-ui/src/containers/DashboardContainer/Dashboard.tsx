@@ -18,13 +18,15 @@ import css from './style.module.scss'
 
 const TOOLTIP_ID = uuid()
 
-export interface ProjectProps {
-  id: number;
+export type Project = {
+  id: string;
   manager: string;
-  name: string;
-  path: string;
-  preset: string;
+  openDate: number;
   favorite: boolean;
+  preset: string;
+  name: string;
+  path: string[];
+  type: string;
 }
 
 export default function Dashboard () {
@@ -33,7 +35,7 @@ export default function Dashboard () {
   const notification = useNotification()
   const { socket, selectedPath } = useContext(SettingsContext)
 
-  const [projects, setProjects] = useState<ProjectProps[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
   const [active, setActive] = useState(null)
   const [title, setTitle] = useState<string>('')
 
@@ -132,7 +134,7 @@ export default function Dashboard () {
       <div className={css.wrapperLayout}>
         <DropdownProject
           title={title}
-          data={[]}
+          data={projects}
           openEdit={handleOpenEdit}
           edit={() => console.log('edit')}
         />
