@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import ReactTooltip from 'react-tooltip'
 import { v4 as uuid } from 'uuid'
@@ -33,11 +34,11 @@ export default function Dashboard () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useDashboardContainer()
   const notification = useNotification()
-  const { socket, selectedPath } = useContext(SettingsContext)
+  const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<Project[]>([])
   const [filterProjects, setFilterProjects] = useState<Project[]>([])
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState<string>('')
   const [title, setTitle] = useState<string>('')
 
   useEffect(() => {
@@ -71,14 +72,15 @@ export default function Dashboard () {
     }
   }, [])
 
-
   useEffect(() => {
     const title: any = !!projects.length && projects.find(p => p.id === active)
     const filterFavorite = (project: Project) => project.favorite === true
-    const filterName = (project: Project) => project.name !== title
-    const filterProjects = projects.length ? [...projects].filter(filterFavorite).filter(filterName) : []
-    setTitle(title ? title.name : '')
-    setFilterProjects(filterProjects)
+    const filterName = (project: Project) => project.name !== title.name
+    const filterProjects = projects.length ? [...projects].filter(filterName).filter(filterFavorite) : []
+    batch(() => {
+      setTitle(title ? title.name : '')
+      setFilterProjects(filterProjects)
+    })
   }, [active, projects])
 
   const menu: MenuItems[] = [
@@ -86,6 +88,17 @@ export default function Dashboard () {
     { key: Routes.DEPENDENCIES, label: t('dependencies'), Icon: StatsIcon },
     { key: Routes.DASHBOARD_TASKS_START, label: t('tasks'), Icon: ActiveIcon }
   ]
+
+  function handleOpen (id: string, path: string[]) {
+    if (id) {
+      socket.send({
+        type: 'OPEN_PROJECT',
+        id
+      })
+      changeSelectedPath(path)
+      setActive(id)
+    }
+  }
 
   function handleOpenEdit () {
     socket.send({
@@ -142,7 +155,7 @@ export default function Dashboard () {
           title={title}
           data={filterProjects}
           openEdit={handleOpenEdit}
-          edit={() => console.log('edit')}
+          edit={handleOpen}
         />
         <div className={css.nav}>
           {renderChildren}

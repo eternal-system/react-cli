@@ -55,19 +55,22 @@ export default function DropdownProject ({
     )
   }
 
-  function handleClick (url: string[]) {
-    edit(url)
+  function handleClick (id: string, url: string[]) {
+    edit(id, url)
   }
 
   function renderTitle () {
     if (!data.length) return
-    return <div className={css.titleFavorite}>Избранные проекты</div>
+    return <div className={css.titleFavorite}>{t('favoriteProjects')}</div>
   }
 
   function renderFavoriteProjects () {
     if (!data.length) return <div><AttachFileIcon /><span>{t('emptyFavoriteFolders')}</span></div>
+
     return data.map((f, i) => (
-      <div key={i} onClick={() => handleClick(f.path)}><StarIcon /><span>{f.name}</span></div>
+      <div key={i} onClick={() => handleClick(f.id, f.path)}>
+        <StarIcon /><span>{f.name}</span>
+      </div>
     ))
   }
 
