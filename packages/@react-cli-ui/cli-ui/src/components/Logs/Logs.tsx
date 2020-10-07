@@ -24,7 +24,6 @@ export default function Logs () {
       type: 'GET_LOGS'
     })
     socket.on('list-logs', (res: any) => {
-      console.log('log', res)
       setLogs(res.data)
     })
     return () => {
@@ -32,7 +31,6 @@ export default function Logs () {
     }
   }, [])
 
-  console.log(logs)
   return (
     <div className={css.logger}>
       <div className={css.header}>
