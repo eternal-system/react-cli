@@ -53,7 +53,7 @@ export default function Footer () {
           <HomeIcon />
         </Link>
         {selectedPath && (
-          <CurrentPath url={selectedPath}/>
+          <CurrentPath theme={darkTheme} url={selectedPath}/>
         )}
         <div className={css.log} onClick={handleToggleLog}>
           <div className={css.iconLog}><ComputerIcon /></div>

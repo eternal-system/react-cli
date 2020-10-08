@@ -7,7 +7,12 @@
   &.dark {
     .content {
       background: #61dafb;
+      overflow: hidden;
       .log {
+        color: #000;
+        &:hover {
+          background-color: #56c4e2;
+        }
         .iconLog {
           svg {
             fill: #000;
@@ -15,8 +20,12 @@
         }
       }
       .icon {
+        &:hover {
+          background-color: #56c4e2;
+        }
         svg {
           fill: #000;
+          @include click-rule;
         }
       }
     }
