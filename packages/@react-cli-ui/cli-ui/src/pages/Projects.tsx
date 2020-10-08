@@ -21,7 +21,7 @@ export default function Projects () {
   const history = useHistory()
   const { t } = useTranslation('project')
   const notification = useNotification()
-  const { socket, changeSelectedPath } = useContext(SettingsContext)
+  const { socket, changeSelectedPath, darkTheme } = useContext(SettingsContext)
 
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [filters, setFilters] = useState<ProjectProps[]>([])
@@ -130,6 +130,7 @@ export default function Projects () {
           ? <ProjectList
             active={active}
             projects={filters}
+            theme={darkTheme}
             onOpen={openProject}
             onOpenEdit={handleOpenEdit}
             onFavorite={handleFavorite}

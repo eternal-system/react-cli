@@ -1,3 +1,19 @@
+.dark {
+	color: #fff;
+	.content{
+		&:hover {
+			background: rgba(66,185,131,.05);
+		}
+		&.active {
+			background: rgba(66,185,131,.05);
+		}
+		.info{
+			.path {
+				color: #fff;
+			}
+		}
+	}
+}
 .filter {
 	margin: 0 auto;
 	padding-bottom: 25px;
