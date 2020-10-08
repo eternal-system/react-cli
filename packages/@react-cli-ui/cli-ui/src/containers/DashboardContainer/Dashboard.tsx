@@ -51,7 +51,7 @@ export default function Dashboard () {
     })
 
     socket.on('config', (res: any) => {
-      setActive(res.data?.lastOpenProject || 1)
+      setActive(res.data?.lastOpenProject || null)
     })
 
     socket.on('projects', (res: any) => {
@@ -73,14 +73,16 @@ export default function Dashboard () {
   }, [])
 
   useEffect(() => {
-    const title: any = !!projects.length && projects.find(p => p.id === active)
-    const filterFavorite = (project: Project) => project.favorite === true
-    const filterName = (project: Project) => project.name !== title.name
-    const filterProjects = projects.length ? [...projects].filter(filterName).filter(filterFavorite) : []
-    batch(() => {
-      setTitle(title ? title.name : '')
-      setFilterProjects(filterProjects)
-    })
+    if (active) {
+      const title: any = !!projects.length && projects.find(p => p.id === active)
+      const filterFavorite = (project: Project) => project.favorite === true
+      const filterName = (project: Project) => project.name !== title.name
+      const filterProjects = projects.length ? [...projects].filter(filterName).filter(filterFavorite) : []
+      batch(() => {
+        setTitle(title ? title.name : '')
+        setFilterProjects(filterProjects)
+      })
+    }
   }, [active, projects])
 
   const menu: MenuItems[] = [
