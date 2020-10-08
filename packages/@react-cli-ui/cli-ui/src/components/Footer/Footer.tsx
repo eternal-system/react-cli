@@ -49,7 +49,7 @@ export default function Footer () {
           : Routes.PROJECT } onClick={handleClick} className={css.icon}>
           <HomeIcon />
         </Link>
-        {selectedPath && (
+        {selectedPath && localStorage.getItem('selectedPath') && (
           <CurrentPath url={selectedPath}/>
         )}
         <div className={css.log} onClick={handleToggleLog}>

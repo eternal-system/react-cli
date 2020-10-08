@@ -20,6 +20,7 @@ export default function AppContainer () {
         if (msg.data) {
           history.push(Routes.DASHBOARD)
         } else {
+          localStorage.removeItem('selectedPath')
           history.push(Routes.PROJECT)
         }
       }
