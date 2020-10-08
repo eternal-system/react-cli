@@ -3,6 +3,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &.dark {
+    background: #1d2935;
+    .foulderBtn{
+      svg {
+        fill: #000;
+      }
+    }
+  }
 }
 
 .routeRowContainer, 
