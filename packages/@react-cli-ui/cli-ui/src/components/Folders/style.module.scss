@@ -3,7 +3,9 @@
 	overflow-x: hidden;
 	overflow-y: auto;
   position: relative;
-
+  &.dark {
+    color: #fff;
+  }
 	.folderExplorerItem {
 		border-radius: 3px;
 		padding: 16px;

@@ -15,7 +15,7 @@ type Favorites = {
 export default function FileManager () {
   const notification = useNotification()
   // State
-  const { socket, selectedPath, changeSelectedPath } = useContext(SettingsContext)
+  const { socket, selectedPath, changeSelectedPath, darkTheme } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
@@ -129,6 +129,7 @@ export default function FileManager () {
   return (
     <>
       <Toolbar
+        theme={darkTheme}
         back={backFolder}
         updateFolderData={handleReset}
         setUrlPath={setUrl}
@@ -137,7 +138,11 @@ export default function FileManager () {
         path={url}
       />
       { loading && <ProgressBar progress={75} /> }
-      <Folders folders={projects} onSelect={handleClick}/>
+      <Folders
+        folders={projects}
+        theme={darkTheme}
+        onSelect={handleClick}
+      />
     </>
   )
 }

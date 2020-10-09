@@ -14,6 +14,7 @@ import Star from '@icons/star.svg'
 import StarAdd from '@icons/star-add.svg'
 import CreateFolderIcon from '@icons/folder-create-filled.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
@@ -23,6 +24,7 @@ type Favorites = {
 }
 
 interface Props {
+  theme: boolean | null;
   setUrlPath(url: string[]): void;
   updateFolderData(): void;
   addFavorite(favorite: boolean): void;
@@ -32,12 +34,13 @@ interface Props {
 }
 
 // eslint-disable-next-line react/prop-types
-function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favorites }: Props) {
+function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite, favorites }: Props) {
   const { visible, showModal, closeModal } = useModal()
   const [isEdit, setIsEdit] = useState(false)
   const [editPath, setEditPath] = useState('')
   const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
   const isFavorite = favorites.some(f => f.path === check)
+  const styles = cn(theme ? css.dark : css.ligth, css.toolbar)
   const { t } = useTranslation('toolbar')
 
   useEffect(() => {
@@ -99,7 +102,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, back, addFavorite, favor
 
   return (
     <>
-      <div className={css.toolbar}>
+      <div className={styles}>
         <button onClick={back} data-tip={t('tooltip.back')} >
           {renderIcon(ArrowUpIcon)}
         </button>
