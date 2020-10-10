@@ -13,6 +13,20 @@
     margin-bottom: 20px;
   }
 
+  &.dark {
+    background-color: #262e41;
+    p {
+      color: #fff;
+    }
+    .content {
+      h1 {
+        color: #fff;
+      }
+      .list {
+        color: #fff;
+      }
+    }
+  }
   .content {
     text-align: center;
     padding: 20px 20px 30px 20px;

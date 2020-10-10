@@ -1,16 +1,20 @@
 import React from 'react'
 
 import FolderIcon from '@icons/folder-filled.svg'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
 interface IProps {
-  url: string[]
+  url: string[];
+  theme: boolean | null;
 }
 
-export default function CurrentPath ({ url }: IProps) {
+export default function CurrentPath ({ url, theme }: IProps) {
+  // theme
+  const styles = cn(theme ? css.dark : css.ligth, css.path)
   return (
-    <div className={css.path}>
+    <div className={styles}>
       <div className={css.icon}>
         <FolderIcon />
       </div>

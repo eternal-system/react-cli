@@ -5,13 +5,15 @@ import { useNotification } from '@hooks'
 
 import FlashIcon from '@icons/flash-filled.svg'
 import { SettingsContext } from '../../context'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
 export default function KillPort () {
   const [value, setValue] = useState('')
   const notification = useNotification()
-  const { socket } = useContext(SettingsContext)
+  const { socket, darkTheme } = useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapperCard)
 
   useEffect(() => {
     socket.on('kill-port', (res: any) => {
@@ -53,7 +55,7 @@ export default function KillPort () {
   }
 
   return (
-    <div className={css.wrapperCard}>
+    <div className={styles}>
       <div className={css.killPors}>
         <div className={css.title}>Kill Port</div>
         <div className={css.description}>

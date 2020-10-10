@@ -5,6 +5,7 @@ import { CurrentPath, Logs } from '@components'
 import { Routes } from 'router'
 import { SettingsContext } from 'context'
 
+import cn from 'classnames'
 import TranlateIcon from '@icons/translate.svg'
 import DarkIcon from '@icons/dark-mode.svg'
 import LightIcon from '@icons/light-mode.svg'
@@ -18,6 +19,8 @@ export default function Footer () {
   const [toggle, setToggle] = useState('')
   const [toggleLog, setToggleLog] = useState<boolean>(false)
   const { darkTheme, changeTheme, changeLocale, selectedPath } = useContext(SettingsContext)
+  // theme
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.footer)
 
   useEffect(() => {
     setToggle(location.pathname.replace('/', ''))
@@ -39,7 +42,7 @@ export default function Footer () {
   }
 
   return (
-    <div className={css.footer}>
+    <div className={styles}>
       { toggleLog && (
         <Logs />
       )}
@@ -49,8 +52,8 @@ export default function Footer () {
           : Routes.PROJECT } onClick={handleClick} className={css.icon}>
           <HomeIcon />
         </Link>
-        {selectedPath && localStorage.getItem('selectedPath') && (
-          <CurrentPath url={selectedPath}/>
+        {selectedPath && (
+          <CurrentPath theme={darkTheme} url={selectedPath}/>
         )}
         <div className={css.log} onClick={handleToggleLog}>
           <div className={css.iconLog}><ComputerIcon /></div>

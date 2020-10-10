@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 import { DashboardWrap } from '@components'
 import { SettingsContext } from '../../context'
 import { useLocation } from 'react-router-dom'
 
 import PlayIcon from '@icons/play.svg'
-
+import cn from 'classnames'
 import css from './style.module.scss'
 
 export default function Tasks () {
-  const { t } = useTranslation('dashboard')
   const location = useLocation()
-  const { socket } = useContext(SettingsContext)
+  const { socket, darkTheme } = useContext(SettingsContext)
   const [status, setStates] = useState('')
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
 
   useEffect(() => {
   }, [status])
@@ -35,7 +34,7 @@ export default function Tasks () {
 
   function renderTasks () {
     return (
-      <div className={css.wrapper}>
+      <div className={styles}>
         <div className={css.panel}>
           <button onClick={handleTask}>
             <PlayIcon /> { status === 'START' ? <span>Stop</span> : <span>Run</span> }
@@ -46,7 +45,7 @@ export default function Tasks () {
   }
 
   return (
-    <DashboardWrap title={t('titleTasks')}>
+    <DashboardWrap>
       {renderTasks()}
     </DashboardWrap>
   )

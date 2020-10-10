@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { SettingsContext } from 'context'
 import ProjectDependencyItem from './ProjectDependencyItem'
+import cn from 'classnames'
 import css from './style.module.scss'
 
 interface PropsItem {
@@ -20,12 +21,14 @@ interface PropsDepend {
 
 export default function ProjectDependencies ({ list, onDelete }: PropsDepend) {
   const { t } = useTranslation('dependencies')
+  const { darkTheme } = useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
 
   const listDepend = list.filter(p => p.type === 'dependencies')
   const listDevDepend = list.filter(p => p.type === 'devDependencies')
 
   return (
-    <div className={css.wrapper}>
+    <div className={styles}>
       {!!listDepend.length && <div className={css.title}>{t('main')}</div>}
       {listDepend.map(dep => (
         <ProjectDependencyItem

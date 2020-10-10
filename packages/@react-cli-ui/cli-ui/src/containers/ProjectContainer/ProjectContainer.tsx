@@ -9,12 +9,14 @@ import logo from '@public/logo192.png'
 import ProjectIcon from '@icons/nav-projects.svg'
 import SelectFoulderIcon from '@icons/nav-select-folder.svg'
 import ImportIcon from '@icons/nav-import.svg'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
 export default function ProjectContainer () {
   const { t } = useTranslation('project')
-  const { locale, activeTab } = useProjectContainer()
+  const { locale, activeTab, darkTheme } = useProjectContainer()
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapperHeader)
 
   const tabs: TabItem[] = [
     { key: Routes.PROJECT, label: t('projects'), Icon: ProjectIcon },
@@ -49,7 +51,7 @@ export default function ProjectContainer () {
   }), [activeTab, locale])
 
   return (
-    <header className={css.wrapperHeader}>
+    <header className={styles}>
       <div className={css.wrapperLayout}>
         <div className={css.wrapperLogo}>
           <img src={logo} alt="logo" />

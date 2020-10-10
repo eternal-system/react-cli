@@ -1,5 +1,9 @@
 .wrapper {
-	background: #61dafb3f;
+  background: #61dafb3f;
+  &.dark {
+    background-color: #262e41;
+    color: #fff;
+  }
 	.active {
 		.taskElement {
 			background: #61dafb3f;

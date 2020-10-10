@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ItemFolder from './ItemFolder'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
@@ -8,9 +9,11 @@ interface Props {
   /** @TODO add to real types */
   folders: string[];
   onSelect(name: string): void;
+  theme: boolean | null;
 }
 
-export default function Folders ({ folders, onSelect }: Props) {
+export default function Folders ({ folders, theme, onSelect }: Props) {
+  const styles = cn(theme ? css.dark : css.ligth, css.folders)
   function renderFolderList () {
     return folders.map((folder, i) => {
       return (
@@ -20,7 +23,7 @@ export default function Folders ({ folders, onSelect }: Props) {
   }
 
   return (
-    <div className={css.folders}>
+    <div className={styles}>
       { renderFolderList() }
     </div>
   )

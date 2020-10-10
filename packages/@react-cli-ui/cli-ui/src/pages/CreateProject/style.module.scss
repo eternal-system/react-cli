@@ -7,6 +7,16 @@
   max-width: 400px;
   margin: 0 auto;
 
+  &.dark {
+    color: #fff;
+    label {
+      color: #fff;
+    }
+    .createTitle {
+      color: #fff;
+    }
+  }
+
   &.loading {
     height: 100%;
     justify-content: center;

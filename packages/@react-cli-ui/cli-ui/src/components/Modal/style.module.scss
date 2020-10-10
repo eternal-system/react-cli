@@ -9,7 +9,27 @@
 	z-index: 1000;
 	height: 100%;
   background-color: rgba(0, 0, 0, 0.45);
-
+  &.dark {
+    .modalContent {
+       background-color: #304457;
+       label {
+        color:#fff;
+       }
+       input {
+        color: #fff;
+        background-color: #445f79;
+        border: none;
+       }
+       .modalHeader {
+        background-color: #304457;
+        color:#fff;
+        border-bottom: none;
+       }
+       .modalFooter {
+        border-top: none;
+       }
+    }
+  }
 	.modalContent {
 		width: 520px;
 		transform-origin: 62px -72px;

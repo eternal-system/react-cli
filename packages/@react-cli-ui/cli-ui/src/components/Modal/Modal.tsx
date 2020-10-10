@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { SettingsContext } from '../../context'
 import CloceIcon from '@icons/close.svg'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
@@ -17,6 +18,8 @@ export interface ModalInterface {
 export default function Modal (props: ModalInterface) {
   const { visible = false, title = 'Title', children, okText = 'Ok' } = props
   const { t } = useTranslation('modal')
+  const { darkTheme } = useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.modalWrapper)
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -63,7 +66,7 @@ export default function Modal (props: ModalInterface) {
   return (
     <>
       {visible && (
-        <div className={css.modalWrapper}>
+        <div className={styles}>
           <div className={css.modalContent} ref={ref}>
             <button onClick={handleCancel} className={css.modalClose}>
               <span className={css.modalCloseX}>

@@ -14,7 +14,7 @@ import css from './style/main.module.scss'
 
 export default function App () {
   const settings = useSettings()
-  const styles = cn(settings.darkTheme ? 'dark' : 'ligth', css.appContainer)
+  const styles = cn(settings.darkTheme ? css.dark : css.ligth, css.appContainer)
 
   return (
     <I18nextProvider i18n={i18n}>

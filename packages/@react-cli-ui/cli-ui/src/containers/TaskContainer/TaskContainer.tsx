@@ -7,7 +7,7 @@ import { SettingsContext } from '../../context'
 
 import useTaskContainer, { TabItem } from './taskContainer.hook'
 import { DashboardWrap } from '@components'
-
+import cn from 'classnames'
 import ProjectIcon from '@icons/nav-projects.svg'
 
 import css from './style.module.scss'
@@ -15,8 +15,9 @@ import css from './style.module.scss'
 export default function TaskContainer () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useTaskContainer()
-  const { socket } = useContext(SettingsContext)
+  const { socket, darkTheme } = useContext(SettingsContext)
   const [tasks, setTask] = useState<any[]>([])
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
 
   function getKey (key: string) {
     if (key === 'start') {
@@ -75,7 +76,7 @@ export default function TaskContainer () {
 
   function renderTask () {
     return (
-      <div className={css.wrapper}>
+      <div className={styles}>
         {renderChildren}
       </div>
     )

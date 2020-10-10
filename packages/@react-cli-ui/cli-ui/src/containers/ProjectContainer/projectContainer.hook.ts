@@ -11,8 +11,9 @@ export interface TabItem {
 }
 
 interface HookProps {
-  locale: string;
+  locale: string | null;
   activeTab: string;
+  darkTheme: boolean | null;
   handleSetTab(tabItem: TabItem): void;
 }
 export default function useProjectContainer (): HookProps {
@@ -20,13 +21,14 @@ export default function useProjectContainer (): HookProps {
   const history = useHistory()
 
   // State
-  const { locale } = useContext(SettingsContext)
+  const { locale, darkTheme } = useContext(SettingsContext)
 
   function handleSetTab (tabItem: any) {
     history.push(tabItem.key)
   }
 
   return {
+    darkTheme,
     locale,
     activeTab: location.pathname,
     handleSetTab

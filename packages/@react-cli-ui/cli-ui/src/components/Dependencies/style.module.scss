@@ -5,6 +5,22 @@
   background: #61dafb3f;
   min-width: 700px;
   padding: 10px 0px 10px 0px;
+  &.dark {
+    background-color: #262e41;
+    .title {
+      color: #fff;
+    }
+    .content {
+      .listItemInfo {
+        .name {
+          color: #fff;
+        }
+        .description { 
+          color: #fff;
+        }
+      }
+    }
+  }
   .title {
     margin: 16px;
     color: #000;
