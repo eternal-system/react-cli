@@ -30,7 +30,8 @@ export default function CreateProject () {
   const { t } = useTranslation('projectCreate')
   const history = useHistory()
   const notification = useNotification()
-  const { socket, selectedPath } = React.useContext(SettingsContext)
+  const { socket, selectedPath, darkTheme } = React.useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.createContainer)
 
   // State
   const { visible, showModal, closeModal } = useModal()
@@ -108,7 +109,7 @@ export default function CreateProject () {
 
   return (
     <Content>
-      <div className={css.createContainer}>
+      <div className={styles}>
         <h2 className={css.createTitle}>{t('createProjectTitle')}</h2>
         <Input
           name="name"
