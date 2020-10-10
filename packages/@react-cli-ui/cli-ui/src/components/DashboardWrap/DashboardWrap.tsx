@@ -1,5 +1,6 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { SettingsContext } from 'context'
+import cn from 'classnames'
 import css from './style.module.scss'
 
 interface DashboardProps {
@@ -10,8 +11,10 @@ interface DashboardProps {
 }
 
 export default function DashboardWrap ({ children, title, btn, cssStyle }: DashboardProps) {
+  const { darkTheme } = useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
   return (
-    <div className={css.wrapper} style={cssStyle}>
+    <div className={styles} style={cssStyle}>
       <div className={css.top}>
         <div className={css.title}>
           {title}

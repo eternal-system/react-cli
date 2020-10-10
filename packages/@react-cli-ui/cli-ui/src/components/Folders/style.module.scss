@@ -5,6 +5,16 @@
   position: relative;
   &.dark {
     color: #fff;
+    .folderExplorerItem {
+      &:hover {
+        background: #c8f3ff3d;
+      }
+    }
+    .folderName {
+      svg {
+        fill: #4bd7fd;
+      }
+    }
   }
 	.folderExplorerItem {
 		border-radius: 3px;
@@ -15,31 +25,25 @@
 		user-select: none;
     position: relative;
 		cursor: pointer;
-
 		&:hover {
 			background: #c8f3ff;
     }
-
 		.folderName {
 			display: flex;
 			align-items: center;
 			white-space: nowrap;
-
 			.folderNameText {
 				display: flex;
 				align-items: center;		
 				margin-left: 16px;
-
 				.reactIcon {
 					fill: #4bd7fd;
 				}
-
 				svg {
 					width: 24px;
 					height: 24px;
 				}
 			}
-
 			svg {
 				width: 24px;
 				height: 24px;

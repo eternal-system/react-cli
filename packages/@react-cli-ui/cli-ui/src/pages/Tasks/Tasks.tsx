@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 import { DashboardWrap } from '@components'
 import { SettingsContext } from '../../context'
 import { useLocation } from 'react-router-dom'
@@ -9,7 +8,6 @@ import PlayIcon from '@icons/play.svg'
 import css from './style.module.scss'
 
 export default function Tasks () {
-  const { t } = useTranslation('dashboard')
   const location = useLocation()
   const { socket } = useContext(SettingsContext)
   const [status, setStates] = useState('')
@@ -46,7 +44,7 @@ export default function Tasks () {
   }
 
   return (
-    <DashboardWrap title={t('titleTasks')}>
+    <DashboardWrap>
       {renderTasks()}
     </DashboardWrap>
   )

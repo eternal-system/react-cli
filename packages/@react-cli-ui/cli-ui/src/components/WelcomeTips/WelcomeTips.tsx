@@ -7,12 +7,14 @@ import Arrow from '@icons/arrow-back.svg'
 import Home from '@icons/home-filled.svg'
 
 import { SettingsContext } from 'context'
+import cn from 'classnames'
 
 import css from './style.module.scss'
 
 export default function WelcomeTips () {
   const { t } = useTranslation('welcometips')
-  const { locale } = useContext(SettingsContext)
+  const { locale, darkTheme } = useContext(SettingsContext)
+  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
 
   const menu = [
     { key: 1, label: t('tip1'), Icon: DashboardIcon },
@@ -30,7 +32,7 @@ export default function WelcomeTips () {
   }), [locale])
 
   return (
-    <div className={css.wrapper}>
+    <div className={styles}>
       <p className={css.blot}>{t('blot')}</p>
       <div className={css.content}>
         <ReactLogoIcon className={css.logo} />

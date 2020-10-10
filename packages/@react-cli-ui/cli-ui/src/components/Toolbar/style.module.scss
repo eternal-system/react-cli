@@ -7,9 +7,25 @@
   justify-content: space-between;
   padding: 16px 0;
   &.dark {
+    button {
+      background-color: #304457;
+    }
     .urlPathsContainer{
+      background-color: #304457;
+      button {
+        background-color: #304457;
+        border-right: 2px solid #1d2935;
+        &.editBtn {
+          border-left: 2px solid #1d2935;
+        }
+        svg {
+          fill: #fff;
+        }
+      }
       .urlElement{
-        
+        color: #fff;
+        background-color: #304457;
+        border-right: 2px solid #1d2935;
       }
     }
   }

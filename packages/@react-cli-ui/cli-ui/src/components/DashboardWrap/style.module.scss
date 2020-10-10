@@ -3,6 +3,13 @@
   width: 100%;
   background: #61dafb3f;
   overflow:auto;
+  &.dark {
+    .top {
+      .title {
+        color: #fff;
+      }
+    }
+  }
 }
 
 .top {

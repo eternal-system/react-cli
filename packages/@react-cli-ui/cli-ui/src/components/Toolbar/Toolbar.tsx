@@ -75,7 +75,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite
     }
   }
 
-  function handleClickFolder (e) {
+  function handleClickFolder (e: React.ChangeEvent<any>) {
     return setUrlPath(path.slice(0, Number(e.target.dataset.id) + 1))
   }
 

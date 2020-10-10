@@ -6,6 +6,10 @@
   &.dark {
     background: #1d2935;
     .foulderBtn{
+      background-color: #304457d9;
+      &:hover {
+        background-color: #304457;
+      }
       svg {
         fill: #000;
       }
