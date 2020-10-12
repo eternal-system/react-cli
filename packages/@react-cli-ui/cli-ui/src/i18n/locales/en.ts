@@ -76,6 +76,12 @@ const locale = {
     tip3: 'Return to the project manager with the dropdown at the top left of the screen or the home button in the status bar at the bottom.'
   },
   toolbar: {
+    projects: {
+      add: 'Add / remove to favorites',
+      edit: 'Rename',
+      delete: 'Delete',
+      tasks: 'Tasks'
+    },
     tooltip: {
       back: 'Back',
       folder: 'Beginning',
