@@ -35,7 +35,7 @@ export default function ProjectListItem ({ id, active, favorite, name, path, onO
       </div>
       <div className={css.actions}>
         <button onClick={() => onOpenEdit(path)}>
-          <OpenEditorIcon/>
+          <OpenEditorIcon/><span>{t('projects.open')}</span>
         </button>
         <button data-tip={t('projects.edit')}>
           <EditIcon/>

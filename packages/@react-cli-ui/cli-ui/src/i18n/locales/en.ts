@@ -80,7 +80,8 @@ const locale = {
       add: 'Add / remove to favorites',
       edit: 'Rename',
       delete: 'Delete',
-      tasks: 'Tasks'
+      tasks: 'Tasks',
+      open: 'Open in editor'
     },
     tooltip: {
       back: 'Back',
