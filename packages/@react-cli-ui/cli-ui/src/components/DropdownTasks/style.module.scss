@@ -1,16 +1,21 @@
 .dropdown {
   position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #d6d1d1;
+  width: 8px;
+  height: 8px;
 
   .list {
     position: absolute;
-    top: 35px;
+    top: 0px;
     border: 1px solid #cacaca;
     background: #fff;
     width: 100%;
     padding: 5px 10px;
     z-index: 1000;
     color: #000;
-    right: 0px;
+    left: 17px;
     min-width: 270px;
     div {
       text-align: left;

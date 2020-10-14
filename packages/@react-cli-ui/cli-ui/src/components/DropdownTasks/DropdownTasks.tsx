@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import ReactTooltip from 'react-tooltip'
 import { Empty } from '@components'
 
-import DropIcon from '@icons/drop-down.svg'
 import FolderIcon from '@icons/folder-filled.svg'
 
 import css from './style.module.scss'
@@ -14,7 +13,7 @@ interface Props {
 }
 
 export default function DropdownTasks ({ data, edit }: Props) {
-  const { t } = useTranslation('project')
+  const { t } = useTranslation('toolbar')
   const [open, setOpen] = useState(false)
   const divRef = useRef(null)
   const btnRef = useRef(null)
@@ -36,12 +35,6 @@ export default function DropdownTasks ({ data, edit }: Props) {
     }
   }
 
-  function renderIcon (Component: React.FC) {
-    return (
-      <div className={css.icon}><Component /></div>
-    )
-  }
-
   function handleClick (url: string) {
     edit(url.split('/').filter(Boolean))
   }
@@ -56,14 +49,18 @@ export default function DropdownTasks ({ data, edit }: Props) {
 
   return (
     <>
-      <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
-        {renderIcon(DropIcon)}
+      <div ref={btnRef} data-tip={t('projects.tasks')} className={css.dropdown} onClick={() => setOpen(!open)}>
         {open && (
           <div className={css.list} ref={divRef}>
             {renderFavoriteFolders()}
           </div>
         )}
-      </button>
+        <ReactTooltip place="top"
+          effect="solid"
+          delayShow={700}
+          offset={{ top: -10 }}
+        />
+      </div>
     </>
   )
 }
