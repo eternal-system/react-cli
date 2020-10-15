@@ -28,7 +28,7 @@ class TaskApi extends StaticMethods {
     }
   }
 
-  async run (name) {
+  async run (id, name) {
     const activeProjectId = this.db.get('config.lastOpenProject').value()
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
@@ -63,7 +63,7 @@ class TaskApi extends StaticMethods {
     }
   }
 
-  stop () {
+  stop (id) {
     const activeProjectId = this.db.get('config.lastOpenProject').value()
     const child = this.db.get('tasks').find({ projectId: activeProjectId }).value()
     require('child_process').exec(`kill -9 ${child.pid}`, (err) => {

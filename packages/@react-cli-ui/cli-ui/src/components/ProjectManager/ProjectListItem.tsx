@@ -12,18 +12,32 @@ import EditIcon from '@icons/edit-pen.svg'
 import ReactTooltip from 'react-tooltip'
 
 interface Props {
-  id: number;
+  id: string;
   name: string;
   path: string[];
   favorite: boolean;
-  active: number;
-  onDelete(id: number): void;
-  onOpen(id: number): void;
+  active: string;
+  tasks: any[];
+  onDelete(id: string): void;
+  onOpen(id: string): void;
+  onTask(id: string | null): void;
   onOpenEdit(path: string[]): void;
-  onFavorite(id: number): void;
+  onFavorite(id: string): void;
 }
 
-export default function ProjectListItem ({ id, active, favorite, name, path, onOpen, onOpenEdit, onDelete, onFavorite }: Props) {
+export default function ProjectListItem ({
+  id,
+  active,
+  favorite,
+  name,
+  path,
+  tasks,
+  onTask,
+  onOpen,
+  onOpenEdit,
+  onDelete,
+  onFavorite
+}: Props) {
   const { t } = useTranslation('toolbar')
   return (
     <div className={`${css.content} ${id === active ? css.active : ''}`}>
@@ -38,7 +52,11 @@ export default function ProjectListItem ({ id, active, favorite, name, path, onO
           onClick={() => onOpen(id)}>
           {name}
         </div>
-        <DropdownTasks data={[]} edit={() => console.log('edit')}/>
+        <DropdownTasks
+          elementId={id}
+          onTask={onTask}
+          data={tasks}
+          edit={() => console.log('edit')}/>
         <div
           className={css.path}
           onClick={() => onOpen(id)}>
