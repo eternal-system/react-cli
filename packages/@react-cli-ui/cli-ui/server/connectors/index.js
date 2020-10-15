@@ -109,11 +109,11 @@ function api (message, client) {
         break
 
       case 'RUN_TASK':
-        tasks.run(name)
+        tasks.run(id, name)
         break
 
       case 'STOP_TASK':
-        tasks.stop()
+        tasks.stop(id)
         break
 
       // Config

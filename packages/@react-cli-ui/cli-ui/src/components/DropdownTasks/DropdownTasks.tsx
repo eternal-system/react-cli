@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next'
 import ReactTooltip from 'react-tooltip'
 import { Empty } from '@components'
 
-import FolderIcon from '@icons/folder-filled.svg'
-
 import css from './style.module.scss'
 
 interface Props {
@@ -14,7 +12,7 @@ interface Props {
   onTask(id: string | null): void;
 }
 
-export default function DropdownTasks ({ data, edit, elementId, onTask }: Props) {
+export default function DropdownTasks ({ data, elementId, onTask }: Props) {
   const { t } = useTranslation('toolbar')
   const [open, setOpen] = useState(false)
   const [id, setId] = useState<string | null>(null)
@@ -40,33 +38,39 @@ export default function DropdownTasks ({ data, edit, elementId, onTask }: Props)
     }
   }
 
-  function handleClick (url: string) {
-    edit(url.split('/').filter(Boolean))
+  function handleClick (id: string | null, name: string) {
+    console.log(id, name)
   }
 
-  function renderFavoriteFolders () {
+  function renderListTasks () {
     if (!data.length) return <div className={css.element}><Empty text={t('emptyFavoriteFolders')} /></div>
-
     return data.map((f, i) => (
       <div key={i}
         className={css.element}
-        onClick={() => handleClick(f.path)}>
-        <FolderIcon />
-        <span>{f.path}</span>
+        onClick={() => handleClick(id, f.name)}>
+        <div className={css.icon}><f.Icon/></div>
+        <div className={css.wrapperTask}>
+          <span>{f.name}</span>
+          <div>{f.label}</div>
+        </div>
       </div>
     ))
   }
 
   return (
     <>
-      <div ref={btnRef} data-tip={t('projects.tasks')} className={css.dropdown} onClick={() => {
-        setOpen(!open)
-        onTask(id)
-      }}>
+      <div
+        ref={btnRef}
+        // data-tip={t('projects.tasks')}
+        className={css.dropdown}
+        onClick={() => {
+          setOpen(!open)
+          onTask(id)
+        }}>
         {open && (
           <div className={css.list} ref={divRef}>
             <div className={css.title}>{t('projects.tasks')}</div>
-            {renderFavoriteFolders()}
+            {renderListTasks()}
           </div>
         )}
         <ReactTooltip place="top"

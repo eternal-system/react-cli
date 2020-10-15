@@ -23,14 +23,22 @@
       font-size: 14px;
       width: 93%;
       line-height: 19px;
+      .icon {
+        display: inline-block;
+        svg {
+         fill: #000;
+         position: relative;
+         right: 4px;
+         top: -4px;
+        }
+      }
+      .wrapperTask {
+        display: inline-block;
+        position: relative;
+        left: 8px;
+      }
       &:hover{
         background: #c8f3ff;
-      }
-      svg {
-        width: 18px;
-        position: relative;
-        top: 4px;
-        margin-right: 8px;
       }
     }
   }

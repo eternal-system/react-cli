@@ -108,7 +108,6 @@ export default function Projects () {
   }
 
   function handleListTasks (id: string) {
-    console.log('id =>', id)
     if (id) {
       socket.send({
         type: 'GET_LIST_TASKS',
