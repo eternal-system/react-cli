@@ -28,8 +28,8 @@ class TaskApi extends StaticMethods {
     }
   }
 
-  async run (name) {
-    const activeProjectId = this.db.get('config.lastOpenProject').value()
+  async run (id = null, name) {
+    const activeProjectId = id !== null ? id : this.db.get('config.lastOpenProject').value()
     const activeProject = this.db.get('projects').find({ id: activeProjectId }).value()
 
     const filePath = `/${activeProject.path.join('/')}`
@@ -63,8 +63,8 @@ class TaskApi extends StaticMethods {
     }
   }
 
-  stop () {
-    const activeProjectId = this.db.get('config.lastOpenProject').value()
+  stop (id = null) {
+    const activeProjectId = id !== null ? id : this.db.get('config.lastOpenProject').value()
     const child = this.db.get('tasks').find({ projectId: activeProjectId }).value()
     require('child_process').exec(`kill -9 ${child.pid}`, (err) => {
       if (err) {

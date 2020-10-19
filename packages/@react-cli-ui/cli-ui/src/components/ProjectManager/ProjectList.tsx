@@ -6,16 +6,28 @@ import cn from 'classnames'
 import css from './style.module.scss'
 
 interface ProjectList {
-  active: number | null;
+  active: string | null;
   projects: any[];
   theme: boolean | null;
-  onOpen(id: number): void;
+  tasks: any[];
+  onTask(id: string | null): void;
+  onOpen(id: string): void;
   onOpenEdit(path: string[]): void;
-  onDelete(id: number): void;
-  onFavorite(id: number): void;
+  onDelete(id: string): void;
+  onFavorite(id: string): void;
 }
 
-export default function ProjectList ({ active, projects, theme, onOpen, onOpenEdit, onDelete, onFavorite }: ProjectList) {
+export default function ProjectList ({
+  active,
+  projects,
+  theme,
+  tasks,
+  onTask,
+  onOpen,
+  onOpenEdit,
+  onDelete,
+  onFavorite
+}: ProjectList) {
   const { t } = useTranslation('project')
   const styles = cn(theme ? css.dark : css.ligth, css.projectList)
   const listFavorites = projects.filter(p => p.favorite === true)
@@ -31,7 +43,9 @@ export default function ProjectList ({ active, projects, theme, onOpen, onOpenEd
           key={favorite.id}
           {...favorite}
           active={active}
+          tasks={tasks}
           onOpen={onOpen}
+          onTask={onTask}
           onOpenEdit={onOpenEdit}
           onFavorite={onFavorite}
           onDelete={onDelete}
@@ -47,6 +61,8 @@ export default function ProjectList ({ active, projects, theme, onOpen, onOpenEd
           key={project.id}
           {...project}
           active={active}
+          tasks={tasks}
+          onTask={onTask}
           onOpen={onOpen}
           onOpenEdit={onOpenEdit}
           onFavorite={onFavorite}
