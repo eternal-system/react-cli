@@ -81,7 +81,8 @@ const locale = {
       edit: 'Rename',
       delete: 'Delete',
       tasks: 'Tasks',
-      open: 'Open in editor'
+      open: 'Open in editor',
+      noData: 'No data'
     },
     tooltip: {
       back: 'Back',

@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { Layout, Content, Empty, ProjectFilter, ProjectList, Loader } from '@components'
 import { useNotification } from '@hooks'
 
+import AddIcon from '@icons/add.svg'
 import ProjectIcon from '@icons/nav-projects.svg'
+import CloudIcon from '@icons/dashboard-tasks.svg'
+import ComputerIcon from '@icons/computer.svg'
 
 import { SettingsContext } from '../context'
 import { Routes } from '../router'
@@ -31,6 +34,20 @@ function getKey (key: string) {
     return Routes.DASHBOARD_TASKS_EJECT
   } else {
     return Routes.DASHBOARD_TASKS
+  }
+}
+
+function getIcon (key: string) {
+  if (key === 'start') {
+    return ComputerIcon
+  } else if (key === 'build') {
+    return CloudIcon
+  } else if (key === 'test') {
+    return ProjectIcon
+  } else if (key === 'eject') {
+    return AddIcon
+  } else {
+    return ProjectIcon
   }
 }
 
@@ -70,7 +87,7 @@ export default function Projects () {
       const data = Object.entries(res.data)
       const list = []
       for (const [key, value] of data) {
-        list.push({ name: key, label: value, key: getKey(key), Icon: ProjectIcon })
+        list.push({ name: key, label: value, key: getKey(key), Icon: getIcon(key) })
       }
       setTask(list)
     })

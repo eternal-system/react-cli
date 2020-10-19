@@ -17,7 +17,17 @@ interface ProjectList {
   onFavorite(id: string): void;
 }
 
-export default function ProjectList ({ active, projects, theme, tasks, onTask, onOpen, onOpenEdit, onDelete, onFavorite }: ProjectList) {
+export default function ProjectList ({
+  active,
+  projects,
+  theme,
+  tasks,
+  onTask,
+  onOpen,
+  onOpenEdit,
+  onDelete,
+  onFavorite
+}: ProjectList) {
   const { t } = useTranslation('project')
   const styles = cn(theme ? css.dark : css.ligth, css.projectList)
   const listFavorites = projects.filter(p => p.favorite === true)

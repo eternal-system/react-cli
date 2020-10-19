@@ -43,11 +43,12 @@ export default function DropdownTasks ({ data, elementId, onTask }: Props) {
   }
 
   function renderListTasks () {
-    if (!data.length) return <div className={css.element}><Empty text={t('emptyFavoriteFolders')} /></div>
+    if (!data.length) return <div className={css.element}><Empty text={t('projects.noData')} /></div>
     return data.map((f, i) => (
       <div key={i}
         className={css.element}
-        onClick={() => handleClick(id, f.name)}>
+        onClick={() => handleClick(id, f.name)}
+      >
         <div className={css.icon}><f.Icon/></div>
         <div className={css.wrapperTask}>
           <span>{f.name}</span>
