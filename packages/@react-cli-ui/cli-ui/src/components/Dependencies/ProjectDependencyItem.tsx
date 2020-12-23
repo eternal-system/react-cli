@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import LinkIcon from '@icons/link.svg'
 import LikeIcon from '@icons/like.svg'
 import DeleteIcon from '@icons/remove.svg'
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface PropsItem {
   baseFir: string;

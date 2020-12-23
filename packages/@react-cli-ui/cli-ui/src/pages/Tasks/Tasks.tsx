@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 
 import PlayIcon from '@icons/play.svg'
 import cn from 'classnames'
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function Tasks () {
   const location = useLocation()

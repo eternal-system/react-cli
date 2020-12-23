@@ -21,12 +21,12 @@
     height: 100%;
     justify-content: center;
 
-    @for $i from 1 through 3 {
-      .loadingDot#{$i} {
-        -webkit-animation: blink 1s + $i * 0.1 linear infinite;
-        animation: blink 1s + $i * 0.1 linear infinite;
+    each(range(3), {
+      .loadingDot@{value} {
+        -webkit-animation: blink 1s + (@value * 0.1) linear infinite;
+        animation: blink 1s + (@value * 0.1) linear infinite;
       }
-    }
+    });
 
     .loadingDescription {
       color: #80808078;

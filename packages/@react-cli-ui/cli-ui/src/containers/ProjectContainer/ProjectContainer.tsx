@@ -11,7 +11,7 @@ import SelectFoulderIcon from '@icons/nav-select-folder.svg'
 import ImportIcon from '@icons/nav-import.svg'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function ProjectContainer () {
   const { t } = useTranslation('project')

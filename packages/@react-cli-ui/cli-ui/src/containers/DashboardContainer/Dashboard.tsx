@@ -15,7 +15,7 @@ import StatsIcon from '@icons/dashboard-config.svg'
 
 import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 const TOOLTIP_ID = uuid()
 

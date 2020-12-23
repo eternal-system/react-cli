@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface IProps {
   task: {name: string, value: string | any };

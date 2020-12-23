@@ -12,8 +12,8 @@ import { FileManagerModal } from 'modals'
 import { SettingsContext } from 'context'
 import { Routes } from 'router'
 
-import css from './style.module.scss'
-import mainCss from '../../style/main.module.scss'
+import css from './style.module.less'
+import mainCss from '../../style/main.module.less'
 
 const optionsManager = [
   { value: 'npm', label: 'npm' },
@@ -21,7 +21,7 @@ const optionsManager = [
 ]
 
 const optionsPreset = [
-  { value: 'create-react-app', label: 'create-react-app' },
+  { value: 'create-react-app', label: 'create-react-app' }
   // TODO create custorm-react-app
   // { value: 'custom-react-app', label: 'custom-react-app' }
 ]

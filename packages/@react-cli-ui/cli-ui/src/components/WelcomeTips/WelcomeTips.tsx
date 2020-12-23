@@ -9,7 +9,7 @@ import Home from '@icons/home-filled.svg'
 import { SettingsContext } from 'context'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function WelcomeTips () {
   const { t } = useTranslation('welcometips')

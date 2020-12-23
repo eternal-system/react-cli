@@ -1,4 +1,4 @@
-@import "../../style/vars.scss";
+@import "../../style/vars.less";
 
 .footer {
   position: relative;
@@ -25,7 +25,7 @@
         }
         svg {
           fill: #000;
-          @include click-rule;
+          @click-rule();
         }
       }
     }
@@ -81,7 +81,7 @@
         height: 16px;
         width: 16px;
   
-        @include click-rule;
+        @click-rule();
       }
     }
   }

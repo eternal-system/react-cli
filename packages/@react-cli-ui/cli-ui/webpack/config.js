@@ -9,18 +9,17 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
-const isDev = process.env.NODE_ENV === 'development'
+// const isDev = process.env.NODE_ENV === 'development'
 const __parentDir = path.dirname(module.parent.filename)
-const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
-// const appDirectory = fs.realpathSync(process.cwd())
+// const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
+const appDirectory = fs.realpathSync(process.cwd())
+console.log('__parentDir', __parentDir)
+console.log('appDirectory', appDirectory)
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 const regExp = {
-  /** desc: /\.module\.css$/ */
   cssModuleRegex: /\.module\.css$/,
-  /** desc: /\.module\.s(a|c)ss$/ */
-  scssModuleRegex: /\.module\.s(a|c)ss$/,
-  /** desc: /\.inline\.svg$/ */
+  lessModuleRegex: /\.module\.less$/,
   svgInlineRegexp: /\.inline\.svg$/
 }
 
@@ -34,46 +33,8 @@ const paths = {
   appPublic: resolveApp('public'),
   appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appNodeModules: resolveApp('node_modules'),
-  appNodeModulesProd: path.resolve(__dirname, '..', '..', '..', '..', 'node_modules')
+  appNodeModules: resolveApp('node_modules')
 }
-
-const rulesSX = isDev ? [
-  { test: /\.(js|ts)x?$/,
-    exclude: /node_modules/,
-    loader: require.resolve('babel-loader'),
-    options: {
-      presets: [
-        require.resolve('@babel/preset-env'),
-        require.resolve('@babel/preset-react'),
-        require.resolve('@babel/preset-typescript')
-      ]
-    }
-  }] : [
-  {
-    test: /\.js|\.jsx$/,
-    exclude: '/node_modules/',
-    loader: 'babel-loader',
-    options: {
-      presets: [
-        require.resolve('@babel/preset-env'),
-        require.resolve('@babel/preset-react'),
-        require.resolve('@babel/preset-typescript')
-      ]
-    }
-  },
-  {
-    test: /\.ts|\.tsx$/,
-    exclude: '/node_modules/',
-    loader: 'babel-loader',
-    options: {
-      presets: [
-        require.resolve('@babel/preset-env'),
-        require.resolve('@babel/preset-react'),
-        require.resolve('@babel/preset-typescript')
-      ]
-    }
-  }]
 
 module.exports = {
   context: paths.appPath,
@@ -81,7 +42,7 @@ module.exports = {
   mode: 'production',
 
   entry: [
-    isDev ? './src/index.tsx' : path.resolve(__dirname, '..', 'src') + '/index.tsx'
+    path.resolve(__dirname, '..', 'src') + '/index.tsx'
   ],
 
   output: {
@@ -91,8 +52,8 @@ module.exports = {
   },
 
   resolve: {
-    modules: [isDev ? paths.appNodeModules : paths.appNodeModulesProd, paths.appSrc],
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.scss'],
+    modules: [paths.appNodeModules, paths.appSrc],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.less'],
     alias: {
       '@components': paths.appComponents,
       '@pages': paths.appPages,
@@ -149,47 +110,55 @@ module.exports = {
 
   module: {
     rules: [
-      ...rulesSX,
       {
         test: /\.css$/,
         exclude: regExp.cssModuleRegex,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: regExp.scssModuleRegex,
-        loader: [
+        test: /\.less$/,
+        exclude: regExp.lessModuleRegex,
+        use: [
           MiniCssExtractPlugin.loader,
+          'css-loader', // translates CSS into CommonJS
           {
-            loader: 'css-loader',
+            loader: 'less-loader', // compiles Less to CSS
             options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[local]--[hash:base64:5]'
-              },
-              sourceMap: isDev
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDev
+              lessOptions: {
+                javascriptEnabled: true
+              }
             }
           }
         ]
       },
       {
-        test: /\.s(a|c)ss$/,
-        exclude: regExp.scssModuleRegex,
-        loader: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+        test: regExp.lessModuleRegex,
+        use: [
+          'style-loader',
           {
-            loader: 'sass-loader',
+            loader: 'css-loader',
             options: {
-              sourceMap: isDev
+              sourceMap: true,
+              modules: {
+                mode: 'local',
+                localIdentName: '[local]--[hash:base64:5]'
+              }
             }
-          }
+          },
+          'less-loader'
         ]
+      },
+      {
+        test: /\.(js|ts)x?$/,
+        exclude: /node_modules/,
+        loader: require.resolve('babel-loader'),
+        options: {
+          presets: [
+            require.resolve('@babel/preset-env'),
+            require.resolve('@babel/preset-react'),
+            require.resolve('@babel/preset-typescript')
+          ]
+        }
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -220,14 +189,7 @@ module.exports = {
         exclude: regExp.svgInlineRegexp,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                require.resolve('@babel/preset-env'),
-                require.resolve('@babel/preset-react'),
-                require.resolve('@babel/preset-typescript')
-              ]
-            }
+            loader: 'babel-loader'
           },
           {
             loader: 'react-svg-loader',

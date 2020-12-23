@@ -3,7 +3,7 @@ import React from 'react'
 import ItemFolder from './ItemFolder'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Props {
   /** @TODO add to real types */

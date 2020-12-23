@@ -5,7 +5,7 @@ import VueLogoIcon from '@icons/vue-logo.svg'
 import FolderIcon from '@icons/folder.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Folder {
   name: string;

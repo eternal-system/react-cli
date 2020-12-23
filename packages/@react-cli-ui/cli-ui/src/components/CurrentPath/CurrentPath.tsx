@@ -3,7 +3,7 @@ import React from 'react'
 import FolderIcon from '@icons/folder-filled.svg'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface IProps {
   url: string[];

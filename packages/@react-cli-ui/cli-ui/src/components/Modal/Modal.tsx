@@ -4,7 +4,7 @@ import { SettingsContext } from '../../context'
 import CloceIcon from '@icons/close.svg'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export interface ModalInterface {
     visible?: boolean;

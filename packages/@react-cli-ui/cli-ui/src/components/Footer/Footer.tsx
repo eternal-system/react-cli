@@ -12,7 +12,7 @@ import LightIcon from '@icons/light-mode.svg'
 import HomeIcon from '@icons/home-filled.svg'
 import ComputerIcon from '@icons/computer.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function Footer () {
   const location = useLocation()

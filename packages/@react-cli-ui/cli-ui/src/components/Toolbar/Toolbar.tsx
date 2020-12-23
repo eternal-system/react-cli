@@ -16,7 +16,7 @@ import CreateFolderIcon from '@icons/folder-create-filled.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
 import cn from 'classnames'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 type Favorites = {
   name: string;

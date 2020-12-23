@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import LinkIcon from '@icons/link.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface ItemProps {
   // TODO add type

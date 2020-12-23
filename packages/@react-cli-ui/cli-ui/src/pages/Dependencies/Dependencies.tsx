@@ -13,7 +13,7 @@ import Loader from '@icons/react-logo.svg'
 
 import { SettingsContext } from '../../context'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 type Title = {
   name: string | null,

@@ -2,7 +2,7 @@ import React from 'react'
 
 import SearchIcon from '@icons/search.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Props {
   onChange?: any;

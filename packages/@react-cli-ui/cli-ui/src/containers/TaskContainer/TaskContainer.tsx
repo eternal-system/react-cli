@@ -10,7 +10,7 @@ import { DashboardWrap } from '@components'
 import cn from 'classnames'
 import ProjectIcon from '@icons/nav-projects.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function TaskContainer () {
   const { t } = useTranslation('dashboard')

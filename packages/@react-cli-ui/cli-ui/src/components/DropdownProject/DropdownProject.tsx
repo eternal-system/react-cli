@@ -11,7 +11,7 @@ import FolderIcon from '@icons/home-filled.svg'
 import StarIcon from '@icons/star-add.svg'
 import OpenEditorIcon from '@icons/open-editor.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Props {
   data: Project[],
