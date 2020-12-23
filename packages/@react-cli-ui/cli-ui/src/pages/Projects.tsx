@@ -11,7 +11,7 @@ import ProjectIcon from '@icons/nav-projects.svg'
 import CloudIcon from '@icons/dashboard-tasks.svg'
 import ComputerIcon from '@icons/computer.svg'
 
-import { SettingsContext } from '../context'
+import { SettingsContext } from '@context'
 import { Routes } from '../router'
 
 export interface ProjectProps {

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SettingsContext } from 'context'
-import ProjectDependencyItem from './ProjectDependencyItem'
 import cn from 'classnames'
+
+import { SettingsContext } from '@context'
+import ProjectDependencyItem from './ProjectDependencyItem'
+
 import css from './style.module.less'
 
 interface PropsItem {

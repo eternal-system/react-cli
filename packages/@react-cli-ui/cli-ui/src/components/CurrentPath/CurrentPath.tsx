@@ -1,7 +1,7 @@
 import React from 'react'
+import cn from 'classnames'
 
 import FolderIcon from '@icons/folder-filled.svg'
-import cn from 'classnames'
 
 import css from './style.module.less'
 

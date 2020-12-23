@@ -1,7 +1,7 @@
 import React from 'react'
+import cn from 'classnames'
 
 import ItemFolder from './ItemFolder'
-import cn from 'classnames'
 
 import css from './style.module.less'
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Empty } from '@components'
-
 import DropIcon from '@icons/drop-down.svg'
 import FolderIcon from '@icons/folder-filled.svg'
 

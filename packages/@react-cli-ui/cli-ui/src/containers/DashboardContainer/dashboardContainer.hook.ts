@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Routes } from 'router'
-import { SettingsContext } from 'context'
+import { SettingsContext } from '@context'
 
 export interface MenuItems {
   key: Routes.DASHBOARD | Routes.DASHBOARD_TASKS_START | Routes.DEPENDENCIES;

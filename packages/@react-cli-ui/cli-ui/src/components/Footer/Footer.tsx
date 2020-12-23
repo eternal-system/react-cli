@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { CurrentPath, Logs } from '@components'
+import cn from 'classnames'
 
 import { Routes } from 'router'
-import { SettingsContext } from 'context'
-
-import cn from 'classnames'
+import { CurrentPath, Logs } from '@components'
+import { SettingsContext } from '@context'
 import TranlateIcon from '@icons/translate.svg'
 import DarkIcon from '@icons/dark-mode.svg'
 import LightIcon from '@icons/light-mode.svg'

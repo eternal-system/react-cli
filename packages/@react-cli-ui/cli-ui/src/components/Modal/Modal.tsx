@@ -1,8 +1,9 @@
 import React, { useEffect, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SettingsContext } from '../../context'
-import CloceIcon from '@icons/close.svg'
 import cn from 'classnames'
+
+import { SettingsContext } from '@context'
+import CloceIcon from '@icons/close.svg'
 
 import css from './style.module.less'
 

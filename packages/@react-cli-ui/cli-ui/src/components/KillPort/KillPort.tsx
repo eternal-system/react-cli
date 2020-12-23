@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-
-import { Input } from 'common'
-import { useNotification } from '@hooks'
-
-import FlashIcon from '@icons/flash-filled.svg'
-import { SettingsContext } from '../../context'
 import cn from 'classnames'
+
+import { useNotification } from '@hooks'
+import { SettingsContext } from '@context'
+import FlashIcon from '@icons/flash-filled.svg'
+import { Input } from 'common'
 
 import css from './style.module.less'
 

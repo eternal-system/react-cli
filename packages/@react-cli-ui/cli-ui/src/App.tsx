@@ -7,7 +7,7 @@ import cn from 'classnames'
 import i18n from './i18n'
 import { Footer, ConnectionStatus } from '@components'
 import { useSettings } from '@hooks'
-import { SettingsContext } from './context'
+import { SettingsContext } from '@context'
 import { renderRoutes } from './router'
 
 import css from './style/main.module.less'

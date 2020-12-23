@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { SettingsContext } from '../context'
+import { SettingsContext } from '@context'
 import { Routes } from 'router'
 import { Layout, Content, FileManager } from '@components'
 import { useNotification } from '@hooks'

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
-import { SettingsContext } from 'context'
 import cn from 'classnames'
+
+import { SettingsContext } from '@context'
+
 import css from './style.module.less'
 
 interface DashboardProps {

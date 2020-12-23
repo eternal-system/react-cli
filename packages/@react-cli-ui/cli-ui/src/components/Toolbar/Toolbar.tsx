@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import ReactTooltip from 'react-tooltip'
+import cn from 'classnames'
 
 import { Input } from 'common'
 import { useModal } from '@hooks'
-import { ModalFolder } from '../../modals'
 import { Dropdown } from '@components'
-import ReactTooltip from 'react-tooltip'
-import { useTranslation } from 'react-i18next'
-
-import EditIcon from '@icons/edit-pen.svg'
-import ArrowUpIcon from '@icons/arrow-up.svg'
-import RefrechIcon from '@icons/refresh.svg'
-import Star from '@icons/star.svg'
-import StarAdd from '@icons/star-add.svg'
 import CreateFolderIcon from '@icons/folder-create-filled.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
-import cn from 'classnames'
+import ArrowUpIcon from '@icons/arrow-up.svg'
+import RefrechIcon from '@icons/refresh.svg'
+import EditIcon from '@icons/edit-pen.svg'
+import StarAdd from '@icons/star-add.svg'
+import Star from '@icons/star.svg'
+
+import { ModalFolder } from '../../modals'
 
 import css from './style.module.less'
 

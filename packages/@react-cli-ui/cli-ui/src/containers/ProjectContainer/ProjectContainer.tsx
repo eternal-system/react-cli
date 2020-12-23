@@ -1,16 +1,15 @@
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
-
-import { Routes } from 'router'
-import useProjectContainer, { TabItem } from './projectContainer.hook'
-
-import logo from '@public/logo192.png'
-import ProjectIcon from '@icons/nav-projects.svg'
-import SelectFoulderIcon from '@icons/nav-select-folder.svg'
-import ImportIcon from '@icons/nav-import.svg'
 import cn from 'classnames'
 
+import { Routes } from 'router'
+import SelectFoulderIcon from '@icons/nav-select-folder.svg'
+import ProjectIcon from '@icons/nav-projects.svg'
+import ImportIcon from '@icons/nav-import.svg'
+import logo from '@public/logo192.png'
+
+import useProjectContainer, { TabItem } from './projectContainer.hook'
 import css from './style.module.less'
 
 export default function ProjectContainer () {

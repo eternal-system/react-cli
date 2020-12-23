@@ -1,15 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactTooltip from 'react-tooltip'
+
 import { DropdownTasks } from '@components'
-
-import css from './style.module.less'
-
-import CloseIcon from '@icons/close.svg'
 import OpenEditorIcon from '@icons/open-editor.svg'
-import StarIcon from '@icons/star.svg'
 import StarAddIcon from '@icons/star-add.svg'
 import EditIcon from '@icons/edit-pen.svg'
-import ReactTooltip from 'react-tooltip'
+import CloseIcon from '@icons/close.svg'
+import StarIcon from '@icons/star.svg'
+
+import css from './style.module.less'
 
 interface Props {
   id: string;
