@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react'
 
 function noop () {}
@@ -10,11 +9,7 @@ interface SettingsContextProps {
   changeTheme(): void,
   changeLocale(): void,
   changeSelectedPath(path: string[]): void,
-  socket: {
-    on(status: string, noop: any): void,
-    off(status: string): void;
-    send(status: object): void;
-  }
+  socket: SocketIOClient.Socket
 }
 
 export const SettingsContext = createContext<SettingsContextProps>({
@@ -23,10 +18,10 @@ export const SettingsContext = createContext<SettingsContextProps>({
   selectedPath: [],
   changeTheme: noop,
   changeLocale: noop,
-  changeSelectedPath: (path) => {},
+  changeSelectedPath: noop,
   socket: {
-    on (status, noop) {},
-    off (status) {},
-    send (status) {}
-  }
+    on: noop,
+    off: noop,
+    send: noop
+  } as unknown as SocketIOClient.Socket
 })

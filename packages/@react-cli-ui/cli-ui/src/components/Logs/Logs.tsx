@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { SettingsContext } from '../../context'
+import { SettingsContext } from '@context'
 import ComputerIcon from '@icons/computer.svg'
 
 import css from './style.module.less'
@@ -38,7 +38,7 @@ export default function Logs () {
         {t('logs')}
       </div>
       <div className={css.content}>
-        { logs.map((log: ILog) => {
+        { logs && logs.map((log: ILog) => {
           return (
             <div className={css.wrapper} key={log.id}>
               <div className={css.type}>{log.type}</div>

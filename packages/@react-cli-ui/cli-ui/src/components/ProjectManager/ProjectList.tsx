@@ -1,8 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import cn from 'classnames'
 
 import ProjectListItem from './ProjectListItem'
-import cn from 'classnames'
 import css from './style.module.less'
 
 interface ProjectList {

@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
+import cn from 'classnames'
 
 import { Routes } from 'router'
-import { SettingsContext } from '../../context'
-
-import useTaskContainer, { TabItem } from './taskContainer.hook'
+import { SettingsContext } from '@context'
 import { DashboardWrap } from '@components'
-import cn from 'classnames'
 import ProjectIcon from '@icons/nav-projects.svg'
 
+import useTaskContainer, { TabItem } from './taskContainer.hook'
 import css from './style.module.less'
 
 export default function TaskContainer () {

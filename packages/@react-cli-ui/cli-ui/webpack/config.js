@@ -28,6 +28,7 @@ const paths = {
   appBuild: resolveApp('dist'),
   appSrc: resolveApp('src'),
   appComponents: resolveApp('src/components'),
+  appContext: resolveApp('src/context'),
   appPages: resolveApp('src/pages'),
   appHooks: resolveApp('src/hooks'),
   appPublic: resolveApp('public'),
@@ -56,6 +57,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png', '.less'],
     alias: {
       '@components': paths.appComponents,
+      '@context': paths.appContext,
       '@pages': paths.appPages,
       '@public': paths.appPublic,
       '@icons': paths.appIcons,

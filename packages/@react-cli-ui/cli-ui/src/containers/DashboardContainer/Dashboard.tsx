@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react'
-import { NavLink } from 'react-router-dom'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
 import { v4 as uuid } from 'uuid'
 
 import { Routes } from 'router'
 import { useNotification } from '@hooks'
 import { DropdownProject } from '@components'
+import { SettingsContext } from '@context'
 import DashboardIcon from '@icons/dashboard-project.svg'
 import ActiveIcon from '@icons/dashboard-tasks.svg'
-import { SettingsContext } from '../../context'
 import StatsIcon from '@icons/dashboard-config.svg'
 
 import useDashboardContainer, { MenuItems } from './dashboardContainer.hook'

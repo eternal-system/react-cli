@@ -1,5 +1,6 @@
 import React from 'react'
-import { SettingsContext } from '../../context'
+
+import { SettingsContext } from '@context'
 
 export default function CheckBoxTheme () {
   const { darkTheme, changeTheme } = React.useContext(SettingsContext)

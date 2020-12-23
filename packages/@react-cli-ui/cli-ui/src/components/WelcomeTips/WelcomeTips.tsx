@@ -1,13 +1,12 @@
 import React, { useMemo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import ReactLogoIcon from '@icons/react-logo.svg'
-import DashboardIcon from '@icons/dashboard-project.svg'
-import Arrow from '@icons/arrow-back.svg'
-import Home from '@icons/home-filled.svg'
+import cn from 'classnames'
 
 import { SettingsContext } from 'context'
-import cn from 'classnames'
+import DashboardIcon from '@icons/dashboard-project.svg'
+import ReactLogoIcon from '@icons/react-logo.svg'
+import Arrow from '@icons/arrow-back.svg'
+import Home from '@icons/home-filled.svg'
 
 import css from './style.module.less'
 

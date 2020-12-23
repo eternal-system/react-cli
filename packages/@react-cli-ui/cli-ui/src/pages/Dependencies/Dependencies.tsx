@@ -11,7 +11,7 @@ import AddIcon from '@icons/add.svg'
 import UpdateIcon from '@icons/update.svg'
 import Loader from '@icons/react-logo.svg'
 
-import { SettingsContext } from '../../context'
+import { SettingsContext } from '@context'
 
 import css from './style.module.less'
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { DashboardWrap } from '@components'
-import { SettingsContext } from '../../context'
 import { useLocation } from 'react-router-dom'
-
-import PlayIcon from '@icons/play.svg'
 import cn from 'classnames'
+
+import { DashboardWrap } from '@components'
+import { SettingsContext } from '@context'
+import PlayIcon from '@icons/play.svg'
 import css from './style.module.less'
 
 export default function Tasks () {

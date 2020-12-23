@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { unstable_batchedUpdates as batch } from 'react-dom'
 
-import { SettingsContext } from 'context'
-import { ProgressBar } from 'common'
+import { SettingsContext } from '@context'
 import { useNotification } from '@hooks'
+import { ProgressBar } from 'common'
 import { Folders, Toolbar } from '../index'
 
 type Favorites = {
