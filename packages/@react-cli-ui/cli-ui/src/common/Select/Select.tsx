@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import FolderFilledIcon from '@icons/folder-filled.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface OwnProps extends Props {
   options?: any;
@@ -12,7 +12,6 @@ interface OwnProps extends Props {
   label?: string;
   value?: any;
 
-  name?: number | string;
   placeholder?: string;
   type?: string;
   autoFocus?: boolean;

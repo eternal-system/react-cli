@@ -1,4 +1,4 @@
-@import '../../style/vars.scss';
+@import '../../style/vars.less';
 
 .modalWrapper {
 	position: fixed;
@@ -11,23 +11,23 @@
   background-color: rgba(0, 0, 0, 0.45);
   &.dark {
     .modalContent {
-       background-color: #304457;
-       label {
-        color:#fff;
-       }
-       input {
-        color: #fff;
-        background-color: #445f79;
-        border: none;
-       }
-       .modalHeader {
-        background-color: #304457;
-        color:#fff;
-        border-bottom: none;
-       }
-       .modalFooter {
-        border-top: none;
-       }
+      background-color: #304457;
+      label {
+				color:#fff;
+      }
+      input {
+				color: #fff;
+				background-color: #445f79;
+				border: none;
+      }
+      .modalHeader {
+				background-color: #304457;
+				color:#fff;
+				border-bottom: none;
+      }
+      .modalFooter {
+				border-top: none;
+      }
     }
   }
 	.modalContent {
@@ -90,7 +90,7 @@
 				height: 20px;
 				width: 20px;
 
-				@include click-rule;
+				@click-rule();
 			}
     }
 
@@ -119,8 +119,7 @@
 
       button {
 				border-radius: 5px;
-
-				@include click-rule;
+				@click-rule();
       }
 		}
 	}

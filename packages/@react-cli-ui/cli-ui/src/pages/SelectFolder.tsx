@@ -8,7 +8,7 @@ import { useNotification } from '@hooks'
 
 import AddIcon from '@icons/add.svg'
 
-import mainCss from '../style/main.module.scss'
+import mainCss from '../style/main.module.less'
 
 // Create new project
 export default function Create () {

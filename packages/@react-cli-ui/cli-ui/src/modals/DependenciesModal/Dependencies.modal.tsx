@@ -8,7 +8,7 @@ import { useGetPackages } from '@hooks'
 
 import ItemPackages from './ItemPackages'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 type Title = {
   name: string | null,

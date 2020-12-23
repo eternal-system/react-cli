@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { SettingsContext } from '../../context'
 import ComputerIcon from '@icons/computer.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface ILog {
   id: number;

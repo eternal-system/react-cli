@@ -1,6 +1,6 @@
 import React from 'react'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 function Layout ({ children }: React.PropsWithChildren<React.ReactNode>) {
   return (

@@ -10,7 +10,7 @@ import { useSettings } from '@hooks'
 import { SettingsContext } from './context'
 import { renderRoutes } from './router'
 
-import css from './style/main.module.scss'
+import css from './style/main.module.less'
 
 export default function App () {
   const settings = useSettings()

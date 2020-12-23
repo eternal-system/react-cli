@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 import FolderFilledIcon from '@icons/folder-filled.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Props {
   className?: string;

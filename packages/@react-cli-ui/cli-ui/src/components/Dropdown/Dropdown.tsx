@@ -6,7 +6,7 @@ import { Empty } from '@components'
 import DropIcon from '@icons/drop-down.svg'
 import FolderIcon from '@icons/folder-filled.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface Props {
   data: { name: string, path: string }[],

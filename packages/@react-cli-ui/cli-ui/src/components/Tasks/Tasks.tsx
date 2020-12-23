@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemTask from './ItemTask'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface IProps {
   tasks: any;

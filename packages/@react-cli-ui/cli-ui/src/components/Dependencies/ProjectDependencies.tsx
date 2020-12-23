@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { SettingsContext } from 'context'
 import ProjectDependencyItem from './ProjectDependencyItem'
 import cn from 'classnames'
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface PropsItem {
   baseFir: string;

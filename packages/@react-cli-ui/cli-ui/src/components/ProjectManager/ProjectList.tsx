@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import ProjectListItem from './ProjectListItem'
 import cn from 'classnames'
-import css from './style.module.scss'
+import css from './style.module.less'
 
 interface ProjectList {
   active: string | null;

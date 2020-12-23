@@ -7,7 +7,7 @@ import DisconectIcon from '@icons/cloud-off.svg'
 import ConnectingIcon from '@icons/react-logo.svg'
 
 import { SettingsContext } from 'context'
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export default function ConnectionStatus () {
   const { t } = useTranslation('common')

@@ -6,7 +6,7 @@ import { Modal, FileManager } from '@components'
 
 import EditIcon from '@icons/edit-pen.svg'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 export interface ModalFolder {
   folderName: string;

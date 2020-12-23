@@ -10,13 +10,13 @@
     &.loading {
       height: 100%;
       justify-content: center;
-  
-      @for $i from 1 through 3 {
-        .loadingDot#{$i} {
-          -webkit-animation: blink 1s + $i * 0.1 linear infinite;
-          animation: blink 1s + $i * 0.1 linear infinite;
+
+      each(range(4), {
+        .loadingDot@{value} {
+          -webkit-animation: blink 1s (@value * 0.1) linear infinite;
+          animation: blink 1s (@value * 0.1) linear infinite;
         }
-      }
+      });
   
       .loadingDescription {
         color: #80808078;
@@ -28,12 +28,12 @@
         text-align: center;
       }
   
-          svg {
+      svg {
         fill: #61dafb;
-              width: 120px;
-              animation: load 1.5s infinite linear;
-              -webkit-animation: load 1.5s infinite linear;
-          }
+        width: 120px;
+        animation: load 1.5s infinite linear;
+        -webkit-animation: load 1.5s infinite linear;
+      }
     }
   
     & > div {

@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { DropdownTasks } from '@components'
 
-import css from './style.module.scss'
+import css from './style.module.less'
 
 import CloseIcon from '@icons/close.svg'
 import OpenEditorIcon from '@icons/open-editor.svg'
