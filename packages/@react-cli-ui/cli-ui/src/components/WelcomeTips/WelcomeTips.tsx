@@ -13,7 +13,10 @@ import css from './style.module.less'
 export default function WelcomeTips () {
   const { t } = useTranslation('welcometips')
   const { locale, darkTheme } = useContext(SettingsContext)
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
+
+  const styles = cn(css.wrapper, {
+    [css.dark]: darkTheme
+  })
 
   const menu = [
     { key: 1, label: t('tip1'), Icon: DashboardIcon },

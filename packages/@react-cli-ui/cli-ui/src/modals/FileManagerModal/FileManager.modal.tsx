@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import cn from 'classnames'
 
 import { SettingsContext } from 'context'
 import { Modal, FileManager } from '@components'
@@ -17,7 +18,11 @@ export interface ModalFolder {
 
 function FileManagerModal ({ folderName, visible, closeModal, showModal }: ModalFolder) {
   const { t } = useTranslation('modal')
-  const { selectedPath } = React.useContext(SettingsContext)
+  const { selectedPath, darkTheme } = React.useContext(SettingsContext)
+
+  const styles = cn(css.modal, {
+    [css.dark]: darkTheme
+  })
 
   function onSubmit (e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
@@ -25,7 +30,7 @@ function FileManagerModal ({ folderName, visible, closeModal, showModal }: Modal
   }
 
   return (
-    <div className={css.modal}>
+    <div className={styles}>
       <label>
         {`/${selectedPath.join('/')}${selectedPath.length && folderName ? '/' : ''}`}
         <strong>{folderName}</strong>

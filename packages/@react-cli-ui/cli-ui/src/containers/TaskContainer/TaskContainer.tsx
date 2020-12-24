@@ -15,8 +15,12 @@ export default function TaskContainer () {
   const { t } = useTranslation('dashboard')
   const { locale, activeTab } = useTaskContainer()
   const { socket, darkTheme } = useContext(SettingsContext)
+
+  // State
   const [tasks, setTask] = useState<any[]>([])
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
+  const styles = cn(css.wrapper, {
+    [css.dark]: darkTheme
+  })
 
   function getKey (key: string) {
     if (key === 'start') {
@@ -58,12 +62,7 @@ export default function TaskContainer () {
         exact={true}
         to={key}
         activeClassName={css.active}
-        isActive={(_, location) => {
-          if (key === location.pathname) {
-            return true
-          }
-          return false
-        }}
+        isActive={(_, location) => key === location.pathname}
       >
         <div className={css.taskElement}>
           <span className={css.name}>{name}</span>

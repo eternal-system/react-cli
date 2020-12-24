@@ -13,7 +13,7 @@ import { SettingsContext } from 'context'
 import { Routes } from 'router'
 
 import css from './style.module.less'
-import mainCss from '../../style/main.module.less'
+import mainCss from '@styles/main.module.less'
 
 const optionsManager = [
   { value: 'npm', label: 'npm' },
@@ -31,7 +31,10 @@ export default function CreateProject () {
   const history = useHistory()
   const notification = useNotification()
   const { socket, selectedPath, darkTheme } = React.useContext(SettingsContext)
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.createContainer)
+
+  const styles = cn(css.createContainer, {
+    [css.dark]: darkTheme
+  })
 
   // State
   const { visible, showModal, closeModal } = useModal()
@@ -95,7 +98,9 @@ export default function CreateProject () {
   if (loading) {
     return (
       <Content>
-        <div className={cn(css.createContainer, css.loading)}>
+        <div className={cn(css.createContainer, css.loading, {
+          [css.dark]: darkTheme
+        })}>
           <Loader />
           <span>
             {`${t('creatingProject')} ${state.name}`}

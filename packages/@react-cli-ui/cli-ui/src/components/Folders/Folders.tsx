@@ -5,21 +5,26 @@ import ItemFolder from './ItemFolder'
 
 import css from './style.module.less'
 
+export interface Folder {
+  name: string;
+  type: 'react' | 'vue' | 'unknown' | 'empty';
+}
+
 interface Props {
-  /** @TODO add to real types */
-  folders: string[];
-  onSelect(name: string): void;
+  folders: Folder[];
   theme: boolean | null;
+  onSelect(name: string): void;
 }
 
 export default function Folders ({ folders, theme, onSelect }: Props) {
-  const styles = cn(theme ? css.dark : css.ligth, css.folders)
+  const styles = cn(css.folders, {
+    [css.dark]: theme
+  })
+
   function renderFolderList () {
-    return folders.map((folder, i) => {
-      return (
-        <ItemFolder folder={folder} key={i} select={onSelect}/>
-      )
-    })
+    return folders.map((folder, i) => (
+      <ItemFolder folder={folder} key={i} select={onSelect}/>
+    ))
   }
 
   return (

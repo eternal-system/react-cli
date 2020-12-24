@@ -10,11 +10,13 @@ import { useSettings } from '@hooks'
 import { SettingsContext } from '@context'
 import { renderRoutes } from './router'
 
-import css from './style/main.module.less'
+import css from '@styles/main.module.less'
 
 export default function App () {
   const settings = useSettings()
-  const styles = cn(settings.darkTheme ? css.dark : css.ligth, css.appContainer)
+  const styles = cn(css.appContainer, {
+    [css.dark]: settings.darkTheme
+  })
 
   return (
     <I18nextProvider i18n={i18n}>

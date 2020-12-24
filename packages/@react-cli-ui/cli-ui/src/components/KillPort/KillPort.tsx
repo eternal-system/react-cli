@@ -8,11 +8,16 @@ import { Input } from 'common'
 
 import css from './style.module.less'
 
+/** @TODO add locales */
 export default function KillPort () {
-  const [value, setValue] = useState('')
   const notification = useNotification()
   const { socket, darkTheme } = useContext(SettingsContext)
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapperCard)
+
+  // State
+  const [value, setValue] = useState('')
+  const styles = cn(css.wrapperCard, {
+    [css.dark]: darkTheme
+  })
 
   useEffect(() => {
     socket.on('kill-port', (res: any) => {
