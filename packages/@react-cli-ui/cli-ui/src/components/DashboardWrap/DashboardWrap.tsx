@@ -14,20 +14,17 @@ interface DashboardProps {
 
 export default function DashboardWrap ({ children, title, btn, cssStyle }: DashboardProps) {
   const { darkTheme } = useContext(SettingsContext)
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapper)
+  const styles = cn(css.wrapper, {
+    [css.dark]: darkTheme
+  })
+
   return (
     <div className={styles} style={cssStyle}>
       <div className={css.top}>
-        <div className={css.title}>
-          {title}
-        </div>
-        <div className={css.rightGroup}>
-          {btn}
-        </div>
+        <div className={css.title}>{title}</div>
+        <div className={css.rightGroup}>{btn}</div>
       </div>
-      <div className={css.content}>
-        {children}
-      </div>
+      <div className={css.content}>{children}</div>
     </div>
   )
 }

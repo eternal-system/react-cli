@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactTooltip from 'react-tooltip'
+import cn from 'classnames'
 
 import { DropdownTasks } from '@components'
 import OpenEditorIcon from '@icons/open-editor.svg'
@@ -39,8 +40,13 @@ export default function ProjectListItem ({
   onFavorite
 }: Props) {
   const { t } = useTranslation('toolbar')
+
+  const styles = cn(css.content, {
+    [css.active]: id === active
+  })
+
   return (
-    <div className={`${css.content} ${id === active ? css.active : ''}`}>
+    <div className={styles}>
       <div className={css.favorite}>
         <button onClick={() => onFavorite(id)} data-tip={t('projects.add')}>
           { favorite ? <StarAddIcon /> : <StarIcon /> }

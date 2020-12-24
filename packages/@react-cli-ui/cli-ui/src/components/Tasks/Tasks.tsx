@@ -4,11 +4,11 @@ import ItemTask from './ItemTask'
 
 import css from './style.module.less'
 
-interface IProps {
+interface Props {
   tasks: any;
 }
 
-export default function Tasks ({ tasks }: IProps) {
+export default function Tasks ({ tasks }: Props) {
   function renderTaskList () {
     const data = Object.entries(tasks)
     const list = []

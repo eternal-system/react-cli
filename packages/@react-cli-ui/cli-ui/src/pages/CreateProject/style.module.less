@@ -1,3 +1,4 @@
+@import '@styles/vars.less';
 
 .createContainer {
   display: flex;
@@ -9,11 +10,19 @@
 
   &.dark {
     color: #fff;
+
     label {
       color: #fff;
     }
+
     .createTitle {
       color: #fff;
+    }
+
+    &.loading {
+      span {
+        color: @dark_input_bg;
+      }
     }
   }
 

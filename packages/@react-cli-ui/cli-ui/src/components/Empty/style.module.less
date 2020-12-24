@@ -1,6 +1,16 @@
+@import '@styles/vars.less';
+
 .emptyInfo {
   color: #2c3e5080;
   text-align: center;
+
+  &.dark {
+    color: @dark_input_bg;
+
+    svg {
+      fill: @dark_input_bg;
+    }
+  }
 
   svg {
     fill: #2c3e5080;

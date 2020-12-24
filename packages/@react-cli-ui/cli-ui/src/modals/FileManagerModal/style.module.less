@@ -1,9 +1,19 @@
+@import "@styles/vars.less";
+
 .modal {
   color: #2c3e50;
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+
+  &.dark {
+    label {
+      strong {
+        color: @dark_input_bg;
+      }
+    }
+  }
 
   label {
     font-size: 14px;
@@ -18,7 +28,7 @@
     margin-right: 0;
     padding: 7px 8px;
     border: 1px solid #c8f3ff;
-    background-color: #c8f3ff8a;
+    background-color: @dark_input_bg;
 
     svg {
       fill: #2c3e50;

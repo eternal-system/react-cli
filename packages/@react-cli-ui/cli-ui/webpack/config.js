@@ -34,7 +34,8 @@ const paths = {
   appPublic: resolveApp('public'),
   appIcons: resolveApp('public/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appNodeModules: resolveApp('node_modules')
+  appNodeModules: resolveApp('node_modules'),
+  appStyles: resolveApp('src/styles')
 }
 
 module.exports = {
@@ -61,7 +62,8 @@ module.exports = {
       '@pages': paths.appPages,
       '@public': paths.appPublic,
       '@icons': paths.appIcons,
-      '@hooks': paths.appHooks
+      '@hooks': paths.appHooks,
+      '@styles': paths.appStyles
     }
   },
 

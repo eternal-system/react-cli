@@ -15,7 +15,9 @@ import css from './style.module.less'
 export default function ProjectContainer () {
   const { t } = useTranslation('project')
   const { locale, activeTab, darkTheme } = useProjectContainer()
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.wrapperHeader)
+  const styles = cn(css.wrapperHeader, {
+    [css.dark]: darkTheme
+  })
 
   const tabs: TabItem[] = [
     { key: Routes.PROJECT, label: t('projects'), Icon: ProjectIcon },

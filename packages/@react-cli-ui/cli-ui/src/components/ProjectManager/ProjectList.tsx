@@ -29,46 +29,49 @@ export default function ProjectList ({
   onFavorite
 }: ProjectList) {
   const { t } = useTranslation('project')
-  const styles = cn(theme ? css.dark : css.ligth, css.projectList)
-  const listFavorites = projects.filter(p => p.favorite === true)
-  const listProjects = projects.filter(p => p.favorite === false)
+  const listFavorites = projects.filter(p => p.favorite)
+  const listProjects = projects.filter(p => !p.favorite)
+  const styles = cn(css.projectList, {
+    [css.dark]: theme
+  })
+
+  function renderFavoriteList () {
+    return listFavorites.map(favorite => (
+      <ProjectListItem
+        key={favorite.id}
+        {...favorite}
+        active={active}
+        tasks={tasks}
+        onOpen={onOpen}
+        onTask={onTask}
+        onOpenEdit={onOpenEdit}
+        onFavorite={onFavorite}
+        onDelete={onDelete}
+      />
+    ))
+  }
+  function renderProjectList () {
+    return listProjects.map(project => (
+      <ProjectListItem
+        key={project.id}
+        {...project}
+        active={active}
+        tasks={tasks}
+        onTask={onTask}
+        onOpen={onOpen}
+        onOpenEdit={onOpenEdit}
+        onFavorite={onFavorite}
+        onDelete={onDelete}
+      />
+    ))
+  }
 
   return (
     <div className={styles}>
-      { listFavorites.length
-        ? <div>{t('favoriteProjects')}</div> : null }
-
-      { listFavorites.map(favorite => (
-        <ProjectListItem
-          key={favorite.id}
-          {...favorite}
-          active={active}
-          tasks={tasks}
-          onOpen={onOpen}
-          onTask={onTask}
-          onOpenEdit={onOpenEdit}
-          onFavorite={onFavorite}
-          onDelete={onDelete}
-        />
-      )
-      )}
-
-      { listProjects.length && listFavorites.length
-        ? <div>{t('otherProjects')}</div> : null }
-
-      { listProjects.map(project => (
-        <ProjectListItem
-          key={project.id}
-          {...project}
-          active={active}
-          tasks={tasks}
-          onTask={onTask}
-          onOpen={onOpen}
-          onOpenEdit={onOpenEdit}
-          onFavorite={onFavorite}
-          onDelete={onDelete}
-        />
-      )) }
+      {!!listFavorites.length && <div>{t('favoriteProjects')}</div>}
+      {renderFavoriteList()}
+      {!!listProjects.length && !!listFavorites.length && <div>{t('otherProjects')}</div>}
+      {renderProjectList()}
     </div>
   )
 }

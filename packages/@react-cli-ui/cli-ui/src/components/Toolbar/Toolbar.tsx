@@ -35,13 +35,18 @@ interface Props {
 
 // eslint-disable-next-line react/prop-types
 function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite, favorites }: Props) {
+  const { t } = useTranslation('toolbar')
   const { visible, showModal, closeModal } = useModal()
+
+  // State
   const [isEdit, setIsEdit] = useState(false)
   const [editPath, setEditPath] = useState('')
+
   const check = path.join('/') === '' ? '/' : `/${path.join('/')}`
   const isFavorite = favorites.some(f => f.path === check)
-  const styles = cn(theme ? css.dark : css.ligth, css.toolbar)
-  const { t } = useTranslation('toolbar')
+  const styles = cn(css.toolbar, {
+    [css.dark]: theme
+  })
 
   useEffect(() => {
     setEditPath(path.join('/'))

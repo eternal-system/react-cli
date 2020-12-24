@@ -4,16 +4,12 @@ import ReactLogoIcon from '@icons/react-logo.svg'
 import VueLogoIcon from '@icons/vue-logo.svg'
 import FolderIcon from '@icons/folder.svg'
 import FolderFilledIcon from '@icons/folder-filled.svg'
+import { Folder as FolderProps } from './Folders'
 
 import css from './style.module.less'
 
-interface Folder {
-  name: string;
-  type: 'react' | 'vue' | 'unknown' | 'empty';
-}
-
 interface Props {
-  folder: Folder;
+  folder: FolderProps;
   select(folderName: string): void;
 }
 

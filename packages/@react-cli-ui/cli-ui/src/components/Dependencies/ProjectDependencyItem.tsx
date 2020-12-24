@@ -7,8 +7,8 @@ import DeleteIcon from '@icons/remove.svg'
 import css from './style.module.less'
 
 interface PropsItem {
-  baseFir: string;
   id: string;
+  baseFir: string;
   installed: boolean;
   type: string;
   versionRange: string;
@@ -18,6 +18,7 @@ interface PropsItem {
 
 export default function ProjectDependencyItem (item: PropsItem) {
   const { t } = useTranslation('dependencies')
+
   return (
     <div className={css.content}>
       <div className={css.itemLogo}>

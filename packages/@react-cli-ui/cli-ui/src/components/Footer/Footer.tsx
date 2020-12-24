@@ -19,7 +19,9 @@ export default function Footer () {
   const [toggleLog, setToggleLog] = useState<boolean>(false)
   const { darkTheme, changeTheme, changeLocale, selectedPath } = useContext(SettingsContext)
   // theme
-  const styles = cn(darkTheme ? css.dark : css.ligth, css.footer)
+  const styles = cn(css.footer, {
+    [css.dark]: darkTheme
+  })
 
   useEffect(() => {
     setToggle(location.pathname.replace('/', ''))

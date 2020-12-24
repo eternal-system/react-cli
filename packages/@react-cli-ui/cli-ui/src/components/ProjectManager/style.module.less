@@ -1,26 +1,31 @@
+@import "@styles/vars.less";
+
 .dark {
 	color: #fff;
+
 	.content{
 		&:hover {
-			background: rgba(66,185,131,.05);
+			background: @dark_content_bg;
 		}
 		&.active {
-			background: rgba(66,185,131,.05);
+			background: @dark_content_bg;
 		}
 		.info{
 			.path {
-				color: #fff;
+				color: @white;
 			}
 		}
 	}
 }
+
 .filter {
 	margin: 0 auto;
 	padding-bottom: 25px;
 	position: relative;
+
 	.input {
 		border-radius: 21px;
-		background-color: #c8f3ff8a;
+		background-color: @dark_input_bg;
 		margin: 6px 0;
 		padding: 0 10px;
 		border: 1px solid #c8f3ff;
@@ -30,6 +35,7 @@
 		outline: none;
 		padding-left: 29px;
 	}
+
 	svg {
 		width: 13px;
 		position: absolute;
@@ -51,11 +57,11 @@
 	cursor: pointer;
 
 	&:hover {
-		background-color: #c8f3ff8a;
+		background-color: @dark_input_bg;
 	}
 
 	&.active {
-		background-color: #c8f3ff8a;
+		background-color: @dark_input_bg;
 	}
 
 	.favorite {
@@ -68,9 +74,11 @@
 		align-items: center;
 		-ms-flex-pack: center;
 		justify-content: center;
+
 		button {
 			line-height: 11px;
 		}
+
 		svg {
 			width: 13px;
 			fill: #fff;
@@ -79,17 +87,18 @@
 	
 	.info{
 		grid-area: info;
+
 		.name {
 			font-size: 16px;
 			display: inline-block;
 			margin-right: 6px;
 		}
+
 		.path {
 			color: #2c3e5080;
 			font-size: 16px;
 			font-weight: 300;
 		}
-		
 	}
 
 	.actions{
@@ -100,14 +109,17 @@
 		flex-direction: row;
 		-ms-flex-align: center;
 		align-items: center;
+
 		span {
       margin-left: 7px;
       position: relative;
       bottom: 2px;
 		}
+
 		button {
 			line-height: 11px;
 		}
+
 		svg {
 			width: 13px;
 			fill: #fff;

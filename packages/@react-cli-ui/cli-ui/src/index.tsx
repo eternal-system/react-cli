@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './App'
-import './style/main.less'
+import '@styles/main.less'
 
 if (typeof document !== 'undefined') {
   const rootElem: HTMLElement | null = document.getElementById('root')

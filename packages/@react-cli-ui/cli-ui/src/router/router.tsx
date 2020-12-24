@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import { AppRoutes, RouteEntity } from './appRoutes'
-import css from '../style/main.module.less'
+import css from '@styles/main.module.less'
 
 export default function renderRoutes () {
   const createPathsArray = useCallback(
