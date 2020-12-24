@@ -46,7 +46,7 @@ export default function FileManager () {
     socket.on('erro', (error: any) => {
       batch(() => {
         setLoading(false)
-        setUrl((prevState) => prevState.splice(0, url.length - 1))
+        backFolder()
       })
       notification.error({
         title: error.message,
@@ -101,22 +101,12 @@ export default function FileManager () {
     getFoldersData(url)
   }
 
-  // create new folder
-  // function createFolder () {
-  //   console.log('new folder')
-  // }
-
-  // show hidden folder
-  // function changeHiddenFolder () {
-  //   console.log('show folder hidden')
-  // }
-
   // back folder in stap
   function backFolder () {
-    setUrl((prevState) => prevState.splice(0, url.length - 1))
+    setUrl((prevState) => prevState.filter((_, i, arr) => i !== arr.length - 1))
   }
 
-  function handleAddFavorite (favorite) {
+  function handleAddFavorite (favorite: boolean) {
     socket.send({
       type: 'SET_FAVORITE',
       file: {
