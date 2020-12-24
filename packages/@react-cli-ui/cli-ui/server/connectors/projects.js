@@ -51,7 +51,7 @@ class ProjectApi extends StaticMethods {
       this.db.get('projects')
         .value()
         .forEach((project) => {
-          if (!fs.existsSync(path.join('/', ...project.path.slice(0, -1), project.name))) {
+          if (!fs.existsSync(path.join('/'))) {
             this.db.get('projects').remove({ id: project.id }).write()
             if (this.db.get('config.lastOpenProject').value() === project.id) {
               this.db.set('config', {}).write()
