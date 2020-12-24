@@ -2,12 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
-const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
-const webpackConfig = require('./webpack/config.js')
 const chalk = require('chalk')
-const compiler = webpack(webpackConfig)
 
 // logger
 const pino = require('pino')
@@ -45,14 +40,6 @@ module.exports.server = (options, cb = null) => {
 
   app.use(express.json({ extended: true }))
 
-  app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath,
-    stats: { colors: true }
-  }))
-
-  app.use(webpackHotMiddleware(compiler))
-
   /* static client */
   app.use('/', express.static(path.join(__dirname, 'dist')))
 
@@ -61,13 +48,7 @@ module.exports.server = (options, cb = null) => {
     if (fs.existsSync(filePath)) {
       fs.createReadStream(filePath).pipe(res)
     } else {
-      webpack(webpackConfig, (err) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        fs.createReadStream(filePath).pipe(res)
-      })
+      console.log(chalk.hex('#ec1d35')('Application assembly files are missing.'))
     }
   })
 

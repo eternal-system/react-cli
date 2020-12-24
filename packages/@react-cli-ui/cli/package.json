@@ -1,13 +1,14 @@
 {
   "name": "@react-cli-ui/cli",
-  "version": "0.0.7-alpha.1",
+  "version": "0.0.7-alpha.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eternal-system/react-cli.git",
     "directory": "packages/@react-cli-ui/cli"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm publish --access public"
   },
   "description": "Command line interface for React.js development",
   "main": "index.js",
@@ -32,7 +33,7 @@
   },
   "dependencies": {
     "@react-cli-ui/cli-service": "^0.0.5",
-    "@react-cli-ui/cli-ui": "^0.0.6-alpha.1",
+    "@react-cli-ui/cli-ui": "^0.0.6-alpha.4",
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "execa": "^4.0.2",
