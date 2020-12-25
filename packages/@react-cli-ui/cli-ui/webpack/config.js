@@ -9,12 +9,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
-// const isDev = process.env.NODE_ENV === 'development'
-const __parentDir = path.dirname(module.parent.filename)
-// const appDirectory = fs.realpathSync(isDev ? process.cwd() : __parentDir)
 const appDirectory = fs.realpathSync(process.cwd())
-console.log('__parentDir', __parentDir)
-console.log('appDirectory', appDirectory)
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 const regExp = {

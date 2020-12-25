@@ -8,8 +8,12 @@ To work with this package please install @ react-cli-ui/cli
 
 ## Install
 
-```sh
+```bash
+Windows
 npm install -g @react-cli-ui/cli
+
+Mac
+sudo npm install -g @react-cli-ui/cli
 ```
 
 ![](demo.gif)
@@ -17,7 +21,11 @@ npm install -g @react-cli-ui/cli
 ## Usage
 
 ```bash
+Windows
 react ui
+
+Mac
+sudo react ui
 ```
 
 ## License

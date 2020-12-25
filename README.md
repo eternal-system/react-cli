@@ -9,14 +9,22 @@
 ## Install
 
 ```bash
+Windows
 npm install -g @react-cli-ui/cli
+
+Mac
+sudo npm install -g @react-cli-ui/cli
 ```
 ![](demo.gif)
 
 ## Usage
 
 ```bash
+Windows
 react ui
+
+Mac
+sudo react ui
 ```
 
 ## Contributing

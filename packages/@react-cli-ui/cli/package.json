@@ -1,6 +1,6 @@
 {
   "name": "@react-cli-ui/cli",
-  "version": "0.0.7-alpha.2",
+  "version": "0.0.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eternal-system/react-cli.git",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@react-cli-ui/cli-service": "^0.0.5",
-    "@react-cli-ui/cli-ui": "^0.0.6-alpha.4",
+    "@react-cli-ui/cli-ui": "^0.0.8",
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "execa": "^4.0.2",
