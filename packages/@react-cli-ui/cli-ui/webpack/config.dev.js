@@ -4,6 +4,8 @@ const chalk = require('chalk')
 
 const common = require('./config')
 
+const PROXY_TIMEOUT = 1000 * 60 * 10
+
 const devConfig = {
   mode: 'development',
   devtool: 'source-map',
@@ -23,8 +25,8 @@ const devConfig = {
         secure: false,
         changeOrigin: true,
         autoRewrite: true,
-        proxyTimeout: 1000 * 60 * 10,
-        timeout: 1000 * 60 * 10
+        proxyTimeout: PROXY_TIMEOUT,
+        timeout: PROXY_TIMEOUT
       }
     },
     onListening: (server) =>
