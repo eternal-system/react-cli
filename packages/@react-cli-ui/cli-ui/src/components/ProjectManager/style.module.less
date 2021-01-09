@@ -89,9 +89,24 @@
 		grid-area: info;
 
 		.name {
+			display: flex;
+			align-items: center;
 			font-size: 16px;
-			display: inline-block;
 			margin-right: 6px;
+
+			.reactIcon {
+				fill: #4bd7fd;
+			}
+
+			div[class^='dropdown'] {
+				margin-left: 5px;
+			}
+
+			svg {
+				width: 27px;
+				height: 27px;
+				margin-right: 5px;
+			}
 		}
 
 		.path {

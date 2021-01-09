@@ -1,0 +1,60 @@
+button.dropdown {
+  position: relative;
+  padding: 8px 4px;
+
+  .list {
+    position: absolute;
+    top: 36px;
+    right: 2px;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    background: #fff;
+    padding: 5px;
+    z-index: 1000;
+    color: #000;
+
+    div {
+      padding: 5px;
+      font-size: 14px;
+      border-radius: 4px;
+
+      &:hover{
+        background: #c8f3ff;
+      }
+
+      svg {
+        width: 18px;
+        position: relative;
+        top: 4px;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .icon {
+    display: flex;
+    color: #20232a;
+
+    &.dark {
+      color: #fff;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+  }
+
+  div[class^="emptyInfo"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      top: 0;
+      height: 18px;
+      margin: 0 5px 0 0;
+    }
+  }
+}

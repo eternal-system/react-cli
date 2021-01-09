@@ -4,6 +4,7 @@ import { unstable_batchedUpdates as batch } from 'react-dom'
 import { SettingsContext } from '@context'
 import { useNotification } from '@hooks'
 import { ProgressBar } from 'common'
+
 import { Folders, Toolbar } from '../index'
 
 type Favorites = {
@@ -17,9 +18,12 @@ export default function FileManager () {
   // State
   const { socket, selectedPath, changeSelectedPath, darkTheme } = useContext(SettingsContext)
   const [url, setUrl] = useState<string[]>(selectedPath)
+  const [drives, setDrives] = useState<string[]>([])
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [favorites, setFavorites] = useState<Favorites[]>([])
+
+  console.log('url', url)
 
   useEffect(() => {
     socket.send({
@@ -33,8 +37,8 @@ export default function FileManager () {
 
     socket.on('folders', (res: any) => {
       batch(() => {
-        setLoading(true)
         setProjects(res.project)
+        setDrives(res.drives)
         setLoading(false)
       })
     })
@@ -120,12 +124,13 @@ export default function FileManager () {
     <>
       <Toolbar
         theme={darkTheme}
-        back={backFolder}
+        path={url}
+        drives={drives}
+        favorites={favorites}
         updateFolderData={handleReset}
         setUrlPath={setUrl}
         addFavorite={handleAddFavorite}
-        favorites={favorites}
-        path={url}
+        back={backFolder}
       />
       { loading && <ProgressBar progress={75} /> }
       <Folders

@@ -21,6 +21,10 @@ function api (message, client) {
 
     switch (type) {
       // Folders
+      case 'CHANGE_HARD_DRIVE':
+        folder.setHardDrive(name)
+        break
+
       case 'GET_FOLDERS':
         folder.getFolders(url, hidden)
         break
