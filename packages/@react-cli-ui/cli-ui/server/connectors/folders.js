@@ -10,18 +10,34 @@ class FolderApi extends StaticMethods {
     this.logs = logs
   }
 
+  setHardDrive (hardDrive) {
+    this.db.set('config.hardDrive', hardDrive).write()
+    this.client.emit('selectedHardDrive', {
+      data: this.hardDrive
+    })
+    this.getFolders()
+  }
+
   /**
    * Get list folders
    * @param {string} url URL folder
    * @param {boolian} hidden Hidden folder with dot
    */
-  getFolders (url, hidden) {
+  async getFolders (url, hidden) {
     try {
+      await this.getHardDriveList()
+
       const data = {
-        folder: url || '/',
+        folder: this.hardDrive + (url || '/'),
         isHidden: hidden || false,
         projects: [],
         project: []
+      }
+
+      if (this.drives.length) {
+        this.client.emit('selectedHardDrive', {
+          data: this.db.get('config.hardDrive', '').value()
+        })
       }
 
       fs.readdir(data.folder, (err, files) => {
@@ -49,8 +65,9 @@ class FolderApi extends StaticMethods {
         }
 
         this.client.emit('folders', {
-          data: data.projects,
-          project: data.project
+          folder: data.folder,
+          project: data.project,
+          drives: this.drives
         })
       })
     } catch (error) {
@@ -67,8 +84,9 @@ class FolderApi extends StaticMethods {
    */
   async createFolder (dir) {
     try {
-      if (dir && !fs.existsSync(dir)) {
-        await fs.mkdirSync(dir, { recursive: true })
+      const dirUrl = this.hardDrive + dir
+      if (dirUrl && !fs.existsSync(dirUrl)) {
+        await fs.mkdirSync(dirUrl, { recursive: true })
         this.client.emit('notification-folder', {
           message: 'Folder successfully create'
         })
@@ -107,16 +125,16 @@ class FolderApi extends StaticMethods {
     })
   }
 
-  setFavorite ({ file, favorite }) {
+  setFavorite ({ file: url, favorite: isFavorite }) {
     const collection = this.db.get('foldersFavorite')
-    if (favorite) {
-      collection.push({ id: file }).write()
+    if (isFavorite) {
+      collection.push({ id: url }).write()
     } else {
-      collection.remove({ id: file }).write()
+      collection.remove({ id: url }).write()
     }
     this.client.emit('foldersFavorite', {
       data: this.db.get('foldersFavorite').value().map(
-        file => this.generateFolder(file.id)
+        favoriteFoulder => this.generateFolder(favoriteFoulder.id)
       )
     })
   }

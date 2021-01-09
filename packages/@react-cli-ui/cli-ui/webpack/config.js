@@ -27,10 +27,10 @@ const paths = {
   appPages: resolveApp('src/pages'),
   appHooks: resolveApp('src/hooks'),
   appPublic: resolveApp('public'),
-  appIcons: resolveApp('public/icons'),
+  appIcons: resolveApp('src/assets/icons'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appNodeModules: resolveApp('node_modules'),
-  appStyles: resolveApp('src/styles')
+  appStyles: resolveApp('src/styles'),
+  appNodeModules: resolveApp('node_modules')
 }
 
 module.exports = {

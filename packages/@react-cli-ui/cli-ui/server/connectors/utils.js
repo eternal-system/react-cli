@@ -1,10 +1,18 @@
 const fs = require('fs-extra')
 const path = require('path')
+var os = require('os')
 const { get } = require('lodash')
+
+const { runConsoleComand } = require('../util/scripts')
 
 class StaticMethods {
   constructor (db) {
     this.db = db
+    this.drives = []
+  }
+
+  get hardDrive () {
+    return this.db.get('config.hardDrive', '').value()
   }
 
   /**
@@ -12,7 +20,7 @@ class StaticMethods {
    * @param {string} pathFolder - запрашиваемый путь
    * @param {string} namefolder - название директории
    */
-  checkFramework (pathFolder, namefolder) {
+  checkFramework (pathFolder, namefolder = '') {
     const folderItem = { name: namefolder }
     const packageJson = path.join(pathFolder, namefolder, 'package.json')
     const exist = fs.existsSync(packageJson)
@@ -75,6 +83,22 @@ class StaticMethods {
 
   isFavorite (file) {
     return !!this.db.get('foldersFavorite').find({ id: file }).size().value()
+  }
+
+  async getHardDriveList () {
+    if (this.drives.length) return this.drives
+    let subprocess
+
+    if (os.platform() === 'win32') {
+      subprocess = await runConsoleComand('fsutil fsinfo drives')
+      this.drives = subprocess.stdout.toString('utf8').match(/[A-Z]:/g).map(drive => `${drive}/`)
+    }
+
+    if (!this.hardDrive) {
+      this.db.set('config.hardDrive', this.drives[0]).write()
+    }
+
+    return this.drives
   }
 }
 

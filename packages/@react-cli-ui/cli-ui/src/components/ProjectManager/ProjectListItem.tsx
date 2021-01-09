@@ -4,17 +4,14 @@ import ReactTooltip from 'react-tooltip'
 import cn from 'classnames'
 
 import { DropdownTasks } from '@components'
-import OpenEditorIcon from '@icons/open-editor.svg'
-import StarAddIcon from '@icons/star-add.svg'
-import EditIcon from '@icons/edit-pen.svg'
-import CloseIcon from '@icons/close.svg'
-import StarIcon from '@icons/star.svg'
+import { OpenEditorIcon, StarAddIcon, EditIcon, CloseIcon, StarIcon, ReactLogoIcon, VueLogoIcon } from '@icons'
 
 import css from './style.module.less'
 
 interface Props {
   id: string;
   name: string;
+  type: string;
   path: string[];
   favorite: boolean;
   active: string;
@@ -31,6 +28,7 @@ export default function ProjectListItem ({
   active,
   favorite,
   name,
+  type,
   path,
   tasks,
   onTask,
@@ -45,6 +43,17 @@ export default function ProjectListItem ({
     [css.active]: id === active
   })
 
+  function renderProjectIcon () {
+    switch (type) {
+      case 'react':
+        return <ReactLogoIcon className={css.reactIcon} />
+      case 'vue':
+        return <VueLogoIcon/>
+      default:
+        return null
+    }
+  }
+
   return (
     <div className={styles}>
       <div className={css.favorite}>
@@ -53,19 +62,21 @@ export default function ProjectListItem ({
         </button>
       </div>
       <div className={css.info}>
-        <div
-          className={css.name}
-          onClick={() => onOpen(id)}>
-          {name}
+        <div className={css.name}>
+          {renderProjectIcon()}
+          <span onClick={() => onOpen(id)}>{name}</span>
+          <DropdownTasks
+            elementId={id}
+            onTask={onTask}
+            data={tasks}
+            /** @TODO remove console.log */
+            edit={() => console.log('edit')}
+          />
         </div>
-        <DropdownTasks
-          elementId={id}
-          onTask={onTask}
-          data={tasks}
-          edit={() => console.log('edit')}/>
         <div
           className={css.path}
-          onClick={() => onOpen(id)}>
+          onClick={() => onOpen(id)}
+        >
           { typeof path === 'object' ? `/${path.join('/')}` : `/${path}`}
         </div>
       </div>

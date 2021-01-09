@@ -7,7 +7,13 @@ function runScripts (name, pathProject) {
     { shell: true }
   )
 }
- 
+
+// run console comand
+function runConsoleComand (comand) {
+  return execa.command(comand, { shell: true })
+}
+
 module.exports = {
-  runScripts
+  runScripts,
+  runConsoleComand
 }

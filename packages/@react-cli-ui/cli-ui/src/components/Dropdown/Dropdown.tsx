@@ -8,7 +8,7 @@ import FolderIcon from '@icons/folder-filled.svg'
 import css from './style.module.less'
 
 interface Props {
-  data: { name: string, path: string }[],
+  data: { name: string; path: string }[],
   edit: any;
 }
 
@@ -54,15 +54,13 @@ export default function Dropdown ({ data, edit }: Props) {
   }
 
   return (
-    <>
-      <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
-        {renderIcon(DropIcon)}
-        {open && (
-          <div className={css.list} ref={divRef}>
-            {renderFavoriteFolders()}
-          </div>
-        )}
-      </button>
-    </>
+    <button ref={btnRef} className={css.dropdown} onClick={() => setOpen(!open)}>
+      {renderIcon(DropIcon)}
+      {open && (
+        <div className={css.list} ref={divRef}>
+          {renderFavoriteFolders()}
+        </div>
+      )}
+    </button>
   )
 }

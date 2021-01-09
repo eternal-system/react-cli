@@ -220,7 +220,8 @@ class ProjectApi extends StaticMethods {
    * Import Project
    */
   importProject (pathProject) {
-    if (!fs.existsSync(path.join(`/${pathProject.join('/')}`, 'node_modules'))) {
+    const pathProjectUrl = `/${pathProject.join('/')}`
+    if (!fs.existsSync(path.join(pathProjectUrl, 'node_modules'))) {
       this.client.emit('erro-import-project', {
         title: 'NO_MODULES',
         message: 'It seems the project is missing the "node_modules" folder. Please check you installed the dependencies before importing.'
@@ -229,9 +230,10 @@ class ProjectApi extends StaticMethods {
       const project = {
         id: uuid(),
         path: pathProject,
-        favorite: false
+        favorite: false,
+        type: this.checkFramework(pathProjectUrl).type
       }
-      const packageData = this.folder.readPackage(path.join(`/${pathProject.join('/')}`))
+      const packageData = this.folder.readPackage(path.join(pathProjectUrl))
       project.name = packageData.name
       this.db.get('projects').push(project).write()
       this.open(project.id)

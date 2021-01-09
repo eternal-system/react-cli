@@ -8,7 +8,9 @@ const adapter = new FileAsync(dbPath, {
     projects: [],
     foldersFavorite: [],
     tasks: [],
-    config: {},
+    config: {
+      hardDrive: ''
+    },
     logs: []
   }
 })

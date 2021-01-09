@@ -6,17 +6,12 @@ import cn from 'classnames'
 import { Input } from 'common'
 import { useModal } from '@hooks'
 import { Dropdown } from '@components'
-import CreateFolderIcon from '@icons/folder-create-filled.svg'
-import FolderFilledIcon from '@icons/folder-filled.svg'
-import ArrowUpIcon from '@icons/arrow-up.svg'
-import RefrechIcon from '@icons/refresh.svg'
-import EditIcon from '@icons/edit-pen.svg'
-import StarAdd from '@icons/star-add.svg'
-import Star from '@icons/star.svg'
+import { CreateFolderIcon, FolderFilledIcon, ArrowUpIcon, RefrechIcon, EditIcon, StarAddIcon, StarIcon } from '@icons'
 
 import { ModalFolder } from '../../modals'
 
 import css from './style.module.less'
+import HardDriveSelect from 'components/HardDriveSelect'
 
 type Favorites = {
   name: string;
@@ -25,16 +20,17 @@ type Favorites = {
 
 interface Props {
   theme: boolean | null;
+  path: string[];
+  drives: string[];
+  favorites: Favorites[]
   setUrlPath(url: string[]): void;
   updateFolderData(): void;
   addFavorite(favorite: boolean): void;
-  favorites: Favorites[]
   back(): void;
-  path: string[];
 }
 
 // eslint-disable-next-line react/prop-types
-function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite, favorites }: Props) {
+function Toolbar ({ path, theme, drives, favorites, setUrlPath, updateFolderData, addFavorite, back }: Props) {
   const { t } = useTranslation('toolbar')
   const { visible, showModal, closeModal } = useModal()
 
@@ -84,6 +80,11 @@ function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite
     return setUrlPath(path.slice(0, Number(e.target.dataset.id) + 1))
   }
 
+  function renderHardDriveSelect () {
+    if (!drives.length) return null
+    return <HardDriveSelect option={drives} edit={setUrlPath} />
+  }
+
   function renderUrlPath () {
     if (!isEdit) {
       return path.map((url: string, index: number) => (
@@ -97,12 +98,14 @@ function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite
         </div>
       ))
     }
-    return <Input
-      name="path"
-      value={editPath}
-      onKeyPress={onPathKeyPress}
-      onChange={onChangeEditPath}
-    />
+    return (
+      <Input
+        name="path"
+        value={editPath}
+        onKeyPress={onPathKeyPress}
+        onChange={onChangeEditPath}
+      />
+    )
   }
 
   return (
@@ -116,6 +119,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite
             <button onClick={clearUrlPath} data-tip={t('tooltip.folder')}>
               {renderIcon(FolderFilledIcon)}
             </button>
+            {renderHardDriveSelect()}
             {renderUrlPath()}
           </div>
           <button className={css.editBtn} onClick={onChangeEditable} data-tip={t('tooltip.path')} >
@@ -128,7 +132,7 @@ function Toolbar ({ setUrlPath, updateFolderData, path, theme, back, addFavorite
           </button>
 
           <button onClick={() => addFavorite(!isFavorite)} data-tip={t('tooltip.favorite')} >
-            { isFavorite ? renderIcon(StarAdd) : renderIcon(Star) }
+            { isFavorite ? renderIcon(StarAddIcon) : renderIcon(StarIcon) }
           </button>
 
           <Dropdown data={favorites} edit={setUrlPath}/>
