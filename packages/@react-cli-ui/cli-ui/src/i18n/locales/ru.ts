@@ -49,6 +49,7 @@ const locale = {
     version: 'версия',
     installed: 'установлен',
     noInstalled: 'не установлен',
+    notFoundDependencies: 'Зависимости не найдены',
     moreInfo: 'Больше информации',
     install: 'Установить пакет',
     update: 'Обновить пакеты',
