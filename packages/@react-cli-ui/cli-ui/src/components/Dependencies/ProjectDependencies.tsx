@@ -49,14 +49,6 @@ export default function ProjectDependencies ({ list, onDelete }: PropsDepend) {
     return renderItems
   }, [list])
 
-  if (!list.length) {
-    return (
-      <div className={styles}>
-        <div className={css.textEmpty}>{t('notFoundDependencies')}</div>
-      </div>
-    )
-  }
-
   return (
     <div className={styles}>
       {renderListDepend}
