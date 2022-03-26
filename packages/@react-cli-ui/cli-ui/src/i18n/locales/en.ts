@@ -50,6 +50,7 @@ const locale = {
     version: 'version',
     installed: 'installed',
     noInstalled: 'not installed',
+    notFoundDependencies: 'Dependencies not found',
     moreInfo: 'More info',
     install: 'Install dependency',
     update: 'Update all dependencies',
